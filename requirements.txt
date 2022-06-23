@@ -1,0 +1,7 @@
+jupyter-book
+matplotlib
+numpy
+scipy
+qiskit
+qiskit_nature
+pennylane
