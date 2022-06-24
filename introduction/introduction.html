@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
@@ -347,11 +349,30 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
+  <!-- #region -->
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p>Primary motivations and intent of current work, along with motivating statements of QC in general</p></li>
+<li><p>TODO: Primary motivations and intent of current work, along with motivating statements of QC in general</p></li>
+<li><p>Many of the most intriguing problems known by the physics community are presently unreachable by classical computation</p>
+<ul>
+<li><p>Diagonalization of high-dimensional matrices cannot be performed beyond a dimension of <span class="math notranslate nohighlight">\(10^{11}\)</span> currently (see Tsunoda, N., Otsuka, T., Takayanagi, K. et al. The impact of nuclear shape on the emergence of the neutron dripline. Nature 587, 66–71 (2020).</p></li>
+<li><p>The fermion sign problem pervades Quantum Monte Carlo (QMC) calculations</p></li>
 </ul>
+</li>
+<li><p>Our hope is that, in the near future (with the fast developments in the quantum computing (QC) world), we may be able to mitigate these issues with quantum computers that will reduce our time to compute more computationally challenging physics problems from exponential time to polynomial time</p></li>
+<li><p>Error correction and mitigation are also fast advancing (add some info here)</p></li>
+<li><p>A technique that has been used quite often in QC is the Variational Quantum Eigensolver (VQE), which can determine the ground state of some atomic system. It is very popular in Quantum Chemistry and there have been many applications of it in recent years (for example, <a class="reference external" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.120.210501">this PRL paper from 2018</a>. (insert more about VQE but not too much here)</p>
+<ul>
+<li><p>In this Jupyter Book, we will use the example of the pionless-EFT Hamiltonian for the deuteron from this paper and perform VQE to find the ground state energy as a benchmark in our understanding of this QC method. We start by using VQE on <span class="math notranslate nohighlight">\(N=2\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of dimensions, and then progress to <span class="math notranslate nohighlight">\(N=3\)</span>. After this, we extend this work to a general case where we are able to ask for any dimension we would like to calculate.</p></li>
+<li><p>As we wish to investigate VQE on more than just the deuteron, we will then discuss the Reduced Basis Method (RBM) in the context of the (insert Hamiltonian here), as we need to reduce the dimensionality of this Hamiltonian to one that can be handled by our available IBM quantum computers. We then perform VQE on this reduced Hamiltonian, and test this on a real quantum device. Since these qubits will have error, we will attempt error correction to mitigate any bit or phase flips that may occur in our circuit.</p></li>
+</ul>
+</li>
+</ul>
+<!-- #endregion -->
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
