@@ -14,7 +14,3 @@ There are many techniques used in QC that are worth investigating, and many have
 In this Jupyter Book, we will explore VQE in the context of few-body physics. we will use the example of the pionless-EFT Hamiltonian for the deuteron from this paper and perform VQE to find the ground state energy as a benchmark in our understanding of this QC method. We start by using VQE on $N=2$, where $N$ is the number of dimensions, and then progress to $N=3$. After this, we extend this work to a general case where we are able to ask for any dimension we would like to calculate. As we wish to investigate VQE on more than just the deuteron, we will then discuss the Reduced Basis Method (RBM) in the context of the quantum harmonic oscillator, as we need to reduce the dimensionality of this Hamiltonian to one that can be handled by our available IBM quantum computers. We then perform VQE on this reduced Hamiltonian, and test this on a real quantum device. Since these circuits will have errors, we will attempt error mitigation in the form of zero noise extrapolation (ZNE), which is also covered in the PRL discussed above.
 
 <!-- #endregion -->
-
-```python
-
-```
