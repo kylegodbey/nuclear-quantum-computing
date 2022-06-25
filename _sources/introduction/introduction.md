@@ -1,7 +1,5 @@
 <!-- #region -->
 # Introduction
-
- - TODO: Primary motivations and intent of current work, along with motivating statements of QC in general
  
  
 Many of the most intriguing problems known by the physics community are presently unreachable by classical computation. Diagonalization of high-dimensional matrices cannot be performed beyond a dimension of $10^{11}$ currently (see Tsunoda, N., Otsuka, T., Takayanagi, K. et al. The impact of nuclear shape on the emergence of the neutron dripline. Nature 587, 66–71 (2020), and the fermion sign problem pervades Quantum Monte Carlo (QMC) calculations. Instead of classical computers, we now look to quantum computers to provide aid on these frustrating limits of modern classical technology. Our hope is that, in the near future---with the fast developments in the quantum computing (QC) world---we may be able to mitigate the aforementioned issues with quantum computers that will reduce our time to run computationally challenging physics problems from exponential time to polynomial time. With this improvement, we would not have to wait several lifetimes to get results on problems that would have, on a classical computer, taken longer than the age of the universe to complete!
