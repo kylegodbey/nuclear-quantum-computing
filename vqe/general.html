@@ -411,6 +411,8 @@ Maintainer: Kyle Godbey</p>
 <span class="kn">import</span> <span class="nn">pennylane</span> <span class="k">as</span> <span class="nn">qml</span>
 <span class="kn">from</span> <span class="nn">qiskit_nature.operators.second_quantization</span> <span class="kn">import</span> <span class="n">FermionicOp</span>
 <span class="kn">from</span> <span class="nn">qiskit_nature.mappers.second_quantization</span> <span class="kn">import</span> <span class="n">JordanWignerMapper</span><span class="p">,</span> <span class="n">ParityMapper</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
@@ -421,17 +423,6 @@ Maintainer: Kyle Godbey</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">pauli_token_to_operator</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    DO NOT MODIFY anything in this function! It is used to judge your solution.</span>
-
-<span class="sd">    Helper function to turn strings into qml operators.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        token (str): A Pauli operator input in string form.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        A qml.Operator instance of the Pauli.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">qubit_terms</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)):</span>
@@ -458,17 +449,6 @@ Maintainer: Kyle Godbey</p>
 
 
 <span class="k">def</span> <span class="nf">parse_hamiltonian_input</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    DO NOT MODIFY anything in this function! It is used to judge your solution.</span>
-
-<span class="sd">    Turns the contents of the input file into a Hamiltonian.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        filename(str): Name of the input file that contains the Hamiltonian.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        qml.Hamiltonian object of the Hamiltonian specified in the file.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Get the input</span>
     <span class="n">coeffs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">pauli_terms</span> <span class="o">=</span> <span class="p">[]</span>
@@ -590,7 +570,7 @@ Generated Hamiltonian:
 <p>We still need to define our device and circuit, so we’ll let them be general as well.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim</span> <span class="o">=</span> <span class="mi">3</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim</span> <span class="o">=</span> <span class="mi">6</span>
 
 <span class="c1"># In this case we now need 3 qubits</span>
 
@@ -598,7 +578,7 @@ Generated Hamiltonian:
 
 <span class="c1"># Defining our ansatz circuit for the N=3 case</span>
 
-<span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">circuit_3</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">t1</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -610,44 +590,100 @@ Generated Hamiltonian:
     <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 
+<span class="c1"># Define a general ansatz for arbitrary numbers of dimensions</span>
+<span class="c1"># If the device you are running on doesn&#39;t support the arbitrary</span>
+<span class="c1"># Rot gate, pennylane will attempt to decompose it</span>
+
+<span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)):</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wires</span><span class="p">)</span>
+    <span class="n">n_rotations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_rotations</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_rotations</span> <span class="o">//</span> <span class="n">n_qubits</span>
+        <span class="n">n_extra_rots</span> <span class="o">=</span> <span class="n">n_rotations</span> <span class="o">-</span> <span class="n">n_layers</span> <span class="o">*</span> <span class="n">n_qubits</span>
+
+        <span class="c1"># Alternating layers of unitary rotations on every qubit followed by a</span>
+        <span class="c1"># ring cascade of CNOTs.</span>
+        <span class="k">for</span> <span class="n">layer_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="p">):</span>
+            <span class="n">layer_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="n">layer_idx</span> <span class="o">*</span> <span class="n">n_qubits</span> <span class="p">:</span> <span class="n">layer_idx</span> <span class="o">*</span> <span class="n">n_qubits</span> <span class="o">+</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">qml</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">Rot</span><span class="p">,</span> <span class="n">wires</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">layer_params</span><span class="p">)</span>
+            <span class="n">qml</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">,</span> <span class="n">wires</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;ring&quot;</span><span class="p">)</span>
+
+        <span class="c1"># There may be &quot;extra&quot; parameter sets required for which it&#39;s not necessarily</span>
+        <span class="c1"># to perform another full alternating cycle. Apply these to the qubits as needed.</span>
+        <span class="n">extra_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="n">n_extra_rots</span><span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">extra_wires</span> <span class="o">=</span> <span class="n">wires</span><span class="p">[:</span> <span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">n_extra_rots</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">Rot</span><span class="p">,</span> <span class="n">extra_wires</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">extra_params</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># For 1-qubit case, just a single rotation to the qubit</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">Rot</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">wires</span><span class="o">=</span><span class="n">wires</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">SparseHamiltonian</span><span class="p">(</span><span class="n">H_sparse</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">circuit_he</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wires</span><span class="p">)</span>
+    <span class="n">n_rotations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">wires</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">n_qubits</span><span class="p">],</span> <span class="n">wires</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">arbsatz</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">ArbitraryStatePreparation</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">wires</span><span class="p">)</span>
+
+<span class="n">particles</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">ref_state</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">hf_state</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+
+<span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">excitations</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+
+<span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">excitations_to_wires</span><span class="p">(</span><span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">singles</span><span class="p">,</span><span class="n">doubles</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="p">)</span>
+
+<span class="n">ansatz</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">UCCSD</span><span class="p">,</span> <span class="n">init_state</span><span class="o">=</span><span class="n">ref_state</span><span class="p">,</span> <span class="n">s_wires</span><span class="o">=</span><span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="o">=</span><span class="n">d_wires</span><span class="p">)</span>
+<span class="n">ansatz</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">templates</span><span class="o">.</span><span class="n">AllSinglesDoubles</span><span class="p">,</span> <span class="n">hf_state</span><span class="o">=</span><span class="n">ref_state</span><span class="p">,</span> <span class="n">singles</span><span class="o">=</span><span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span><span class="o">=</span><span class="n">doubles</span><span class="p">)</span>
+<span class="n">ansatz</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">ParticleConservingU2</span><span class="p">,</span> <span class="n">init_state</span><span class="o">=</span><span class="n">ref_state</span><span class="p">)</span>
+
+<span class="n">layers</span> <span class="o">=</span> <span class="mi">5</span>
+
+
 <span class="c1"># Defining Hamiltonian</span>
 
 <span class="n">H</span> <span class="o">=</span> <span class="n">deuteron_ham</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+<span class="n">H_sparse</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">sparse_hamiltonian</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+<span class="c1">#print(H_sparse)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generated Hamiltonian: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">H</span><span class="p">)</span>
-
-<span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
+<span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated Hamiltonian: 
-   (-9.625) [Z0]
-+ (-6.125) [Z1]
-+ (0.21829055499999983) [Z2]
-+ (15.531709445) [I0]
-+ (-3.913118960624632) [Y0 Y1]
-+ (-3.913118960624632) [X0 X1]
-+ (-2.1433035249352805) [Y1 Y2]
-+ (-2.1433035249352805) [X1 X2]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 2], [0, 4]] []
+[[0, 1, 2], [0, 1, 2, 3, 4]] []
 </pre></div>
 </div>
 </div>
 </div>
 <p>Amazing! That’s an even better looking Hamiltonian!</p>
-<p>Now we’ll set up what we’ll need for the VQE procedure; namely some initial parameters and convergence info. You can select the initial guess randomly, but in this case we’ll set it manually for repeatability.</p>
-<p>In this case, we also need an additional parameter as mentioned when we set up our circuit.</p>
+<p>Now we’ll set up what we’ll need for the VQE procedure, this time doing a loop over how many parameters we’ll need.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our parameter array, only one lonely element in this case :c</span>
 
-<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">])</span>
-
+<span class="c1">#init_params = np.array([2.5,4.5])</span>
+<span class="n">num_param_sets</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">dim</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_param_sets</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">qml</span><span class="o">.</span><span class="n">ArbitraryStatePreparation</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">n_wires</span><span class="o">=</span><span class="n">dim</span><span class="p">))</span>
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">qml</span><span class="o">.</span><span class="n">ParticleConservingU2</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">n_layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">n_wires</span><span class="o">=</span><span class="n">dim</span><span class="p">))</span>
+<span class="c1">#init_params = np.random.normal(0, 2*np.pi, len(singles) + len(doubles))</span>
+<span class="c1">#init_params = np.random.normal(0, 2*np.pi, 2*dim)</span>
 <span class="c1"># Convergence information and step size</span>
-
+<span class="c1">#print(circuit(init_params))</span>
 <span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">500</span>
-<span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-06</span>
-<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-05</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.05</span>
 </pre></div>
 </div>
 </div>
@@ -655,14 +691,21 @@ Generated Hamiltonian:
 <p>Finally, the VQE block. We’re still using the standard gradient descent optimizer since it worked so well before, but soon the time will come to shop around for better options.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNGOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
 
 <span class="n">params</span> <span class="o">=</span> <span class="n">init_params</span>
 
 <span class="n">gd_param_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">params</span><span class="p">]</span>
 <span class="n">gd_cost_history</span> <span class="o">=</span> <span class="p">[]</span>
 
+<span class="n">accel</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">prev_conv</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
+
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+    <span class="n">fac</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
     <span class="c1"># Take a step in parameter space and record your energy</span>
     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -677,10 +720,22 @@ Generated Hamiltonian:
     <span class="c1"># Calculate difference between new and old energies</span>
     <span class="n">conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energy</span> <span class="o">-</span> <span class="n">prev_energy</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">energy</span> <span class="o">-</span> <span class="n">prev_energy</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="n">step_size</span> <span class="o">&gt;</span> <span class="mf">0.001</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowering!&quot;</span><span class="p">)</span>
+        <span class="n">accel</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">step_size</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="n">conv</span> <span class="o">&lt;</span> <span class="n">prev_conv</span><span class="p">):</span> <span class="n">accel</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">prev_conv</span> <span class="o">=</span> <span class="n">conv</span>
+    
+    <span class="k">if</span><span class="p">(</span><span class="n">accel</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">step_size</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accelerating!&quot;</span><span class="p">)</span>
+        <span class="n">step_size</span> <span class="o">=</span> <span class="mf">1.1</span><span class="o">*</span><span class="n">step_size</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;Iteration = </span><span class="si">{:}</span><span class="s2">,  Energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV,  Convergence parameter = {&quot;</span>
-            <span class="s2">&quot;:.8f} MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conv</span><span class="p">)</span>
+            <span class="s2">&quot;It = </span><span class="si">{:}</span><span class="s2">,  Energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV,  Conv = {&quot;</span>
+            <span class="s2">&quot;:.8f} MeV, Time Elapsed = </span><span class="si">{:.3f}</span><span class="s2"> s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conv</span><span class="p">,</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">conv</span> <span class="o">&lt;=</span> <span class="n">conv_tol</span><span class="p">:</span>
@@ -693,29 +748,258 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 2.62754488 MeV,  Convergence parameter = 0.41528526 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lowering!
+It = 0,  Energy = 28.53938360 MeV,  Conv = 0.28694856 MeV, Time Elapsed = 2.150 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = -1.45759287 MeV,  Convergence parameter = 0.07290178 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 1,  Energy = 25.13481078 MeV,  Conv = 3.40457282 MeV, Time Elapsed = 2.126 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 40,  Energy = -1.98314671 MeV,  Convergence parameter = 0.00676702 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 14.08008083 MeV,  Conv = 11.05472995 MeV, Time Elapsed = 2.133 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 60,  Energy = -2.03668718 MeV,  Convergence parameter = 0.00089606 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Lowering!
+It = 3,  Energy = 19.20595828 MeV,  Conv = 5.12587745 MeV, Time Elapsed = 2.150 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 80,  Energy = -2.04435261 MeV,  Convergence parameter = 0.00013419 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 4,  Energy = 3.58927465 MeV,  Conv = 15.61668363 MeV, Time Elapsed = 2.151 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 100,  Energy = -2.04548435 MeV,  Convergence parameter = 0.00001928 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 5,  Energy = 0.02962861 MeV,  Conv = 3.55964604 MeV, Time Elapsed = 2.064 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 120,  Energy = -2.04564498 MeV,  Convergence parameter = 0.00000269 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = -0.47609312 MeV,  Conv = 0.50572174 MeV, Time Elapsed = 2.148 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -2.04566218 MeV
-Number of iterations =  131
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 7,  Energy = -0.75244982 MeV,  Conv = 0.27635669 MeV, Time Elapsed = 2.151 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 8,  Energy = -0.94562678 MeV,  Conv = 0.19317696 MeV, Time Elapsed = 2.161 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 9,  Energy = -1.09449905 MeV,  Conv = 0.14887227 MeV, Time Elapsed = 2.074 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -1.21465819 MeV,  Conv = 0.12015914 MeV, Time Elapsed = 2.127 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 11,  Energy = -1.31459871 MeV,  Conv = 0.09994052 MeV, Time Elapsed = 2.138 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 12,  Energy = -1.39967229 MeV,  Conv = 0.08507358 MeV, Time Elapsed = 2.154 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 13,  Energy = -1.47345560 MeV,  Conv = 0.07378331 MeV, Time Elapsed = 2.051 s
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1832</span><span class="o">/</span><span class="mf">3576908300.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> 
+<span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
+<span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span> 
+<span class="g g-Whitespace">     </span><span class="mi">20</span>     <span class="c1"># This keeps track of our energy for plotting at comparisons</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/optimize/gradient_descent.py</span> in <span class="ni">step_and_cost</span><span class="nt">(self, objective_fn, grad_fn, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="sd"> </span>
+<span class="ne">---&gt; </span><span class="mi">59</span><span class="sd">         g, forward = self.compute_grad(objective_fn, args, kwargs, grad_fn=grad_fn)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="sd">         new_args = self.apply_grad(g, args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="sd"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/optimize/gradient_descent.py</span> in <span class="ni">compute_grad</span><span class="nt">(objective_fn, args, kwargs, grad_fn)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="n">g</span> <span class="o">=</span> <span class="n">get_gradient</span><span class="p">(</span><span class="n">objective_fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">grad_fn</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">grad_fn</span>
+<span class="ne">--&gt; </span><span class="mi">117</span>         <span class="n">grad</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>         <span class="n">forward</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">&quot;forward&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_grad.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>             <span class="k">return</span> <span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span> 
+<span class="ne">--&gt; </span><span class="mi">115</span>         <span class="n">grad_value</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">grad_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span> <span class="o">=</span> <span class="n">ans</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/wrap_util.py</span> in <span class="ni">nary_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>             <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">argnum</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">20</span>             <span class="k">return</span> <span class="n">unary_operator</span><span class="p">(</span><span class="n">unary_f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">nary_op_args</span><span class="p">,</span> <span class="o">**</span><span class="n">nary_op_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="k">return</span> <span class="n">nary_f</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">return</span> <span class="n">nary_operator</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_grad.py</span> in <span class="ni">_grad_with_forward</span><span class="nt">(fun, x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>         <span class="n">difference</span> <span class="n">being</span> <span class="n">that</span> <span class="n">it</span> <span class="n">returns</span> <span class="n">both</span> <span class="n">the</span> <span class="n">gradient</span> <span class="o">*</span><span class="ow">and</span><span class="o">*</span> <span class="n">the</span> <span class="n">forward</span> <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="n">value</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">133</span><span class="s2">         vjp, ans = _make_vjp(fun, x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="s2">         if not vspace(ans).size == 1:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">make_vjp</span><span class="nt">(fun, x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2"> def make_vjp(fun, x):</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="s2">     start_node = VJPNode.new_root()</span>
+<span class="ne">---&gt; </span><span class="mi">10</span><span class="s2">     end_value, end_node =  trace(start_node, fun, x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="s2">     if end_node is None:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="s2">         def vjp(g): return vspace(x).zeros()</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">trace</span><span class="nt">(start_node, fun, x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2">     with trace_stack.new_trace() as t:</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="s2">         start_box = new_box(x, t, start_node)</span>
+<span class="ne">---&gt; </span><span class="mi">10</span><span class="s2">         end_box = fun(start_box)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="s2">         if isbox(end_box) and end_box._trace == start_box._trace:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="s2">             return end_box._value, end_box._node</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/wrap_util.py</span> in <span class="ni">unary_f</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="s2">                 else:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="s2">                     subargs = subvals(args, zip(argnum, x))</span>
+<span class="ne">---&gt; </span><span class="mi">15</span><span class="s2">                 return fun(*subargs, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="s2">             if isinstance(argnum, int):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="s2">                 x = args[argnum]</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/vqe/vqe.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">227</span><span class="s2">     def __call__(self, *args, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">228</span><span class="s2">         return self.cost_fn(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/dot.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(params, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span><span class="s2">         interface = y.interface</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span><span class="s2">         fn, x = _get_dot_func(interface, x)</span>
+<span class="ne">--&gt; </span><span class="mi">143</span><span class="s2">         func = lambda params, **kwargs: fn(x, y(params, **kwargs))</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span><span class="s2">     else:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/qnode_collection.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span><span class="s2">     def __call__(self, *args, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">277</span><span class="s2">         results = self.evaluate(args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">         return self.convert_results(results, self.interface)</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/qnode_collection.py</span> in <span class="ni">evaluate</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span><span class="s2">         for q in self.qnodes:</span>
+<span class="ne">--&gt; </span><span class="mi">233</span><span class="s2">             results.append(q(*args, **kwargs))</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span><span class="s2">         return results</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span><span class="s2">             gradient_kwargs=self.gradient_kwargs,</span>
+<span class="g g-Whitespace">    </span><span class="mi">625</span><span class="s2">             override_shots=override_shots,</span>
+<span class="ne">--&gt; </span><span class="mi">626</span><span class="s2">             **self.execute_kwargs,</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span><span class="s2">         )</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">execute</span><span class="nt">(tapes, device, gradient_fn, interface, mode, gradient_kwargs, cache, cachesize, max_diff, override_shots, expand_fn, max_expansion, device_batch_transform)</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span><span class="s2">             qml.interfaces.cache_execute(</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span><span class="s2">                 batch_execute, cache, return_tuple=False, expand_fn=expand_fn</span>
+<span class="ne">--&gt; </span><span class="mi">346</span><span class="s2">             )(tapes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span><span class="s2">         )</span>
+<span class="g g-Whitespace">    </span><span class="mi">348</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">wrapper</span><span class="nt">(tapes, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span><span class="s2">         else:</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span><span class="s2">             # execute all unique tapes that do not exist in the cache</span>
+<span class="ne">--&gt; </span><span class="mi">172</span><span class="s2">             res = fn(execution_tapes.values(), **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span><span class="s2">         final_res = []</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">fn</span><span class="nt">(tapes, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span><span class="s2">         def fn(tapes, **kwargs):  # pylint: disable=function-redefined</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span><span class="s2">             tapes = [expand_fn(tape) for tape in tapes]</span>
+<span class="ne">---&gt; </span><span class="mi">97</span><span class="s2">             return original_fn(tapes, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="s2">     @wraps(fn)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">inner</span><span class="nt">(*args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="s2">         def inner(*args, **kwds):</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span><span class="s2">             with self._recreate_cm():</span>
+<span class="ne">---&gt; </span><span class="mi">74</span><span class="s2">                 return func(*args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="s2">         return inner</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_qubit_device.py</span> in <span class="ni">batch_execute</span><span class="nt">(self, circuits)</span>
+<span class="g g-Whitespace">    </span><span class="mi">353</span><span class="s2">             self.reset()</span>
+<span class="g g-Whitespace">    </span><span class="mi">354</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">355</span><span class="s2">             res = self.execute(circuit)</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span><span class="s2">             results.append(res)</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_qubit_device.py</span> in <span class="ni">execute</span><span class="nt">(self, circuit, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span><span class="s2">         # apply all circuit operations</span>
+<span class="ne">--&gt; </span><span class="mi">257</span><span class="s2">         self.apply(circuit.operations, rotations=circuit.diagonalizing_gates, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span><span class="s2">         # generate computational basis samples</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">apply</span><span class="nt">(self, operations, rotations, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span><span class="s2">                         self._debugger.snapshots[len(self._debugger.snapshots)] = state_vector</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span><span class="s2">             else:</span>
+<span class="ne">--&gt; </span><span class="mi">231</span><span class="s2">                 self._state = self._apply_operation(self._state, operation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span><span class="s2">         # store the pre-rotated state</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_operation</span><span class="nt">(self, state, operation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">254</span><span class="s2">         if operation.base_name in self._apply_ops:</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span><span class="s2">             axes = self.wires.indices(wires)</span>
+<span class="ne">--&gt; </span><span class="mi">256</span><span class="s2">             return self._apply_ops[operation.base_name](state, axes, inverse=operation.inverse)</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span><span class="s2">         matrix = self._asarray(self._get_unitary_matrix(operation), dtype=self.C_DTYPE)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_cnot</span><span class="nt">(self, state, axes, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">375</span><span class="s2">         state_x = self._apply_x(state[sl_1], axes=target_axes)</span>
+<span class="ne">--&gt; </span><span class="mi">376</span><span class="s2">         return self._stack([state[sl_0], state_x], axis=axes[0])</span>
+<span class="g g-Whitespace">    </span><span class="mi">377</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">378</span><span class="s2">     def _apply_toffoli(self, state, axes, **kwargs):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/wrapper.py</span> in <span class="ni">_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2">         # evaluate the original object</span>
+<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">         res = obj(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2">         if isinstance(res, _np.ndarray):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">stack</span><span class="nt">(arrays, axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="s2">     sl = (slice(None),) * axis + (None,)</span>
+<span class="ne">--&gt; </span><span class="mi">103</span><span class="s2">     return concatenate([arr[sl] for arr in arrays], axis=axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span><span class="s2"> def append(arr, values, axis=None):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(arr_list, axis)</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span><span class="s2"> def concatenate_args(axis, *args):</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="s2">     return _np.concatenate(args, axis).view(ndarray)</span>
+<span class="ne">---&gt; </span><span class="mi">38</span><span class="s2"> concatenate = lambda arr_list, axis=0 : concatenate_args(axis, *arr_list)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="s2"> vstack = row_stack = lambda tup: concatenate([atleast_2d(_m) for _m in tup], axis=0)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span><span class="s2"> def hstack(tup):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="s2">             parents = tuple(box._node for _     , box in boxed_args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="s2">             argnums = tuple(argnum    for argnum, _   in boxed_args)</span>
+<span class="ne">---&gt; </span><span class="mi">44</span><span class="s2">             ans = f_wrapped(*argvals, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span><span class="s2">             node = node_constructor(ans, f_wrapped, argvals, kwargs, argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">         else:</span>
+<span class="ne">---&gt; </span><span class="mi">48</span><span class="s2">             return f_raw(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="s2">     f_wrapped.fun = f_raw</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span><span class="s2">     f_wrapped._is_autograd_primitive = True</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">concatenate_args</span><span class="nt">(axis, *args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="s2"> @primitive</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span><span class="s2"> def concatenate_args(axis, *args):</span>
+<span class="ne">---&gt; </span><span class="mi">37</span><span class="s2">     return _np.concatenate(args, axis).view(ndarray)</span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="s2"> concatenate = lambda arr_list, axis=0 : concatenate_args(axis, *arr_list)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="s2"> vstack = row_stack = lambda tup: concatenate([atleast_2d(_m) for _m in tup], axis=0)</span>
+
+<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">concatenate</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -726,7 +1010,8 @@ Number of iterations =  131
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;seaborn&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
-
+<span class="n">good</span> <span class="o">=</span> <span class="n">params</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (MeV)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Optimization steps&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -735,7 +1020,72 @@ Number of iterations =  131
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/general_17_0.png" src="../_images/general_17_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1.43611503  0.44170403 -1.65472785]
+ [-1.03646289 -1.07805036  1.18567562]
+ [ 1.14205706 -0.93392006 -1.0370167 ]
+ [-0.86109287 -1.22334535 -0.40499659]
+ [ 0.23085791  0.22518157  0.05185782]
+ [ 1.24220446 -0.72379109 -0.97417589]
+ [ 0.97860879 -0.50512952  0.05970585]
+ [-0.71160103  0.75229758  0.54093147]
+ [ 0.25773309 -0.67825947 -1.80169203]
+ [-0.17631169  2.0435715   0.89952941]
+ [ 0.57819868 -0.24190579  0.07557548]
+ [-1.39318297  1.91023468 -1.41690015]
+ [-1.21149383  0.40647872 -0.05312088]
+ [-1.67764499  1.22746085  0.1669642 ]
+ [-0.47968628  1.25214951  0.08296357]
+ [-1.11962455 -1.32784896  1.31564872]
+ [-0.61902566  1.06558948 -0.16094066]
+ [ 0.02398786  0.04840668  0.37977987]
+ [-2.01902127  1.64924495  0.67575374]
+ [-0.16666318  0.57999779  1.66141197]
+ [ 1.2230436  -0.19542849 -1.7735324 ]
+ [ 0.94257024 -1.32462558 -0.95705655]
+ [ 0.91364992  0.34749849 -0.15685016]
+ [ 1.37838627  0.09783992 -1.45588818]
+ [ 0.70514738 -1.13542705 -0.41108211]
+ [-0.66195975 -1.06009678  0.63003702]
+ [ 0.04938787  0.39798286  1.06411209]
+ [-0.45566064 -0.12992944  1.07124777]
+ [-0.9087228   1.43820288 -0.86387032]
+ [ 0.83411681 -0.55837808  1.59202871]
+ [-0.56300331  1.28191076 -1.25999826]
+ [-0.7265027   0.77514275 -1.25233288]
+ [-0.7346878  -0.66657003 -0.94234767]
+ [-0.85598862 -0.5478078  -0.12671861]
+ [-1.2321566   0.64189108 -0.93741645]
+ [-0.78501856 -1.13211846 -1.09756446]
+ [-1.03221571  1.00128094  0.78933666]
+ [-0.8152301   0.93937857  0.12607574]
+ [-0.17835137  1.24349448 -0.00840111]
+ [-0.61160282  1.31114824  1.55759332]
+ [-1.62622312  1.56249976  0.84188218]
+ [ 0.12109203  1.01995023 -0.8073863 ]
+ [-0.4296737   0.99058094  1.3489908 ]
+ [ 0.20715834 -0.45429129 -1.06633254]
+ [-1.19452298  1.68798664  0.85178701]
+ [-1.26217369  1.24251417 -1.29965846]
+ [-0.592905   -0.59353358 -0.45437405]
+ [-1.59583961 -1.11491574 -0.38993757]
+ [-0.29415016 -0.34344616  1.31144863]
+ [ 0.84804725 -1.5826652   0.87333149]
+ [ 0.17849837  0.97672102 -0.59405051]
+ [ 1.06648518  1.16837897 -1.58365512]
+ [ 1.07048119 -1.09292152  0.24071434]
+ [ 0.0959548  -0.93963663  1.08841235]
+ [ 0.31105368  0.73775948  0.33802114]
+ [-1.18439551  0.33128196  0.78330676]
+ [ 0.94969518  0.15191051  0.65334557]
+ [ 0.36841171 -0.62540244 -0.50420988]
+ [ 0.12530301  0.53551912  0.27576127]
+ [-0.18375429  0.45509664 -0.60662364]
+ [-1.05324948  0.57855096 -1.67820771]
+ [-0.04563337 -0.18202297 -0.01542904]
+ [ 1.13126361  0.47629414 -0.48397113]]
+</pre></div>
+</div>
+<img alt="../_images/general_17_1.png" src="../_images/general_17_1.png" />
 </div>
 </div>
 <p>Since we are now allowed to move in higher dimensions, making a general PES plotter gets a little tricky, but feel free to play around and see if you can think of clever ways to plot how your solution explores the space!</p>
