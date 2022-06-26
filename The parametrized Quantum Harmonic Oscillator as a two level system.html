@@ -1,0 +1,937 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>The parametrized Quantum Harmonic Oscillator as a two level system &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Quantum Computing Applications in Nuclear Physics</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="landing.html">
+                    Quantum Computing Applications in Nuclear Physics
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introduction/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="vqe/vqe.html">
+   Variational Quantum Eigensolver
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="vqe/deuteron.html">
+     Quantum Computing the Deuteron
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="vqe/n2.html">
+       First Steps: N=2
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="vqe/n3.html">
+       Complexity++: N=3
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="vqe/general.html">
+       A General Case
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vqe/qng.html">
+     Quantum Natural Gradient
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributors.html">
+   Contributors
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/The parametrized Quantum Harmonic Oscillator as a two level system.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/The parametrized Quantum Harmonic Oscillator as a two level system.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2FThe parametrized Quantum Harmonic Oscillator as a two level system.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/The parametrized Quantum Harmonic Oscillator as a two level system.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
+   Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
+   We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>The parametrized Quantum Harmonic Oscillator as a two level system</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
+   Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
+   We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="the-parametrized-quantum-harmonic-oscillator-as-a-two-level-system">
+<h1>The parametrized Quantum Harmonic Oscillator as a two level system<a class="headerlink" href="#the-parametrized-quantum-harmonic-oscillator-as-a-two-level-system" title="Permalink to this headline">#</a></h1>
+<p>Adapted from https://kylegodbey.github.io/nuclear-rbm/ho/1dHO.html with permision of Eric Flynn</p>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<p>Consider the Schrodinger equation for the 1-d Harmonic Oscillator:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0261cbcf-6bd9-43e9-b071-f4f388fb15b6">
+<span class="eqno">()<a class="headerlink" href="#equation-0261cbcf-6bd9-43e9-b071-f4f388fb15b6" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;\Big(- \frac{d^{2}}{dx^{2}} + V_\alpha (x)  - \lambda \Big) \phi = 0, \\
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V_\alpha(x)=\alpha x^{2}\)</span>. This equation can be written a</p>
+<div class="amsmath math notranslate nohighlight" id="equation-53fa51ba-60e9-42f6-9ddd-31bbc305c820">
+<span class="eqno">()<a class="headerlink" href="#equation-53fa51ba-60e9-42f6-9ddd-31bbc305c820" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;F_{\alpha}\Big[ \phi_{\alpha}(x) \Big] = H_\alpha\phi - \lambda \phi=0 
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda = 2 m E\)</span> is the eigenvalue with energy <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(\alpha = m^{2} \omega^{2}\)</span> is the harmonic oscillator parameter. We want to implement an algorithm in a quantum circuit to find solutions to this equation for many values of the parameter <span class="math notranslate nohighlight">\(\alpha\)</span>. The currently available quantum computing systems have a very limited amount of qbits, for example, 7 in the case of the free version of the IBM services. This might make it probelmatic to implement such Schrodinger’s equation in a finite element method approach since we would need to store the state <span class="math notranslate nohighlight">\(\phi\)</span> as a tall vector with many entries (usually 1,000 or more), which is not possible to represent with only 7 qbits.</p>
+<p>We can approximate this equation using dimensionality reduction techniques, such as the Reduced Basis Method [CITE SOME BOOKS], as was done in [CITE OUR PAPER]. These techniques aim at reducing the redundant, or unnecesary, degrees of freedom of the system from many thousand to just a handful. This is done by first restricting the solution to the equation to lay in the span of a basis of <span class="math notranslate nohighlight">\(n\)</span> states:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1eae0f99-54fc-4b9d-8e16-a68a090463ef">
+<span class="eqno">()<a class="headerlink" href="#equation-1eae0f99-54fc-4b9d-8e16-a68a090463ef" title="Permalink to this equation">#</a></span>\[\begin{align}
+\hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previos solutions built on a classical computer to the Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sci</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### NOTE: hbar = 1 in this demo</span>
+<span class="c1">### First define exact solutions to compare numerical solutions to.</span>
+<span class="k">def</span> <span class="nf">V</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    1-d harmonic Oscillator potential</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float or nd array</span>
+<span class="sd">        position.</span>
+<span class="sd">    alpha : float</span>
+<span class="sd">        oscillator length parameter.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float or ndarray</span>
+<span class="sd">        value of potential evaluated at x.</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">def</span> <span class="nf">construct_H</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">mass</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Uses 2nd order finite difference scheme to construct a discretized differential H operator</span>
+<span class="sd">    Note: mass is fixed to 1 for this demo.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    V : TYPE</span>
+<span class="sd">        DESCRIPTION.</span>
+<span class="sd">        </span>
+<span class="sd">    alpha : TYPE</span>
+<span class="sd">        oscillator parameter alpha used in V(x) = alpha*x**2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    H : ndarray</span>
+<span class="sd">        2d numpy array</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">dim</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">off_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+    <span class="n">off_diag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">+</span> <span class="n">sci</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">toeplitz</span><span class="p">(</span><span class="n">off_diag</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">mass</span><span class="o">*</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="n">alpha</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">H</span>
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    H : 2d ndarray</span>
+<span class="sd">        Hamiltonian Matrix.</span>
+<span class="sd">    grid : ndarray</span>
+<span class="sd">        Discretized 1d domain.</span>
+<span class="sd">    h : float</span>
+<span class="sd">        grid spacing.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    evals : ndarray</span>
+<span class="sd">        returns nd array of eigenvalues of H. </span>
+<span class="sd">    evects : ndarray</span>
+<span class="sd">        returns ndarray of eigenvectors of H.</span>
+<span class="sd">    Eigenvalues and eigenvectors are ordered in ascending order. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">evals</span><span class="p">,</span><span class="n">evects</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">evects</span> <span class="o">=</span> <span class="n">evects</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">evect</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evects</span><span class="p">):</span>
+        <span class="c1">#norm = np.sqrt(1/sci.integrate.simpson(evect*evect,grid))</span>
+        <span class="n">norm</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">evect</span><span class="p">,</span><span class="n">evect</span><span class="p">)))</span>
+        <span class="n">evects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">norm</span>
+    <span class="k">return</span> <span class="n">evals</span><span class="p">,</span><span class="n">evects</span>
+
+<span class="k">def</span> <span class="nf">getSystem</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">psi_array</span><span class="p">,</span><span class="n">phi_array</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Sets up syetem of equations for Galerkin projection &lt;\phi_{j},F_{k}(phi_{k})&gt;</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    H : ndarray</span>
+<span class="sd">        Hamiltonian matrix.</span>
+<span class="sd">    psi_array : ndarray</span>
+<span class="sd">        array of projector functions. Assumes rows are corresponding to discretized functions</span>
+<span class="sd">    phi_array : TYPE</span>
+<span class="sd">        DESCRIPTION.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Function</span>
+<span class="sd">        Function that takes in a vector of parameters of the form (a_{1},a_{2},....,\lambda_{\alpha}) </span>
+<span class="sd">        and outputs of the system of equations. \lambda_{\alpha} is the eigenvalue of HO equation.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1">## </span>
+    <span class="k">def</span> <span class="nf">system</span><span class="p">(</span><span class="n">a_vec</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a_vec : ndarray</span>
+<span class="sd">            vector of parameters (a_{k},\lambda).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        results : ndarray</span>
+<span class="sd">            outputs of the Galerkin projection equations and normalization functions &lt;\hat{\phi}|\hat{\phi}&gt; = 1.</span>
+<span class="sd">            This systems can be solved using sci.optimize.fsolve or using your choice of method.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a_vec</span><span class="p">))</span>
+        <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># from normalization</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">a_vec</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">a_vec</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a_vec</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psi_array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">phi_array</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="o">-</span> \
+                <span class="n">a_vec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a_vec</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psi_array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">phi_array</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">a_vec</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">kp</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">a_vec</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">results</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a_vec</span><span class="p">[</span><span class="n">kp</span><span class="p">]</span><span class="o">*</span><span class="n">a_vec</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">psi_array</span><span class="p">[</span><span class="n">kp</span><span class="p">],</span><span class="n">phi_array</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">results</span>
+    <span class="k">return</span> <span class="n">system</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#First define global variables</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="c1">### grid spacing for domain (Warning around 10**(-3) it starts to get slow).</span>
+<span class="c1">### HO global parameters </span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># principle quantum number to solve in HO</span>
+<span class="n">mass</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="c1"># mass for the HO system</span>
+<span class="c1"># define the domain boundaries</span>
+<span class="n">x_a</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span> <span class="c1"># left boundary </span>
+<span class="n">x_b</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># right boundary </span>
+<span class="n">x_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">x_a</span><span class="p">,</span><span class="n">x_b</span><span class="o">+</span><span class="n">h</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_array</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of grid points: &#39;</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of grid points:  2001
+</pre></div>
+</div>
+</div>
+</div>
+<p>First select a set of values of <span class="math notranslate nohighlight">\(\alpha\)</span> to solve the SE with. These solutions will be used as the basis in the reduced basis model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select alpha values to use to solve SE exactly.</span>
+<span class="n">alpha_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">]</span>  <span class="c1">#Here, we choose 3 values of alpha to solve exactly. This results in 3 basis functions</span>
+<span class="c1"># initialize solution arrays. T is the matrix that will hold wavefunction solutions. </span>
+<span class="c1"># T has the form T[i][j], i = alpha, j = solution components</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">),</span><span class="n">m</span><span class="p">))</span> 
+<span class="c1"># T_evals holds the eigenvalues for each evect in T. </span>
+<span class="n">T_evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">alpha_sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">):</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">construct_H</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">x_array</span><span class="p">,</span><span class="n">mass</span><span class="p">,</span><span class="n">alpha_sample</span><span class="p">)</span> <span class="c1"># construct the Hamiltonian matrix for given alpha_sample.</span>
+    <span class="n">evals</span><span class="p">,</span> <span class="n">evects</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">x_array</span><span class="p">,</span><span class="n">h</span><span class="p">)</span> <span class="c1"># solve the system for evals and evects.</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evects</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">evects</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="c1"># assign the nth evect to solution array T</span>
+    <span class="n">T_evals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evals</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="c1"># assign the nth eigenvalue to the eigenvalue array T_eval.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;alpha = </span><span class="si">{</span><span class="n">alpha_sample</span><span class="si">}</span><span class="s1">, lambda = </span><span class="si">{</span><span class="n">evals</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+
+    
+
+<span class="c1"># Make plots of the numerical wavefunction </span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">)):</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solutions&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 0.5, lambda = 0.707103656172208
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 1, lambda = 0.9999937499607756
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 2, lambda = 1.414201062263058
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 5, lambda = 2.236036727063779
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 15, lambda = 3.872889593938531
+</pre></div>
+</div>
+<img alt="_images/The parametrized Quantum Harmonic Oscillator as a two level system_6_5.png" src="_images/The parametrized Quantum Harmonic Oscillator as a two level system_6_5.png" />
+</div>
+</div>
+</section>
+<section id="creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
+<h2>Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)<a class="headerlink" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">phi1</span><span class="o">=-</span><span class="mi">1</span><span class="o">*</span><span class="n">Vh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">#multiplying by -1 so they are positive at x=0, not necessary but the plots look better</span>
+<span class="n">phi2</span><span class="o">=-</span><span class="mi">1</span><span class="o">*</span><span class="n">Vh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">n_comps</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># number of principle components to plot (i.e number of column vectors of SVD matrix V to plot)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">s</span><span class="o">/</span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;o-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Singular values of solution matrix $T$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\sigma$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">phi1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">phi2</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;First </span><span class="si">{</span><span class="n">n_comps</span><span class="si">}</span><span class="s1"> principle components&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/The parametrized Quantum Harmonic Oscillator as a two level system_8_0.png" src="_images/The parametrized Quantum Harmonic Oscillator as a two level system_8_0.png" />
+</div>
+</div>
+</section>
+<section id="we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
+<h2>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.<a class="headerlink" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components" title="Permalink to this headline">#</a></h2>
+<p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b21bb087-0eae-4daf-b2a1-30f92460783a">
+<span class="eqno">()<a class="headerlink" href="#equation-b21bb087-0eae-4daf-b2a1-30f92460783a" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
+&amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
+\end{align}\]</div>
+<p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-65f3cf36-59d1-4dd8-a6fb-5478fc1671c1">
+<span class="eqno">()<a class="headerlink" href="#equation-65f3cf36-59d1-4dd8-a6fb-5478fc1671c1" title="Permalink to this equation">#</a></span>\[\begin{align}
+\langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
+\end{align}\]</div>
+<p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6aee7588-c685-4f3a-945f-a94c3c0d2196">
+<span class="eqno">()<a class="headerlink" href="#equation-6aee7588-c685-4f3a-945f-a94c3c0d2196" title="Permalink to this equation">#</a></span>\[\begin{align}
+&amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
+&amp;\langle \phi_{i}|  H_\alpha \phi_1 + H_\alpha \phi_2 - \hat \lambda \phi_1 - \hat \lambda \phi_2\rangle
+\end{align}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c3f43706-b794-49cd-a1d1-ca99721fad51">
+<span class="eqno">()<a class="headerlink" href="#equation-c3f43706-b794-49cd-a1d1-ca99721fad51" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
+\end{equation}\]</div>
+<p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e56c396b-e115-45a0-814c-163600d943c3">
+<span class="eqno">()<a class="headerlink" href="#equation-e56c396b-e115-45a0-814c-163600d943c3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
+\end{equation}\]</div>
+<p>while the normalization condition translates into:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d66ea66f-c395-4575-aab3-a547f1d35fb0">
+<span class="eqno">()<a class="headerlink" href="#equation-d66ea66f-c395-4575-aab3-a547f1d35fb0" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\langle a|a \rangle  = a_1^2+a_2^2= 1
+\end{equation}\]</div>
+<p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the potential part and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\alpha H_1\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span> and <span class="math notranslate nohighlight">\(H_1= x^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \alpha \tilde H_1\)</span>. We now construct these matrices:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_array</span><span class="p">)</span>
+<span class="n">off_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim0</span><span class="p">)</span>
+<span class="n">off_diag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">H0</span><span class="o">=-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim0</span><span class="p">)</span> <span class="o">+</span> <span class="n">sci</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">toeplitz</span><span class="p">(</span><span class="n">off_diag</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">mass</span><span class="o">*</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> 
+<span class="n">H1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">tildeH0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]])</span>
+<span class="n">tildeH1</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">]])</span>
+
+<span class="n">tildeH0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H0</span><span class="p">,</span><span class="n">phi1</span><span class="p">))</span>
+<span class="n">tildeH0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H0</span><span class="p">,</span><span class="n">phi2</span><span class="p">))</span>
+<span class="n">tildeH0</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H0</span><span class="p">,</span><span class="n">phi1</span><span class="p">))</span>
+<span class="n">tildeH0</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H0</span><span class="p">,</span><span class="n">phi2</span><span class="p">))</span>
+
+<span class="n">tildeH1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span><span class="n">phi1</span><span class="p">))</span>
+<span class="n">tildeH1</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span><span class="n">phi2</span><span class="p">))</span>
+<span class="n">tildeH1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span><span class="n">phi1</span><span class="p">))</span>
+<span class="n">tildeH1</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span><span class="n">phi2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">tildeH0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tildeH1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.7770897  -1.24211884]
+ [-1.24211884  4.31476477]]
+[[0.33403818 0.51577806]
+ [0.51577806 1.5018725 ]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tildeH</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tildeH0</span><span class="o">+</span><span class="n">alpha</span><span class="o">*</span><span class="n">tildeH1</span>
+
+<span class="k">def</span> <span class="nf">systemSolver</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+    <span class="n">resultssystem</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">tildeH</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">resultssystem</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">resultssystem</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="n">resultssystem</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">resultssystem</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">resultssystem</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="n">resultssystem</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>   
+    <span class="k">return</span> <span class="n">resultssystem</span>
+
+<span class="k">def</span> <span class="nf">phibuilder</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+    <span class="n">coefficients</span><span class="o">=</span><span class="n">systemSolver</span><span class="p">(</span><span class="n">alpha</span><span class="p">)[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">coefficients</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">phi1</span><span class="o">+</span><span class="n">coefficients</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">phi2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tildeH</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.11112788, -0.72634078],
+       [-0.72634078,  5.81663726]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">systemSolver</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1.0015614 , 5.92620375]),
+ array([[ 0.98881312, -0.1491597 ],
+        [ 0.1491597 ,  0.98881312]]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we try our solution solver against the finite element computation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can construct our RBM for an alpha of our choosing. </span>
+<span class="n">alpha_k</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">solGaler</span><span class="o">=</span><span class="n">phibuilder</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">)</span>
+<span class="n">lamGaler</span><span class="o">=</span><span class="n">systemSolver</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Select alpha values to use to solve SE exactly.</span>
+<span class="n">alpha_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">alpha_k</span><span class="p">]</span>  <span class="c1">#Here, we choose 3 values of alpha to solve exactly. This results in 3 basis functions</span>
+<span class="c1"># initialize solution arrays. T is the matrix that will hold wavefunction solutions. </span>
+<span class="c1"># T has the form T[i][j], i = alpha, j = solution components</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">),</span><span class="n">m</span><span class="p">))</span> 
+<span class="c1"># T_evals holds the eigenvalues for each evect in T. </span>
+<span class="n">T_evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">alpha_sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">):</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">construct_H</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">x_array</span><span class="p">,</span><span class="n">mass</span><span class="p">,</span><span class="n">alpha_sample</span><span class="p">)</span> <span class="c1"># construct the Hamiltonian matrix for given alpha_sample.</span>
+    <span class="n">evals</span><span class="p">,</span> <span class="n">evects</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">x_array</span><span class="p">,</span><span class="n">h</span><span class="p">)</span> <span class="c1"># solve the system for evals and evects.</span>
+    <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evects</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">evects</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="c1"># assign the nth evect to solution array T</span>
+    <span class="n">T_evals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evals</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="c1"># assign the nth eigenvalue to the eigenvalue array T_eval.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;alpha = </span><span class="si">{</span><span class="n">alpha_sample</span><span class="si">}</span><span class="s1">, lambda = </span><span class="si">{</span><span class="n">evals</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
+
+    
+
+<span class="c1"># Make plots of the numerical wavefunction </span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">)):</span>
+    
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Finite element $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">phi1</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Galerkin $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>    
+    
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solutions&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 3, lambda = 1.7320320573669001
+</pre></div>
+</div>
+<img alt="_images/The parametrized Quantum Harmonic Oscillator as a two level system_16_1.png" src="_images/The parametrized Quantum Harmonic Oscillator as a two level system_16_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jingyi Li, Alexandra Semposki, Pablo Giuliani, Kyle Godbey<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
