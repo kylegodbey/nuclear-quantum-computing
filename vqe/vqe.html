@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Quantum Computing the Deuteron" href="deuteron.html" />
@@ -349,6 +351,44 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="variational-quantum-eigensolver">
 <h1>Variational Quantum Eigensolver<a class="headerlink" href="#variational-quantum-eigensolver" title="Permalink to this headline">#</a></h1>
+<p>The variational quantum eigensolver (VQE) has been used prominently in QC in the past few years as a way to find the ground state energy of a system. This is done using the variational method from quantum mechanics, which is able to provide an upper bound for this ground state energy. We start with a Hermitian Hamiltonian, <span class="math notranslate nohighlight">\(H\)</span>, and write the eigenvalue equation down as</p>
+<div class="math notranslate nohighlight">
+\[
+H | \psi_{i} \rangle = \lambda_{i} | \psi_{i} \rangle.
+\]</div>
+<p>Say, however, that we cannot directly solve this and must instead use states <span class="math notranslate nohighlight">\(| \psi(\theta) \rangle\)</span>, which have some variable angle <span class="math notranslate nohighlight">\(\theta\)</span> dependence, and can be expanded in a basis of the original states such that</p>
+<div class="math notranslate nohighlight">
+\[
+| \psi(\theta) \rangle = \sum_{i} c_{i} | \psi_{i} \rangle.
+\]</div>
+<p>Now we can find the expectation value.</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \psi(\theta) | H | \psi(\theta) \rangle = \sum_{i,j} c_{j}^{*} c_{i} \langle \psi_{j} | H | \psi_{i} \rangle = \sum_{i,j} \delta_{ij} c_{j}^{*} c_{i} E_{i},
+\]</div>
+<p>and finally</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \psi(\theta) | H | \psi(\theta) \rangle = \sum_{i} |c_{i}|^{2} E_{i},
+\]</div>
+<p>and we know that</p>
+<div class="math notranslate nohighlight">
+\[
+\langle \psi(\theta) | H | \psi(\theta) \rangle = E \ge E_{0},
+\]</div>
+<p>so we can minimize the angles <span class="math notranslate nohighlight">\(\theta\)</span> and get</p>
+<div class="math notranslate nohighlight">
+\[
+\textrm{min} \langle \psi(\theta) | H | \psi(\theta) \rangle = E_{0}.
+\]</div>
+<p>VQE will attempt to do this angle minimization to obtain a reasonable approximation to the ground state energy of the deuteron in this chapter. (To see the notebook this was adapted from, and an excellent tutorial using a very simple Hamiltonian, click <a class="reference external" href="https://github.com/NuclearPhysicsWorkshops/FRIB-TASummerSchoolQuantumComputing/blob/main/doc/pub/lecture7/ipynb/lecture7.ipynb">here</a>).</p>
+<p>When it comes to implementing this technique, there are a few main ingredients in the recipe:</p>
+<ol class="simple">
+<li><p>The Hamiltonian in question transformed into the Pauli basis using the <strong>Jordan-Wigner transformation</strong>;</p></li>
+<li><p>A suitable <strong>ansatz</strong> for the wave function;</p></li>
+<li><p>A classical <strong>optimization routine</strong> to be used to continously optimize the angles <span class="math notranslate nohighlight">\(\theta\)</span> for each run of the VQE circuit.</p></li>
+</ol>
+<p>In the next chapter, we will see these three ingredients worked out in detail and implemented using the package <tt>pennylane</tt>.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
