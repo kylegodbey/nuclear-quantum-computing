@@ -54,8 +54,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quantum Natural Gradient" href="qng.html" />
-    <link rel="prev" title="Complexity++: N=3" href="n3.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -115,32 +113,32 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../introduction/introduction.html">
    Introduction
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="vqe.html">
    Variational Quantum Eigensolver
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
-   <li class="toctree-l2 current active has-children">
+  <ul>
+   <li class="toctree-l2 has-children">
     <a class="reference internal" href="deuteron.html">
      Quantum Computing the Deuteron
     </a>
-    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
     <label for="toctree-checkbox-2">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="current">
+    <ul>
      <li class="toctree-l3">
       <a class="reference internal" href="n2.html">
        First Steps: N=2
@@ -151,8 +149,8 @@ const thebe_selector_output = ".output, .cell_output"
        Complexity++: N=3
       </a>
      </li>
-     <li class="toctree-l3 current active">
-      <a class="current reference internal" href="#">
+     <li class="toctree-l3">
+      <a class="reference internal" href="general.html">
        A General Case
       </a>
      </li>
@@ -229,7 +227,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/vqe/general.ipynb"
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/vqe/optnotes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -247,7 +245,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/vqe/general.ipynb"
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/vqe/optnotes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -307,7 +305,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fvqe/general.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fvqe/optnotes.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -335,7 +333,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/vqe/general.ipynb"
+        <a href="../_sources/vqe/optnotes.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -577,12 +575,59 @@ Generated Hamiltonian:
 <span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;default.qubit&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">dim</span><span class="p">)</span>
 
 <span class="c1"># Define a general ansatz for arbitrary numbers of dimensions</span>
+<span class="c1"># If the device you are running on doesn&#39;t support the arbitrary</span>
+<span class="c1"># Rot gate, pennylane will attempt to decompose it</span>
+
+<span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)):</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wires</span><span class="p">)</span>
+    <span class="n">n_rotations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n_rotations</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n_layers</span> <span class="o">=</span> <span class="n">n_rotations</span> <span class="o">//</span> <span class="n">n_qubits</span>
+        <span class="n">n_extra_rots</span> <span class="o">=</span> <span class="n">n_rotations</span> <span class="o">-</span> <span class="n">n_layers</span> <span class="o">*</span> <span class="n">n_qubits</span>
+
+        <span class="c1"># Alternating layers of unitary rotations on every qubit followed by a</span>
+        <span class="c1"># ring cascade of CNOTs.</span>
+        <span class="k">for</span> <span class="n">layer_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="p">):</span>
+            <span class="n">layer_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="n">layer_idx</span> <span class="o">*</span> <span class="n">n_qubits</span> <span class="p">:</span> <span class="n">layer_idx</span> <span class="o">*</span> <span class="n">n_qubits</span> <span class="o">+</span> <span class="n">n_qubits</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">qml</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">Rot</span><span class="p">,</span> <span class="n">wires</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">layer_params</span><span class="p">)</span>
+            <span class="n">qml</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">,</span> <span class="n">wires</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;ring&quot;</span><span class="p">)</span>
+
+        <span class="c1"># There may be &quot;extra&quot; parameter sets required for which it&#39;s not necessarily</span>
+        <span class="c1"># to perform another full alternating cycle. Apply these to the qubits as needed.</span>
+        <span class="n">extra_params</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="o">-</span><span class="n">n_extra_rots</span><span class="p">:,</span> <span class="p">:]</span>
+        <span class="n">extra_wires</span> <span class="o">=</span> <span class="n">wires</span><span class="p">[:</span> <span class="n">n_qubits</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">n_extra_rots</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">broadcast</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">Rot</span><span class="p">,</span> <span class="n">extra_wires</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;single&quot;</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">extra_params</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># For 1-qubit case, just a single rotation to the qubit</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">Rot</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">wires</span><span class="o">=</span><span class="n">wires</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">SparseHamiltonian</span><span class="p">(</span><span class="n">H_sparse</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="n">dim</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">circuit_he</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
+    <span class="n">n_qubits</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">wires</span><span class="p">)</span>
+    <span class="n">n_rotations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">wires</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_qubits</span><span class="p">):</span>
+        <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">n_qubits</span><span class="p">],</span> <span class="n">wires</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+
+<span class="nd">@qml</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">arbsatz</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">ArbitraryStatePreparation</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">wires</span><span class="p">)</span>
 
 <span class="n">particles</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">ref_state</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">hf_state</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
 
-<span class="n">ansatz</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">ParticleConservingU2</span><span class="p">,</span> <span class="n">init_state</span><span class="o">=</span><span class="n">ref_state</span><span class="p">)</span>
+<span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">excitations</span><span class="p">(</span><span class="n">particles</span><span class="p">,</span> <span class="n">dim</span><span class="p">)</span>
+
+<span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">qchem</span><span class="o">.</span><span class="n">excitations_to_wires</span><span class="p">(</span><span class="n">singles</span><span class="p">,</span> <span class="n">doubles</span><span class="p">)</span>
+
+<span class="n">ansatz</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">UCCSD</span><span class="p">,</span> <span class="n">init_state</span><span class="o">=</span><span class="n">ref_state</span><span class="p">,</span> <span class="n">s_wires</span><span class="o">=</span><span class="n">s_wires</span><span class="p">,</span> <span class="n">d_wires</span><span class="o">=</span><span class="n">d_wires</span><span class="p">)</span>
+<span class="c1">#ansatz = partial(qml.templates.AllSinglesDoubles, hf_state=ref_state, singles=singles, doubles=doubles)</span>
+<span class="c1">#ansatz = partial(qml.ParticleConservingU2, init_state=ref_state)</span>
 
 <span class="n">layers</span> <span class="o">=</span> <span class="n">dim</span> <span class="o">-</span> <span class="mi">2</span>
 
@@ -591,7 +636,7 @@ Generated Hamiltonian:
 
 <span class="n">H</span> <span class="o">=</span> <span class="n">deuteron_ham</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
 
-<span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
+<span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">arbsatz</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -600,20 +645,25 @@ Generated Hamiltonian:
 <p>Now we’ll set up what we’ll need for the VQE procedure, this time doing a loop over how many parameters we’ll need.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our parameter array</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our parameter array, only one lonely element in this case :c</span>
 
-<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">qml</span><span class="o">.</span><span class="n">ParticleConservingU2</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">n_layers</span><span class="o">=</span><span class="n">layers</span><span class="p">,</span> <span class="n">n_wires</span><span class="o">=</span><span class="n">dim</span><span class="p">))</span>
-
+<span class="c1">#init_params = np.array([2.5,4.5])</span>
+<span class="n">num_param_sets</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="n">dim</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_param_sets</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">qml</span><span class="o">.</span><span class="n">ArbitraryStatePreparation</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">n_wires</span><span class="o">=</span><span class="n">dim</span><span class="p">))</span>
+<span class="c1">#init_params = np.random.uniform(low=-np.pi / 2, high=np.pi / 2, size=qml.ParticleConservingU2.shape(n_layers=layers, n_wires=dim))</span>
+<span class="c1">#init_params = np.random.normal(0, 2*np.pi, len(singles) + len(doubles))</span>
+<span class="c1">#init_params = np.random.normal(0, 2*np.pi, 2*dim)</span>
 <span class="c1"># Convergence information and step size</span>
-
+<span class="c1">#print(circuit(init_params))</span>
 <span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">500</span>
 <span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-05</span>
-<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.05</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>Finally, the VQE block. We’re still using the standard gradient descent optimizer since it worked so well before, but soon the time will come to shop around for better options. I have also added a quick and dirty variable step size just to speed things up slightly.</p>
+<p>Finally, the VQE block. We’re still using the standard gradient descent optimizer since it worked so well before, but soon the time will come to shop around for better options. I have also added a variable step size just to speed things up slightly.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
@@ -626,11 +676,11 @@ Generated Hamiltonian:
 <span class="n">accel</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">prev_conv</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
 
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
     <span class="n">fac</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
     <span class="c1"># Take a step in parameter space and record your energy</span>
     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -657,14 +707,11 @@ Generated Hamiltonian:
         <span class="c1">#print(&quot;Accelerating!&quot;)</span>
         <span class="n">step_size</span> <span class="o">=</span> <span class="mf">1.1</span><span class="o">*</span><span class="n">step_size</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
     <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span>
             <span class="s2">&quot;It = </span><span class="si">{:}</span><span class="s2">,  Energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV,  Conv = {&quot;</span>
             <span class="s2">&quot;:.8f} MeV, Time Elapsed = </span><span class="si">{:.3f}</span><span class="s2"> s&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conv</span><span class="p">,</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-
 
     <span class="k">if</span> <span class="n">conv</span> <span class="o">&lt;=</span> <span class="n">conv_tol</span><span class="p">:</span>
         <span class="k">break</span>
@@ -676,21 +723,12 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 36.88604699 MeV,  Conv = 12.29381462 MeV, Time Elapsed = 0.935 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -0.28074798 MeV,  Conv = 0.19416516 MeV, Time Elapsed = 8.648 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -1.91223952 MeV,  Conv = 0.01508431 MeV, Time Elapsed = 8.637 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 30,  Energy = -2.01672957 MeV,  Conv = 0.00888230 MeV, Time Elapsed = 8.720 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 36.98407595 MeV,  Conv = 15.13768097 MeV, Time Elapsed = 3.232 s
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1912</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1996</span><span class="o">/</span><span class="mf">3669017576.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -726,62 +764,172 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">return</span> <span class="n">nary_operator</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_grad.py</span> in <span class="ni">_grad_with_forward</span><span class="nt">(fun, x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> 
-<span class="ne">--&gt; </span><span class="mi">141</span>         <span class="n">grad_value</span> <span class="o">=</span> <span class="n">vjp</span><span class="p">(</span><span class="n">vspace</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span><span class="o">.</span><span class="n">ones</span><span class="p">())</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="k">return</span> <span class="n">grad_value</span><span class="p">,</span> <span class="n">ans</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> 
+<span class="g g-Whitespace">    </span><span class="mi">131</span>         <span class="n">difference</span> <span class="n">being</span> <span class="n">that</span> <span class="n">it</span> <span class="n">returns</span> <span class="n">both</span> <span class="n">the</span> <span class="n">gradient</span> <span class="o">*</span><span class="ow">and</span><span class="o">*</span> <span class="n">the</span> <span class="n">forward</span> <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="n">value</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">133</span><span class="s2">         vjp, ans = _make_vjp(fun, x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="s2">         if not vspace(ans).size == 1:</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp</span><span class="nt">(g)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="k">def</span> <span class="nf">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">):</span> <span class="k">return</span> <span class="n">vspace</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">zeros</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">14</span>         <span class="k">def</span> <span class="nf">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">):</span> <span class="k">return</span> <span class="n">backward_pass</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">return</span> <span class="n">vjp</span><span class="p">,</span> <span class="n">end_value</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> 
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">make_vjp</span><span class="nt">(fun, x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2"> def make_vjp(fun, x):</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="s2">     start_node = VJPNode.new_root()</span>
+<span class="ne">---&gt; </span><span class="mi">10</span><span class="s2">     end_value, end_node =  trace(start_node, fun, x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="s2">     if end_node is None:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="s2">         def vjp(g): return vspace(x).zeros()</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">backward_pass</span><span class="nt">(g, end_node)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">toposort</span><span class="p">(</span><span class="n">end_node</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>         <span class="n">outgrad</span> <span class="o">=</span> <span class="n">outgrads</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">21</span>         <span class="n">ingrads</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">vjp</span><span class="p">(</span><span class="n">outgrad</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">ingrad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="n">ingrads</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>             <span class="n">outgrads</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_outgrads</span><span class="p">(</span><span class="n">outgrads</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ingrad</span><span class="p">)</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">trace</span><span class="nt">(start_node, fun, x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="s2">     with trace_stack.new_trace() as t:</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="s2">         start_box = new_box(x, t, start_node)</span>
+<span class="ne">---&gt; </span><span class="mi">10</span><span class="s2">         end_box = fun(start_box)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="s2">         if isbox(end_box) and end_box._trace == start_box._trace:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="s2">             return end_box._value, end_box._node</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(g)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>                     <span class="s2">&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnum 0 not defined&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>             <span class="n">vjp</span> <span class="o">=</span> <span class="n">vjpfun</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">67</span>             <span class="k">return</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="p">(</span><span class="n">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">),)</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="k">elif</span> <span class="n">L</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="n">argnum_0</span><span class="p">,</span> <span class="n">argnum_1</span> <span class="o">=</span> <span class="n">argnums</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/wrap_util.py</span> in <span class="ni">unary_f</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span><span class="s2">                 else:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span><span class="s2">                     subargs = subvals(args, zip(argnum, x))</span>
+<span class="ne">---&gt; </span><span class="mi">15</span><span class="s2">                 return fun(*subargs, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span><span class="s2">             if isinstance(argnum, int):</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span><span class="s2">                 x = args[argnum]</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_vjps.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(g)</span>
-<span class="g g-Whitespace">    </span><span class="mi">699</span>         <span class="k">return</span> <span class="n">A</span>
-<span class="g g-Whitespace">    </span><span class="mi">700</span>     <span class="k">return</span> <span class="n">SparseObject</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">mut_add</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">701</span> <span class="n">defvjp</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">ArrayBox</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">untake</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">vspace</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span>
-<span class="g g-Whitespace">    </span><span class="mi">702</span> <span class="n">defvjp</span><span class="p">(</span><span class="n">untake</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">703</span> 
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/vqe/vqe.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">227</span><span class="s2">     def __call__(self, *args, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">228</span><span class="s2">         return self.cost_fn(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span><span class="s2"> </span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vspace</span><span class="nt">(value)</span>
-<span class="g g-Whitespace">    </span><span class="mi">231</span> <span class="k">def</span> <span class="nf">vspace</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">232</span>     <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">233</span>         <span class="k">return</span> <span class="n">VSpace</span><span class="o">.</span><span class="n">mappings</span><span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)](</span><span class="n">value</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">234</span>     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">235</span>         <span class="k">if</span> <span class="n">isbox</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/dot.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(params, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span><span class="s2">         interface = y.interface</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span><span class="s2">         fn, x = _get_dot_func(interface, x)</span>
+<span class="ne">--&gt; </span><span class="mi">143</span><span class="s2">         func = lambda params, **kwargs: fn(x, y(params, **kwargs))</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span><span class="s2">     else:</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_vspaces.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="n">VSpace</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span>                 <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ComplexArrayVSpace</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">58</span>                 <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">iscomplexobj</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">59</span>                 <span class="k">else</span> <span class="n">ArrayVSpace</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span> 
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/qnode_collection.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span><span class="s2">     def __call__(self, *args, **kwargs):</span>
+<span class="ne">--&gt; </span><span class="mi">277</span><span class="s2">         results = self.evaluate(args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span><span class="s2">         return self.convert_results(results, self.interface)</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span><span class="s2"> </span>
 
-<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">iscomplexobj</span><span class="nt">(*args, **kwargs)</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/qnode_collection.py</span> in <span class="ni">evaluate</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span><span class="s2">         for q in self.qnodes:</span>
+<span class="ne">--&gt; </span><span class="mi">233</span><span class="s2">             results.append(q(*args, **kwargs))</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span><span class="s2">         return results</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/numpy/lib/type_check.py</span> in <span class="ni">iscomplexobj</span><span class="nt">(x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">339</span>     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">340</span>         <span class="n">type_</span> <span class="o">=</span> <span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">type</span>
-<span class="ne">--&gt; </span><span class="mi">341</span>     <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">type_</span><span class="p">,</span> <span class="n">_nx</span><span class="o">.</span><span class="n">complexfloating</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">342</span> 
-<span class="g g-Whitespace">    </span><span class="mi">343</span> 
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span><span class="s2">             gradient_kwargs=self.gradient_kwargs,</span>
+<span class="g g-Whitespace">    </span><span class="mi">625</span><span class="s2">             override_shots=override_shots,</span>
+<span class="ne">--&gt; </span><span class="mi">626</span><span class="s2">             **self.execute_kwargs,</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span><span class="s2">         )</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">execute</span><span class="nt">(tapes, device, gradient_fn, interface, mode, gradient_kwargs, cache, cachesize, max_diff, override_shots, expand_fn, max_expansion, device_batch_transform)</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span><span class="s2">             qml.interfaces.cache_execute(</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span><span class="s2">                 batch_execute, cache, return_tuple=False, expand_fn=expand_fn</span>
+<span class="ne">--&gt; </span><span class="mi">346</span><span class="s2">             )(tapes)</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span><span class="s2">         )</span>
+<span class="g g-Whitespace">    </span><span class="mi">348</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">wrapper</span><span class="nt">(tapes, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span><span class="s2">         else:</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span><span class="s2">             # execute all unique tapes that do not exist in the cache</span>
+<span class="ne">--&gt; </span><span class="mi">172</span><span class="s2">             res = fn(execution_tapes.values(), **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span><span class="s2">         final_res = []</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">fn</span><span class="nt">(tapes, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span><span class="s2">         def fn(tapes, **kwargs):  # pylint: disable=function-redefined</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span><span class="s2">             tapes = [expand_fn(tape) for tape in tapes]</span>
+<span class="ne">---&gt; </span><span class="mi">97</span><span class="s2">             return original_fn(tapes, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="s2">     @wraps(fn)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">inner</span><span class="nt">(*args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="s2">         def inner(*args, **kwds):</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span><span class="s2">             with self._recreate_cm():</span>
+<span class="ne">---&gt; </span><span class="mi">74</span><span class="s2">                 return func(*args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="s2">         return inner</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_qubit_device.py</span> in <span class="ni">batch_execute</span><span class="nt">(self, circuits)</span>
+<span class="g g-Whitespace">    </span><span class="mi">353</span><span class="s2">             self.reset()</span>
+<span class="g g-Whitespace">    </span><span class="mi">354</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">355</span><span class="s2">             res = self.execute(circuit)</span>
+<span class="g g-Whitespace">    </span><span class="mi">356</span><span class="s2">             results.append(res)</span>
+<span class="g g-Whitespace">    </span><span class="mi">357</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_qubit_device.py</span> in <span class="ni">execute</span><span class="nt">(self, circuit, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">255</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span><span class="s2">         # apply all circuit operations</span>
+<span class="ne">--&gt; </span><span class="mi">257</span><span class="s2">         self.apply(circuit.operations, rotations=circuit.diagonalizing_gates, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">258</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span><span class="s2">         # generate computational basis samples</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">apply</span><span class="nt">(self, operations, rotations, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span><span class="s2">                         self._debugger.snapshots[len(self._debugger.snapshots)] = state_vector</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span><span class="s2">             else:</span>
+<span class="ne">--&gt; </span><span class="mi">231</span><span class="s2">                 self._state = self._apply_operation(self._state, operation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">233</span><span class="s2">         # store the pre-rotated state</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_operation</span><span class="nt">(self, state, operation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">259</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">260</span><span class="s2">         if operation in diagonal_in_z_basis:</span>
+<span class="ne">--&gt; </span><span class="mi">261</span><span class="s2">             return self._apply_diagonal_unitary(state, matrix, wires)</span>
+<span class="g g-Whitespace">    </span><span class="mi">262</span><span class="s2">         if len(wires) &lt;= 2:</span>
+<span class="g g-Whitespace">    </span><span class="mi">263</span><span class="s2">             # Einsum is faster for small gates</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_diagonal_unitary</span><span class="nt">(self, state, phases, wires)</span>
+<span class="g g-Whitespace">    </span><span class="mi">761</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">762</span><span class="s2">         einsum_indices = f&quot;</span><span class="si">{affected_indices}</span><span class="s2">,</span><span class="si">{state_indices}</span><span class="s2">-&gt;</span><span class="si">{state_indices}</span><span class="s2">&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">763</span><span class="s2">         return self._einsum(einsum_indices, phases, state)</span>
+<span class="g g-Whitespace">    </span><span class="mi">764</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">765</span><span class="s2">     def reset(self):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/wrapper.py</span> in <span class="ni">_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2">         # evaluate the original object</span>
+<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">         res = obj(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2">         if isinstance(res, _np.ndarray):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="s2">             argnums = tuple(argnum    for argnum, _   in boxed_args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="s2">             ans = f_wrapped(*argvals, **kwargs)</span>
+<span class="ne">---&gt; </span><span class="mi">45</span><span class="s2">             node = node_constructor(ans, f_wrapped, argvals, kwargs, argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">         else:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">__init__</span><span class="nt">(self, value, fun, args, kwargs, parent_argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s2">             raise NotImplementedError(&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnums </span><span class="si">{}</span><span class="s2"> not defined&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="s2">                                       .format(fun_name, parent_argnums))</span>
+<span class="ne">---&gt; </span><span class="mi">36</span><span class="s2">         self.vjp = vjpmaker(parent_argnums, value, args, kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="s2">     def initialize_root(self):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp_argnums</span><span class="nt">(argnums, *args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2"> def defvjp_argnum(fun, vjpmaker):</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">     def vjp_argnums(argnums, *args):</span>
+<span class="ne">---&gt; </span><span class="mi">48</span><span class="s2">         vjps = [vjpmaker(argnum, *args) for argnum in argnums]</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="s2">         return lambda g: (vjp(g) for vjp in vjps)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span><span class="s2">     defvjp_argnums(fun, vjp_argnums)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2"> def defvjp_argnum(fun, vjpmaker):</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">     def vjp_argnums(argnums, *args):</span>
+<span class="ne">---&gt; </span><span class="mi">48</span><span class="s2">         vjps = [vjpmaker(argnum, *args) for argnum in argnums]</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="s2">         return lambda g: (vjp(g) for vjp in vjps)</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span><span class="s2">     defvjp_argnums(fun, vjp_argnums)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_vjps.py</span> in <span class="ni">grad_einsum</span><span class="nt">(argnum, ans, operands_, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span><span class="s2"> defvjp(anp.atleast_3d, grad_reshape_list)</span>
+<span class="g g-Whitespace">    </span><span class="mi">586</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">587</span><span class="s2"> def grad_einsum(argnum, ans, operands_, kwargs):</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="s2">     result_meta = anp.metadata(operands_[argnum])</span>
+<span class="g g-Whitespace">    </span><span class="mi">589</span><span class="s2">     def vjp(g):</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -802,7 +950,7 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/general_17_0.png" src="../_images/general_17_0.png" />
+<img alt="../_images/optnotes_17_0.png" src="../_images/optnotes_17_0.png" />
 </div>
 </div>
 <p>Since we are now allowed to move in higher dimensions, making a general PES plotter gets a little tricky, but feel free to play around and see if you can think of clever ways to plot how your solution explores the space!</p>
@@ -836,20 +984,6 @@ Generated Hamiltonian:
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="n3.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Complexity++: N=3</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="qng.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quantum Natural Gradient</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
 </div>
             </footer>
         </div>
