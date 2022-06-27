@@ -7,6 +7,8 @@ chapters:
 
 - file: vqe/vqe
   sections:
+- file: vqe/error
+  sections:
   - file: vqe/deuteron
     sections:
     - file: vqe/n2
