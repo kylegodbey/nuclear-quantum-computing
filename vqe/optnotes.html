@@ -129,6 +129,11 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="error.html">
+     Error Mitigation: Zero-Noise Extrapolation (ZNE)
+    </a>
+   </li>
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="deuteron.html">
      Quantum Computing the Deuteron
@@ -723,12 +728,12 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 36.98407595 MeV,  Conv = 15.13768097 MeV, Time Elapsed = 3.232 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 33.06812741 MeV,  Conv = 13.49315202 MeV, Time Elapsed = 3.228 s
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1996</span><span class="o">/</span><span class="mf">3669017576.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1910</span><span class="o">/</span><span class="mf">3669017576.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -876,60 +881,25 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">    </span><span class="mi">233</span><span class="s2">         # store the pre-rotated state</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_operation</span><span class="nt">(self, state, operation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span><span class="s2">             return self._apply_ops[operation.base_name](state, axes, inverse=operation.inverse)</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">258</span><span class="s2">         matrix = self._asarray(self._get_unitary_matrix(operation), dtype=self.C_DTYPE)</span>
 <span class="g g-Whitespace">    </span><span class="mi">259</span><span class="s2"> </span>
 <span class="g g-Whitespace">    </span><span class="mi">260</span><span class="s2">         if operation in diagonal_in_z_basis:</span>
-<span class="ne">--&gt; </span><span class="mi">261</span><span class="s2">             return self._apply_diagonal_unitary(state, matrix, wires)</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span><span class="s2">         if len(wires) &lt;= 2:</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span><span class="s2">             # Einsum is faster for small gates</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_diagonal_unitary</span><span class="nt">(self, state, phases, wires)</span>
-<span class="g g-Whitespace">    </span><span class="mi">761</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">762</span><span class="s2">         einsum_indices = f&quot;</span><span class="si">{affected_indices}</span><span class="s2">,</span><span class="si">{state_indices}</span><span class="s2">-&gt;</span><span class="si">{state_indices}</span><span class="s2">&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">763</span><span class="s2">         return self._einsum(einsum_indices, phases, state)</span>
-<span class="g g-Whitespace">    </span><span class="mi">764</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">765</span><span class="s2">     def reset(self):</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_get_unitary_matrix</span><span class="nt">(self, unitary)</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span><span class="s2">             return unitary.eigvals()</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">564</span><span class="s2">         return unitary.matrix()</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span><span class="s2">     @classmethod</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/wrapper.py</span> in <span class="ni">_wrapped</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2">         # evaluate the original object</span>
-<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">         res = obj(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2">         if isinstance(res, _np.ndarray):</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="s2">             argnums = tuple(argnum    for argnum, _   in boxed_args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="s2">             ans = f_wrapped(*argvals, **kwargs)</span>
-<span class="ne">---&gt; </span><span class="mi">45</span><span class="s2">             node = node_constructor(ans, f_wrapped, argvals, kwargs, argnums, parents)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">         else:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">__init__</span><span class="nt">(self, value, fun, args, kwargs, parent_argnums, parents)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s2">             raise NotImplementedError(&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnums </span><span class="si">{}</span><span class="s2"> not defined&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="s2">                                       .format(fun_name, parent_argnums))</span>
-<span class="ne">---&gt; </span><span class="mi">36</span><span class="s2">         self.vjp = vjpmaker(parent_argnums, value, args, kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="s2">     def initialize_root(self):</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp_argnums</span><span class="nt">(argnums, *args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2"> def defvjp_argnum(fun, vjpmaker):</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">     def vjp_argnums(argnums, *args):</span>
-<span class="ne">---&gt; </span><span class="mi">48</span><span class="s2">         vjps = [vjpmaker(argnum, *args) for argnum in argnums]</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="s2">         return lambda g: (vjp(g) for vjp in vjps)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span><span class="s2">     defvjp_argnums(fun, vjp_argnums)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2"> def defvjp_argnum(fun, vjpmaker):</span>
-<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">     def vjp_argnums(argnums, *args):</span>
-<span class="ne">---&gt; </span><span class="mi">48</span><span class="s2">         vjps = [vjpmaker(argnum, *args) for argnum in argnums]</span>
-<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="s2">         return lambda g: (vjp(g) for vjp in vjps)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span><span class="s2">     defvjp_argnums(fun, vjp_argnums)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_vjps.py</span> in <span class="ni">grad_einsum</span><span class="nt">(argnum, ans, operands_, kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">585</span><span class="s2"> defvjp(anp.atleast_3d, grad_reshape_list)</span>
-<span class="g g-Whitespace">    </span><span class="mi">586</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">587</span><span class="s2"> def grad_einsum(argnum, ans, operands_, kwargs):</span>
-<span class="g g-Whitespace">    </span><span class="mi">588</span><span class="s2">     result_meta = anp.metadata(operands_[argnum])</span>
-<span class="g g-Whitespace">    </span><span class="mi">589</span><span class="s2">     def vjp(g):</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">matrix</span><span class="nt">(self, wire_order)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1412</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1413</span><span class="s2">     def matrix(self, wire_order=None):</span>
+<span class="ne">-&gt; </span><span class="mi">1414</span><span class="s2">         canonical_matrix = self.compute_matrix(*self.parameters, **self.hyperparameters)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1415</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1416</span><span class="s2">         if self.inverse:</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>

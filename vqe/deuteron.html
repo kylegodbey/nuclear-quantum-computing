@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="First Steps: N=2" href="n2.html" />
-    <link rel="prev" title="Variational Quantum Eigensolver" href="vqe.html" />
+    <link rel="prev" title="Error Mitigation: Zero-Noise Extrapolation (ZNE)" href="error.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -131,6 +131,11 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="error.html">
+     Error Mitigation: Zero-Noise Extrapolation (ZNE)
+    </a>
+   </li>
    <li class="toctree-l2 current active has-children">
     <a class="current reference internal" href="#">
      Quantum Computing the Deuteron
@@ -355,13 +360,13 @@ title="Print to PDF"
 <p>From the paper we can read that the authors employed the projection of hamiltonian operators onto quantum qubits (X,Y,Z) to construct a quantum computatable hamiltonian.
 By the Pionless EFT, a systematically improvable and model-independent approach to nuclear interactions in a regime where the momentum scale <span class="math notranslate nohighlight">\(Q\)</span> of the interesting physics. The important part of this paper is how the deuteron creation and annihlation operator is mapped onto qubits using Jordan-Wigner transformation. Qubits can be used by quantum computers for boperations based on Pauli matrices (denoted as <span class="math notranslate nohighlight">\(X_{q}, Y_{q}\)</span>, and <span class="math notranslate nohighlight">\(Z_{q}\)</span> on qubit <span class="math notranslate nohighlight">\(q\)</span> ).</p>
 <p>The deuteron Hamiltonian is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9591e26-cf9e-4381-9051-009fac30b95e">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c9591e26-cf9e-4381-9051-009fac30b95e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d2d330fc-f904-407e-8267-3947856eebc3">
+<span class="eqno">(1)<a class="headerlink" href="#equation-d2d330fc-f904-407e-8267-3947856eebc3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle a_{n^{\prime}}^{\dagger} a_{n} .
 \end{equation}\]</div>
 <p>The operators <span class="math notranslate nohighlight">\(a_{n}^{\dagger}\)</span> and <span class="math notranslate nohighlight">\(a_{n}\)</span> here are the creatiion and annihilation operators. A deuteron is created or annihilated in the harmonic-oscillator <span class="math notranslate nohighlight">\(s\)</span>-wave state <span class="math notranslate nohighlight">\(|n\rangle\)</span>. The matrix elements of the kinetic and potential energy are represented by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c04f91ae-3b52-4a35-9f74-a7df2fdfde7b">
-<span class="eqno">(2)<a class="headerlink" href="#equation-c04f91ae-3b52-4a35-9f74-a7df2fdfde7b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-46dfc43d-d87e-44e1-ad09-1cef1712199e">
+<span class="eqno">(2)<a class="headerlink" href="#equation-46dfc43d-d87e-44e1-ad09-1cef1712199e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 \left\langle n^{\prime}|T| n\right\rangle=&amp; \frac{\hbar \omega}{2}\left[(2 n+3 / 2) \delta_{n}^{n^{\prime}}-\sqrt{n(n+1 / 2)} \delta_{n}^{n^{\prime}+1}\right.\\
 &amp;\left.-\sqrt{(n+1)(n+3 / 2)} \delta_{n}^{n^{\prime}-1}\right] \\
@@ -399,11 +404,11 @@ H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle 
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="vqe.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="error.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Variational Quantum Eigensolver</p>
+            <p class="prev-next-title">Error Mitigation: Zero-Noise Extrapolation (ZNE)</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="n2.html" title="next page">
