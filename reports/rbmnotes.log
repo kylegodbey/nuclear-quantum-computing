@@ -1,0 +1,50 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/nbclient/client.py", line 664, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+prob_circuit(params)
+
+qnode = qml.QNode(prob_circuit(params,gen_ansatz), dev)
+qnode(params,shots=10000)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m/tmp/ipykernel_2113/3461465445.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mprob_circuit[0m[0;34m([0m[0mparams[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;34m[0m[0m
+[1;32m      3[0m [0mqnode[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mQNode[0m[0;34m([0m[0mprob_circuit[0m[0;34m([0m[0mparams[0m[0;34m,[0m[0mgen_ansatz[0m[0;34m)[0m[0;34m,[0m [0mdev[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0mqnode[0m[0;34m([0m[0mparams[0m[0;34m,[0m[0mshots[0m[0;34m=[0m[0;36m10000[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py[0m in [0;36m__call__[0;34m(self, *args, **kwargs)[0m
+[1;32m    607[0m [0;34m[0m[0m
+[1;32m    608[0m         [0;31m# construct the tape[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 609[0;31m         [0mself[0m[0;34m.[0m[0mconstruct[0m[0;34m([0m[0margs[0m[0;34m,[0m [0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    610[0m [0;34m[0m[0m
+[1;32m    611[0m         [0mcache[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mexecute_kwargs[0m[0;34m.[0m[0mget[0m[0;34m([0m[0;34m"cache"[0m[0;34m,[0m [0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py[0m in [0;36mconstruct[0;34m(self, args, kwargs)[0m
+[1;32m    524[0m [0;34m[0m[0m
+[1;32m    525[0m         [0;32mwith[0m [0mself[0m[0;34m.[0m[0mtape[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 526[0;31m             [0mself[0m[0;34m.[0m[0m_qfunc_output[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mfunc[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    527[0m         [0mself[0m[0;34m.[0m[0m_tape[0m[0;34m.[0m[0m_qfunc_output[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_qfunc_output[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    528[0m [0;34m[0m[0m
+
+[0;31mTypeError[0m: prob_circuit() missing 1 required positional argument: 'ansatz'
+TypeError: prob_circuit() missing 1 required positional argument: 'ansatz'
+
