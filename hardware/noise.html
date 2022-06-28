@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Error Mitigation: Zero-Noise Extrapolation" href="error.html" />
@@ -275,6 +277,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/hardware/noise.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/hardware/noise.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -379,12 +428,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-the-origin-of-noise">
+   On the origin of noise
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noiseless-vs-noisy-circuits-a-simple-example">
+   Noiseless vs. noisy circuits: a simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -396,6 +479,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-the-origin-of-noise">
+   On the origin of noise
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noiseless-vs-noisy-circuits-a-simple-example">
+   Noiseless vs. noisy circuits: a simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -405,7 +511,58 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="noisy-circuits">
 <h1>Noisy Circuits<a class="headerlink" href="#noisy-circuits" title="Permalink to this headline">#</a></h1>
-<p>TODO: discuss adding noise to ciurcuits and show that it changes things?</p>
+<p>Author: Alexandra Semposki</p>
+<p>Maintainer: Alexandra Semposki</p>
+<p>Now that VQE has been extensively covered for a noiseless system, we can begin to consider what happens when we add noise into the circuit. Of course, some questions one would have are how the noise occurs in the circuit, how does it affect the circuit results, and how would one correct such errors? In this notebook, we’ll cover all of these questions and end with an error mitigation technique that will become very useful for the calculations in the rest of this Jupyter Book.</p>
+<section id="on-the-origin-of-noise">
+<h2>On the origin of noise<a class="headerlink" href="#on-the-origin-of-noise" title="Permalink to this headline">#</a></h2>
+<p>If you’ve only ever run a quantum circuit on a simulator, you’ve probably never encountered errors on your qubits (unless you were using a noisy backend, of course). However, if you run your circuit(s) on a real quantum device, like IBM’s quantum computers, you’ll notice (once your job stops running) that you don’t have just the results you thought you would—instead, you’ll have some probabilities in bins you didn’t expect at all. This is an example of this noise we’re talking about. There are two clear places errors can occur that you’ll probably be able to guess quite quickly:</p>
+<ul class="simple">
+<li><p>Qubits</p></li>
+<li><p>Quantum gates</p></li>
+</ul>
+<p>Both of these hardware components are highly susceptible to error. Some of the general types of error are described below.</p>
+<ul class="simple">
+<li><p><strong>Decoherence</strong>: a qubit will eventually interact with its environment in a real quantum device, which leads to the qubit entangling with this environment, which in turn leads to the qubit altering from its original state into this entangled state.</p></li>
+<li><p><strong>Dephasing</strong>: this term describes the process of a qubit’s phase changing over time; this can be visualised by thinking of a qubit as a vector in the Bloch sphere, and then rotating this vector slowly away from its original position.</p></li>
+<li><p><strong>Relaxation</strong>: this occurs when a qubit is in a more energetic state, or “excited” state, which we can call <span class="math notranslate nohighlight">\(|1\rangle\)</span>, and over time it slowly returns back to its “ground” state, which we term <span class="math notranslate nohighlight">\(|0\rangle\)</span>.</p></li>
+</ul>
+<p>We also can describe some of the specific errors that can occur in a qubit, and which lead to the terms described above.</p>
+<ul class="simple">
+<li><p><strong>Bit flips</strong>: a qubit flips from a 0 to a 1 or vice versa; for example, a state may go from <span class="math notranslate nohighlight">\(|000\rangle\)</span> to <span class="math notranslate nohighlight">\(|010\rangle\)</span> without the action of the quantum gate that would have done this normally.</p></li>
+<li><p><strong>Phase flips</strong>: a qubit in a superposition state will experience a sign flip between the two components; for example, for a multi-qubit state, the state may go from <span class="math notranslate nohighlight">\((|001\rangle + |110\rangle)\)</span> to <span class="math notranslate nohighlight">\((|001\rangle - |110\rangle)\)</span>. Again, this is not a command from the user, it is one that appears to spontaneously occur with no command to do so.</p></li>
+</ul>
+<p>The two error sources above can be corrected for using more qubits to track which qubit’s bit or phase flipped—this is called <strong>error correction</strong>. The two types of error control are <strong>error correction</strong> and <strong>error mitigation</strong>. Error mitigation is not exactly the same thing as error correction; it deals with current practical methods in reducing error in quantum circuits, but not completely removing these errors [1]. Error correction tries to do the latter, but often requires hundreds of qubits to perform this task well, which is just not practical at this time for large-scale use.</p>
+</section>
+<section id="noiseless-vs-noisy-circuits-a-simple-example">
+<h2>Noiseless vs. noisy circuits: a simple example<a class="headerlink" href="#noiseless-vs-noisy-circuits-a-simple-example" title="Permalink to this headline">#</a></h2>
+<p>Now let’s get our hands dirty and build a very simple circuit to demonstrate this noise. We’ll use a noiseless simulator first, and then move to a noisy backend to show the difference between simulated quantum circuits and what would happen on a real quantum device.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import qiskit and other needed packages</span>
+<span class="kn">import</span> <span class="nn">qiskit</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="ne">C</span>:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_17752/3972249381.py in &lt;module&gt;
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#import qiskit and other needed packages</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">qiskit</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;qiskit&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>[1] <tt>mitiq</tt> documentation, “About Error Mitigation,” 2020. (Page found <a class="reference external" href="https://mitiq.readthedocs.io/en/v.0.1a2/guide/guide_06-error-mitigation.html">here</a>).</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
