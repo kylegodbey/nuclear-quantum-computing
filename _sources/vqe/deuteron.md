@@ -35,7 +35,7 @@ Quantum computers manipulate qubits by operations based on Pauli matrices (denot
 
 Note that other mappings can be used, with the various mappings having benefits and drawbacks that may apply to your problem of interest.
 
-A spin up $|\uparrow\rangle$ (down $|\downarrow\rangle$ ) on qubit $n$ corresponds to zero (one) deuteron in the state $|n\rangle$. As we deal with single-particle states, the symmetry under permutations plays no role here. To compute the ground-state energy of the deuteron we employ the following strategy. We determine the ground-state energies of the Hamiltonian (1) for $N=1,2,3$ and use those values to extrapolate the energy to the infinite-dimensional space. We have $H_{1}=0.218291\left(Z_{0}-I\right) \mathrm{MeV}$, and its ground-state energy $E_{1}=\left\langle\downarrow\left|H_{1}\right| \downarrow\right\rangle \approx-0.436 \mathrm{MeV}$ requires no computation. Here, $I$ denotes the identity operation. For $N=2,3$ we have (all numbers are in units of $\mathrm{MeV}$)
+A spin up $|\uparrow\rangle$ (down $|\downarrow\rangle$ ) on qubit $n$ corresponds to zero (one) deuteron in the state $|n\rangle$. For $N=2,3$ we have the components of the Hamiltonian (all numbers are in units of $\mathrm{MeV}$)
 
 \begin{equation}
 \begin{aligned}

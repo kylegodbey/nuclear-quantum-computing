@@ -755,12 +755,12 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 46.32858935 MeV,  Conv = 5.12708420 MeV, Time Elapsed = 3.035 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 29.61776960 MeV,  Conv = 14.06429803 MeV, Time Elapsed = 4.813 s
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1995</span><span class="o">/</span><span class="mf">3669017576.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2129</span><span class="o">/</span><span class="mf">3669017576.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -908,18 +908,18 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">    </span><span class="mi">233</span><span class="s2">         # store the pre-rotated state</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_operation</span><span class="nt">(self, state, operation)</span>
+<span class="g g-Whitespace">    </span><span class="mi">256</span><span class="s2">             return self._apply_ops[operation.base_name](state, axes, inverse=operation.inverse)</span>
+<span class="g g-Whitespace">    </span><span class="mi">257</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">258</span><span class="s2">         matrix = self._asarray(self._get_unitary_matrix(operation), dtype=self.C_DTYPE)</span>
 <span class="g g-Whitespace">    </span><span class="mi">259</span><span class="s2"> </span>
 <span class="g g-Whitespace">    </span><span class="mi">260</span><span class="s2">         if operation in diagonal_in_z_basis:</span>
-<span class="ne">--&gt; </span><span class="mi">261</span><span class="s2">             return self._apply_diagonal_unitary(state, matrix, wires)</span>
-<span class="g g-Whitespace">    </span><span class="mi">262</span><span class="s2">         if len(wires) &lt;= 2:</span>
-<span class="g g-Whitespace">    </span><span class="mi">263</span><span class="s2">             # Einsum is faster for small gates</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_apply_diagonal_unitary</span><span class="nt">(self, state, phases, wires)</span>
-<span class="g g-Whitespace">    </span><span class="mi">755</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">756</span><span class="s2">         # reshape vectors</span>
-<span class="ne">--&gt; </span><span class="mi">757</span><span class="s2">         phases = self._cast(self._reshape(phases, [2] * len(device_wires)), dtype=self.C_DTYPE)</span>
-<span class="g g-Whitespace">    </span><span class="mi">758</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">759</span><span class="s2">         state_indices = ABC[: self.num_wires]</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit_autograd.py</span> in <span class="ni">_asarray</span><span class="nt">(array, dtype)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="s2">     @staticmethod</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="s2">     def _asarray(array, dtype=None):</span>
+<span class="ne">--&gt; </span><span class="mi">100</span><span class="s2">         res = np.asarray(array, dtype=dtype)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="s2">         if res.dtype is np.dtype(&quot;O&quot;):</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/wrapper.py</span> in <span class="ni">_wrapped</span><span class="nt">(*args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">115</span><span class="s2"> </span>
@@ -929,25 +929,32 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2">         if isinstance(res, _np.ndarray):</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="s2">             parents = tuple(box._node for _     , box in boxed_args)</span>
 <span class="g g-Whitespace">     </span><span class="mi">43</span><span class="s2">             argnums = tuple(argnum    for argnum, _   in boxed_args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="s2">             ans = f_wrapped(*argvals, **kwargs)</span>
-<span class="ne">---&gt; </span><span class="mi">45</span><span class="s2">             node = node_constructor(ans, f_wrapped, argvals, kwargs, argnums, parents)</span>
+<span class="ne">---&gt; </span><span class="mi">44</span><span class="s2">             ans = f_wrapped(*argvals, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span><span class="s2">             node = node_constructor(ans, f_wrapped, argvals, kwargs, argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
 <span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">         else:</span>
+<span class="ne">---&gt; </span><span class="mi">48</span><span class="s2">             return f_raw(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span><span class="s2">     f_wrapped.fun = f_raw</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span><span class="s2">     f_wrapped._is_autograd_primitive = True</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">__init__</span><span class="nt">(self, value, fun, args, kwargs, parent_argnums, parents)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s2">             raise NotImplementedError(&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnums </span><span class="si">{}</span><span class="s2"> not defined&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="s2">                                       .format(fun_name, parent_argnums))</span>
-<span class="ne">---&gt; </span><span class="mi">36</span><span class="s2">         self.vjp = vjpmaker(parent_argnums, value, args, kwargs)</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/tensor.py</span> in <span class="ni">asarray</span><span class="nt">(vals, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="s2">     &quot;&quot;&quot;</span><span class="n">Gradient</span> <span class="n">supporting</span> <span class="n">autograd</span> <span class="n">asarray</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s2">     if isinstance(vals, (onp.ndarray, _np.ndarray)):</span>
+<span class="ne">---&gt; </span><span class="mi">35</span><span class="s2">         return _np.asarray(vals, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span><span class="s2">     return _np.array(vals, *args, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">37</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="s2">     def initialize_root(self):</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp_argnums</span><span class="nt">(argnums, ans, args, kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span><span class="s2">     vjps_dict = {argnum : translate_vjp(vjpmaker, fun, argnum)</span>
-<span class="g g-Whitespace">     </span><span class="mi">55</span><span class="s2">                  for argnum, vjpmaker in zip(argnums, vjpmakers)}</span>
-<span class="ne">---&gt; </span><span class="mi">56</span><span class="s2">     def vjp_argnums(argnums, ans, args, kwargs):</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">         L = len(argnums)</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="s2">         # These first two cases are just optimizations</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">33</span><span class="s2">     Wraps a function so that its gradient can be specified and its invocation</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s2">     can be recorded. For examples, see the docs.&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">35</span>     <span class="nd">@wraps</span><span class="p">(</span><span class="n">f_raw</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="k">def</span> <span class="nf">f_wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span>         <span class="n">boxed_args</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">node_constructor</span> <span class="o">=</span> <span class="n">find_top_boxed_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
