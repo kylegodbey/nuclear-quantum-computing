@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Dimensionality Reduction &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
-    <link rel="prev" title="Quantum Computing Applications in Nuclear Physics" href="../landing.html" />
+    <link rel="next" title="Quantum Harmonic Oscillator as a two level system" href="classical.html" />
+    <link rel="prev" title="Real Hardware" href="../hardware/ibm.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -116,8 +114,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../introduction/introduction.html">
    Introduction
   </a>
  </li>
@@ -204,18 +202,18 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../horbm/horbm.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
    Dimensionality Reduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../horbm/classical.html">
+    <a class="reference internal" href="classical.html">
      Quantum Harmonic Oscillator as a two level system
     </a>
    </li>
@@ -316,7 +314,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fintroduction/introduction.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fhorbm/horbm.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -344,7 +342,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/introduction/introduction.md"
+        <a href="../_sources/horbm/horbm.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -393,7 +391,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction</h1>
+                <h1>Dimensionality Reduction</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -405,15 +403,11 @@ title="Print to PDF"
                 
               <div>
                 
-  <!-- #region -->
-<section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>Author: Alexandra Semposki</p>
-<p>Many of the most intriguing problems known by the physics community are presently unreachable by classical computation. Diagonalization of high-dimensional matrices cannot be performed beyond a dimension of <span class="math notranslate nohighlight">\(10^{11}\)</span> currently (see Tsunoda, N., Otsuka, T., Takayanagi, K. et al. The impact of nuclear shape on the emergence of the neutron dripline. Nature 587, 66–71 (2020), and the fermion sign problem pervades Quantum Monte Carlo (QMC) calculations. Instead of classical computers, we now look to quantum computers to provide aid on these frustrating limits of modern classical technology. Our hope is that, in the near future—with the fast developments in the quantum computing (QC) world—we may be able to mitigate the aforementioned issues with quantum computers that will reduce our time to run computationally challenging physics problems from exponential time to polynomial time. With this improvement, we would not have to wait several lifetimes to get results on problems that would have, on a classical computer, taken longer than the age of the universe to complete!</p>
-<p>Quantum computers run in a similar way to classical computers: they use a form of bit called a qubit, and have quantum gates that perform transformations on these qubits, much like classical gates do on classical bits. However, there are a couple of stark differences between the two systems. One, a qubit can take many more possible values than a classical bit owing to their ability to be in a superposition of states, and two, quantum gates are reversible—hence they are unitary operators, a condition not necessary for gates in a classical circuit. Of course, with qubits and quantum gates comes the question: what about entanglement? Entanglement can occur and be induced between qubits on purpose using the gates, but qubits can also interact with the environment, causing a fair amount of error to arise. Is this the end for qubits? Not to worry! Error correction and mitigation are also fast advancing, with algorithms to correct for bit and phase flips developing and improving year by year.</p>
-<p>There are many techniques used in QC that are worth investigating, and many have been and will be tremendously useful in the fields of few-body and many-body systems in physics. One that has been used quite often is the Variational Quantum Eigensolver (VQE), which can determine the ground state of an atomic system. It is very popular in Quantum Chemistry and there have been many applications of it in recent years—for example, <a class="reference external" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.120.210501">this PRL paper from 2018</a>, where it is applied to the deuteron. VQE will be discussed in detail in the next chapter, but right now we will say that it is an application of the Variational Principle you most likely learned in your first ever Quantum Mechanics class in undergrad, with more bells and whistles and qubits of course!</p>
-<p>In this Jupyter Book, we will explore VQE in the context of few-body physics. we will use the example of the pionless-EFT Hamiltonian for the deuteron from this paper and perform VQE to find the ground state energy as a benchmark in our understanding of this QC method. We start by using VQE on <span class="math notranslate nohighlight">\(N=2\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is the number of dimensions, and then progress to <span class="math notranslate nohighlight">\(N=3\)</span>. After this, we extend this work to a general case where we are able to ask for any dimension we would like to calculate. As we wish to investigate VQE on more than just the deuteron, we will then discuss the Reduced Basis Method (RBM) in the context of the quantum harmonic oscillator, as we need to reduce the dimensionality of this Hamiltonian to one that can be handled by our available IBM quantum computers. We then perform VQE on this reduced Hamiltonian, and test this on a real quantum device. Since these circuits will have errors, we will attempt error mitigation in the form of zero noise extrapolation (ZNE), which is also covered in the PRL discussed above.</p>
-<!-- #endregion -->
+  <section class="tex2jax_ignore mathjax_ignore" id="dimensionality-reduction">
+<h1>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">#</a></h1>
+<p>TODO: Some intro on RBM</p>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -429,7 +423,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./introduction"
+            path: "./horbm"
         },
         predefinedOutput: true
     }
@@ -443,17 +437,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../landing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../hardware/ibm.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Quantum Computing Applications in Nuclear Physics</p>
+            <p class="prev-next-title">Real Hardware</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../vqe/vqe.html" title="next page">
+    <a class='right-next' id="next-link" href="classical.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Variational Quantum Eigensolver</p>
+        <p class="prev-next-title">Quantum Harmonic Oscillator as a two level system</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -200,6 +200,23 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="horbm.html">
+   Dimensionality Reduction
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classical.html">
+     Quantum Harmonic Oscillator as a two level system
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributors.html">
    Contributors
@@ -773,8 +790,8 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1.30465335  1.46570113  0.49613109]
- [-0.02784276 -0.19578356  1.17039824]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.20739365 -0.41438032  1.45982188]
+ [ 0.44027866  1.46238348 -0.49933133]]
 </pre></div>
 </div>
 </div>
@@ -842,30 +859,33 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 1.96100244,  Conv = 0.13040707, Time Elapsed = 0.071 s
-It = 1,  Energy = 1.79489304,  Conv = 0.16610940, Time Elapsed = 0.072 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 2.63414500,  Conv = 1.20342893, Time Elapsed = 0.070 s
+It = 1,  Energy = 2.24961727,  Conv = 0.38452773, Time Elapsed = 0.072 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 1.77103269,  Conv = 0.02386035, Time Elapsed = 0.132 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 2.03996614,  Conv = 0.20965113, Time Elapsed = 0.160 s
+It = 3,  Energy = 1.90692486,  Conv = 0.13304129, Time Elapsed = 0.068 s
+It = 4,  Energy = 1.83641214,  Conv = 0.07051272, Time Elapsed = 0.067 s
+It = 5,  Energy = 1.79987317,  Conv = 0.03653896, Time Elapsed = 0.068 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 3,  Energy = 1.76705405,  Conv = 0.00397864, Time Elapsed = 0.070 s
-It = 4,  Energy = 1.76631338,  Conv = 0.00074068, Time Elapsed = 0.068 s
-It = 5,  Energy = 1.76613725,  Conv = 0.00017613, Time Elapsed = 0.067 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = 1.78219951,  Conv = 0.01767366, Time Elapsed = 0.071 s
+It = 7,  Energy = 1.77365606,  Conv = 0.00854345, Time Elapsed = 0.089 s
+It = 8,  Energy = 1.76961896,  Conv = 0.00403711, Time Elapsed = 0.070 s
+It = 9,  Energy = 1.76770366,  Conv = 0.00191530, Time Elapsed = 0.068 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = 1.76607489,  Conv = 0.00006235, Time Elapsed = 0.071 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = 1.76680239,  Conv = 0.00090127, Time Elapsed = 0.070 s
+It = 11,  Energy = 1.76637702,  Conv = 0.00042537, Time Elapsed = 0.073 s
+It = 12,  Energy = 1.76627520,  Conv = 0.00010182, Time Elapsed = 0.070 s
+It = 13,  Energy = 1.76629780,  Conv = 0.00002260, Time Elapsed = 0.068 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 7,  Energy = 1.76604412,  Conv = 0.00003077, Time Elapsed = 0.073 s
-It = 8,  Energy = 1.76602644,  Conv = 0.00001768, Time Elapsed = 0.068 s
-It = 9,  Energy = 1.76601577,  Conv = 0.00001067, Time Elapsed = 0.067 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = 1.76600924,  Conv = 0.00000654, Time Elapsed = 0.072 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 14,  Energy = 1.76599890,  Conv = 0.00029890, Time Elapsed = 0.070 s
+It = 15,  Energy = 1.76599878,  Conv = 0.00000012, Time Elapsed = 0.158 s
 
-Final value of the energy = 1.76600924
-Number of iterations =  10
+Final value of the energy = 1.76599878
+Number of iterations =  15
 </pre></div>
 </div>
 </div>
@@ -884,11 +904,8 @@ Number of iterations =  10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient: 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 0.9990120687208356
-a2 Coefficient:  0.044439695657334896
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9990654057377594
+a2 Coefficient:  0.043224010203205564
 </pre></div>
 </div>
 </div>
@@ -937,12 +954,12 @@ a2 Coefficient:  0.044439695657334896
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finite Ele alpha = 3, lambda = 1.7320320573669001
-QC Galerkin alpha = 3, lambda = 1.7660092356476123
+QC Galerkin alpha = 3, lambda = 1.7659987771926993
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1793</span><span class="o">/</span><span class="mf">1959063373.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1846</span><span class="o">/</span><span class="mf">1959063373.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Finite element $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 <span class="g g-Whitespace">     </span><span class="mi">28</span> 
 <span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">phi1</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Galerkin $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
