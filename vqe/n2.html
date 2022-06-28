@@ -168,6 +168,33 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../hardware/hardware.html">
+   Running on “Hardware”
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hardware/noise.html">
+     Noisy Circuits
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hardware/zne.html">
+     Zero-Noise Extrapolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../hardware/ibm.html">
+     Real Hardware
+    </a>
+   </li>
+  </ul>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributors.html">
    Contributors
@@ -403,8 +430,7 @@ title="Print to PDF"
 <h1>First Steps: N=2<a class="headerlink" href="#first-steps-n-2" title="Permalink to this headline">#</a></h1>
 <p>Author(s): Kyle Godbey</p>
 <p>Maintainer: Kyle Godbey</p>
-<p>TODO: write some background on the interaction/hamiltonian, how and why we convert it to a pauli representation</p>
-<p>We begin with…</p>
+<p>With the background of the previous page, we now begin our quantum computing journey! This entry will walk you through how to set up our Hamiltonian for the deuteron defined previously as well as an appropriate ansatz for the problem.</p>
 <p>Now let’s set up our imports! For this first example and the next we will just use <a class="reference external" href="https://pennylane.ai/">pennylane</a> and define the circuits and Hamiltonian directly in the form from <a class="reference external" href="https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.120.210501">Cloud Quantum Computing of an Atomic Nucleus</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
