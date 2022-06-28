@@ -13,7 +13,14 @@ chapters:
     - file: vqe/n2
     - file: vqe/n3
     - file: vqe/general
+  - file: vqe/opt
   - file: vqe/qng
+
+- file: hardware/hardware
+  sections:
+  - file: hardware/noise
+  - file: hardware/zne
+  - file: hardware/ibm
 
 - file: contributors
 
