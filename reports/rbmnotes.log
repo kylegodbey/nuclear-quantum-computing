@@ -25,7 +25,7 @@ qnode(params,shots=10000)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mTypeError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_2366/3461465445.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_1828/3461465445.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0mprob_circuit[0m[0;34m([0m[0mparams[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      2[0m [0;34m[0m[0m
 [1;32m      3[0m [0mqnode[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mQNode[0m[0;34m([0m[0mprob_circuit[0m[0;34m([0m[0mparams[0m[0;34m,[0m[0mgen_ansatz[0m[0;34m)[0m[0;34m,[0m [0mdev[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m

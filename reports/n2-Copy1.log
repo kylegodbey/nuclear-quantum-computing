@@ -27,7 +27,7 @@ import qiskit.providers.aer.noise as noise
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_2264/3207773961.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_1953/3207773961.py[0m in [0;36m<module>[0;34m[0m
 [0;32m----> 1[0;31m [0;32mimport[0m [0mmitiq[0m [0;32mas[0m [0mmq[0m[0;34m[0m[0;34m[0m[0m
 [0m[1;32m      2[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0mscaling[0m [0;32mimport[0m [0mfold_global[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      3[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0minference[0m [0;32mimport[0m [0mRichardsonFactory[0m[0;34m[0m[0;34m[0m[0m

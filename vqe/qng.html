@@ -251,6 +251,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/vqe/qng.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/vqe/qng.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -381,7 +428,279 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="quantum-natural-gradient">
 <h1>Quantum Natural Gradient<a class="headerlink" href="#quantum-natural-gradient" title="Permalink to this headline">#</a></h1>
-<p>Quantum fischer information matrix etc etc</p>
+<p>Author(s): Kyle Godbey</p>
+<p>Maintainer: Kyle Godbey</p>
+<p>For this last application, let’s think of a way to improve our VQE algorithm by exploiting some features of our quantum computing architecture. What we’ll do is, instead of computing the gradient of the variational parameters of our ansatz, we’ll instead compute the so-called Quantum Natural Gradient. This is an extension of the standard natural gradient which moves in the steepest descent direction of the information geometry, using something like the Fisher metric. For these quantum systems, we’ll instead use the Fubini-Study metric (real part of the quantum geometric tensor) to determine the most optimal step in the ansatz parameters. For more details you should have a look at the <a class="reference external" href="https://quantum-journal.org/papers/q-2020-05-25-269/">Quantum Natural Gradient</a> paper published in 2020.</p>
+<p>While it’s not too difficult to calculate this measure yourself by constructing the Hessian using <a class="reference external" href="https://pennylane.ai/qml/glossary/parameter_shift.html">parameter shift rules</a>, we’ll be using a built in pennylane method to make our lives easier.</p>
+<p>Most of this will be the same as the N=3 case, so we’ll toss it all in a cell together – be sure to check that you know what’s happening though!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pennylane</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pennylane</span> <span class="k">as</span> <span class="nn">qml</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># In this case we now need 3 qubits</span>
+
+<span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;default.qubit&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Defining our ansatz circuit for the N=3 case</span>
+
+<span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="o">-</span><span class="n">t1</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># And building our Hamiltonian for the N=3 case</span>
+
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">15.531709</span> <span class="p">,</span><span class="o">-</span><span class="mf">2.1433</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.1433</span><span class="p">,</span> <span class="mf">0.21829</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.125</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.625</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.91</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.91</span><span class="p">]</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qml</span><span class="o">.</span><span class="n">Identity</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliY</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliY</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">qml</span><span class="o">.</span><span class="n">PauliY</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliY</span><span class="p">(</span><span class="mi">2</span><span class="p">)]</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
+<span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll still set up what we need for our VQE procedure, but we’ll be running it twice, so setting the initial parameters is a necessity for the sake of fairness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hand-picked, small-batch initialization</span>
+
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,</span><span class="mf">4.5</span><span class="p">])</span>
+
+<span class="c1"># Convergence information and step size</span>
+
+<span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-06</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.01</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the VQE block, we’ll run two one after another. First up is the same thing we had before, good ol’ gradient descent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">init_params</span>
+
+<span class="n">gd_param_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">params</span><span class="p">]</span>
+<span class="n">gd_cost_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+
+    <span class="c1"># Take a step in parameter space and record your energy</span>
+    <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># This keeps track of our energy for plotting at comparisons</span>
+    <span class="n">gd_param_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">gd_cost_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev_energy</span><span class="p">)</span>
+
+    <span class="c1"># Here we see what the energy of our system is with the new parameters</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">cost_fn</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># Calculate difference between new and old energies</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energy</span> <span class="o">-</span> <span class="n">prev_energy</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Iteration = </span><span class="si">{:}</span><span class="s2">,  Energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV,  Convergence parameter = {&quot;</span>
+            <span class="s2">&quot;:.8f} MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conv</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">conv</span> <span class="o">&lt;=</span> <span class="n">conv_tol</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final value of the energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of iterations = &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 22.73185830 MeV,  Convergence parameter = 0.16533643 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = 13.86733622 MeV,  Convergence parameter = 0.85950160 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 40,  Energy = 0.66226895 MeV,  Convergence parameter = 0.41277410 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 60,  Energy = -1.94958676 MeV,  Convergence parameter = 0.01827050 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 80,  Energy = -2.04226133 MeV,  Convergence parameter = 0.00054725 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 100,  Energy = -2.04502496 MeV,  Convergence parameter = 0.00001629 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -2.04510468 MeV
+Number of iterations =  116
+</pre></div>
+</div>
+</div>
+</div>
+<p>Looks the same as before, that’s a good sign. Now let’s try the QNG!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNGOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">init_params</span>
+
+<span class="n">qng_param_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">params</span><span class="p">]</span>
+<span class="n">qng_cost_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+
+    <span class="c1"># Take a step in parameter space and record your energy</span>
+    <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># This keeps track of our energy for plotting at comparisons</span>
+    <span class="n">qng_param_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">qng_cost_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev_energy</span><span class="p">)</span>
+
+    <span class="c1"># Here we see what the energy of our system is with the new parameters</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">cost_fn</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># Calculate difference between new and old energies</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energy</span> <span class="o">-</span> <span class="n">prev_energy</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Iteration = </span><span class="si">{:}</span><span class="s2">,  Energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV,  Convergence parameter = {&quot;</span>
+            <span class="s2">&quot;:.8f} MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conv</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">conv</span> <span class="o">&lt;=</span> <span class="n">conv_tol</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final value of the energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of iterations = &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 22.30149608 MeV,  Convergence parameter = 0.59569865 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = -2.03927628 MeV,  Convergence parameter = 0.00595511 MeV
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -2.04510917 MeV
+Number of iterations =  33
+</pre></div>
+</div>
+</div>
+</div>
+<p>Very nice! We sped things up a good bit, but let’s check the convergence plot to see the behavior over the iterations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;seaborn&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qng_cost_history</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Quantum Natural Gradient&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (MeV)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Optimization steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/qng_9_0.png" src="../_images/qng_9_0.png" />
+</div>
+</div>
+<p>Wow! It seems taking a more intelligent step in parameter space can work wonders towards finding an optimal solution. This works much better than simply adding a variable time step, like we did for the general case. Try implementing the QNG optimizer for higher dimensions and check the performance!</p>
+<p>Finally, we can plot how we trace the potential energy surface (PES) as we find a solution. It’s a little more exciting now that we have two paths – let’s imagine they’re racing through the mountains.</p>
+<p>If you’re running this yourself, you can either generate the surface yourself or put this code in a cell to download it locally:</p>
+<p><code class="docutils literal notranslate"><span class="pre">!wget</span> <span class="pre">https://github.com/kylegodbey/nuclear-quantum-computing/raw/main/nuclear-qc/vqe/deut_pes_n3.npy</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Discretize the parameter space</span>
+<span class="n">theta0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">theta1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Load energy value at each point in parameter space</span>
+<span class="n">pes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;deut_pes_n3.npy&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get the minimum of the PES</span>
+<span class="n">minloc</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">pes</span><span class="o">.</span><span class="n">argmin</span><span class="p">(),</span><span class="n">pes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="c1"># Plot energy landscape</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s2">&quot;coolwarm&quot;</span><span class="p">)</span>
+<span class="n">contour_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">theta0</span><span class="p">,</span> <span class="n">theta1</span><span class="p">,</span> <span class="n">pes</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta_0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta_1$&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">theta0</span><span class="p">[</span><span class="n">minloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span><span class="n">theta1</span><span class="p">[</span><span class="n">minloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span><span class="s2">&quot;r*&quot;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Minimum&quot;</span><span class="p">)</span>
+
+<span class="c1"># Plot optimization path for gradient descent. Plot every 10th point.</span>
+<span class="n">gd_color</span> <span class="o">=</span> <span class="s2">&quot;b&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gd_param_history</span><span class="p">)[::</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gd_param_history</span><span class="p">)[::</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">gd_color</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gd_param_history</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gd_param_history</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">gd_color</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Plot optimization path for qng. Plot every 10th point.</span>
+<span class="n">qng_color</span> <span class="o">=</span> <span class="s2">&quot;g&quot;</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qng_param_history</span><span class="p">)[::</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qng_param_history</span><span class="p">)[::</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s2">&quot;.&quot;</span><span class="p">,</span><span class="n">markersize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">qng_color</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Quantum Natural Gradient&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qng_param_history</span><span class="p">)[:,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">qng_param_history</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="s2">&quot;-&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">qng_color</span><span class="p">,</span>
+    <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/qng_11_0.png" src="../_images/qng_11_0.png" />
+</div>
+</div>
+<p>You can see that the paths are not massively different, but the QNG results in a much sharper gradient in the parameter space. Exemplified by the spacing between the points along the line, showing the value every ten time steps. This steeper landscape leads to bigger steps towards the minimum without risking overshooting, making it an excellent fit in situations where you can make use of it!</p>
+<p>This concludes our exploration of playing with VQE ad nauseam, next up we’ll explore what happens when things get a bit more noisy.</p>
 </section>
 
     <script type="text/x-thebe-config">
