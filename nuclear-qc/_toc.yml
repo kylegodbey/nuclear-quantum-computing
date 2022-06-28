@@ -7,7 +7,6 @@ chapters:
 
 - file: vqe/vqe
   sections:
-  - file: vqe/error
   - file: vqe/deuteron
     sections:
     - file: vqe/n2
@@ -18,7 +17,9 @@ chapters:
 - file: hardware/hardware
   sections:
   - file: hardware/noise
-  - file: hardware/zne
+  - file: hardware/error
+    sections:
+    - file: hardware/zne
   - file: hardware/ibm
 
 - file: contributors
