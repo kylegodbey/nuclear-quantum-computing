@@ -1,5 +1,7 @@
 # Variational Quantum Eigensolver
 
+Author: Alexandra Semposki
+
 The variational quantum eigensolver (VQE) has been used prominently in QC in the past few years as a way to find the ground state energy of a system. This is done using the variational method from quantum mechanics, which is able to provide an upper bound for this ground state energy. We start with a Hermitian Hamiltonian, $H$, and write the eigenvalue equation down as
 
 $$
