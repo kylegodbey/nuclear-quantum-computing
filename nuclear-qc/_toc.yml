@@ -21,6 +21,11 @@ chapters:
   - file: hardware/zne
   - file: hardware/ibm
 
+- file: horbm/horbm
+  sections:
+  - file: horbm/classical
+  - file: horbm/qc
+
 - file: contributors
 
 
