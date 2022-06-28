@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>A General Case &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Reduced Basis Method on a Quantum Computer &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -266,7 +264,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/horbm/rbmnotes.ipynb"
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/horbm/quantum.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -284,7 +282,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/horbm/rbmnotes.ipynb"
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/horbm/quantum.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -344,7 +342,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fhorbm/rbmnotes.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fhorbm/quantum.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -372,7 +370,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/horbm/rbmnotes.ipynb"
+        <a href="../_sources/horbm/quantum.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -421,7 +419,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A General Case</h1>
+                <h1>Reduced Basis Method on a Quantum Computer</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -433,12 +431,11 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="a-general-case">
-<h1>A General Case<a class="headerlink" href="#a-general-case" title="Permalink to this headline">#</a></h1>
-<p>Author(s): Kyle Godbey</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="reduced-basis-method-on-a-quantum-computer">
+<h1>Reduced Basis Method on a Quantum Computer<a class="headerlink" href="#reduced-basis-method-on-a-quantum-computer" title="Permalink to this headline">#</a></h1>
+<p>Author(s): Kyle Godbey, Pablo Giuliani</p>
 <p>Maintainer: Kyle Godbey</p>
-<p>To take this particular problem to its natural conclusion, we will be now devising a way to automatically generate our Hamiltonian and ansatz circuits based on what basis dimension we want to calculate.</p>
-<p>To do this in the most straightforward manner, I will first implement the Hamiltonian in second quantization before mapping it to a Pauli representation. To help out, I’ll be importing some tools from qiskit as well as pennylane, proving that frameworks can indeed work together!</p>
+<p>Now it’s time to take the two level representation we just solved classically and implement it for use on quantum hardware. The bulk of this notebook is based on the VQE example for the deuteron, so check that out for more descriptions <a class="reference internal" href="../vqe/general.html"><span class="doc std std-doc">here</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -512,49 +509,10 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Something else that will be very important is a function to compute the matrix elements <span class="math notranslate nohighlight">\(\langle n' | (\hat{T} + \hat{V}) | n \rangle\)</span> needed for our Hamiltonian.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">kron</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">j</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">1</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-
-<span class="k">def</span> <span class="nf">matrix_element</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">):</span>
-    
-    <span class="n">ele</span> <span class="o">=</span> <span class="mf">0.0</span>
-    
-    <span class="n">ele</span> <span class="o">=</span> <span class="p">((</span><span class="mf">2.0</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mf">1.5</span><span class="p">)</span><span class="o">*</span><span class="n">kron</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">))</span><span class="o">*</span><span class="n">kron</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> \
-    <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">1.5</span><span class="p">))</span><span class="o">*</span><span class="n">kron</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="mf">3.5</span>
-    
-    <span class="n">ele</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">5.68658111</span> <span class="o">*</span> <span class="n">kron</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">*</span> <span class="n">kron</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
-    
-    
-    <span class="k">return</span> <span class="n">ele</span>
-</pre></div>
-</div>
-</div>
-</div>
 <p>Lastly, we’ll make a function that returns a pennylane compatible Hamiltonian given a requested basis dimension, N.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">deuteron_ham</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">mapper</span><span class="o">=</span><span class="n">JordanWignerMapper</span><span class="p">):</span>
-    <span class="c1"># Start out by zeroing what will be our fermionic operator</span>
-    <span class="n">op</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-            <span class="c1"># Construct the terms of the Hamiltonian in terms of creation/annihilation operators </span>
-            <span class="n">op</span> <span class="o">+=</span> <span class="n">matrix_element</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="o">*</span> \
-            <span class="n">FermionicOp</span><span class="p">([([(</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">),(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">j</span><span class="p">)],</span> <span class="mf">1.0</span><span class="p">)])</span>
-
-    <span class="n">hamstr</span> <span class="o">=</span> <span class="s2">&quot;+ &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">mapper</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">second_q_op</span><span class="o">=</span><span class="n">op</span><span class="p">))</span>
-
-    <span class="n">hamiltonian</span> <span class="o">=</span> <span class="n">parse_hamiltonian_input</span><span class="p">(</span><span class="n">hamstr</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">hamiltonian</span>
-
-<span class="k">def</span> <span class="nf">rbm_ham</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">mapper</span><span class="o">=</span><span class="n">JordanWignerMapper</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ham</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">mapper</span><span class="o">=</span><span class="n">JordanWignerMapper</span><span class="p">):</span>
     <span class="c1"># Start out by zeroing what will be our fermionic operator</span>
     <span class="n">op</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">mat_ele</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">1.11112788</span><span class="p">,</span><span class="o">-</span><span class="mf">0.72634078</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.72634078</span><span class="p">,</span><span class="mf">5.81663726</span><span class="p">]]</span>
@@ -611,12 +569,18 @@ title="Print to PDF"
 + (-3.91) [Y1 Y2]
 + (-2.1433) [X0 X1]
 + (-2.1433) [Y0 Y1]
-Generated Hamiltonian: 
-   (-2.90831863) [Z0]
-+ (-0.55556394) [Z1]
-+ (3.46388257) [I0]
-+ (-0.36317039) [Y0 Y1]
-+ (-0.36317039) [X0 X1]
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1758</span><span class="o">/</span><span class="mf">1435815197.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="c1"># Let&#39;s now use our new function!</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> 
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="n">H</span> <span class="o">=</span> <span class="n">rbm_ham</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generated Hamiltonian: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">H</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;rbm_ham&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -748,33 +712,23 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 1.08402934 MeV,  Conv = 0.06026410 MeV, Time Elapsed = 0.030 s
-It = 1,  Energy = 1.04887358 MeV,  Conv = 0.03515576 MeV, Time Elapsed = 0.026 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 1.08402934 MeV,  Conv = 0.06026410 MeV, Time Elapsed = 0.034 s
+It = 1,  Energy = 1.04887358 MeV,  Conv = 0.03515576 MeV, Time Elapsed = 0.024 s
 It = 2,  Energy = 1.02859261 MeV,  Conv = 0.02028097 MeV, Time Elapsed = 0.025 s
-It = 3,  Energy = 1.01696853 MeV,  Conv = 0.01162407 MeV, Time Elapsed = 0.025 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 4,  Energy = 1.01033109 MeV,  Conv = 0.00663744 MeV, Time Elapsed = 0.027 s
-It = 5,  Energy = 1.00654918 MeV,  Conv = 0.00378191 MeV, Time Elapsed = 0.027 s
-It = 6,  Energy = 1.00439695 MeV,  Conv = 0.00215223 MeV, Time Elapsed = 0.025 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 7,  Energy = 1.00317300 MeV,  Conv = 0.00122395 MeV, Time Elapsed = 0.026 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 8,  Energy = 1.00247723 MeV,  Conv = 0.00069577 MeV, Time Elapsed = 0.027 s
-It = 9,  Energy = 1.00208180 MeV,  Conv = 0.00039543 MeV, Time Elapsed = 0.081 s
-It = 10,  Energy = 1.00185709 MeV,  Conv = 0.00022471 MeV, Time Elapsed = 0.025 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 11,  Energy = 1.00172940 MeV,  Conv = 0.00012768 MeV, Time Elapsed = 0.027 s
-It = 12,  Energy = 1.00165072 MeV,  Conv = 0.00007868 MeV, Time Elapsed = 0.027 s
-It = 13,  Energy = 1.00160542 MeV,  Conv = 0.00004530 MeV, Time Elapsed = 0.025 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 14,  Energy = 1.00158129 MeV,  Conv = 0.00002413 MeV, Time Elapsed = 0.027 s
-It = 15,  Energy = 1.00156953 MeV,  Conv = 0.00001176 MeV, Time Elapsed = 0.026 s
-It = 16,  Energy = 1.00156436 MeV,  Conv = 0.00000517 MeV, Time Elapsed = 0.025 s
+It = 3,  Energy = 1.01696853 MeV,  Conv = 0.01162407 MeV, Time Elapsed = 0.023 s
+It = 4,  Energy = 1.01033109 MeV,  Conv = 0.00663744 MeV, Time Elapsed = 0.025 s
+It = 5,  Energy = 1.00654918 MeV,  Conv = 0.00378191 MeV, Time Elapsed = 0.024 s
+It = 6,  Energy = 1.00439695 MeV,  Conv = 0.00215223 MeV, Time Elapsed = 0.027 s
+It = 7,  Energy = 1.00317300 MeV,  Conv = 0.00122395 MeV, Time Elapsed = 0.023 s
+It = 8,  Energy = 1.00247723 MeV,  Conv = 0.00069577 MeV, Time Elapsed = 0.022 s
+It = 9,  Energy = 1.00208180 MeV,  Conv = 0.00039543 MeV, Time Elapsed = 0.025 s
+It = 10,  Energy = 1.00185709 MeV,  Conv = 0.00022471 MeV, Time Elapsed = 0.024 s
+It = 11,  Energy = 1.00172940 MeV,  Conv = 0.00012768 MeV, Time Elapsed = 0.025 s
+It = 12,  Energy = 1.00165072 MeV,  Conv = 0.00007868 MeV, Time Elapsed = 0.023 s
+It = 13,  Energy = 1.00160542 MeV,  Conv = 0.00004530 MeV, Time Elapsed = 0.022 s
+It = 14,  Energy = 1.00158129 MeV,  Conv = 0.00002413 MeV, Time Elapsed = 0.022 s
+It = 15,  Energy = 1.00156953 MeV,  Conv = 0.00001176 MeV, Time Elapsed = 0.022 s
+It = 16,  Energy = 1.00156436 MeV,  Conv = 0.00000517 MeV, Time Elapsed = 0.023 s
 
 Final value of the energy = 1.00156436 MeV
 Number of iterations =  16
@@ -800,7 +754,7 @@ Number of iterations =  16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/rbmnotes_17_0.png" src="../_images/rbmnotes_17_0.png" />
+<img alt="../_images/quantum_15_0.png" src="../_images/quantum_15_0.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2.84060445]
 0.2964641282522704
 </pre></div>
@@ -819,25 +773,28 @@ Number of iterations =  16
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1878</span><span class="o">/</span><span class="mf">3461465445.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">qnode</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">gen_ansatz</span><span class="p">),</span> <span class="n">dev</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">qnode</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="nn">/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/general copy.ipynb Cell 19&#39;</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/general</span><span class="si">%20c</span><span class="s1">opy.ipynb#ch0000020?line=0&#39;</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/general</span><span class="si">%20c</span><span class="s1">opy.ipynb#ch0000020?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">qnode</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">gen_ansatz</span><span class="p">),</span> <span class="n">dev</span><span class="p">)</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/general</span><span class="si">%20c</span><span class="s1">opy.ipynb#ch0000020?line=3&#39;</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">qnode</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">607</span> 
-<span class="g g-Whitespace">    </span><span class="mi">608</span>         <span class="c1"># construct the tape</span>
-<span class="ne">--&gt; </span><span class="mi">609</span>         <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">610</span> 
-<span class="g g-Whitespace">    </span><span class="mi">611</span>         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cache&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nn">File ~/.local/lib/python3.10/site-packages/pennylane/qnode.py:609,</span> in <span class="ni">QNode.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">606</span>         <span class="n">set_shots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_original_device</span><span class="p">,</span> <span class="n">override_shots</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_gradient_fn</span><span class="p">)()</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span> <span class="c1"># construct the tape</span>
+<span class="ne">--&gt; </span><span class="mi">609</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cache&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span> <span class="n">using_custom_cache</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span>     <span class="nb">hasattr</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s2">&quot;__getitem__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">614</span>     <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s2">&quot;__setitem__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">615</span>     <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s2">&quot;__delitem__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">616</span> <span class="p">)</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py</span> in <span class="ni">construct</span><span class="nt">(self, args, kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> 
-<span class="g g-Whitespace">    </span><span class="mi">525</span>         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">526</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
-<span class="g g-Whitespace">    </span><span class="mi">528</span> 
+<span class="nn">File ~/.local/lib/python3.10/site-packages/pennylane/qnode.py:526,</span> in <span class="ni">QNode.construct</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">QuantumTape</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">526</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">(</span><span class="n">trainable_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="ne">TypeError</span>: prob_circuit() missing 1 required positional argument: &#39;ansatz&#39;
 </pre></div>

@@ -17,18 +17,35 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-tildeH(1)
+dim = 2
 
-mat[1][2]
+# Building our Hamiltonian for the N=3 case, as before
+
+coeffs = [15.531709 ,-2.1433, -2.1433, 0.21829, -6.125, -9.625, -3.91, -3.91]
+obs = [qml.Identity(0),qml.PauliX(0) @ qml.PauliX(1), qml.PauliY(0) @ qml.PauliY(1),qml.PauliZ(0),qml.PauliZ(1),qml.PauliZ(2),qml.PauliX(1) @ qml.PauliX(2),qml.PauliY(1) @ qml.PauliY(2)]
+
+ham = qml.Hamiltonian(coeffs, obs)
+
+# Let's print it out
+
+print("Original Hamiltonian: \n",ham)
+
+# Let's now use our new function!
+
+H = rbm_ham(dim)
+
+print("Generated Hamiltonian: \n",H)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1850/4285296799.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      1[0m [0mtildeH[0m[0;34m([0m[0;36m1[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      2[0m [0;34m[0m[0m
-[0;32m----> 3[0;31m [0mmat[0m[0;34m[[0m[0;36m1[0m[0;34m][0m[0;34m[[0m[0;36m2[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;31mNameError[0m: name 'mat' is not defined
-NameError: name 'mat' is not defined
+[0;32m/tmp/ipykernel_1758/1435815197.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     14[0m [0;31m# Let's now use our new function![0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     15[0m [0;34m[0m[0m
+[0;32m---> 16[0;31m [0mH[0m [0;34m=[0m [0mrbm_ham[0m[0;34m([0m[0mdim[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     17[0m [0;34m[0m[0m
+[1;32m     18[0m [0mprint[0m[0;34m([0m[0;34m"Generated Hamiltonian: \n"[0m[0;34m,[0m[0mH[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'rbm_ham' is not defined
+NameError: name 'rbm_ham' is not defined
 

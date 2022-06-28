@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>The parametrized Quantum Harmonic Oscillator as a two level system &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Quantum Harmonic Oscillator as a two level system &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -266,7 +266,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/horbm/The parametrized Quantum Harmonic Oscillator as a two level system.ipynb"
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/horbm/classical.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -284,7 +284,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/horbm/The parametrized Quantum Harmonic Oscillator as a two level system.ipynb"
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/horbm/classical.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -344,7 +344,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fhorbm/The parametrized Quantum Harmonic Oscillator as a two level system.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fhorbm/classical.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -372,7 +372,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/horbm/The parametrized Quantum Harmonic Oscillator as a two level system.ipynb"
+        <a href="../_sources/horbm/classical.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -436,16 +436,6 @@ title="Print to PDF"
    Background
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
-   Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
-   We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -455,7 +445,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>The parametrized Quantum Harmonic Oscillator as a two level system</h1>
+                <h1>Quantum Harmonic Oscillator as a two level system</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -470,16 +460,6 @@ title="Print to PDF"
    Background
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
-   Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
-   We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -490,25 +470,27 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="the-parametrized-quantum-harmonic-oscillator-as-a-two-level-system">
-<h1>The parametrized Quantum Harmonic Oscillator as a two level system<a class="headerlink" href="#the-parametrized-quantum-harmonic-oscillator-as-a-two-level-system" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="quantum-harmonic-oscillator-as-a-two-level-system">
+<h1>Quantum Harmonic Oscillator as a two level system<a class="headerlink" href="#quantum-harmonic-oscillator-as-a-two-level-system" title="Permalink to this headline">#</a></h1>
+<p>Author(s): Pablo Giuliani, Kyle Godbey</p>
+<p>Maintainer: Pablo Giuliani</p>
 <p>Adapted from https://kylegodbey.github.io/nuclear-rbm/ho/1dHO.html with permision of Eric Flynn</p>
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Let us consider the Schrodinger equation for the 1-d Harmonic Oscillator:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ddad3a79-99a8-4ce7-b0df-f0b24679ba2c">
-<span class="eqno">()<a class="headerlink" href="#equation-ddad3a79-99a8-4ce7-b0df-f0b24679ba2c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5805cc56-4dad-46b1-8aaa-e7e765421585">
+<span class="eqno">()<a class="headerlink" href="#equation-5805cc56-4dad-46b1-8aaa-e7e765421585" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\Big(- \frac{d^{2}}{dx^{2}} + V_\alpha (x)  - \lambda \Big) \phi = 0, \\
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_\alpha(x)=\alpha x^{2}\)</span>. This equation can be written a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a0e4317f-b634-42c0-a4b9-8d7a37ba8325">
-<span class="eqno">()<a class="headerlink" href="#equation-a0e4317f-b634-42c0-a4b9-8d7a37ba8325" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-30b26796-ae4c-4fe8-af7a-6cf106dc5b0d">
+<span class="eqno">()<a class="headerlink" href="#equation-30b26796-ae4c-4fe8-af7a-6cf106dc5b0d" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;F_{\alpha}\Big[ \phi_{\alpha}(x) \Big] = H_\alpha\phi - \lambda \phi=0 
 \end{align}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\lambda = 2 m E\)</span> is the eigenvalue with energy <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(\alpha = m^{2} \omega^{2}\)</span> is the harmonic oscilation parameter with oscilation frequency <span class="math notranslate nohighlight">\(\omega\)</span>. We want to implement an algorithm in a quantum circuit to find solutions to this equation for many values of the parameter <span class="math notranslate nohighlight">\(\alpha\)</span>. The currently available quantum computing systems have a very limited amount of qbits, for example, 7 in the case of the free version of the IBM services. This might make it problematic to implement such Schrodinger’s equation in a finite element method approach since we would need to store the state <span class="math notranslate nohighlight">\(\phi\)</span> as a tall vector with many entries (usually 1,000 or more), which is not possible to represent with only 7 qbits.</p>
+<p>where <span class="math notranslate nohighlight">\(\lambda = 2 m E\)</span> is the eigenvalue with energy <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(\alpha = m^{2} \omega^{2}\)</span> is the harmonic oscilation parameter with oscilation frequency <span class="math notranslate nohighlight">\(\omega\)</span>. We want to implement an algorithm in a quantum circuit to find solutions to this equation for many values of the parameter <span class="math notranslate nohighlight">\(\alpha\)</span>. The currently available quantum computing systems have a very limited amount of qubits, for example, 7 in the case of the free version of the IBM services. This might make it problematic to implement such Schrodinger’s equation in a finite element method approach since we would need to store the state <span class="math notranslate nohighlight">\(\phi\)</span> as a tall vector with many entries (usually 1,000 or more), which is not possible to directly represent with only 7 qubits.</p>
 <p>We approximate this equation using dimensionality reduction techniques, such as the Reduced Basis Method [CITE SOME BOOKS], as was done in [CITE OUR PAPER]. These techniques aim at reducing the redundant, or unnecessary, degrees of freedom of the system from many thousand to just a handful. This is done by first restricting the solution to the equation to lay in the span of a basis of <span class="math notranslate nohighlight">\(n\)</span> states:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a37ba8ac-a461-4ec4-b23b-9b9e85fd9777">
-<span class="eqno">()<a class="headerlink" href="#equation-a37ba8ac-a461-4ec4-b23b-9b9e85fd9777" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-85ee5052-40e5-462d-a607-2e603914a020">
+<span class="eqno">()<a class="headerlink" href="#equation-85ee5052-40e5-462d-a607-2e603914a020" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -523,6 +505,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>We first define some helper functions to return things like the potentials and Hamiltonian.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### NOTE: hbar = 1 in this demo</span>
@@ -597,7 +580,7 @@ title="Print to PDF"
 
 <span class="k">def</span> <span class="nf">getSystem</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">psi_array</span><span class="p">,</span><span class="n">phi_array</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Sets up syetem of equations for Galerkin projection &lt;\phi_{j},F_{k}(phi_{k})&gt;</span>
+<span class="sd">    Sets up system of equations for Galerkin projection &lt;\phi_{j},F_{k}(phi_{k})&gt;</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -643,6 +626,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Now we can define some parameters of our system, including our mesh.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#First define global variables</span>
@@ -721,12 +705,10 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 15, lambda = 3.872889593938531
 </pre></div>
 </div>
-<img alt="../_images/The parametrized Quantum Harmonic Oscillator as a two level system_6_5.png" src="../_images/The parametrized Quantum Harmonic Oscillator as a two level system_6_5.png" />
+<img alt="../_images/classical_8_5.png" src="../_images/classical_8_5.png" />
 </div>
 </div>
-</section>
-<section id="creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
-<h2>Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)<a class="headerlink" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values" title="Permalink to this headline">#</a></h2>
+<p>Creating an orthonormal basis of two elements and checking that our problem is well behaved (exemplified by a fast decay in singular values)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -747,45 +729,43 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/The parametrized Quantum Harmonic Oscillator as a two level system_8_0.png" src="../_images/The parametrized Quantum Harmonic Oscillator as a two level system_8_0.png" />
+<img alt="../_images/classical_10_0.png" src="../_images/classical_10_0.png" />
 </div>
 </div>
-</section>
-<section id="we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
-<h2>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.<a class="headerlink" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components" title="Permalink to this headline">#</a></h2>
+<p>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0d61ae54-b9bf-4db8-b955-357696244a4a">
-<span class="eqno">()<a class="headerlink" href="#equation-0d61ae54-b9bf-4db8-b955-357696244a4a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-03d5730b-88f4-4f91-baa8-1b10bc547fc6">
+<span class="eqno">()<a class="headerlink" href="#equation-03d5730b-88f4-4f91-baa8-1b10bc547fc6" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7c63a4ac-a646-49d2-ba8b-75f64a7159ad">
-<span class="eqno">()<a class="headerlink" href="#equation-7c63a4ac-a646-49d2-ba8b-75f64a7159ad" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d80876d6-913f-4cc4-87dd-a8d1aed55e69">
+<span class="eqno">()<a class="headerlink" href="#equation-d80876d6-913f-4cc4-87dd-a8d1aed55e69" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-89e28d96-664c-46dc-b555-7402db6381c9">
-<span class="eqno">()<a class="headerlink" href="#equation-89e28d96-664c-46dc-b555-7402db6381c9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0212d932-c5b9-44af-b9bd-1c78507b62de">
+<span class="eqno">()<a class="headerlink" href="#equation-0212d932-c5b9-44af-b9bd-1c78507b62de" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0c813e5b-4225-4c6d-a45e-bcaf2054ec04">
-<span class="eqno">()<a class="headerlink" href="#equation-0c813e5b-4225-4c6d-a45e-bcaf2054ec04" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-35f0748e-02f8-41ba-8b68-aa5a12ce95e5">
+<span class="eqno">()<a class="headerlink" href="#equation-35f0748e-02f8-41ba-8b68-aa5a12ce95e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c2bf4de3-33e5-45f5-9d67-0d2f939c15b5">
-<span class="eqno">()<a class="headerlink" href="#equation-c2bf4de3-33e5-45f5-9d67-0d2f939c15b5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-24c6b273-b394-4541-b1fe-b917e0ceb9ff">
+<span class="eqno">()<a class="headerlink" href="#equation-24c6b273-b394-4541-b1fe-b917e0ceb9ff" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-656f357f-10e0-4eb8-bfda-4db041687707">
-<span class="eqno">()<a class="headerlink" href="#equation-656f357f-10e0-4eb8-bfda-4db041687707" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a1b28e74-ab2e-4d23-a93c-e1bb2009f5f5">
+<span class="eqno">()<a class="headerlink" href="#equation-a1b28e74-ab2e-4d23-a93c-e1bb2009f5f5" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
-<p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the potential part and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\alpha H_1\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span> and <span class="math notranslate nohighlight">\(H_1= x^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \alpha \tilde H_1\)</span>. We now construct these matrices:</p>
+<p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depends on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the potential part and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\alpha H_1\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span> and <span class="math notranslate nohighlight">\(H_1= x^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \alpha \tilde H_1\)</span>. We now construct these matrices:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dim0</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_array</span><span class="p">)</span>
@@ -822,6 +802,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>With these two Hamiltonians, we can then combine them according to the equation above via these helper functions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tildeH</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
@@ -842,27 +823,21 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>Let’s print out our total Hamiltonian given <span class="math notranslate nohighlight">\(\alpha=1\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tildeH</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">mat</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1850</span><span class="o">/</span><span class="mf">4285296799.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">tildeH</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">mat</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-
-<span class="ne">NameError</span>: name &#39;mat&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.11112788, -0.72634078],
+       [-0.72634078,  5.81663726]])
 </pre></div>
 </div>
 </div>
 </div>
+<p>Looks great! Now we can compute the coefficients of our basis functions via direct diagonalization, again with <span class="math notranslate nohighlight">\(\alpha=1\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">systemSolver</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -877,7 +852,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Now we try our solution solver against the finite element computation:</p>
+<p>Now we try our solution solver against the finite element computation to see how well our RBM solution is doing.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Now we can construct our RBM for an alpha of our choosing. </span>
@@ -919,12 +894,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 1, lambda = 0.9999937499607757
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 1, lambda = 0.9999937499607756
 </pre></div>
 </div>
-<img alt="../_images/The parametrized Quantum Harmonic Oscillator as a two level system_16_1.png" src="../_images/The parametrized Quantum Harmonic Oscillator as a two level system_16_1.png" />
+<img alt="../_images/classical_21_1.png" src="../_images/classical_21_1.png" />
 </div>
 </div>
+<p>Excellent! Of course, if we take more basis functions we will better reproduce the finite element solution, but the procedure remains largely the same. Now that we’ve laid the groundwork for representing our complicated coordinate space problems in a natural reduced basis, we can explore how this translates to a representation on a quantum computer.</p>
 </section>
 </section>
 
