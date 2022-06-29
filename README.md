@@ -11,5 +11,5 @@ TO DO: Put some general info about the purpose of this repo and Jupyter Book her
 
 This GitHub repo and Jupyter Book were written by Pablo Giuliani (MSU), Kyle Godbey (MSU), Jingyi Li (MSU), and Alexandra Semposki (OU). 
 
-< put the general email address for contact info here >
+Any questions or concerns may be directed to qc@kyle.ee. 
 <!-- #endregion -->
