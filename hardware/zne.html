@@ -557,16 +557,15 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define some noise model to use in pennylane</span>
-<span class="n">prob_1</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">;</span> <span class="n">prob_2</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1">#for one, two qubit gates</span>
-<span class="n">error_1</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="n">prob_1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">error_2</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="n">prob_2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">NoiseModel</span><span class="p">()</span>
-<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">])</span>
-<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define some noise model to use in pennylane from qiskit.test.mock</span>
+<span class="kn">from</span> <span class="nn">qiskit.test.mock</span> <span class="kn">import</span> <span class="n">FakeLondon</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="kn">import</span> <span class="n">NoiseModel</span>
 
-<span class="c1">#define the simulator to use</span>
-<span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;qiskit.aer&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">optimization_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;aer_simulator&#39;</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
+<span class="n">backend</span> <span class="o">=</span> <span class="n">FakeLondon</span><span class="p">()</span>
+<span class="n">noise_model</span> <span class="o">=</span> <span class="n">NoiseModel</span><span class="o">.</span><span class="n">from_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
+
+<span class="c1">#set up noisy device</span>
+<span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;qiskit.aer&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
 <span class="c1">#now we&#39;ll define the circuit we want to use with this Hamiltonian</span>
 <span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
@@ -574,7 +573,7 @@ title="Print to PDF"
     <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-    <span class="c1">#return qml.expval(H)</span>
+   <span class="c1"># return qml.expval(H)</span>
 
 <span class="c1">#define cost function</span>
 <span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
@@ -587,12 +586,12 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">DeviceError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1982</span><span class="o">/</span><span class="mf">3501128949.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> 
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">#define the simulator to use</span>
-<span class="ne">---&gt; </span><span class="mi">10</span> <span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;qiskit.aer&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">optimization_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;aer_simulator&#39;</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1">#now we&#39;ll define the circuit we want to use with this Hamiltonian</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2120</span><span class="o">/</span><span class="mf">977029829.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> 
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#set up noisy device</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;qiskit.aer&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1">#now we&#39;ll define the circuit we want to use with this Hamiltonian</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/__init__.py</span> in <span class="ni">device</span><span class="nt">(name, *args, **kwargs)</span>
 <span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="k">return</span> <span class="n">dev</span>
@@ -662,14 +661,14 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.98172444 MeV,  Convergence parameter = 0.24654443 MeV
-Iteration = 20,  Energy = -0.34402834 MeV,  Convergence parameter = 0.00544482 MeV
-Iteration = 40,  Energy = -1.43802711 MeV,  Convergence parameter = 0.02778419 MeV
-Iteration = 60,  Energy = -1.64023235 MeV,  Convergence parameter = 0.01581067 MeV
-Iteration = 80,  Energy = -1.65169065 MeV,  Convergence parameter = 0.05152632 MeV
-Iteration = 100,  Energy = -1.59197186 MeV,  Convergence parameter = 0.15367872 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.51917406 MeV,  Convergence parameter = 0.48852124 MeV
+Iteration = 20,  Energy = 0.27461237 MeV,  Convergence parameter = 0.26951874 MeV
+Iteration = 40,  Energy = -1.08308103 MeV,  Convergence parameter = 0.10918310 MeV
+Iteration = 60,  Energy = -1.20120853 MeV,  Convergence parameter = 0.02907825 MeV
+Iteration = 80,  Energy = -1.16127402 MeV,  Convergence parameter = 0.07704430 MeV
+Iteration = 100,  Energy = -1.26292217 MeV,  Convergence parameter = 0.05561661 MeV
 
-Final value of the energy = -1.95005903 MeV
+Final value of the energy = -1.13681568 MeV
 Number of iterations =  119
 </pre></div>
 </div>
@@ -697,31 +696,30 @@ Number of iterations =  119
 <h2>ZNE for N=2<a class="headerlink" href="#zne-for-n-2" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#set up the extrapolation step and scale factors to use</span>
+<span class="n">extrapolate</span> <span class="o">=</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span>
+<span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 
-<span class="c1">#create Qnodes to use</span>
-<span class="c1">#@qml.transforms.mitigate_with_zne([1, 2, 3], fold_global, RichardsonFactory.extrapolate)</span>
-<span class="c1">#@qml.qnode(dev_sim)</span>
+<span class="n">sim_qnode</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
 
-<span class="n">sim_qnode_new</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
+<span class="c1">#use ZNE to mitigate error</span>
+<span class="n">mitigated_qnode</span> <span class="o">=</span> <span class="n">mitigate_with_zne</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">extrapolate</span><span class="p">)(</span><span class="n">sim_qnode</span><span class="p">)</span>
+<span class="n">zne_result</span> <span class="o">=</span> <span class="n">mitigated_qnode</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span>
 
-<span class="n">extrapolate</span> <span class="o">=</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span>
-<span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-
-<span class="n">mitigated_qnode</span> <span class="o">=</span> <span class="n">mitigate_with_zne</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">extrapolate</span><span class="p">)(</span>
-    <span class="n">sim_qnode_new</span>
-<span class="p">)</span>
-<span class="n">mitigated_qnode</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1">#print the result of the ground state energy</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;N=2 ground state energy result with ZNE: &#39;</span><span class="p">,</span> <span class="n">zne_result</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.1967884335937489
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N=2 ground state energy result with ZNE:  -2.1173792911376825
 </pre></div>
 </div>
 </div>

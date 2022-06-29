@@ -17,16 +17,15 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#define some noise model to use in pennylane
-prob_1 = 0.001; prob_2 = 0.01 #for one, two qubit gates
-error_1 = noise.depolarizing_error(prob_1, 1)
-error_2 = noise.depolarizing_error(prob_2, 2)
-noise_model = noise.NoiseModel()
-noise_model.add_all_qubit_quantum_error(error_1, ['u1', 'u2', 'u3'])
-noise_model.add_all_qubit_quantum_error(error_2, ['cx'])
+#define some noise model to use in pennylane from qiskit.test.mock
+from qiskit.test.mock import FakeLondon
+from qiskit.providers.aer.noise import NoiseModel
 
-#define the simulator to use
-dev_sim = qml.device('qiskit.aer', wires=2, optimization_limit=0, backend='aer_simulator', noise_model=noise_model)
+backend = FakeLondon()
+noise_model = NoiseModel.from_backend(backend)
+
+#set up noisy device
+dev_sim = qml.device("qiskit.aer", wires=2, noise_model=noise_model, optimization_level=0, shots=10000)
 
 #now we'll define the circuit we want to use with this Hamiltonian
 def circuit(params, wires):
@@ -34,7 +33,7 @@ def circuit(params, wires):
     qml.PauliX(wires=0)
     qml.RY(t0, wires=1)
     qml.CNOT(wires=[1,0])
-    #return qml.expval(H)
+   # return qml.expval(H)
 
 #define cost function
 cost_fn = qml.ExpvalCost(circuit, H, dev_sim)
@@ -45,12 +44,12 @@ sim_qnode = qml.QNode(circuit, dev_sim)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mDeviceError[0m                               Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1982/3501128949.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      8[0m [0;34m[0m[0m
-[1;32m      9[0m [0;31m#define the simulator to use[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
-[0;32m---> 10[0;31m [0mdev_sim[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mdevice[0m[0;34m([0m[0;34m'qiskit.aer'[0m[0;34m,[0m [0mwires[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m [0moptimization_limit[0m[0;34m=[0m[0;36m0[0m[0;34m,[0m [0mbackend[0m[0;34m=[0m[0;34m'aer_simulator'[0m[0;34m,[0m [0mnoise_model[0m[0;34m=[0m[0mnoise_model[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     11[0m [0;34m[0m[0m
-[1;32m     12[0m [0;31m#now we'll define the circuit we want to use with this Hamiltonian[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/tmp/ipykernel_2120/977029829.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      7[0m [0;34m[0m[0m
+[1;32m      8[0m [0;31m#set up noisy device[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 9[0;31m [0mdev_sim[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mdevice[0m[0;34m([0m[0;34m"qiskit.aer"[0m[0;34m,[0m [0mwires[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m [0mnoise_model[0m[0;34m=[0m[0mnoise_model[0m[0;34m,[0m [0moptimization_level[0m[0;34m=[0m[0;36m0[0m[0;34m,[0m [0mshots[0m[0;34m=[0m[0;36m10000[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     10[0m [0;34m[0m[0m
+[1;32m     11[0m [0;31m#now we'll define the circuit we want to use with this Hamiltonian[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
 [0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/__init__.py[0m in [0;36mdevice[0;34m(name, *args, **kwargs)[0m
 [1;32m    326[0m         [0;32mreturn[0m [0mdev[0m[0;34m[0m[0;34m[0m[0m
