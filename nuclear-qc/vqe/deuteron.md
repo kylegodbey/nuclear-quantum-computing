@@ -4,7 +4,7 @@ In this introduction we will briefly discuss the 2018 paper, [Cloud Quantum Comp
 
 From the paper we can read that the authors employed the projection of hamiltonian operators onto quantum qubits (X,Y,Z) to construct a quantum computatable hamiltonian by the Pionless EFT, a systematically improvable and model-independent approach to nuclear interactions in a regime where the momentum scale $Q$ of the interesting physics. The important part of this paper is how the deuteron creation and annihlation operator is mapped onto qubits using Jordan-Wigner transformation. Qubits can be used by quantum computers for boperations based on Pauli matrices (denoted as $X_{q}, Y_{q}$, and $Z_{q}$ on qubit $q$ ).
 
-### Defining the Hamiltonian
+## Defining the Hamiltonian
 
 The deuteron Hamiltonian is 
 \begin{equation}
@@ -22,7 +22,7 @@ The operators $a_{n}^{\dagger}$ and $a_{n}$ here are the creation and annihilati
 
 Here, $V_{0}=-5.68658111 \mathrm{MeV}$, and $n, n^{\prime}=0,1, \ldots N-1$, for a basis of dimension $N$. We also set $\hbar \omega=7 \mathrm{MeV}$.
 
-### Mapping the deuteron onto qubits
+## Mapping the deuteron onto qubits
 
 Quantum computers manipulate qubits by operations based on Pauli matrices (denoted as $X_{q}, Y_{q}$, and $Z_{q}$ on qubit $q$ ). The deuteron creation and annihilation operators can be mapped onto Pauli matrices via the Jordan-Wigner transformation, defined as,
 
