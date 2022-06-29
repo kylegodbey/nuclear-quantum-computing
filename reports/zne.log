@@ -17,31 +17,48 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-%matplotlib inline
+#define some noise model to use in pennylane
+prob_1 = 0.001; prob_2 = 0.01 #for one, two qubit gates
+error_1 = noise.depolarizing_error(prob_1, 1)
+error_2 = noise.depolarizing_error(prob_2, 2)
+noise_model = noise.NoiseModel()
+noise_model.add_all_qubit_quantum_error(error_1, ['u1', 'u2', 'u3'])
+noise_model.add_all_qubit_quantum_error(error_2, ['cx'])
 
-import matplotlib.pyplot as plt
-from pennylane import numpy as np
-import pennylane as qml
-import warnings
-warnings.filterwarnings('ignore')
+#define the simulator to use
+dev_sim = qml.device('qiskit.aer', wires=2, optimization_limit=0, backend='aer_simulator', noise_model=noise_model)
 
-import mitiq as mq
-from mitiq.zne.scaling import fold_global
-from mitiq.zne.inference import RichardsonFactory
-from pennylane.transforms import mitigate_with_zne
-from qiskit.providers.aer import AerSimulator
-import qiskit.providers.aer.noise as noise
+#now we'll define the circuit we want to use with this Hamiltonian
+def circuit(params, wires):
+    t0 = params[0]
+    qml.PauliX(wires=0)
+    qml.RY(t0, wires=1)
+    qml.CNOT(wires=[1,0])
+    #return qml.expval(H)
+
+#define cost function
+cost_fn = qml.ExpvalCost(circuit, H, dev_sim)
+
+#set up the Qnode to run the above circuit on the simulator (is this necessary?)
+sim_qnode = qml.QNode(circuit, dev_sim)
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1832/1348160367.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      7[0m [0mwarnings[0m[0;34m.[0m[0mfilterwarnings[0m[0;34m([0m[0;34m'ignore'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mDeviceError[0m                               Traceback (most recent call last)
+[0;32m/tmp/ipykernel_1982/3501128949.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      8[0m [0;34m[0m[0m
-[0;32m----> 9[0;31m [0;32mimport[0m [0mmitiq[0m [0;32mas[0m [0mmq[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     10[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0mscaling[0m [0;32mimport[0m [0mfold_global[0m[0;34m[0m[0;34m[0m[0m
-[1;32m     11[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0minference[0m [0;32mimport[0m [0mRichardsonFactory[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      9[0m [0;31m#define the simulator to use[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 10[0;31m [0mdev_sim[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mdevice[0m[0;34m([0m[0;34m'qiskit.aer'[0m[0;34m,[0m [0mwires[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m [0moptimization_limit[0m[0;34m=[0m[0;36m0[0m[0;34m,[0m [0mbackend[0m[0;34m=[0m[0;34m'aer_simulator'[0m[0;34m,[0m [0mnoise_model[0m[0;34m=[0m[0mnoise_model[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     11[0m [0;34m[0m[0m
+[1;32m     12[0m [0;31m#now we'll define the circuit we want to use with this Hamiltonian[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mModuleNotFoundError[0m: No module named 'mitiq'
-ModuleNotFoundError: No module named 'mitiq'
+[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/__init__.py[0m in [0;36mdevice[0;34m(name, *args, **kwargs)[0m
+[1;32m    326[0m         [0;32mreturn[0m [0mdev[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    327[0m [0;34m[0m[0m
+[0;32m--> 328[0;31m     [0;32mraise[0m [0mDeviceError[0m[0;34m([0m[0;34m"Device does not exist. Make sure the required plugin is installed."[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    329[0m [0;34m[0m[0m
+[1;32m    330[0m [0;34m[0m[0m
+
+[0;31mDeviceError[0m: Device does not exist. Make sure the required plugin is installed.
+DeviceError: Device does not exist. Make sure the required plugin is installed.
 
