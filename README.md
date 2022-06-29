@@ -1,5 +1,5 @@
 <!-- #region -->
-# < suitable title for github repo here >
+# Quantum Computing: Applications in Nuclear Physics
 
 
 ## About 
