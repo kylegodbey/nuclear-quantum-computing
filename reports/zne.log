@@ -17,6 +17,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
+%matplotlib inline
+
+import matplotlib.pyplot as plt
+from pennylane import numpy as np
+import pennylane as qml
+import warnings
+warnings.filterwarnings('ignore')
+
 import mitiq as mq
 from mitiq.zne.scaling import fold_global
 from mitiq.zne.inference import RichardsonFactory
@@ -27,12 +35,12 @@ import qiskit.providers.aer.noise as noise
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1940/3207773961.py[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0;32mimport[0m [0mmitiq[0m [0;32mas[0m [0mmq[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0mscaling[0m [0;32mimport[0m [0mfold_global[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0minference[0m [0;32mimport[0m [0mRichardsonFactory[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m [0;32mfrom[0m [0mpennylane[0m[0;34m.[0m[0mtransforms[0m [0;32mimport[0m [0mmitigate_with_zne[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;32mfrom[0m [0mqiskit[0m[0;34m.[0m[0mproviders[0m[0;34m.[0m[0maer[0m [0;32mimport[0m [0mAerSimulator[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/tmp/ipykernel_1769/1348160367.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      7[0m [0mwarnings[0m[0;34m.[0m[0mfilterwarnings[0m[0;34m([0m[0;34m'ignore'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      8[0m [0;34m[0m[0m
+[0;32m----> 9[0;31m [0;32mimport[0m [0mmitiq[0m [0;32mas[0m [0mmq[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     10[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0mscaling[0m [0;32mimport[0m [0mfold_global[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     11[0m [0;32mfrom[0m [0mmitiq[0m[0;34m.[0m[0mzne[0m[0;34m.[0m[0minference[0m [0;32mimport[0m [0mRichardsonFactory[0m[0;34m[0m[0;34m[0m[0m
 
 [0;31mModuleNotFoundError[0m: No module named 'mitiq'
 ModuleNotFoundError: No module named 'mitiq'

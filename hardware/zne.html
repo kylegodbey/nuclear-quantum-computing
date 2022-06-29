@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Zero-Noise Extrapolation &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Zero-Noise Extrapolation: the N=2 case &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Real Hardware" href="ibm.html" />
@@ -190,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
     <ul class="current">
      <li class="toctree-l3 current active">
       <a class="current reference internal" href="#">
-       Zero-Noise Extrapolation
+       Zero-Noise Extrapolation: the N=2 case
       </a>
      </li>
     </ul>
@@ -275,6 +277,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/hardware/zne.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/hardware/zne.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -379,23 +428,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vqe-for-n-2-with-noisy-simulator">
+   VQE for N=2 (with noisy simulator)
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Zero-Noise Extrapolation</h1>
+                <h1>Zero-Noise Extrapolation: the N=2 case</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#vqe-for-n-2-with-noisy-simulator">
+   VQE for N=2 (with noisy simulator)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -403,9 +489,314 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="zero-noise-extrapolation">
-<h1>Zero-Noise Extrapolation<a class="headerlink" href="#zero-noise-extrapolation" title="Permalink to this headline">#</a></h1>
-<p>TODO: This is where the mitigation stuff can go</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="zero-noise-extrapolation-the-n-2-case">
+<h1>Zero-Noise Extrapolation: the N=2 case<a class="headerlink" href="#zero-noise-extrapolation-the-n-2-case" title="Permalink to this headline">#</a></h1>
+<p>Authors: Kyle Godbey, Alexandra Semposki</p>
+<p>Maintainer: Alexandra Semposki</p>
+<p>Here we’ll try developing some error mitigation for the <span class="math notranslate nohighlight">\(N=2\)</span> deuteron case from the VQE chapter. Let’s begin by importing <tt>pennylane</tt>, <tt>mitiq</tt>, and any other packages we may need, and copy over the code from the <span class="math notranslate nohighlight">\(N=2\)</span> notebook for calculating the ground state energy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">pennylane</span> <span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pennylane</span> <span class="k">as</span> <span class="nn">qml</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">mitiq</span> <span class="k">as</span> <span class="nn">mq</span>
+<span class="kn">from</span> <span class="nn">mitiq.zne.scaling</span> <span class="kn">import</span> <span class="n">fold_global</span>
+<span class="kn">from</span> <span class="nn">mitiq.zne.inference</span> <span class="kn">import</span> <span class="n">RichardsonFactory</span>
+<span class="kn">from</span> <span class="nn">pennylane.transforms</span> <span class="kn">import</span> <span class="n">mitigate_with_zne</span>
+<span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
+<span class="kn">import</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="k">as</span> <span class="nn">noise</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1769</span><span class="o">/</span><span class="mf">1348160367.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">import</span> <span class="nn">mitiq</span> <span class="k">as</span> <span class="nn">mq</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span> <span class="nn">mitiq.zne.scaling</span> <span class="kn">import</span> <span class="n">fold_global</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span> <span class="nn">mitiq.zne.inference</span> <span class="kn">import</span> <span class="n">RichardsonFactory</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;mitiq&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="vqe-for-n-2-with-noisy-simulator">
+<h2>VQE for N=2 (with noisy simulator)<a class="headerlink" href="#vqe-for-n-2-with-noisy-simulator" title="Permalink to this headline">#</a></h2>
+<p>Here we’ll pull from some of the VQE notebook to define the Hamiltonian and circuit again. If you would like to revisit the VQE process, go to <a class="reference external" href="https://kylegodbey.github.io/nuclear-quantum-computing/vqe/n2.html">this page</a>.</p>
+<p>Next, we define a simulator that has a noise model imbedded into it, so that we are simulating running on a real quantum device. Let’s see how the convergence of the VQE routine goes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define the Hamiltonian we&#39;re using again, for N=2</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="mf">5.906709</span><span class="p">,</span> <span class="mf">0.218291</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.125</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.143304</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.143304</span><span class="p">]</span>
+<span class="n">obs</span> <span class="o">=</span> <span class="p">[</span><span class="n">qml</span><span class="o">.</span><span class="n">Identity</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliZ</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliY</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">@</span> <span class="n">qml</span><span class="o">.</span><span class="n">PauliY</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (-6.125) [Z1]
++ (0.218291) [Z0]
++ (5.906709) [I0]
++ (-2.143304) [X0 X1]
++ (-2.143304) [Y0 Y1]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define some noise model to use in pennylane</span>
+<span class="n">prob_1</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">;</span> <span class="n">prob_2</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1">#for one, two qubit gates</span>
+<span class="n">error_1</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="n">prob_1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">error_2</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">depolarizing_error</span><span class="p">(</span><span class="n">prob_2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">noise_model</span> <span class="o">=</span> <span class="n">noise</span><span class="o">.</span><span class="n">NoiseModel</span><span class="p">()</span>
+<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_1</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;u1&#39;</span><span class="p">,</span> <span class="s1">&#39;u2&#39;</span><span class="p">,</span> <span class="s1">&#39;u3&#39;</span><span class="p">])</span>
+<span class="n">noise_model</span><span class="o">.</span><span class="n">add_all_qubit_quantum_error</span><span class="p">(</span><span class="n">error_2</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;cx&#39;</span><span class="p">])</span>
+
+<span class="c1">#define the simulator to use</span>
+<span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;qiskit.aer&#39;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">optimization_limit</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;aer_simulator&#39;</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">)</span>
+
+<span class="c1">#create Qnodes to use</span>
+<span class="nd">@qml</span><span class="o">.</span><span class="n">transforms</span><span class="o">.</span><span class="n">mitigate_with_zne</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span><span class="p">)</span>
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev_sim</span><span class="p">)</span>
+
+<span class="c1">#now we&#39;ll define the circuit we want to use with this Hamiltonian</span>
+<span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">PauliX</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">RY</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qml</span><span class="o">.</span><span class="n">CNOT</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1">#define cost function</span>
+<span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
+
+<span class="c1">#set up the Qnode to run the above circuit on the simulator (is this necessary?)</span>
+<span class="n">sim_qnode</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we define some initial parameter and convergence info, as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#parameter array</span>
+<span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,])</span>
+
+<span class="c1">#convergence information and step size</span>
+<span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-06</span>
+<span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.01</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s run VQE as in the VQE chapter. We should get a result that takes longer to converge due to the noise we have added into the device.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#VQE step</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">GradientDescentOptimizer</span><span class="p">(</span><span class="n">stepsize</span><span class="o">=</span><span class="n">step_size</span><span class="p">)</span>
+
+<span class="n">params</span> <span class="o">=</span> <span class="n">init_params</span>
+
+<span class="n">gd_param_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">params</span><span class="p">]</span>
+<span class="n">gd_cost_history</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+
+    <span class="c1"># Take a step in parameter space and record your energy</span>
+    <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># This keeps track of our energy for plotting at comparisons</span>
+    <span class="n">gd_param_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">gd_cost_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev_energy</span><span class="p">)</span>
+
+    <span class="c1"># Here we see what the energy of our system is with the new parameters</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">cost_fn</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="c1"># Calculate difference between new and old energies</span>
+    <span class="n">conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energy</span> <span class="o">-</span> <span class="n">prev_energy</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">20</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Iteration = </span><span class="si">{:}</span><span class="s2">,  Energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV,  Convergence parameter = {&quot;</span>
+            <span class="s2">&quot;:.8f} MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conv</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">conv</span> <span class="o">&lt;=</span> <span class="n">conv_tol</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final value of the energy = </span><span class="si">{:.8f}</span><span class="s2"> MeV&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of iterations = &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">QuantumFunctionError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
+<span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">48</span><span class="p">],</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">gd_cost_history</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> 
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
+<span class="ne">---&gt; </span><span class="mi">12</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="c1"># This keeps track of our energy for plotting at comparisons</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">gd_param_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\optimize\gradient_descent.py:59,</span> in <span class="ni">GradientDescentOptimizer.step_and_cost</span><span class="nt">(self, objective_fn, grad_fn, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span> <span class="k">def</span> <span class="nf">step_and_cost</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objective_fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">grad_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span>     <span class="sd">&quot;&quot;&quot;Update trainable arguments with one step of the optimizer and return the corresponding</span>
+<span class="g g-Whitespace">     </span><span class="mi">41</span><span class="sd">     objective function value prior to the step.</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span><span class="sd">         If single arg is provided, list [array] is replaced by array.</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">59</span>     <span class="n">g</span><span class="p">,</span> <span class="n">forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_grad</span><span class="p">(</span><span class="n">objective_fn</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">grad_fn</span><span class="o">=</span><span class="n">grad_fn</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="n">new_args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_grad</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span>     <span class="k">if</span> <span class="n">forward</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\optimize\gradient_descent.py:117,</span> in <span class="ni">GradientDescentOptimizer.compute_grad</span><span class="nt">(objective_fn, args, kwargs, grad_fn)</span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span> <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute gradient of the objective function at the given point and return it along with</span>
+<span class="g g-Whitespace">    </span><span class="mi">100</span><span class="sd"> the objective function forward pass (if available).</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span><span class="sd">     will not be evaluted and instead ``None`` will be returned.</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span> <span class="n">g</span> <span class="o">=</span> <span class="n">get_gradient</span><span class="p">(</span><span class="n">objective_fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">grad_fn</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">grad_fn</span>
+<span class="ne">--&gt; </span><span class="mi">117</span> <span class="n">grad</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="n">forward</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">&quot;forward&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span> <span class="n">num_trainable_args</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="s2">&quot;requires_grad&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\_grad.py:115,</span> in <span class="ni">grad.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span>     <span class="k">return</span> <span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">115</span> <span class="n">grad_value</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">grad_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span> <span class="o">=</span> <span class="n">ans</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> <span class="k">return</span> <span class="n">grad_value</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\autograd\wrap_util.py:20,</span> in <span class="ni">unary_to_nary.&lt;locals&gt;.nary_operator.&lt;locals&gt;.nary_f</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="n">x</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">argnum</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">20</span> <span class="k">return</span> <span class="n">unary_operator</span><span class="p">(</span><span class="n">unary_f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">nary_op_args</span><span class="p">,</span> <span class="o">**</span><span class="n">nary_op_kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\_grad.py:133,</span> in <span class="ni">grad._grad_with_forward</span><span class="nt">(fun, x)</span>
+<span class="g g-Whitespace">    </span><span class="mi">127</span> <span class="nd">@staticmethod</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span> <span class="nd">@unary_to_nary</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span> <span class="k">def</span> <span class="nf">_grad_with_forward</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>     <span class="sd">&quot;&quot;&quot;This function is a replica of ``autograd.grad``, with the only</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span><span class="sd">     difference being that it returns both the gradient *and* the forward pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="sd">     value.&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">133</span>     <span class="n">vjp</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">_make_vjp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span>     <span class="k">if</span> <span class="ow">not</span> <span class="n">vspace</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span>         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>             <span class="s2">&quot;Grad only applies to real scalar-output functions. &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">138</span>             <span class="s2">&quot;Try jacobian, elementwise_grad or holomorphic_grad.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">139</span>         <span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\autograd\core.py:10,</span> in <span class="ni">make_vjp</span><span class="nt">(fun, x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">def</span> <span class="nf">make_vjp</span><span class="p">(</span><span class="n">fun</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">start_node</span> <span class="o">=</span> <span class="n">VJPNode</span><span class="o">.</span><span class="n">new_root</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="n">end_value</span><span class="p">,</span> <span class="n">end_node</span> <span class="o">=</span>  <span class="n">trace</span><span class="p">(</span><span class="n">start_node</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="k">if</span> <span class="n">end_node</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="k">def</span> <span class="nf">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">):</span> <span class="k">return</span> <span class="n">vspace</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">zeros</span><span class="p">()</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\autograd\tracer.py:10,</span> in <span class="ni">trace</span><span class="nt">(start_node, fun, x)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">with</span> <span class="n">trace_stack</span><span class="o">.</span><span class="n">new_trace</span><span class="p">()</span> <span class="k">as</span> <span class="n">t</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">start_box</span> <span class="o">=</span> <span class="n">new_box</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">start_node</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="n">end_box</span> <span class="o">=</span> <span class="n">fun</span><span class="p">(</span><span class="n">start_box</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="k">if</span> <span class="n">isbox</span><span class="p">(</span><span class="n">end_box</span><span class="p">)</span> <span class="ow">and</span> <span class="n">end_box</span><span class="o">.</span><span class="n">_trace</span> <span class="o">==</span> <span class="n">start_box</span><span class="o">.</span><span class="n">_trace</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="k">return</span> <span class="n">end_box</span><span class="o">.</span><span class="n">_value</span><span class="p">,</span> <span class="n">end_box</span><span class="o">.</span><span class="n">_node</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\autograd\wrap_util.py:15,</span> in <span class="ni">unary_to_nary.&lt;locals&gt;.nary_operator.&lt;locals&gt;.nary_f.&lt;locals&gt;.unary_f</span><span class="nt">(x)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="n">subargs</span> <span class="o">=</span> <span class="n">subvals</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">argnum</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">15</span> <span class="k">return</span> <span class="n">fun</span><span class="p">(</span><span class="o">*</span><span class="n">subargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\vqe\vqe.py:228,</span> in <span class="ni">ExpvalCost.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">227</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">228</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\collections\dot.py:143,</span> in <span class="ni">dot.&lt;locals&gt;.&lt;lambda&gt;</span><span class="nt">(params, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>     <span class="n">interface</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">interface</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>     <span class="n">fn</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">_get_dot_func</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">143</span>     <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">145</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">146</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one argument must be a QNodeCollection&quot;</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\collections\qnode_collection.py:277,</span> in <span class="ni">QNodeCollection.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">276</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">277</span>     <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\collections\qnode_collection.py:233,</span> in <span class="ni">QNodeCollection.evaluate</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">230</span>     <span class="k">return</span> <span class="n">dask</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="o">*</span><span class="n">results</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="n">_scheduler</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">232</span> <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qnodes</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">233</span>     <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">235</span> <span class="k">return</span> <span class="n">results</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\qnode.py:609,</span> in <span class="ni">QNode.__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">606</span>         <span class="n">set_shots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_original_device</span><span class="p">,</span> <span class="n">override_shots</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_gradient_fn</span><span class="p">)()</span>
+<span class="g g-Whitespace">    </span><span class="mi">608</span> <span class="c1"># construct the tape</span>
+<span class="ne">--&gt; </span><span class="mi">609</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">611</span> <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cache&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">612</span> <span class="n">using_custom_cache</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">613</span>     <span class="nb">hasattr</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s2">&quot;__getitem__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">614</span>     <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s2">&quot;__setitem__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">615</span>     <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cache</span><span class="p">,</span> <span class="s2">&quot;__delitem__&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">616</span> <span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\qnode.py:526,</span> in <span class="ni">QNode.construct</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">QuantumTape</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">526</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">(</span><span class="n">trainable_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\collections\map.py:136,</span> in <span class="ni">map.&lt;locals&gt;.circuit</span><span class="nt">(params, _obs, _m, _wires, **circuit_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span> <span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="n">params</span><span class="p">,</span> <span class="n">_obs</span><span class="o">=</span><span class="n">obs</span><span class="p">,</span> <span class="n">_m</span><span class="o">=</span><span class="n">m</span><span class="p">,</span> <span class="n">_wires</span><span class="o">=</span><span class="n">wires</span><span class="p">,</span> <span class="o">**</span><span class="n">circuit_kwargs</span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span> <span class="p">):</span>  <span class="c1"># pylint: disable=dangerous-default-value, function-redefined</span>
+<span class="ne">--&gt; </span><span class="mi">136</span>     <span class="n">template</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">_wires</span><span class="p">,</span> <span class="o">**</span><span class="n">circuit_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">137</span>     <span class="k">return</span> <span class="n">MEASURE_MAP</span><span class="p">[</span><span class="n">_m</span><span class="p">](</span><span class="n">_obs</span><span class="p">)</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\transforms\batch_transform.py:288,</span> in <span class="ni">batch_transform.default_qnode_wrapper.&lt;locals&gt;._wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span> <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span>     <span class="n">shots</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;shots&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">288</span>     <span class="n">qnode</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="n">tapes</span><span class="p">,</span> <span class="n">processing_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">qnode</span><span class="o">.</span><span class="n">qtape</span><span class="p">,</span> <span class="o">*</span><span class="n">targs</span><span class="p">,</span> <span class="o">**</span><span class="n">tkwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>     <span class="n">interface</span> <span class="o">=</span> <span class="n">qnode</span><span class="o">.</span><span class="n">interface</span>
+
+<span class="nn">File ~\anaconda3\envs\qiskit20\lib\site-packages\pennylane\qnode.py:540,</span> in <span class="ni">QNode.construct</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">535</span>     <span class="n">measurement_processes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
+<span class="g g-Whitespace">    </span><span class="mi">537</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">538</span>     <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">qml</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">MeasurementProcess</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">measurement_processes</span>
+<span class="g g-Whitespace">    </span><span class="mi">539</span> <span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">540</span>     <span class="k">raise</span> <span class="n">qml</span><span class="o">.</span><span class="n">QuantumFunctionError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">541</span>         <span class="s2">&quot;A quantum function must return either a single measurement, &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">542</span>         <span class="s2">&quot;or a nonempty sequence of measurements.&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">545</span> <span class="n">terminal_measurements</span> <span class="o">=</span> <span class="p">[</span>
+<span class="g g-Whitespace">    </span><span class="mi">546</span>     <span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">measurements</span> <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">return_type</span> <span class="o">!=</span> <span class="n">qml</span><span class="o">.</span><span class="n">measurements</span><span class="o">.</span><span class="n">MidMeasure</span>
+<span class="g g-Whitespace">    </span><span class="mi">547</span> <span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="n">m</span> <span class="k">for</span> <span class="n">ret</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">measurement_processes</span><span class="p">,</span> <span class="n">terminal_measurements</span><span class="p">)):</span>
+
+<span class="ne">QuantumFunctionError</span>: A quantum function must return either a single measurement, or a nonempty sequence of measurements.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
