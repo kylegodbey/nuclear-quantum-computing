@@ -44,7 +44,7 @@ sim_qnode = qml.QNode(circuit, dev_sim)
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mDeviceError[0m                               Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1925/977029829.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_2021/977029829.py[0m in [0;36m<module>[0;34m[0m
 [1;32m      7[0m [0;34m[0m[0m
 [1;32m      8[0m [0;31m#set up noisy device[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m----> 9[0;31m [0mdev_sim[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mdevice[0m[0;34m([0m[0;34m"qiskit.aer"[0m[0;34m,[0m [0mwires[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m [0mnoise_model[0m[0;34m=[0m[0mnoise_model[0m[0;34m,[0m [0moptimization_level[0m[0;34m=[0m[0;36m0[0m[0;34m,[0m [0mshots[0m[0;34m=[0m[0;36m10000[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
