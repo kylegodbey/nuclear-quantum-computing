@@ -461,6 +461,16 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noiseless-measurement">
+   Noiseless measurement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noisy-measurement">
+   Noisy measurement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
    References
   </a>
@@ -492,6 +502,16 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#noiseless-vs-noisy-circuits-a-simple-example">
    Noiseless vs. noisy circuits: a simple example
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noiseless-measurement">
+   Noiseless measurement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noisy-measurement">
+   Noisy measurement
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -536,31 +556,204 @@ title="Print to PDF"
 </section>
 <section id="noiseless-vs-noisy-circuits-a-simple-example">
 <h2>Noiseless vs. noisy circuits: a simple example<a class="headerlink" href="#noiseless-vs-noisy-circuits-a-simple-example" title="Permalink to this headline">#</a></h2>
-<p>Now let’s get our hands dirty and build a very simple circuit to demonstrate this noise. We’ll use a noiseless simulator first, and then move to a noisy backend to show the difference between simulated quantum circuits and what would happen on a real quantum device.</p>
+<p>Now let’s get our hands dirty and build a very simple circuit to demonstrate this noise. We’ll use a noiseless simulator first, and then move to a noisy backend to show the difference between simulated quantum circuits and what would happen on a real quantum device. Let’s build a couple of the Bell states to start.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import qiskit and other needed packages</span>
 <span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="kn">import</span> <span class="nn">qiskit.test.mock</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first Bell state we want to build is given as</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|00\rangle + |11\rangle}{\sqrt{2}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#build the first Bell state</span>
+<span class="n">bell1</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">bell1</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bell1</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bell1</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span>
+<span class="n">bell1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="ne">C</span>:\Users\ALEXAN~1\AppData\Local\Temp/ipykernel_17752/3972249381.py in &lt;module&gt;
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#import qiskit and other needed packages</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">qiskit</span>
+<span class="ne">MissingOptionalLibraryError</span><span class="g g-Whitespace">               </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1739</span><span class="o">/</span><span class="mf">2377541224.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">bell1</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">bell1</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">bell1</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;qiskit&#39;
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/circuit/quantumcircuit.py</span> in <span class="ni">draw</span><span class="nt">(self, output, scale, filename, style, interactive, plot_barriers, reverse_bits, justify, vertical_compression, idle_wires, with_layout, fold, ax, initial_state, cregbundle)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1849</span>             <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1850</span>             <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1851</span>             <span class="n">cregbundle</span><span class="o">=</span><span class="n">cregbundle</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1852</span>         <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1853</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/visualization/circuit_visualization.py</span> in <span class="ni">circuit_drawer</span><span class="nt">(circuit, scale, filename, style, output, interactive, plot_barriers, reverse_bits, justify, vertical_compression, idle_wires, with_layout, fold, ax, initial_state, cregbundle)</span>
+<span class="g g-Whitespace">    </span><span class="mi">242</span>             <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">243</span>             <span class="n">initial_state</span><span class="o">=</span><span class="n">initial_state</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">244</span>             <span class="n">cregbundle</span><span class="o">=</span><span class="n">cregbundle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">245</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span>     <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/visualization/circuit_visualization.py</span> in <span class="ni">_matplotlib_circuit_drawer</span><span class="nt">(circuit, scale, filename, style, plot_barriers, reverse_bits, justify, idle_wires, with_layout, fold, ax, initial_state, cregbundle)</span>
+<span class="g g-Whitespace">    </span><span class="mi">597</span>         <span class="n">cregs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">598</span>         <span class="n">with_layout</span><span class="o">=</span><span class="n">with_layout</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">599</span>         <span class="n">circuit</span><span class="o">=</span><span class="n">circuit</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">600</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">601</span>     <span class="k">return</span> <span class="n">qcd</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/utils/classtools.py</span> in <span class="ni">out</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span>             <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_before</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span>                 <span class="n">callback</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">117</span>             <span class="n">retval</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>             <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>                 <span class="n">callback</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/utils/classtools.py</span> in <span class="ni">out</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">114</span>         <span class="k">def</span> <span class="nf">out</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span>             <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_before</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">116</span>                 <span class="n">callback</span><span class="o">.</span><span class="fm">__get__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">117</span>             <span class="n">retval</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span>             <span class="k">for</span> <span class="n">callback</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_after</span><span class="p">:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/utils/lazy_tester.py</span> in <span class="ni">__call__</span><span class="nt">(self, *_args, **_kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> 
+<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">_args</span><span class="p">,</span> <span class="o">**</span><span class="n">_kwargs</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">39</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_tester</span><span class="o">.</span><span class="n">require_now</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_feature</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="g g-Whitespace">     </span><span class="mi">41</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/utils/lazy_tester.py</span> in <span class="ni">require_now</span><span class="nt">(self, feature)</span>
+<span class="g g-Whitespace">    </span><span class="mi">222</span>             <span class="k">return</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span>         <span class="k">raise</span> <span class="n">MissingOptionalLibraryError</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">224</span>             <span class="n">libname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">feature</span><span class="p">,</span> <span class="n">pip_install</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_install</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_msg</span>
+<span class="g g-Whitespace">    </span><span class="mi">225</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span> 
+
+<span class="ne">MissingOptionalLibraryError</span>: &quot;The &#39;pylatexenc&#39; library is required to use &#39;MatplotlibDrawer&#39;. You can install it with &#39;pip install pylatexenc&#39;.&quot;
 </pre></div>
 </div>
 </div>
 </div>
+<p>The second Bell state we will build is</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|10\rangle + |01\rangle}{\sqrt{2}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#second Bell state</span>
+<span class="n">bell2</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">bell2</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bell2</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">bell2</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bell2</span><span class="o">.</span><span class="n">measure_all</span><span class="p">()</span>
+<span class="n">bell2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/noise_8_0.png" src="../_images/noise_8_0.png" />
+</div>
+</div>
+</section>
+<section id="noiseless-measurement">
+<h2>Noiseless measurement<a class="headerlink" href="#noiseless-measurement" title="Permalink to this headline">#</a></h2>
+<p>Now let’s do a simple measurement of these circuits. The measurement tool is already included in both circuits, so all we need to do is send these circuits to a noiseless simulator to begin.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#call the Aer noiseless simulator</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">13</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;aer_simulator&#39;</span><span class="p">)</span>
+<span class="n">qc_trans</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">bell1</span><span class="p">,</span> <span class="n">sim</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_trans</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Counts:&#39;</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;11&#39;: 4095, &#39;00&#39;: 4097}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As this is a <strong>very</strong> simple measurement, and we do not even wish to get any probabilities here, only the number of counts for each state of the Bell state, we only see these counts above. However, it is obvious that there are only two states, <span class="math notranslate nohighlight">\(|00\rangle\)</span> and <span class="math notranslate nohighlight">\(|11\rangle\)</span>, the ones we expected. Now let’s check the same thing for the second Bell state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#call the Aer noiseless simulator</span>
+<span class="n">qc_trans2</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">bell2</span><span class="p">,</span> <span class="n">sim</span><span class="p">)</span>
+<span class="n">counts2</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_trans2</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Counts:&#39;</span><span class="p">,</span> <span class="n">counts2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;01&#39;: 4089, &#39;10&#39;: 4103}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, only the <span class="math notranslate nohighlight">\(|10\rangle\)</span> and <span class="math notranslate nohighlight">\(|01\rangle\)</span> state have shown up. Now let’s move on to the noisy measurement with a noisy backend and see what changes!</p>
+</section>
+<section id="noisy-measurement">
+<h2>Noisy measurement<a class="headerlink" href="#noisy-measurement" title="Permalink to this headline">#</a></h2>
+<p>We employ the <code class="docutils literal notranslate"><span class="pre">qiskit.test.mock</span></code> module, which uses data from a real IBM quantum device to construct a noisy simulator that will emulate this real quantum computer [2].</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#load qiskit noisy backend (with more than 1 qubit)</span>
+<span class="n">noisy_backend</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">mock</span><span class="o">.</span><span class="n">FakeLondon</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Basis gates:&quot;</span><span class="p">,</span> <span class="n">noisy_backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">basis_gates</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of qubits:&quot;</span><span class="p">,</span> <span class="n">noisy_backend</span><span class="o">.</span><span class="n">configuration</span><span class="p">()</span><span class="o">.</span><span class="n">num_qubits</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Basis gates: [&#39;id&#39;, &#39;u1&#39;, &#39;u2&#39;, &#39;u3&#39;, &#39;cx&#39;]
+Number of qubits: 5
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s run our circuits again, on this noisy simulator, and see what we get.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#first Bell state</span>
+<span class="n">qc_transn1</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">bell1</span><span class="p">,</span> <span class="n">noisy_backend</span><span class="p">)</span>
+<span class="n">countsn1</span> <span class="o">=</span> <span class="n">noisy_backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_transn1</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Noisy counts for (|00&gt; + |11&gt;):&#39;</span><span class="p">,</span> <span class="n">countsn1</span><span class="p">)</span>
+
+<span class="c1">#second Bell state</span>
+<span class="n">qc_transn2</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">bell2</span><span class="p">,</span> <span class="n">noisy_backend</span><span class="p">)</span>
+<span class="n">countsn2</span> <span class="o">=</span> <span class="n">noisy_backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_transn2</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Noisy counts for (|10&gt; + |01&gt;):&#39;</span><span class="p">,</span> <span class="n">countsn2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Noisy counts for (|00&gt; + |11&gt;): {&#39;00&#39;: 3975, &#39;11&#39;: 3582, &#39;01&#39;: 321, &#39;10&#39;: 314}
+Noisy counts for (|10&gt; + |01&gt;): {&#39;10&#39;: 3714, &#39;01&#39;: 3844, &#39;00&#39;: 520, &#39;11&#39;: 114}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Aha! The counts from the noisy backend clearly show counts in states that are not supposed to be included in the Bell states they correspond to, demonstrating the effect of the noise in a real quantum circuit. This will definitely become an issue with longer and larger computations, and will be something we would like to mitigate. On the next page, we discuss zero-noise extrapolation, a method of error mitigation that we’ll be using in future chapters to dispose of as much error as we can while running on real quantum devices.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>[1] <tt>mitiq</tt> documentation, “About Error Mitigation,” 2020. (Page found <a class="reference external" href="https://mitiq.readthedocs.io/en/v.0.1a2/guide/guide_06-error-mitigation.html">here</a>).</p></li>
+<li><p>[2] FRIB-TA Summer School: Quantum Computing and Nuclear Few- and Many-Body Problems, Lecture 11 (link <a class="reference external" href="https://github.com/NuclearPhysicsWorkshops/FRIB-TASummerSchoolQuantumComputing/blob/main/doc/pub/lecture11/ipynb/lecture11.ipynb">here</a>).</p></li>
 </ul>
 </section>
 </section>

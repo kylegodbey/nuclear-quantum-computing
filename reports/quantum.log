@@ -57,7 +57,7 @@ plt.show()
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/tmp/ipykernel_1804/1959063373.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_1787/1959063373.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     27[0m     [0max[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0mx_array[0m[0;34m,[0m[0;34m([0m[0mT[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m,[0m[0mlabel[0m[0;34m=[0m [0;34mr'Finite element $\alpha$ = '[0m[0;34m+[0m[0mstr[0m[0;34m([0m[0malpha_vals[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     28[0m [0;34m[0m[0m
 [0;32m---> 29[0;31m [0max[0m[0;34m.[0m[0mplot[0m[0;34m([0m[0mx_array[0m[0;34m,[0m[0;34m([0m[0mphi1[0m[0;34m)[0m[0;34m,[0m[0mlabel[0m[0;34m=[0m[0;34mr'Galerkin $\alpha$ = '[0m[0;34m+[0m[0mstr[0m[0;34m([0m[0malpha_vals[0m[0;34m[[0m[0mi[0m[0;34m][0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
