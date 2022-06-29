@@ -52,6 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributors" href="../contributors.html" />
+    <link rel="prev" title="Quantum Harmonic Oscillator as a two level system" href="classical.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,7 +113,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../introduction/introduction.html">
    Introduction
@@ -200,19 +202,24 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="horbm.html">
    Dimensionality Reduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
   <label for="toctree-checkbox-5">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="classical.html">
      Quantum Harmonic Oscillator as a two level system
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Reduced Basis Method on a Quantum Computer
     </a>
    </li>
   </ul>
@@ -790,8 +797,8 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.42496228  1.35853505 -0.99779672]
- [ 1.23804941 -0.9011439  -0.45886452]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.97951201  1.54066399  1.52633934]
+ [-1.5271885  -0.64042526 -1.16374687]]
 </pre></div>
 </div>
 </div>
@@ -859,30 +866,67 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 1.81620287,  Conv = 4.20765104, Time Elapsed = 0.067 s
-It = 1,  Energy = 1.78106511,  Conv = 0.03513776, Time Elapsed = 0.066 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 3.43553471,  Conv = 4.43632458, Time Elapsed = 0.072 s
+It = 1,  Energy = 3.14195763,  Conv = 0.29357707, Time Elapsed = 0.071 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 1.77200112,  Conv = 0.00906398, Time Elapsed = 0.150 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 3.60806195,  Conv = 0.46610432, Time Elapsed = 0.155 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 3,  Energy = 1.76844986,  Conv = 0.00355126, Time Elapsed = 0.069 s
-It = 4,  Energy = 1.76699837,  Conv = 0.00145149, Time Elapsed = 0.071 s
-It = 5,  Energy = 1.76640681,  Conv = 0.00059156, Time Elapsed = 0.064 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 3,  Energy = 1.86359074,  Conv = 1.74447122, Time Elapsed = 0.074 s
+It = 4,  Energy = 1.82645251,  Conv = 0.03713822, Time Elapsed = 0.070 s
+It = 5,  Energy = 1.80832337,  Conv = 0.01812914, Time Elapsed = 0.069 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = 1.76616517,  Conv = 0.00024163, Time Elapsed = 0.068 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = 1.79695230,  Conv = 0.01137108, Time Elapsed = 0.076 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 7,  Energy = 1.76606666,  Conv = 0.00009851, Time Elapsed = 0.071 s
-It = 8,  Energy = 1.76602646,  Conv = 0.00004020, Time Elapsed = 0.070 s
-It = 9,  Energy = 1.76601007,  Conv = 0.00001639, Time Elapsed = 0.069 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 7,  Energy = 1.78925495,  Conv = 0.00769735, Time Elapsed = 0.077 s
+It = 8,  Energy = 1.78383692,  Conv = 0.00541803, Time Elapsed = 0.073 s
+It = 9,  Energy = 1.77991376,  Conv = 0.00392316, Time Elapsed = 0.069 s
+It = 10,  Energy = 1.77700707,  Conv = 0.00290669, Time Elapsed = 0.070 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = 1.76600338,  Conv = 0.00000669, Time Elapsed = 0.070 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 11,  Energy = 1.77481165,  Conv = 0.00219542, Time Elapsed = 0.076 s
+It = 12,  Energy = 1.77312609,  Conv = 0.00168556, Time Elapsed = 0.075 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 13,  Energy = 1.77181363,  Conv = 0.00131246, Time Elapsed = 0.076 s
+It = 14,  Energy = 1.77077913,  Conv = 0.00103450, Time Elapsed = 0.072 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 15,  Energy = 1.76987752,  Conv = 0.00090161, Time Elapsed = 0.159 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 16,  Energy = 1.76910218,  Conv = 0.00077534, Time Elapsed = 0.074 s
+It = 17,  Energy = 1.76844474,  Conv = 0.00065743, Time Elapsed = 0.072 s
+It = 18,  Energy = 1.76789553,  Conv = 0.00054921, Time Elapsed = 0.069 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 19,  Energy = 1.76744395,  Conv = 0.00045158, Time Elapsed = 0.073 s
+It = 20,  Energy = 1.76707892,  Conv = 0.00036503, Time Elapsed = 0.074 s
+It = 21,  Energy = 1.76678924,  Conv = 0.00028968, Time Elapsed = 0.069 s
+It = 22,  Energy = 1.76656393,  Conv = 0.00022531, Time Elapsed = 0.069 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 23,  Energy = 1.76639252,  Conv = 0.00017140, Time Elapsed = 0.073 s
+It = 24,  Energy = 1.76626529,  Conv = 0.00012723, Time Elapsed = 0.070 s
+It = 25,  Energy = 1.76617342,  Conv = 0.00009188, Time Elapsed = 0.069 s
+It = 26,  Energy = 1.76610911,  Conv = 0.00006431, Time Elapsed = 0.069 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 27,  Energy = 1.76606573,  Conv = 0.00004337, Time Elapsed = 0.076 s
+It = 28,  Energy = 1.76603925,  Conv = 0.00002649, Time Elapsed = 0.152 s
+It = 29,  Energy = 1.76606181,  Conv = 0.00002256, Time Elapsed = 0.069 s
+It = 30,  Energy = 1.76616490,  Conv = 0.00010309, Time Elapsed = 0.071 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 31,  Energy = 1.76604279,  Conv = 0.00012211, Time Elapsed = 0.075 s
+It = 32,  Energy = 1.76601708,  Conv = 0.00002571, Time Elapsed = 0.075 s
+It = 33,  Energy = 1.76601078,  Conv = 0.00000631, Time Elapsed = 0.074 s
 
-Final value of the energy = 1.76600338
-Number of iterations =  10
+Final value of the energy = 1.76601078
+Number of iterations =  33
 </pre></div>
 </div>
 </div>
@@ -901,8 +945,8 @@ Number of iterations =  10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9990877457141457
-a2 Coefficient:  0.04270452392694078
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9990092252079681
+a2 Coefficient:  0.04450357232150171
 </pre></div>
 </div>
 </div>
@@ -951,12 +995,12 @@ a2 Coefficient:  0.04270452392694078
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finite Ele alpha = 3, lambda = 1.7320320573669001
-QC Galerkin alpha = 3, lambda = 1.766003383413186
+QC Galerkin alpha = 3, lambda = 1.7660107779508925
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1853</span><span class="o">/</span><span class="mf">1959063373.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1876</span><span class="o">/</span><span class="mf">1959063373.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">27</span>     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Finite element $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 <span class="g g-Whitespace">     </span><span class="mi">28</span> 
 <span class="ne">---&gt; </span><span class="mi">29</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">phi1</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Galerkin $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
@@ -999,6 +1043,20 @@ QC Galerkin alpha = 3, lambda = 1.766003383413186
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="classical.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Quantum Harmonic Oscillator as a two level system</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../contributors.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contributors</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

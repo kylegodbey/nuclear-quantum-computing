@@ -219,6 +219,11 @@ const thebe_selector_output = ".output, .cell_output"
      Quantum Harmonic Oscillator as a two level system
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../horbm/quantum.html">
+     Reduced Basis Method on a Quantum Computer
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -732,21 +737,21 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 13.49542238 MeV,  Conv = 2.56004152 MeV, Time Elapsed = 0.933 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 30.25567343 MeV,  Conv = 13.46828904 MeV, Time Elapsed = 0.987 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -0.80811414 MeV,  Conv = 0.27125694 MeV, Time Elapsed = 9.022 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -1.93362871 MeV,  Conv = 0.02951850 MeV, Time Elapsed = 8.977 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -1.84512490 MeV,  Conv = 0.04268120 MeV, Time Elapsed = 9.032 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -2.04001729 MeV,  Conv = 0.00928208 MeV, Time Elapsed = 8.967 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 30,  Energy = -2.12263027 MeV,  Conv = 0.01864807 MeV, Time Elapsed = 9.176 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 30,  Energy = -1.95064083 MeV,  Conv = 0.10629333 MeV, Time Elapsed = 9.093 s
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1919</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_1944</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -978,11 +983,25 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="k">def</span> <span class="nf">wrap_if_boxes_inside</span><span class="p">(</span><span class="n">raw_array</span><span class="p">,</span> <span class="n">slow_op_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="n">Wraps</span> <span class="n">a</span> <span class="n">function</span> <span class="n">so</span> <span class="n">that</span> <span class="n">its</span> <span class="n">gradient</span> <span class="n">can</span> <span class="n">be</span> <span class="n">specified</span> <span class="ow">and</span> <span class="n">its</span> <span class="n">invocation</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="n">can</span> <span class="n">be</span> <span class="n">recorded</span><span class="o">.</span> <span class="n">For</span> <span class="n">examples</span><span class="p">,</span> <span class="n">see</span> <span class="n">the</span> <span class="n">docs</span><span class="o">.</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">35</span><span class="s2">     @wraps(f_raw)</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span><span class="s2">     def f_wrapped(*args, **kwargs):</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="s2">         boxed_args, trace, node_constructor = find_top_boxed_args(args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="n">argnums</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">argnum</span>    <span class="k">for</span> <span class="n">argnum</span><span class="p">,</span> <span class="n">_</span>   <span class="ow">in</span> <span class="n">boxed_args</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span>             <span class="n">ans</span> <span class="o">=</span> <span class="n">f_wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">argvals</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">45</span>             <span class="n">node</span> <span class="o">=</span> <span class="n">node_constructor</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">f_wrapped</span><span class="p">,</span> <span class="n">argvals</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">argnums</span><span class="p">,</span> <span class="n">parents</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>             <span class="k">return</span> <span class="n">new_box</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>         <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">__init__</span><span class="nt">(self, value, fun, args, kwargs, parent_argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span>             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnums </span><span class="si">{}</span><span class="s2"> not defined&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span>                                       <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fun_name</span><span class="p">,</span> <span class="n">parent_argnums</span><span class="p">))</span>
+<span class="ne">---&gt; </span><span class="mi">36</span>         <span class="bp">self</span><span class="o">.</span><span class="n">vjp</span> <span class="o">=</span> <span class="n">vjpmaker</span><span class="p">(</span><span class="n">parent_argnums</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span> 
+<span class="g g-Whitespace">     </span><span class="mi">38</span>     <span class="k">def</span> <span class="nf">initialize_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp_argnums</span><span class="nt">(argnums, ans, args, kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="n">vjps_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">argnum</span> <span class="p">:</span> <span class="n">translate_vjp</span><span class="p">(</span><span class="n">vjpmaker</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">argnum</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span>                  <span class="k">for</span> <span class="n">argnum</span><span class="p">,</span> <span class="n">vjpmaker</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">argnums</span><span class="p">,</span> <span class="n">vjpmakers</span><span class="p">)}</span>
+<span class="ne">---&gt; </span><span class="mi">56</span>     <span class="k">def</span> <span class="nf">vjp_argnums</span><span class="p">(</span><span class="n">argnums</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">argnums</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span>         <span class="c1"># These first two cases are just optimizations</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
