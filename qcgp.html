@@ -464,16 +464,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#background">
    Background
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
-   Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
-   We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
+     Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
+     We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -498,16 +500,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#background">
    Background
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
-   Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
-   We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
+     Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
+     We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -521,18 +525,20 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="final-challenge-solving-the-gross-pitaevskii-equation">
 <h1>Final challenge: Solving the Gross-Pitaevskii Equation<a class="headerlink" href="#final-challenge-solving-the-gross-pitaevskii-equation" title="Permalink to this headline">#</a></h1>
+<p>Author(s): Kyle Godbey, Pablo Giuliani</p>
+<p>Maintainer: Kyle Godbey</p>
 <p>Parts adapted from https://arxiv.org/pdf/2203.05284.pdf with permission from the authors.</p>
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference external" href="https://link.springer.com/article/10.1007/BF02731494">Gross</a>-<a class="reference external" href="http://jetp.ras.ru/cgi-bin/dn/e_013_02_0451.pdf">Pitaevskii</a> (GP) equation (also <a class="reference external" href="https://epubs.siam.org/doi/10.1137/20M1313106">here</a> for a RBM application) is a nonlinear Schrödinger equation that approximately describes the low-energy properties of dilute Bose-Einstein condensates. Using a self-consistent mean field approximation, the many-body wavefunction is reduced to a description in terms of a single complex-valued wavefunction <span class="math notranslate nohighlight">\(\phi(\vec{r})\)</span>. We work with the <a class="reference external" href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.62.063610">one-dimensional Gross-Pitaevskii equation</a> with a harmonic trapping potential by letting <span class="math notranslate nohighlight">\(F_\alpha\)</span> be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7d15ffaa-424e-42f4-94c8-40677fb1a499">
-<span class="eqno">(16)<a class="headerlink" href="#equation-7d15ffaa-424e-42f4-94c8-40677fb1a499" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ab93fbe3-85b2-4350-be78-e7c3b53c599e">
+<span class="eqno">(16)<a class="headerlink" href="#equation-ab93fbe3-85b2-4350-be78-e7c3b53c599e" title="Permalink to this equation">#</a></span>\[\begin{equation}
   F_{q,\kappa}(\phi)= -\phi''+\kappa x^2\phi+q|\phi|^2\phi-\lambda_{q,\kappa}\phi=0,
 \end{equation}\]</div>
 <p>where the parameters are now <span class="math notranslate nohighlight">\(\alpha=\{\kappa, q\}\)</span>, which are proportional to the strength of the harmonic trapping and the self-coupling of the wavefunction,respectively, while <span class="math notranslate nohighlight">\(\lambda_{q,\kappa}\)</span> is proportional to the ground state energ. <span class="math notranslate nohighlight">\(\phi(x)\)</span> is a single variable function that depends on <span class="math notranslate nohighlight">\(x\)</span> and it is normalized to unity.</p>
 <p>To be able to solve this problem in a quantum computer with few qbits we follow the same procedure as with the Harmonic Oscillator problem and cast the equations in the reduced basis. We once again expand our solution in a basis of <span class="math notranslate nohighlight">\(n\)</span> elements:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5484bec7-8a36-40ad-9a20-eec9f96efe0b">
-<span class="eqno">(17)<a class="headerlink" href="#equation-5484bec7-8a36-40ad-9a20-eec9f96efe0b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-80b33d35-be68-46e1-93a7-83612689399d">
+<span class="eqno">(17)<a class="headerlink" href="#equation-80b33d35-be68-46e1-93a7-83612689399d" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the non-linear Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha=\{\kappa,q\}\)</span>.</p>
@@ -811,9 +817,8 @@ alpha = [10, 1], lambda = 4.022841278511264
 <img alt="_images/qcgp_8_1.png" src="_images/qcgp_8_1.png" />
 </div>
 </div>
-</section>
 <section id="creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values">
-<h2>Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)<a class="headerlink" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values" title="Permalink to this headline">#</a></h2>
+<h3>Creating an orthonormal basis of two elements and checking that our problem is well behaved (fast decay in singular values)<a class="headerlink" href="#creating-an-orthonormal-basis-of-two-elements-and-checking-that-our-problem-is-well-behaved-fast-decay-in-singular-values" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
@@ -839,38 +844,38 @@ alpha = [10, 1], lambda = 4.022841278511264
 </div>
 </section>
 <section id="we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components">
-<h2>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.<a class="headerlink" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components" title="Permalink to this headline">#</a></h2>
+<h3>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.<a class="headerlink" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components" title="Permalink to this headline">#</a></h3>
 <p>This discussion retraces everything we did before for the Harmonic Oscillator. The main difference is that now the Hamiltonian effectively depends on the solution <span class="math notranslate nohighlight">\(H_\alpha \equiv H_\alpha[\phi]\)</span>, but since we are aiming at solving the problem iteratively, at each stage we have a fixed linear Hamiltonian.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b4266ee6-4261-41f6-a1fd-38485edd9a29">
-<span class="eqno">(18)<a class="headerlink" href="#equation-b4266ee6-4261-41f6-a1fd-38485edd9a29" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cafd2b32-0c17-49f2-8fd1-49fdf7336e65">
+<span class="eqno">(18)<a class="headerlink" href="#equation-cafd2b32-0c17-49f2-8fd1-49fdf7336e65" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-14a85a79-524d-44ab-9064-e4cec08d577f">
-<span class="eqno">(19)<a class="headerlink" href="#equation-14a85a79-524d-44ab-9064-e4cec08d577f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-46eb6ec1-98d6-433b-bec3-1d55b2ecce93">
+<span class="eqno">(19)<a class="headerlink" href="#equation-46eb6ec1-98d6-433b-bec3-1d55b2ecce93" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-23823510-f5e3-4fac-9a90-95a1702c219e">
-<span class="eqno">(20)<a class="headerlink" href="#equation-23823510-f5e3-4fac-9a90-95a1702c219e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-18ea7e48-ebde-4194-80eb-666122dc1b3f">
+<span class="eqno">(20)<a class="headerlink" href="#equation-18ea7e48-ebde-4194-80eb-666122dc1b3f" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-babc058c-217f-45da-aad9-7f287d548f74">
-<span class="eqno">(21)<a class="headerlink" href="#equation-babc058c-217f-45da-aad9-7f287d548f74" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-3bae28b2-88c8-4f7e-9d68-21dcc4135930">
+<span class="eqno">(21)<a class="headerlink" href="#equation-3bae28b2-88c8-4f7e-9d68-21dcc4135930" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c12edc2e-4c38-4122-a8da-f6b60ce06f72">
-<span class="eqno">(22)<a class="headerlink" href="#equation-c12edc2e-4c38-4122-a8da-f6b60ce06f72" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-99ee0c41-0fe0-4f77-bda8-5a04f0d766de">
+<span class="eqno">(22)<a class="headerlink" href="#equation-99ee0c41-0fe0-4f77-bda8-5a04f0d766de" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-495e772d-1b8e-4a47-b54b-c375a4c12568">
-<span class="eqno">(23)<a class="headerlink" href="#equation-495e772d-1b8e-4a47-b54b-c375a4c12568" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ebbad357-4d54-401a-b374-e79e2c6a44cc">
+<span class="eqno">(23)<a class="headerlink" href="#equation-ebbad357-4d54-401a-b374-e79e2c6a44cc" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the tow potential parts and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\kappa H_1 +q H_2\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span>, <span class="math notranslate nohighlight">\(H_1= x^2\)</span>, and <span class="math notranslate nohighlight">\(H_2=|\phi(x)|^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \kappa \tilde H_1+ q \tilde H_2\)</span>. We now construct these matrices, <span class="math notranslate nohighlight">\(H_2\)</span> being a function that must be constructed every time:</p>
@@ -1013,7 +1018,7 @@ H2= [[ 0.36584365 -0.13715205]
     
 
 <span class="c1"># Make plots of the numerical wavefunction </span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solFinite</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Finite element method $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">))</span>
@@ -1163,7 +1168,7 @@ H2= [[ 0.36584365 -0.13715205]
     <span class="k">if</span><span class="p">(</span><span class="n">debug</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final value of the energy = </span><span class="si">{:.8f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy</span><span class="p">))</span>
     <span class="k">if</span><span class="p">(</span><span class="n">debug</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of iterations = &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">gd_cost_history</span>
 
 <span class="k">def</span> <span class="nf">run_vqe</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">init_params</span><span class="p">,</span> <span class="n">dev</span><span class="p">,</span> <span class="n">mixing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> \
     <span class="n">noisy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">conv_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1270,13 +1275,12 @@ H2= [[ 0.36584365 -0.13715205]
 
 <span class="n">classical</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">tildeH</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result expected from classical computation: &quot;</span><span class="p">,</span> <span class="n">classical</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">params</span><span class="p">,</span> <span class="n">energy</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+<span class="n">params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result expected from classical computation:  3.3910483648941208
-Final value of the energy = 3.39105632
 </pre></div>
 </div>
 </div>
@@ -1292,7 +1296,7 @@ Final value of the energy = 3.39105632
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span>
 <span class="n">classical</span><span class="o">=</span><span class="n">ItetariveRBMsolver</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 
-<span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">run_vqe_fixed</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+<span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_vqe_fixed</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
 <span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">)</span>
 <span class="n">new_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 <span class="n">coeffs</span> <span class="o">=</span> <span class="n">new_coeffs</span>
@@ -1304,7 +1308,7 @@ Final value of the energy = 3.39105632
 <span class="n">prev_energy</span> <span class="o">=</span> <span class="mf">10.0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
     <span class="n">coeffs</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">mixing</span><span class="p">)</span><span class="o">*</span><span class="n">coeffs</span> <span class="o">+</span> <span class="n">mixing</span><span class="o">*</span><span class="n">new_coeffs</span>
-    <span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">run_vqe_fixed</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">coeffs</span><span class="p">,</span><span class="n">sol_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+    <span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_vqe_fixed</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">coeffs</span><span class="p">,</span><span class="n">sol_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
     <span class="n">total_it</span> <span class="o">+=</span> <span class="n">n</span>
     <span class="k">if</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">energy</span><span class="o">-</span><span class="n">prev_energy</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Convergence tolerance met!&quot;</span><span class="p">)</span>
@@ -1326,9 +1330,9 @@ Final value of the energy = 3.39105632
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Convergence tolerance met!
 Result expected from classical computation:  3.2502202855515776
 Coefficients expected from classical computation:  0.9913354984896009 0.131354213614845
-Result from standard VQE:  3.2502193236644996
-Coefficients from standard VQE:  0.9913354774404971 0.13135437247317416
-Total Iterations Required:  60
+Result from standard VQE:  3.2502199182089284
+Coefficients from standard VQE:  0.9913355270644103 0.13135399795943606
+Total Iterations Required:  73
 </pre></div>
 </div>
 </div>
@@ -1350,9 +1354,9 @@ Total Iterations Required:  60
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result expected from classical computation:  3.2502202855515776
 Coefficients expected from classical computation:  0.9913354984896009 0.131354213614845
-Result from dynamic VQE:  3.2502207938475203
-Coefficients from dynamic VQE:  0.9913354781979928 0.13135436675633222
-Total Iterations Required:  22
+Result from dynamic VQE:  3.2502195699735195
+Coefficients from dynamic VQE:  0.9913354413991934 0.13135464447771186
+Total Iterations Required:  31
 </pre></div>
 </div>
 </div>
@@ -1363,7 +1367,7 @@ Total Iterations Required:  22
 <span class="n">lamGaler</span><span class="o">=</span><span class="n">solFull</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Make plots of the numerical wavefunction </span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solFinite</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Finite element method $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solGaler</span><span class="p">,</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Quantum Computing Galerkin $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">))</span>
@@ -1404,7 +1408,7 @@ Total Iterations Required:  22
     <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">dev_sim</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
 
 <span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">energy_history</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev_sim</span><span class="p">,</span>\
-    <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">noisy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">noisy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">probs</span> <span class="o">=</span> <span class="n">noisy_prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">)</span>
 <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
@@ -1420,9 +1424,9 @@ Total Iterations Required:  22
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result expected from classical computation:  3.2502202855515776
 Coefficients expected from classical computation:  0.9913354984896009 0.131354213614845
-Result from noisy VQE:  3.0775726438512083
-Coefficients from noisy VQE:  0.9413288479590965 0.1673320053068151
-Total Iterations Required:  49
+Result from noisy VQE:  3.062590327131969
+Coefficients from noisy VQE:  0.9389888178247918 0.17549928774784243
+Total Iterations Required:  19
 </pre></div>
 </div>
 </div>
@@ -1456,7 +1460,7 @@ Total Iterations Required:  49
 
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solutions&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -1466,8 +1470,10 @@ Total Iterations Required:  49
 <img alt="_images/qcgp_32_0.png" src="_images/qcgp_32_0.png" />
 </div>
 </div>
-<p>Even with a noisy circuit it doesn’t do terribly! One last thing we can do to get slightly better performance is to leverage zero-noise extrapolation for the coefficients and see if there is a noticeable improvement.</p>
-<p>To achieve this we’ll first define an extrapolation function to parse the output from our probability function and setup the error mitigated qnode.</p>
+<p>Even with a noisy circuit it doesn’t do terribly! It’s likely we let it run a little too long, in fact, as our standard convergence criteria isn’t well suited to a noisy system. Can you think of any ways to better measure convergence in these cases? Give it a try!</p>
+<p>One last thing we can do to get slightly better performance is to leverage zero-noise extrapolation for the coefficients and see if there is a noticeable improvement.</p>
+<p>To achieve this we’ll first define an extrapolation function to parse the output from our probability function and setup the error mitigated qnode. Then we can run it with three scale factors and extrapolate our coefficients.</p>
+<p>Finally, we’ll plot the error mitigated solution and see if this was all worth doing!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob_extrapolate</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="o">**</span><span class="n">extrapolate_kwargs</span><span class="p">):</span>
@@ -1512,6 +1518,10 @@ Total Iterations Required:  49
 <img alt="_images/qcgp_35_0.png" src="_images/qcgp_35_0.png" />
 </div>
 </div>
+<p>Yet another beautiful result! Compared to the vanilla noisy result a few cells up, this has much better agreement with the ‘true’ solution provided by the finite element method. And remember, this is the noisy result from a basis of N=2!</p>
+<p>I encourage you to try how well we can solve the Gross-Pitaevskii equation with different values of the model parameters, <span class="math notranslate nohighlight">\(\alpha = {\kappa,q}\)</span>. While we haven’t picked something in our basis, it’s possible we just got lucky with the values we chose. Indeed, if you vary the parameters well outside the true solutions that inform the basis, you might start to see big deviations. But these deviations will manifest in the classical computing calculations too, so it’s not a computational limit but an informational one.</p>
+<p>That brings us to the end of the final challenge problem for our expansive tutorial series on quantum computing applications to many-body problems. The authors had a great time putting this all together, so we hope you enjoyed going through it :).</p>
+</section>
 </section>
 </section>
 
