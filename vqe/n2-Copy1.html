@@ -195,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -613,21 +613,12 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.89426366 MeV,  Convergence parameter = 0.52891694 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = -0.66950925 MeV,  Convergence parameter = 0.17005461 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 40,  Energy = -1.70101182 MeV,  Convergence parameter = 0.00828148 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 60,  Energy = -1.74716419 MeV,  Convergence parameter = 0.00034480 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 80,  Energy = -1.74907865 MeV,  Convergence parameter = 0.00001426 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -1.74915572 MeV
+Iteration = 20,  Energy = -0.66950925 MeV,  Convergence parameter = 0.17005461 MeV
+Iteration = 40,  Energy = -1.70101182 MeV,  Convergence parameter = 0.00828148 MeV
+Iteration = 60,  Energy = -1.74716419 MeV,  Convergence parameter = 0.00034480 MeV
+Iteration = 80,  Energy = -1.74907865 MeV,  Convergence parameter = 0.00001426 MeV
+
+Final value of the energy = -1.74915572 MeV
 Number of iterations =  97
 </pre></div>
 </div>
@@ -763,7 +754,7 @@ Number of iterations =  97
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.7145425879999932
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.5826797731999969
 </pre></div>
 </div>
 </div>
@@ -806,33 +797,33 @@ Shots: 1024
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2230</span><span class="o">/</span><span class="mf">1686130105.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">sim_qnode</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">mitigated_qnode</span><span class="p">()</span>
+<span class="nn">/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/n2-Copy1.ipynb Cell 20&#39;</span> in <span class="ni">&lt;cell line: 8&gt;</span><span class="nt">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/n2-Copy1.ipynb#ch0000019?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/n2-Copy1.ipynb#ch0000019?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">mitigated_qnode</span> <span class="o">=</span> <span class="n">mitigate_with_zne</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">extrapolate</span><span class="p">)(</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/n2-Copy1.ipynb#ch0000019?line=5&#39;</span><span class="o">&gt;</span><span class="mi">6</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span>     <span class="n">sim_qnode</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/n2-Copy1.ipynb#ch0000019?line=6&#39;</span><span class="o">&gt;</span><span class="mi">7</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="p">)</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/kyle/code/quantum-computing-tutorial/nuclear-qc/vqe/n2-Copy1.ipynb#ch0000019?line=7&#39;</span><span class="o">&gt;</span><span class="mi">8</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">mitigated_qnode</span><span class="p">()</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/transforms/batch_transform.py</span> in <span class="ni">_wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">286</span>         <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">287</span>             <span class="n">shots</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;shots&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">288</span>             <span class="n">qnode</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">289</span>             <span class="n">tapes</span><span class="p">,</span> <span class="n">processing_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">qnode</span><span class="o">.</span><span class="n">qtape</span><span class="p">,</span> <span class="o">*</span><span class="n">targs</span><span class="p">,</span> <span class="o">**</span><span class="n">tkwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">290</span> 
+<span class="nn">File ~/.local/lib/python3.10/site-packages/pennylane/transforms/batch_transform.py:288,</span> in <span class="ni">batch_transform.default_qnode_wrapper.&lt;locals&gt;._wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">286</span> <span class="k">def</span> <span class="nf">_wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">287</span>     <span class="n">shots</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;shots&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">288</span>     <span class="n">qnode</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">289</span>     <span class="n">tapes</span><span class="p">,</span> <span class="n">processing_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">qnode</span><span class="o">.</span><span class="n">qtape</span><span class="p">,</span> <span class="o">*</span><span class="n">targs</span><span class="p">,</span> <span class="o">**</span><span class="n">tkwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">291</span>     <span class="n">interface</span> <span class="o">=</span> <span class="n">qnode</span><span class="o">.</span><span class="n">interface</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/transforms/batch_transform.py</span> in <span class="ni">_construct</span><span class="nt">(args, kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">373</span> 
-<span class="g g-Whitespace">    </span><span class="mi">374</span>                 <span class="k">def</span> <span class="nf">_construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">375</span>                     <span class="n">qnode</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">376</span>                     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">qnode</span><span class="o">.</span><span class="n">qtape</span><span class="p">,</span> <span class="o">*</span><span class="n">targs</span><span class="p">,</span> <span class="o">**</span><span class="n">tkwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">377</span> 
+<span class="nn">File ~/.local/lib/python3.10/site-packages/pennylane/transforms/batch_transform.py:375,</span> in <span class="ni">batch_transform.__call__.&lt;locals&gt;.wrapper.&lt;locals&gt;._construct</span><span class="nt">(args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span> <span class="k">def</span> <span class="nf">_construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">375</span>     <span class="n">qnode</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">376</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">qnode</span><span class="o">.</span><span class="n">qtape</span><span class="p">,</span> <span class="o">*</span><span class="n">targs</span><span class="p">,</span> <span class="o">**</span><span class="n">tkwargs</span><span class="p">)</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py</span> in <span class="ni">construct</span><span class="nt">(self, args, kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> 
-<span class="g g-Whitespace">    </span><span class="mi">525</span>         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">526</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
-<span class="g g-Whitespace">    </span><span class="mi">528</span> 
+<span class="nn">File ~/.local/lib/python3.10/site-packages/pennylane/qnode.py:526,</span> in <span class="ni">QNode.construct</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">QuantumTape</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">525</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">526</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">527</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span> <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="o">.</span><span class="n">get_parameters</span><span class="p">(</span><span class="n">trainable_only</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: circuit_mit() missing 1 required positional argument: &#39;params&#39;
+<span class="ne">TypeError</span>: circuit_mit() missing 2 required positional arguments: &#39;params&#39; and &#39;wires&#39;
 </pre></div>
 </div>
 </div>

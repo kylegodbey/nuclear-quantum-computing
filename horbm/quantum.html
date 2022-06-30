@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -480,55 +480,6 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
-<span class="g g-Whitespace">    </span><span class="mi">126</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">127</span>                 <span class="n">rc</span> <span class="o">=</span> <span class="n">rc_params_from_file</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">use_default_template</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">128</span>                 <span class="n">_apply_style</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">rc_params_from_file</span><span class="nt">(fname, fail_on_error, use_default_template)</span>
-<span class="g g-Whitespace">    </span><span class="mi">851</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">852</span><span class="s2">     config_from_file = _rc_params_in_file(fname, fail_on_error=fail_on_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="s2"> </span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">_rc_params_in_file</span><span class="nt">(fname, transform, fail_on_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">777</span><span class="s2">     rc_temp = </span><span class="si">{}</span><span class="s2"></span>
-<span class="ne">--&gt; </span><span class="mi">778</span><span class="s2">     with _open_file_or_url(fname) as fd:</span>
-<span class="g g-Whitespace">    </span><span class="mi">779</span><span class="s2">         try:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">__enter__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">112</span><span class="s2">             return next(self.gen)</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="s2">         except StopIteration:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">_open_file_or_url</span><span class="nt">(fname)</span>
-<span class="g g-Whitespace">    </span><span class="mi">754</span><span class="s2">             encoding = &quot;utf-8&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">755</span><span class="s2">         with open(fname, encoding=encoding) as f:</span>
-<span class="g g-Whitespace">    </span><span class="mi">756</span><span class="s2">             yield f</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;science&#39;
-
-<span class="s2">The above exception was the direct cause of the following exception:</span>
-
-<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="s2">/tmp/ipykernel_2104/3059013997.py in &lt;module&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="s2"> import warnings</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="s2"> warnings.filterwarnings(&#39;ignore&#39;)</span>
-<span class="ne">---&gt; </span><span class="mi">13</span><span class="s2"> plt.style.use([&#39;science&#39;,&#39;notebook&#39;])</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span><span class="s2">                     &quot;</span><span class="si">{!r}</span><span class="s2"> not found in the style library and input is not a &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="s2">                     &quot;valid URL or path; see `style.available` for list of &quot;</span>
-<span class="ne">--&gt; </span><span class="mi">133</span><span class="s2">                     &quot;available styles&quot;.format(style)) from err</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="s2"> </span>
-
-<span class="ne">OSError</span>: &#39;science&#39; not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
 </pre></div>
 </div>
 </div>

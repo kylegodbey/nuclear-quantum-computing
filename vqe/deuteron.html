@@ -199,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -422,13 +422,13 @@ title="Print to PDF"
 <p>From the paper we can read that the authors employed the projection of hamiltonian operators onto quantum qubits (X,Y,Z) to construct a quantum computatable hamiltonian.
 By the Pionless EFT, a systematically improvable and model-independent approach to nuclear interactions in a regime where the momentum scale <span class="math notranslate nohighlight">\(Q\)</span> of the interesting physics. The important part of this paper is how the deuteron creation and annihlation operator is mapped onto qubits using Jordan-Wigner transformation. Qubits can be used by quantum computers for boperations based on Pauli matrices (denoted as <span class="math notranslate nohighlight">\(X_{q}, Y_{q}\)</span>, and <span class="math notranslate nohighlight">\(Z_{q}\)</span> on qubit <span class="math notranslate nohighlight">\(q\)</span> ).</p>
 <p>The deuteron Hamiltonian is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3cfed133-0b4c-44d1-8934-6bf79eceefae">
-<span class="eqno">(1)<a class="headerlink" href="#equation-3cfed133-0b4c-44d1-8934-6bf79eceefae" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-65797fa4-99de-433e-a6fc-10fa1a3de9da">
+<span class="eqno">(1)<a class="headerlink" href="#equation-65797fa4-99de-433e-a6fc-10fa1a3de9da" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle a_{n^{\prime}}^{\dagger} a_{n} .
 \end{equation}\]</div>
 <p>The operators <span class="math notranslate nohighlight">\(a_{n}^{\dagger}\)</span> and <span class="math notranslate nohighlight">\(a_{n}\)</span> here are the creatiion and annihilation operators. A deuteron is created or annihilated in the harmonic-oscillator <span class="math notranslate nohighlight">\(s\)</span>-wave state <span class="math notranslate nohighlight">\(|n\rangle\)</span>. The matrix elements of the kinetic and potential energy are represented by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-481b2d2c-fbee-4aa4-8da2-c14ce597902a">
-<span class="eqno">(2)<a class="headerlink" href="#equation-481b2d2c-fbee-4aa4-8da2-c14ce597902a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cb0e01c8-a18a-4c2d-bcb0-d0d5bf1c0c15">
+<span class="eqno">(2)<a class="headerlink" href="#equation-cb0e01c8-a18a-4c2d-bcb0-d0d5bf1c0c15" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 \left\langle n^{\prime}|T| n\right\rangle=&amp; \frac{\hbar \omega}{2}\left[(2 n+3 / 2) \delta_{n}^{n^{\prime}}-\sqrt{n(n+1 / 2)} \delta_{n}^{n^{\prime}+1}\right.\\
 &amp;\left.-\sqrt{(n+1)(n+3 / 2)} \delta_{n}^{n^{\prime}-1}\right] \\
@@ -437,29 +437,29 @@ H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle 
 \end{equation}\]</div>
 <p>Here, <span class="math notranslate nohighlight">\(V_{0}=-5.68658111 \mathrm{MeV}\)</span>, and <span class="math notranslate nohighlight">\(n, n^{\prime}=0,1, \ldots N-1\)</span>, for a basis of dimension <span class="math notranslate nohighlight">\(N\)</span>. We set <span class="math notranslate nohighlight">\(\hbar \omega=7 \mathrm{MeV}\)</span>, and the potential has an ultraviolet cutoff <span class="math notranslate nohighlight">\(\Lambda \approx 152 \mathrm{MeV}\)</span> [28], which is still well separated from the bound-state momentum of about <span class="math notranslate nohighlight">\(Q \approx 46 \mathrm{MeV}\)</span>.</p>
 <p>Mapping the deuteron onto qubits.-Quantum computers manipulate qubits by operations based on Pauli matrices (denoted as <span class="math notranslate nohighlight">\(X_{q}, Y_{q}\)</span>, and <span class="math notranslate nohighlight">\(Z_{q}\)</span> on qubit <span class="math notranslate nohighlight">\(q\)</span> ). The deuteron creation and annihilation operators can be mapped onto Pauli matrices via the Jordan-Wigner transformation</p>
-<div class="amsmath math notranslate nohighlight" id="equation-91c76c99-6a77-4611-ace8-23b2714509f1">
-<span class="eqno">(3)<a class="headerlink" href="#equation-91c76c99-6a77-4611-ace8-23b2714509f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-dc0b1611-3a77-4736-bc8b-ed4de8bc7d7b">
+<span class="eqno">(3)<a class="headerlink" href="#equation-dc0b1611-3a77-4736-bc8b-ed4de8bc7d7b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 &amp;a_{n}^{\dagger} \rightarrow \frac{1}{2}\left[\prod_{j=0}^{n-1}-Z_{j}\right]\left(X_{n}-i Y_{n}\right) \\
 &amp;a_{n} \rightarrow \frac{1}{2}\left[\prod_{j=0}^{n-1}-Z_{j}\right]\left(X_{n}+i Y_{n}\right) .
 \end{aligned}
 \end{equation}\]</div>
 <p>A spin up <span class="math notranslate nohighlight">\(|\uparrow\rangle\)</span> (down <span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span> ) on qubit <span class="math notranslate nohighlight">\(n\)</span> corresponds to zero (one) deuteron in the state <span class="math notranslate nohighlight">\(|n\rangle\)</span>. As we deal with single-particle states, the symmetry under permutations plays no role here. To compute the ground-state energy of the deuteron we employ the following strategy. We determine the ground-state energies of the Hamiltonian (1) for <span class="math notranslate nohighlight">\(N=1,2,3\)</span> and use those values to extrapolate the energy to the infinite-dimensional space. We have <span class="math notranslate nohighlight">\(H_{1}=0.218291\left(Z_{0}-I\right) \mathrm{MeV}\)</span>, and its ground-state energy <span class="math notranslate nohighlight">\(E_{1}=\left\langle\downarrow\left|H_{1}\right| \downarrow\right\rangle \approx-0.436 \mathrm{MeV}\)</span> requires no computation. Here, <span class="math notranslate nohighlight">\(I\)</span> denotes the identity operation. For <span class="math notranslate nohighlight">\(N=2,3\)</span> we have (all numbers are in units of <span class="math notranslate nohighlight">\(\mathrm{MeV}\)</span> )</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dbed20bd-303c-490d-9a27-123a145cbc50">
-<span class="eqno">(4)<a class="headerlink" href="#equation-dbed20bd-303c-490d-9a27-123a145cbc50" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ead23de5-ee18-4b46-ba62-71014a71069b">
+<span class="eqno">(4)<a class="headerlink" href="#equation-ead23de5-ee18-4b46-ba62-71014a71069b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 H_{2}=&amp; 5.906709 I+0.218291 Z_{0}-6.125 Z_{1} \\
 &amp;-2.143304\left(X_{0} X_{1}+Y_{0} Y_{1}\right)
 \end{aligned}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-793b77dc-3ff4-496d-94a9-e5c0bd766c3e">
-<span class="eqno">(5)<a class="headerlink" href="#equation-793b77dc-3ff4-496d-94a9-e5c0bd766c3e" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c729062d-641c-4506-9e87-2ae06abdaa71">
+<span class="eqno">(5)<a class="headerlink" href="#equation-c729062d-641c-4506-9e87-2ae06abdaa71" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_{3}=H_{2}+9.625\left(I-Z_{2}\right)-3.913119\left(X_{1} X_{2}+Y_{1} Y_{2}\right)
 \end{equation}\]</div>
 <p>We note that the tridiagonal structure of our Hamiltonian can be implemented efficiently on a linear chain of connected qubits and this suits existing designs. The simulation of the Hamiltonian <span class="math notranslate nohighlight">\(H_{N}\)</span> requires <span class="math notranslate nohighlight">\(N-1\)</span> angles and the circuit depth is linear in <span class="math notranslate nohighlight">\(N\)</span>.</p>
 <p>For the extrapolation to the infinite space we employ the harmonic-oscillator variant of Lüscher’s formula [29] for finite-size corrections to the ground-state energy [30]</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ce3d21fd-beb6-43bf-bf9f-66d859126f4a">
-<span class="eqno">(6)<a class="headerlink" href="#equation-ce3d21fd-beb6-43bf-bf9f-66d859126f4a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-764e6e4c-8c14-4945-815e-9b6c3e9a6178">
+<span class="eqno">(6)<a class="headerlink" href="#equation-764e6e4c-8c14-4945-815e-9b6c3e9a6178" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 E_{N}=&amp;-\frac{\hbar^{2} k^{2}}{2 m}\left(1-2 \frac{\gamma^{2}}{k} e^{-2 k L}-4 \frac{\gamma^{4} L}{k} e^{-4 k L}\right) \\
 &amp;+\frac{\hbar^{2} k \gamma^{2}}{m}\left(1-\frac{\gamma^{2}}{k}-\frac{\gamma^{4}}{4 k^{2}}+2 w_{2} k \gamma^{4}\right) e^{-4 k L} .

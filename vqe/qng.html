@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -477,6 +477,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
 <span class="c1"># In this case we now need 3 qubits</span>
 
 <span class="n">dev</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;default.qubit&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -502,8 +503,32 @@ title="Print to PDF"
 
 <span class="n">H</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">obs</span><span class="p">)</span>
 <span class="n">cost_fn</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">ExpvalCost</span><span class="p">(</span><span class="n">circuit</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">dev</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">draw_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="o">=</span><span class="n">dev</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="n">qml</span><span class="o">.</span><span class="n">drawer</span><span class="o">.</span><span class="n">use_style</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">draw_mpl</span><span class="p">(</span><span class="n">draw_circuit</span><span class="p">)(</span><span class="n">init_params</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (-9.625) [Z2]
++ (-6.125) [Z1]
++ (0.21829) [Z0]
++ (15.531709) [I0]
++ (-3.91) [X1 X2]
++ (-3.91) [Y1 Y2]
++ (-2.1433) [X0 X1]
++ (-2.1433) [Y0 Y1]
+(&lt;Figure size 900x400 with 1 Axes&gt;, &lt;Axes:&gt;)
+</pre></div>
+</div>
+<img alt="../_images/qng_1_1.png" src="../_images/qng_1_1.png" />
 </div>
 </div>
 <p>Now we’ll still set up what we need for our VQE procedure, but we’ll be running it twice, so setting the initial parameters is a necessity for the sake of fairness.</p>
@@ -564,24 +589,13 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 22.73185830 MeV,  Convergence parameter = 0.16533643 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = 13.86733622 MeV,  Convergence parameter = 0.85950160 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 40,  Energy = 0.66226895 MeV,  Convergence parameter = 0.41277410 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 60,  Energy = -1.94958676 MeV,  Convergence parameter = 0.01827050 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 80,  Energy = -2.04226133 MeV,  Convergence parameter = 0.00054725 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 100,  Energy = -2.04502496 MeV,  Convergence parameter = 0.00001629 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -2.04510468 MeV
+Iteration = 20,  Energy = 13.86733622 MeV,  Convergence parameter = 0.85950160 MeV
+Iteration = 40,  Energy = 0.66226895 MeV,  Convergence parameter = 0.41277410 MeV
+Iteration = 60,  Energy = -1.94958676 MeV,  Convergence parameter = 0.01827050 MeV
+Iteration = 80,  Energy = -2.04226133 MeV,  Convergence parameter = 0.00054725 MeV
+Iteration = 100,  Energy = -2.04502496 MeV,  Convergence parameter = 0.00001629 MeV
+
+Final value of the energy = -2.04510468 MeV
 Number of iterations =  116
 </pre></div>
 </div>
@@ -629,12 +643,9 @@ Number of iterations =  116
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 22.30149608 MeV,  Convergence parameter = 0.59569865 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = -2.03927628 MeV,  Convergence parameter = 0.00595511 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -2.04510917 MeV
+Iteration = 20,  Energy = -2.03927628 MeV,  Convergence parameter = 0.00595511 MeV
+
+Final value of the energy = -2.04510917 MeV
 Number of iterations =  33
 </pre></div>
 </div>
@@ -643,9 +654,7 @@ Number of iterations =  33
 <p>Very nice! We sped things up a good bit, but let’s check the convergence plot to see the behavior over the iterations.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;seaborn&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qng_cost_history</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Quantum Natural Gradient&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (MeV)&quot;</span><span class="p">)</span>

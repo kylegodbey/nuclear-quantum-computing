@@ -197,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -475,6 +475,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pennylane</span> <span class="k">as</span> <span class="nn">qml</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -505,6 +507,14 @@ title="Print to PDF"
 <span class="c1"># Let&#39;s print it out</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">draw_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wires</span><span class="o">=</span><span class="n">dev</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">expval</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+
+<span class="n">qml</span><span class="o">.</span><span class="n">drawer</span><span class="o">.</span><span class="n">use_style</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">draw_mpl</span><span class="p">(</span><span class="n">draw_circuit</span><span class="p">)(</span><span class="n">init_params</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -514,8 +524,10 @@ title="Print to PDF"
 + (5.906709) [I0]
 + (-2.143304) [X0 X1]
 + (-2.143304) [Y0 Y1]
+(&lt;Figure size 500x300 with 1 Axes&gt;, &lt;Axes:&gt;)
 </pre></div>
 </div>
+<img alt="../_images/n2_3_1.png" src="../_images/n2_3_1.png" />
 </div>
 </div>
 <p>Great! That’s a good looking Hamiltonian, even if it was a bit tedious to write it out. We’ll find out a more programmatic way to do it later, but for now let’s move on to the fun stuff.</p>
@@ -577,21 +589,12 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.89426366 MeV,  Convergence parameter = 0.52891694 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 20,  Energy = -0.66950925 MeV,  Convergence parameter = 0.17005461 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 40,  Energy = -1.70101182 MeV,  Convergence parameter = 0.00828148 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 60,  Energy = -1.74716419 MeV,  Convergence parameter = 0.00034480 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 80,  Energy = -1.74907865 MeV,  Convergence parameter = 0.00001426 MeV
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Final value of the energy = -1.74915572 MeV
+Iteration = 20,  Energy = -0.66950925 MeV,  Convergence parameter = 0.17005461 MeV
+Iteration = 40,  Energy = -1.70101182 MeV,  Convergence parameter = 0.00828148 MeV
+Iteration = 60,  Energy = -1.74716419 MeV,  Convergence parameter = 0.00034480 MeV
+Iteration = 80,  Energy = -1.74907865 MeV,  Convergence parameter = 0.00001426 MeV
+
+Final value of the energy = -1.74915572 MeV
 Number of iterations =  97
 </pre></div>
 </div>
@@ -602,8 +605,7 @@ Number of iterations =  97
 <p>Let’s plot the convergence next.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;seaborn&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (MeV)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Optimization steps&quot;</span><span class="p">)</span>

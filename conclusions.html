@@ -195,7 +195,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -322,7 +322,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2FConclusions and Acknowledgements.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fconclusions.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -350,7 +350,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/Conclusions and Acknowledgements.md"
+        <a href="_sources/conclusions.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -413,13 +413,15 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="conclusions-and-acknowledgements">
 <h1>Conclusions and Acknowledgements<a class="headerlink" href="#conclusions-and-acknowledgements" title="Permalink to this headline">#</a></h1>
-<p>Through this jupyter book we have gone through various fundamental concepts and tools needed for implementing nuclear model calculations on quantum computers. We explained and developed the Variational Quantum Eigensolver in the first chapter, showcasing an implementation of the deuteron with additional improvements for speeding convergence. In chapter two we went through the intrinsic noise associated with quantum circuits, and addressed ways of dealing with it through the Zero Noise Extrapolation algorithm. In chapter three we explored the Reduced Basis Method, a dimensionality reduction technique capable of transforming problems involving thousands of degrees of freedom into just a few interacting “quasi particles”. This is a crucial step into translating calculations for quantum computers with access to just few qbits. Finally, in the last chapter we added everything together to tackle the Gross-Pitaevskii equation, a simple model for describing dilute Bose-Einstein condensates.</p>
-<p>With all these tools in place you, the reader, have now the possibility to implement your own calculations into a quantum computer. Following a similar flowchart as the one we developed in the last chapter you should find a reduced order model for your system (perhaps using the reduced basis method), which could then be implemented into a quantum circuit for using the Variational Quantum Eigensolver algorithm. Don’t forget to use also some noise mitigation technique such as the Zero Noise Extrapolation if you are dealing with a noisy circuit. Let us know through our contact person Kyle Godbey on your success in this journey!</p>
-<p>We will like to thank the organizers of the 2022 FRIB Theory Alliance Summer School on Quantum Computing and Nuclear Few- and Many-Body Problems for the incredible opportunity of learning about all these topics from world experts, as well as for raising a “final challenge” that lead to the construction of this jupyter book.</p>
-<p>In particular, we would like to thank:</p>
-<p>Ben Hall and Morten Hjorth-Jensen for a fantastic explanation of the Variational Quantum Eigensolver
-Ryan Larose for another fantastic explanation on the Zero Noise Extrapolation algorithm
-Dean Lee for great discussions about the Gross-Pitaevskii</p>
+<p>Through this Jupyter book we have gone through various fundamental concepts and tools needed for implementing nuclear model calculations on quantum computers. We explained and developed the Variational Quantum Eigensolver in the first chapter, showcasing an implementation of the deuteron with additional improvements for speeding convergence. In chapter two we went through the intrinsic noise associated with quantum circuits, and addressed ways of dealing with it through the Zero-Noise Extrapolation algorithm. In chapter three we explored the Reduced Basis Method, a dimensionality reduction technique capable of transforming problems involving thousands of degrees of freedom into just a few interacting “quasiparticles”. This is a crucial step into translating calculations for quantum computers with access to just few qubits. Finally, in the last chapter we added everything together to tackle the Gross-Pitaevskii equation, a simple nonlinear model for describing dilute Bose-Einstein condensates.</p>
+<p>With all these tools in place, you, the reader, now have the ability to implement your own calculations onto a quantum computer. Following a similar workflow as the one we developed in the last chapter, you could find a reduced order model for your system (perhaps using the reduced basis method), which could then be mapped onto a quantum circuit for use with the Variational Quantum Eigensolver algorithm. Don’t forget to also use some noise mitigation technique such as the Zero Noise Extrapolation if you are dealing with a noisy circuit. Be sure to let us know if you apply anything you’ve learned from this book to your own problems of interest and share your successes on this journey! If you’d like, we could even explore adding it to the book - so send any comments or questions to Kyle via <code class="docutils literal notranslate"><span class="pre">qc</span> <span class="pre">at</span> <span class="pre">kyle</span> <span class="pre">dot</span> <span class="pre">ee</span></code>.</p>
+<p>We will like to thank all of the organizers of the 2022 FRIB Theory Alliance Summer School on Quantum Computing and Nuclear Few- and Many-Body Problems for the incredible opportunity of learning about all these topics from world experts, as well as for raising a “final challenge” that lead to the construction of this Jupyter book.</p>
+<p>For the topics found in this book in particular, we would like to thank:</p>
+<ul class="simple">
+<li><p>Ben Hall and Morten Hjorth-Jensen for a fantastic explanation of the Variational Quantum Eigensolver</p></li>
+<li><p>Ryan Larose for another fantastic explanation on the Zero Noise Extrapolation algorithm</p></li>
+<li><p>Dean Lee for great discussions about the Gross-Pitaevskii equation</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">

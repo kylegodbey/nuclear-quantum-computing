@@ -199,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../hardware/ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -460,44 +460,35 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Quantum Harmonic Oscillator as a two level system
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#background">
-     Background
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#finite-element-method-approach">
    Finite element method approach
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-reduced-basis-method-approach">
    The Reduced Basis Method approach
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#construction-of-the-reduced-basis">
      Construction of the Reduced Basis
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#proper-orthogonal-decomposition">
-       Proper Orthogonal Decomposition
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#effective-two-level-system-hamiltonian">
-       Effective two level system “Hamiltonian”
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proper-orthogonal-decomposition">
+     Proper Orthogonal Decomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effective-two-level-system-hamiltonian">
+     Effective two level system “Hamiltonian”
+    </a>
    </li>
   </ul>
  </li>
@@ -520,44 +511,35 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Quantum Harmonic Oscillator as a two level system
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#background">
-     Background
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#finite-element-method-approach">
    Finite element method approach
   </a>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-reduced-basis-method-approach">
    The Reduced Basis Method approach
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#construction-of-the-reduced-basis">
      Construction of the Reduced Basis
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#proper-orthogonal-decomposition">
-       Proper Orthogonal Decomposition
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#effective-two-level-system-hamiltonian">
-       Effective two level system “Hamiltonian”
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#proper-orthogonal-decomposition">
+     Proper Orthogonal Decomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#effective-two-level-system-hamiltonian">
+     Effective two level system “Hamiltonian”
+    </a>
    </li>
   </ul>
  </li>
@@ -579,26 +561,25 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Let us consider the Schrodinger equation for the 1-d Harmonic Oscillator:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9632ac55-19b6-4370-8a0b-491fbe5c75a6">
-<span class="eqno">(7)<a class="headerlink" href="#equation-9632ac55-19b6-4370-8a0b-491fbe5c75a6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d4447b20-d0b2-4842-8869-8f12880d436d">
+<span class="eqno">(7)<a class="headerlink" href="#equation-d4447b20-d0b2-4842-8869-8f12880d436d" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\Big(- \frac{d^{2}}{dx^{2}} + V_\alpha (x)  - \lambda \Big) \phi = 0, \\
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_\alpha(x)=\alpha x^{2}\)</span>. This equation can be written a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b1f1e652-f25b-410f-a299-06c7a238368e">
-<span class="eqno">(8)<a class="headerlink" href="#equation-b1f1e652-f25b-410f-a299-06c7a238368e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5a3bbfa7-e5e2-40bf-be70-afe6ae5bb329">
+<span class="eqno">(8)<a class="headerlink" href="#equation-5a3bbfa7-e5e2-40bf-be70-afe6ae5bb329" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;F_{\alpha}\Big[ \phi_{\alpha}(x) \Big] = H_\alpha\phi - \lambda \phi=0 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda = 2 m E\)</span> is the eigenvalue with energy <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(\alpha = m^{2} \omega^{2}\)</span> is the harmonic oscilation parameter with oscilation frequency <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
 <p>The shooting method and finite elements methods are among the many approaches to solve such types of equations using classical computers. During this notebook we will follow the finite element method, in which every object is projected onto a discretized space, the functions <span class="math notranslate nohighlight">\(\phi(x)\)</span> becomes vectors, and the operators <span class="math notranslate nohighlight">\(H_\alpha\)</span> matrices. These vectors and matrices could be composed of houndreds or thousands of elements, making it impossible to store such amount of information in a quantum computer with few qbits. For example, 7 qbits are available in the case of the free version of the IBM services. Therefore, if we want to implement an algorithm in a quantum circuit to find solutions to this equation for many values of the parameter <span class="math notranslate nohighlight">\(\alpha\)</span> we need another strategy.  We approximate this equation using dimensionality reduction techniques, such as the <a class="reference external" href="https://link.springer.com/book/10.1007/978-3-319-22470-1">Reduced Basis Method</a>, as was done in <a class="reference external" href="https://kylegodbey.github.io/nuclear-rbm/ho/1dHO.html">this book</a>. These techniques aim at reducing the redundant, or unnecessary, degrees of freedom of the system from many thousand to just a handful. This is done by first restricting the solution to the equation to lay in the span of a basis of <span class="math notranslate nohighlight">\(n\)</span> states:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-202ba5d6-acc9-451d-89e8-fb0e823b3d30">
-<span class="eqno">(9)<a class="headerlink" href="#equation-202ba5d6-acc9-451d-89e8-fb0e823b3d30" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9e719171-1649-4146-bda5-6ab44259d2b6">
+<span class="eqno">(9)<a class="headerlink" href="#equation-9e719171-1649-4146-bda5-6ab44259d2b6" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="finite-element-method-approach">
-<h1>Finite element method approach<a class="headerlink" href="#finite-element-method-approach" title="Permalink to this headline">#</a></h1>
+<section id="finite-element-method-approach">
+<h2>Finite element method approach<a class="headerlink" href="#finite-element-method-approach" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -607,55 +588,6 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">special</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
-<span class="g g-Whitespace">    </span><span class="mi">126</span>             <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">127</span>                 <span class="n">rc</span> <span class="o">=</span> <span class="n">rc_params_from_file</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">use_default_template</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">128</span>                 <span class="n">_apply_style</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">rc_params_from_file</span><span class="nt">(fname, fail_on_error, use_default_template)</span>
-<span class="g g-Whitespace">    </span><span class="mi">851</span>     <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">852</span><span class="s2">     config_from_file = _rc_params_in_file(fname, fail_on_error=fail_on_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="s2"> </span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">_rc_params_in_file</span><span class="nt">(fname, transform, fail_on_error)</span>
-<span class="g g-Whitespace">    </span><span class="mi">777</span><span class="s2">     rc_temp = </span><span class="si">{}</span><span class="s2"></span>
-<span class="ne">--&gt; </span><span class="mi">778</span><span class="s2">     with _open_file_or_url(fname) as fd:</span>
-<span class="g g-Whitespace">    </span><span class="mi">779</span><span class="s2">         try:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">__enter__</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">112</span><span class="s2">             return next(self.gen)</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="s2">         except StopIteration:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">_open_file_or_url</span><span class="nt">(fname)</span>
-<span class="g g-Whitespace">    </span><span class="mi">754</span><span class="s2">             encoding = &quot;utf-8&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">755</span><span class="s2">         with open(fname, encoding=encoding) as f:</span>
-<span class="g g-Whitespace">    </span><span class="mi">756</span><span class="s2">             yield f</span>
-
-<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;science&#39;
-
-<span class="s2">The above exception was the direct cause of the following exception:</span>
-
-<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
-<span class="s2">/tmp/ipykernel_2082/1574299450.py in &lt;module&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="s2"> from scipy import special</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="s2"> import matplotlib.pyplot as plt</span>
-<span class="ne">----&gt; </span><span class="mi">6</span><span class="s2"> plt.style.use([&#39;science&#39;,&#39;notebook&#39;])</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
-<span class="g g-Whitespace">    </span><span class="mi">131</span><span class="s2">                     &quot;</span><span class="si">{!r}</span><span class="s2"> not found in the style library and input is not a &quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="s2">                     &quot;valid URL or path; see `style.available` for list of &quot;</span>
-<span class="ne">--&gt; </span><span class="mi">133</span><span class="s2">                     &quot;available styles&quot;.format(style)) from err</span>
-<span class="g g-Whitespace">    </span><span class="mi">134</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="s2"> </span>
-
-<span class="ne">OSError</span>: &#39;science&#39; not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
 </pre></div>
 </div>
 </div>
@@ -824,10 +756,10 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="the-reduced-basis-method-approach">
-<h1>The Reduced Basis Method approach<a class="headerlink" href="#the-reduced-basis-method-approach" title="Permalink to this headline">#</a></h1>
+<section id="the-reduced-basis-method-approach">
+<h2>The Reduced Basis Method approach<a class="headerlink" href="#the-reduced-basis-method-approach" title="Permalink to this headline">#</a></h2>
 <section id="construction-of-the-reduced-basis">
-<h2>Construction of the Reduced Basis<a class="headerlink" href="#construction-of-the-reduced-basis" title="Permalink to this headline">#</a></h2>
+<h3>Construction of the Reduced Basis<a class="headerlink" href="#construction-of-the-reduced-basis" title="Permalink to this headline">#</a></h3>
 <p>Now we select a set of values of <span class="math notranslate nohighlight">\(\alpha\)</span> to solve with the finite element method. These solutions will be used as the basis in the reduced basis model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -855,7 +787,7 @@ title="Print to PDF"
     
 
 <span class="c1"># Make plots of the numerical wavefunction </span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">)):</span>
     
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
@@ -869,16 +801,17 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 0.5, lambda = 0.7067941428962997
-alpha = 1, lambda = 0.9993746086405191
-alpha = 2, lambda = 1.4129624545775832
-alpha = 5, lambda = 2.23293859175509
-alpha = 15, lambda = 3.863585486364566
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 0.5, lambda = 0.7067941428963106
+alpha = 1, lambda = 0.9993746086404902
+alpha = 2, lambda = 1.4129624545775548
+alpha = 5, lambda = 2.23293859175503
+alpha = 15, lambda = 3.8635854863645682
 </pre></div>
 </div>
 <img alt="../_images/classical_10_1.png" src="../_images/classical_10_1.png" />
 </div>
 </div>
+</section>
 <section id="proper-orthogonal-decomposition">
 <h3>Proper Orthogonal Decomposition<a class="headerlink" href="#proper-orthogonal-decomposition" title="Permalink to this headline">#</a></h3>
 <p>After obtained a sample of what the solutions look like for some values of the parameters we proceed now to construct our basis with two elements. These elements will be selected as the first two principal components of a <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">Principal Component Analysis</a>, also related to <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition">Singular Value Decomposition</a>. This procedure aims at capturing the two components that can better explain (in a linear way) the variability among our samples. In the Reduced Basis Methods community it is known as Proper Orthogonal Decompositon.</p>
@@ -910,35 +843,35 @@ alpha = 15, lambda = 3.863585486364566
 <h3>Effective two level system “Hamiltonian”<a class="headerlink" href="#effective-two-level-system-hamiltonian" title="Permalink to this headline">#</a></h3>
 <p>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71f9108b-76d7-418f-9d9b-67a5caed0ca1">
-<span class="eqno">(10)<a class="headerlink" href="#equation-71f9108b-76d7-418f-9d9b-67a5caed0ca1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2a7b1341-f3f9-48d3-b603-00ffdbd0999c">
+<span class="eqno">(10)<a class="headerlink" href="#equation-2a7b1341-f3f9-48d3-b603-00ffdbd0999c" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-063a5fca-d0f9-4ec3-9cdd-61129f2fffff">
-<span class="eqno">(11)<a class="headerlink" href="#equation-063a5fca-d0f9-4ec3-9cdd-61129f2fffff" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cb747bda-b02d-4bfe-b740-b645a6b94178">
+<span class="eqno">(11)<a class="headerlink" href="#equation-cb747bda-b02d-4bfe-b740-b645a6b94178" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2e6f280f-c0f4-4a7c-946e-9fddcb943a03">
-<span class="eqno">(12)<a class="headerlink" href="#equation-2e6f280f-c0f4-4a7c-946e-9fddcb943a03" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-26c11107-ce3e-4b5c-9b00-74696edb4913">
+<span class="eqno">(12)<a class="headerlink" href="#equation-26c11107-ce3e-4b5c-9b00-74696edb4913" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-083e2961-aa58-497f-8b4b-6d68b455bcf3">
-<span class="eqno">(13)<a class="headerlink" href="#equation-083e2961-aa58-497f-8b4b-6d68b455bcf3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-23f17ce7-2087-45a9-9d74-659a945f6958">
+<span class="eqno">(13)<a class="headerlink" href="#equation-23f17ce7-2087-45a9-9d74-659a945f6958" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-50efe357-4dd2-40c9-b9c9-fd40c85ed2cc">
-<span class="eqno">(14)<a class="headerlink" href="#equation-50efe357-4dd2-40c9-b9c9-fd40c85ed2cc" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-9d9a7ad0-e88c-4df3-a7bc-405ae303d418">
+<span class="eqno">(14)<a class="headerlink" href="#equation-9d9a7ad0-e88c-4df3-a7bc-405ae303d418" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6f8bd926-0115-4d75-b501-2d873d443007">
-<span class="eqno">(15)<a class="headerlink" href="#equation-6f8bd926-0115-4d75-b501-2d873d443007" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-b9520736-b310-445f-83c5-26b247ae2afd">
+<span class="eqno">(15)<a class="headerlink" href="#equation-b9520736-b310-445f-83c5-26b247ae2afd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depends on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the potential part and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\alpha H_1\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span> and <span class="math notranslate nohighlight">\(H_1= x^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \alpha \tilde H_1\)</span>. We now construct these matrices:</p>
@@ -1025,8 +958,8 @@ alpha = 15, lambda = 3.863585486364566
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigenvalues:  [1.76417802 8.80965817]
-a1 Coefficient:  0.9990624419940105
-a2 Coefficient:  0.043292458892566915
+a1 Coefficient:  0.9990624419940102
+a2 Coefficient:  0.04329245889257087
 </pre></div>
 </div>
 </div>
@@ -1076,7 +1009,7 @@ a2 Coefficient:  0.043292458892566915
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 3, lambda = 1.7301737711983423
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 3, lambda = 1.7301737711983323
 </pre></div>
 </div>
 <img alt="../_images/classical_23_1.png" src="../_images/classical_23_1.png" />

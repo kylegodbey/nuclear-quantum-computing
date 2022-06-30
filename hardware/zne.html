@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Real Hardware" href="ibm.html" />
+    <link rel="next" title="Real Hardware: N=2 Case" href="ibm.html" />
     <link rel="prev" title="Error Mitigation: Zero-Noise Extrapolation" href="error.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -199,7 +199,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="ibm.html">
-     Real Hardware
+     Real Hardware: N=2 Case
     </a>
    </li>
   </ul>
@@ -530,6 +530,8 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">pennylane.transforms</span> <span class="kn">import</span> <span class="n">mitigate_with_zne</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.aer</span> <span class="kn">import</span> <span class="n">AerSimulator</span>
 <span class="kn">import</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="k">as</span> <span class="nn">noise</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -596,7 +598,7 @@ title="Print to PDF"
 <span class="n">init_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.5</span><span class="p">,])</span>
 
 <span class="c1">#convergence information and step size</span>
-<span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">80</span>
 <span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-06</span>
 <span class="n">step_size</span> <span class="o">=</span> <span class="mf">0.01</span>
 </pre></div>
@@ -645,23 +647,20 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.91581311 MeV,  Convergence parameter = 0.43063906 MeV
-Iteration = 20,  Energy = -0.08565763 MeV,  Convergence parameter = 0.28591615 MeV
-Iteration = 40,  Energy = -1.28501083 MeV,  Convergence parameter = 0.02400316 MeV
-Iteration = 60,  Energy = -1.30151527 MeV,  Convergence parameter = 0.09387584 MeV
-Iteration = 80,  Energy = -1.36145504 MeV,  Convergence parameter = 0.03246856 MeV
-Iteration = 100,  Energy = -1.43787035 MeV,  Convergence parameter = 0.09574779 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.84977776 MeV,  Convergence parameter = 0.43411675 MeV
+Iteration = 20,  Energy = -0.04717536 MeV,  Convergence parameter = 0.13790896 MeV
+Iteration = 40,  Energy = -1.28578824 MeV,  Convergence parameter = 0.01283113 MeV
+Iteration = 60,  Energy = -1.35220863 MeV,  Convergence parameter = 0.04286391 MeV
 
-Final value of the energy = -1.35099772 MeV
-Number of iterations =  119
+Final value of the energy = -1.37330145 MeV
+Number of iterations =  79
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;seaborn&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">gd_cost_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gradient descent&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy (MeV)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Optimization steps&quot;</span><span class="p">)</span>
@@ -682,7 +681,7 @@ Number of iterations =  119
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#set up the extrapolation step and scale factors to use</span>
 <span class="n">extrapolate</span> <span class="o">=</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span>
-<span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="p">):</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -703,12 +702,13 @@ Number of iterations =  119
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N=2 ground state energy result with ZNE: -2.2811627227783022 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>N=2 ground state energy result with ZNE: -1.7711602082519509 MeV
 </pre></div>
 </div>
 </div>
 </div>
-<p>This result is pretty close to the expected -2.22 MeV value for the ground state of the deuteron! However, it is clear from the above cell that the ZNE method was only applied on the circuit expectation value result and not the result from the VQE run. The latter is much more complicated to implement, and will be left as an exercise for the reader. See if you can nest ZNE into the VQE code above to apply ZNE at each step of the VQE routine! This should greatly improve our results from the VQE iterations.</p>
+<p>This result is pretty close to the expected -1.75 MeV value for the N=2 ground state of the deuteron! However, it is clear from the above cell that the ZNE method was only applied on the circuit expectation value result and not the result from the VQE run. The latter is much more complicated to implement, and will be left as an exercise for the reader. See if you can nest ZNE into the VQE code above to apply ZNE at each step of the VQE routine! This should greatly improve our results from the VQE iterations.</p>
+<p>We’ll mention it in the hardware section as well, but some VQE implementations in various quantum computing libraries will include options for error mitigation baked-in, which makes getting up and running a lot easier than building our own.</p>
 </section>
 </section>
 
@@ -749,7 +749,7 @@ Number of iterations =  119
     <a class='right-next' id="next-link" href="ibm.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Real Hardware</p>
+        <p class="prev-next-title">Real Hardware: N=2 Case</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
