@@ -742,18 +742,21 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 18.52901538 MeV,  Conv = 3.77312631 MeV, Time Elapsed = 1.400 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 14.99041902 MeV,  Conv = 3.67159632 MeV, Time Elapsed = 0.836 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -1.77566944 MeV,  Conv = 0.00506709 MeV, Time Elapsed = 14.006 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -1.80816516 MeV,  Conv = 0.00435220 MeV, Time Elapsed = 8.213 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -1.80919519 MeV,  Conv = 0.00163183 MeV, Time Elapsed = 14.060 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -1.83268120 MeV,  Conv = 0.00205919 MeV, Time Elapsed = 8.269 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 30,  Energy = -1.86687630 MeV,  Conv = 0.00489681 MeV, Time Elapsed = 8.262 s
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2219</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2293</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -908,39 +911,74 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">    </span><span class="mi">260</span><span class="s2">         if operation in diagonal_in_z_basis:</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_get_unitary_matrix</span><span class="nt">(self, unitary)</span>
-<span class="g g-Whitespace">    </span><span class="mi">560</span><span class="s2">         &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">561</span>         <span class="k">if</span> <span class="n">unitary</span> <span class="ow">in</span> <span class="n">diagonal_in_z_basis</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">562</span>             <span class="k">return</span> <span class="n">unitary</span><span class="o">.</span><span class="n">eigvals</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">563</span> 
-<span class="g g-Whitespace">    </span><span class="mi">564</span>         <span class="k">return</span> <span class="n">unitary</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span><span class="s2">             return unitary.eigvals()</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">564</span><span class="s2">         return unitary.matrix()</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">566</span><span class="s2">     @classmethod</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">eigvals</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1423</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1424</span>     <span class="k">def</span> <span class="nf">eigvals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">1425</span>         <span class="n">op_eigvals</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eigvals</span><span class="p">()</span>
-<span class="g g-Whitespace">   </span><span class="mi">1426</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1427</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">:</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">matrix</span><span class="nt">(self, wire_order)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1412</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1413</span><span class="s2">     def matrix(self, wire_order=None):</span>
+<span class="ne">-&gt; </span><span class="mi">1414</span><span class="s2">         canonical_matrix = self.compute_matrix(*self.parameters, **self.hyperparameters)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1415</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1416</span><span class="s2">         if self.inverse:</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">eigvals</span><span class="nt">(self)</span>
-<span class="g g-Whitespace">    </span><span class="mi">687</span> 
-<span class="g g-Whitespace">    </span><span class="mi">688</span>         <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">689</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_eigvals</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">690</span>         <span class="k">except</span> <span class="n">EigvalsUndefinedError</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">691</span>             <span class="c1"># By default, compute the eigenvalues from the matrix representation.</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/ops/qubit/parametric_ops.py</span> in <span class="ni">compute_matrix</span><span class="nt">(theta)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span><span class="s2">         ]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1371</span><span class="s2"> </span>
+<span class="ne">-&gt; </span><span class="mi">1372</span><span class="s2">         return qml.math.stack([stack_last(row) for row in matrix], axis=-2)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">     @staticmethod</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/ops/qubit/parametric_ops.py</span> in <span class="ni">compute_eigvals</span><span class="nt">(theta)</span>
-<span class="g g-Whitespace">    </span><span class="mi">313</span>             <span class="n">theta</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">cast_like</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="mi">1</span><span class="n">j</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">314</span> 
-<span class="ne">--&gt; </span><span class="mi">315</span>         <span class="n">p</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="n">j</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">316</span> 
-<span class="g g-Whitespace">    </span><span class="mi">317</span>         <span class="k">return</span> <span class="n">stack_last</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">qml</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">p</span><span class="p">)])</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/ops/qubit/parametric_ops.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1370</span><span class="s2">         ]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1371</span><span class="s2"> </span>
+<span class="ne">-&gt; </span><span class="mi">1372</span><span class="s2">         return qml.math.stack([stack_last(row) for row in matrix], axis=-2)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">     @staticmethod</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_boxes.py</span> in <span class="ni">__rmul__</span><span class="nt">(self, other)</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>     <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="k">return</span> <span class="n">anp</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>     <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span>     <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="k">return</span> <span class="n">anp</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">35</span>     <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="k">return</span> <span class="n">anp</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span>     <span class="k">def</span> <span class="fm">__rpow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="k">return</span> <span class="n">anp</span><span class="o">.</span><span class="n">power</span><span class="p">(</span>   <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>     <span class="k">def</span> <span class="nf">__rdiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span> <span class="k">return</span> <span class="n">anp</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span>  <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/multi_dispatch.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span><span class="s2">             kwargs[&quot;like&quot;] = interface</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span><span class="s2"> </span>
+<span class="ne">--&gt; </span><span class="mi">178</span><span class="s2">             return fn(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">180</span><span class="s2">         return wrapper</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/multi_dispatch.py</span> in <span class="ni">stack</span><span class="nt">(values, axis, like)</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span><span class="s2">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">506</span>     <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">coerce</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">like</span><span class="o">=</span><span class="n">like</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">507</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">like</span><span class="o">=</span><span class="n">like</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">508</span> 
+<span class="g g-Whitespace">    </span><span class="mi">509</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autoray/autoray.py</span> in <span class="ni">do</span><span class="nt">(fn, like, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span>         <span class="n">backend</span> <span class="o">=</span> <span class="n">infer_backend</span><span class="p">(</span><span class="n">like</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span> 
+<span class="ne">---&gt; </span><span class="mi">85</span>     <span class="k">return</span> <span class="n">get_lib_fn</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">fn</span><span class="p">)(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span> 
+<span class="g g-Whitespace">     </span><span class="mi">87</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/wrapper.py</span> in <span class="ni">_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span> 
+<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="c1"># evaluate the original object</span>
+<span class="ne">--&gt; </span><span class="mi">117</span>         <span class="n">res</span> <span class="o">=</span> <span class="n">obj</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span> 
+<span class="g g-Whitespace">    </span><span class="mi">119</span>         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">_np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">stack</span><span class="nt">(arrays, axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+<span class="g g-Whitespace">    </span><span class="mi">102</span>     <span class="n">sl</span> <span class="o">=</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),)</span> <span class="o">*</span> <span class="n">axis</span> <span class="o">+</span> <span class="p">(</span><span class="kc">None</span><span class="p">,)</span>
+<span class="ne">--&gt; </span><span class="mi">103</span>     <span class="k">return</span> <span class="n">concatenate</span><span class="p">([</span><span class="n">arr</span><span class="p">[</span><span class="n">sl</span><span class="p">]</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> 
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span> 
+<span class="g g-Whitespace">    </span><span class="mi">102</span>     <span class="n">sl</span> <span class="o">=</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">),)</span> <span class="o">*</span> <span class="n">axis</span> <span class="o">+</span> <span class="p">(</span><span class="kc">None</span><span class="p">,)</span>
+<span class="ne">--&gt; </span><span class="mi">103</span>     <span class="k">return</span> <span class="n">concatenate</span><span class="p">([</span><span class="n">arr</span><span class="p">[</span><span class="n">sl</span><span class="p">]</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span> 
+<span class="g g-Whitespace">    </span><span class="mi">105</span> <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
 <span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="n">argnums</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">argnum</span>    <span class="k">for</span> <span class="n">argnum</span><span class="p">,</span> <span class="n">_</span>   <span class="ow">in</span> <span class="n">boxed_args</span><span class="p">)</span>
@@ -963,12 +1001,12 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">     </span><span class="mi">67</span>             <span class="k">return</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="p">(</span><span class="n">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">),)</span>
 <span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="k">elif</span> <span class="n">L</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_vjps.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(ans, x, y)</span>
-<span class="g g-Whitespace">     </span><span class="mi">33</span>                         <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">unbroadcast_f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span> <span class="n">defvjp</span><span class="p">(</span><span class="n">anp</span><span class="o">.</span><span class="n">multiply</span><span class="p">,</span>    <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">unbroadcast_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">y</span> <span class="o">*</span> <span class="n">g</span><span class="p">),</span>
-<span class="ne">---&gt; </span><span class="mi">35</span>                         <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">unbroadcast_f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">g</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">36</span> <span class="n">defvjp</span><span class="p">(</span><span class="n">anp</span><span class="o">.</span><span class="n">subtract</span><span class="p">,</span>    <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">unbroadcast_f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="p">),</span>
-<span class="g g-Whitespace">     </span><span class="mi">37</span>                         <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">unbroadcast_f</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="o">-</span><span class="n">g</span><span class="p">))</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_vjps.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(ans, A, idx)</span>
+<span class="g g-Whitespace">    </span><span class="mi">699</span>         <span class="k">return</span> <span class="n">A</span>
+<span class="g g-Whitespace">    </span><span class="mi">700</span>     <span class="k">return</span> <span class="n">SparseObject</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">mut_add</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">701</span> <span class="n">defvjp</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">ArrayBox</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">),</span> <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">idx</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">untake</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">vspace</span><span class="p">(</span><span class="n">A</span><span class="p">)))</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span> <span class="n">defvjp</span><span class="p">(</span><span class="n">untake</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">ans</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span> 
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>

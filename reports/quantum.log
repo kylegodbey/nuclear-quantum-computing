@@ -17,11 +17,18 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import numpy as np
-import scipy as sci
-from scipy import optimize
-from scipy import special
+%matplotlib inline
+
 import matplotlib.pyplot as plt
+from pennylane import numpy as np
+import scipy as sci
+import pennylane as qml
+from qiskit_nature.operators.second_quantization import FermionicOp
+from qiskit_nature.mappers.second_quantization import JordanWignerMapper, ParityMapper
+import time
+from functools import partial
+import warnings
+warnings.filterwarnings('ignore')
 plt.style.use(['science','notebook'])
 ------------------
 
@@ -57,10 +64,10 @@ plt.style.use(['science','notebook'])
 The above exception was the direct cause of the following exception:
 
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_2204/1574299450.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      4[0m [0;32mfrom[0m [0mscipy[0m [0;32mimport[0m [0mspecial[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      5[0m [0;32mimport[0m [0mmatplotlib[0m[0;34m.[0m[0mpyplot[0m [0;32mas[0m [0mplt[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 6[0;31m [0mplt[0m[0;34m.[0m[0mstyle[0m[0;34m.[0m[0muse[0m[0;34m([0m[0;34m[[0m[0;34m'science'[0m[0;34m,[0m[0;34m'notebook'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m/tmp/ipykernel_2227/3059013997.py[0m in [0;36m<module>[0;34m[0m
+[1;32m     11[0m [0;32mimport[0m [0mwarnings[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     12[0m [0mwarnings[0m[0;34m.[0m[0mfilterwarnings[0m[0;34m([0m[0;34m'ignore'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 13[0;31m [0mplt[0m[0;34m.[0m[0mstyle[0m[0;34m.[0m[0muse[0m[0;34m([0m[0;34m[[0m[0;34m'science'[0m[0;34m,[0m[0;34m'notebook'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0m
 [0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py[0m in [0;36muse[0;34m(style)[0m
 [1;32m    131[0m                     [0;34m"{!r} not found in the style library and input is not a "[0m[0;34m[0m[0;34m[0m[0m

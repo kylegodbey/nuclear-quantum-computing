@@ -479,6 +479,56 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">127</span>                 <span class="n">rc</span> <span class="o">=</span> <span class="n">rc_params_from_file</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">use_default_template</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>                 <span class="n">_apply_style</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">rc_params_from_file</span><span class="nt">(fname, fail_on_error, use_default_template)</span>
+<span class="g g-Whitespace">    </span><span class="mi">851</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">852</span><span class="s2">     config_from_file = _rc_params_in_file(fname, fail_on_error=fail_on_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">853</span><span class="s2"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">_rc_params_in_file</span><span class="nt">(fname, transform, fail_on_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span><span class="s2">     rc_temp = </span><span class="si">{}</span><span class="s2"></span>
+<span class="ne">--&gt; </span><span class="mi">778</span><span class="s2">     with _open_file_or_url(fname) as fd:</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span><span class="s2">         try:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">__enter__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="s2">         try:</span>
+<span class="ne">--&gt; </span><span class="mi">112</span><span class="s2">             return next(self.gen)</span>
+<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="s2">         except StopIteration:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/__init__.py</span> in <span class="ni">_open_file_or_url</span><span class="nt">(fname)</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span><span class="s2">             encoding = &quot;utf-8&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">755</span><span class="s2">         with open(fname, encoding=encoding) as f:</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span><span class="s2">             yield f</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;science&#39;
+
+<span class="s2">The above exception was the direct cause of the following exception:</span>
+
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="s2">/tmp/ipykernel_2227/3059013997.py in &lt;module&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span><span class="s2"> import warnings</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span><span class="s2"> warnings.filterwarnings(&#39;ignore&#39;)</span>
+<span class="ne">---&gt; </span><span class="mi">13</span><span class="s2"> plt.style.use([&#39;science&#39;,&#39;notebook&#39;])</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/matplotlib/style/core.py</span> in <span class="ni">use</span><span class="nt">(style)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span><span class="s2">                     &quot;</span><span class="si">{!r}</span><span class="s2"> not found in the style library and input is not a &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span><span class="s2">                     &quot;valid URL or path; see `style.available` for list of &quot;</span>
+<span class="ne">--&gt; </span><span class="mi">133</span><span class="s2">                     &quot;available styles&quot;.format(style)) from err</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">135</span><span class="s2"> </span>
+
+<span class="ne">OSError</span>: &#39;science&#39; not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
 </pre></div>
 </div>
 </div>
@@ -603,7 +653,7 @@ title="Print to PDF"
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">evect</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">evects</span><span class="p">):</span>
         <span class="c1">#norm = np.sqrt(1/sci.integrate.simpson(evect*evect,grid))</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">evect</span><span class="p">,</span><span class="n">evect</span><span class="p">)))</span>
-        <span class="n">evects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">norm</span>
+        <span class="n">evects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">norm</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">evals</span><span class="p">,</span><span class="n">evects</span>
 </pre></div>
 </div>
@@ -673,19 +723,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 0.5, lambda = 0.7071036561722082
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 1, lambda = 0.9999937499607756
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 2, lambda = 1.4142010622630583
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 5, lambda = 2.236036727063778
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 15, lambda = 3.872889593938531
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = 0.5, lambda = 0.7071036561740655
+alpha = 1, lambda = 0.9999937499625953
+alpha = 2, lambda = 1.4142010622616896
+alpha = 5, lambda = 2.236036727063667
+alpha = 15, lambda = 3.872889593935947
 Basis constructed!
 </pre></div>
 </div>
@@ -775,11 +817,11 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (-4.410191127127632) [Z0]
-+ (-0.8896021203240635) [Z1]
-+ (5.299793247451696) [I0]
-+ (0.1526076698205186) [Y0 Y1]
-+ (0.1526076698205186) [X0 X1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  (-4.410191127127895) [Z0]
++ (-0.8896021203242128) [Z1]
++ (5.299793247452108) [I0]
++ (0.1526076698211456) [Y0 Y1]
++ (0.1526076698211456) [X0 X1]
 </pre></div>
 </div>
 </div>
@@ -802,8 +844,8 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.83872116 -1.01325562 -0.36371292]
- [-0.67114055 -0.4210741  -0.8282815 ]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-1.28431806 -0.44740746 -0.75320554]
+ [-1.15793302 -1.50851015 -0.48926459]]
 </pre></div>
 </div>
 </div>
@@ -871,39 +913,21 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 3.90068459,  Conv = 1.13622250, Time Elapsed = 0.115 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 1,  Energy = 1.80001702,  Conv = 2.10066758, Time Elapsed = 0.120 s
-It = 2,  Energy = 1.77434211,  Conv = 0.02567490, Time Elapsed = 0.103 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 3,  Energy = 1.76885260,  Conv = 0.00548951, Time Elapsed = 0.122 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 4,  Energy = 1.76723989,  Conv = 0.00161271, Time Elapsed = 0.139 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 5,  Energy = 1.76660391,  Conv = 0.00063598, Time Elapsed = 0.109 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = 1.76630674,  Conv = 0.00029717, Time Elapsed = 0.117 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 7,  Energy = 1.76615782,  Conv = 0.00014893, Time Elapsed = 0.125 s
-It = 8,  Energy = 1.76608131,  Conv = 0.00007650, Time Elapsed = 0.114 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 9,  Energy = 1.76604168,  Conv = 0.00003963, Time Elapsed = 0.121 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = 1.76602110,  Conv = 0.00002059, Time Elapsed = 0.119 s
-It = 11,  Energy = 1.76601039,  Conv = 0.00001071, Time Elapsed = 0.115 s
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 12,  Energy = 1.76600482,  Conv = 0.00000557, Time Elapsed = 0.123 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 3.45108482,  Conv = 0.65783415, Time Elapsed = 0.057 s
+It = 1,  Energy = 1.85248904,  Conv = 1.59859577, Time Elapsed = 0.040 s
+It = 2,  Energy = 1.78916111,  Conv = 0.06332794, Time Elapsed = 0.032 s
+It = 3,  Energy = 1.77401069,  Conv = 0.01515042, Time Elapsed = 0.033 s
+It = 4,  Energy = 1.76922936,  Conv = 0.00478133, Time Elapsed = 0.033 s
+It = 5,  Energy = 1.76740033,  Conv = 0.00182903, Time Elapsed = 0.031 s
+It = 6,  Energy = 1.76662534,  Conv = 0.00077498, Time Elapsed = 0.031 s
+It = 7,  Energy = 1.76628210,  Conv = 0.00034324, Time Elapsed = 0.088 s
+It = 8,  Energy = 1.76612743,  Conv = 0.00015467, Time Elapsed = 0.031 s
+It = 9,  Energy = 1.76605728,  Conv = 0.00007015, Time Elapsed = 0.033 s
+It = 10,  Energy = 1.76602540,  Conv = 0.00003189, Time Elapsed = 0.029 s
+It = 11,  Energy = 1.76601089,  Conv = 0.00001451, Time Elapsed = 0.032 s
+It = 12,  Energy = 1.76600429,  Conv = 0.00000660, Time Elapsed = 0.029 s
 
-Final value of the energy = 1.76600482
+Final value of the energy = 1.76600429
 Number of iterations =  12
 </pre></div>
 </div>
@@ -923,8 +947,8 @@ Number of iterations =  12
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9990249424431383
-a2 Coefficient:  0.044149341744630574
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9991031231376774
+a2 Coefficient:  0.04234323247626702
 </pre></div>
 </div>
 </div>
@@ -955,25 +979,28 @@ a2 Coefficient:  0.044149341744630574
     
 
 <span class="c1"># Make plots of the numerical wavefunction </span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">)):</span>
     
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Finite element $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Finite element&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">solGaler</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Galerkin $\alpha$ = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,(</span><span class="n">solGaler</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Reduced Basis&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
     
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solutions&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solution &#39;</span> <span class="sa">r</span><span class="s1">&#39;$\alpha=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;$\Phi(x)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finite Ele alpha = 3, lambda = 1.7320320573669001
-QC Galerkin alpha = 3, lambda = 1.7660048204623058
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finite Ele alpha = 3, lambda = 1.7320320573659755
+QC Galerkin alpha = 3, lambda = 1.7660042901259638
 </pre></div>
 </div>
 <img alt="../_images/quantum_19_1.png" src="../_images/quantum_19_1.png" />
