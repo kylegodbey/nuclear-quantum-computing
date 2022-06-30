@@ -32,14 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-solution0=IterativeSolver(x_array,0,1,1)
-solution=IterativeSolver(x_array,10,1,1000)
-
-
-plt.plot(x_array, solution0[1][0], color="blue",label = 'q=0, kappa=1')
-plt.plot(x_array, abs(solution[1][0]), color="red",label = 'q=10, kappa=1')
-plt.legend()
-plt.show()
-print(solution[0][0])
+['for i,alpha_sample in enumerate(alpha_vals):', '    ', '    evals, evects = IterativeSolver(x_array,alpha_sample[0],alpha_sample[1],700) # solve the system for evals and evects.', '    T[i] = evects[n]/np.linalg.norm(evects[n]) # assign the nth evect to solution array T', '    T_evals[i] = evals[n] # assign the nth eigenvalue to the eigenvalue array T_eval.']
+...
+["ax.set_title('Numerical solutions')", '', 'ax.legend()', '', 'plt.show()']
 -------------------
 
