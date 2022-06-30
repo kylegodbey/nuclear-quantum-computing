@@ -7,13 +7,27 @@ chapters:
 
 - file: vqe/vqe
   sections:
-  - file: vqe/error
   - file: vqe/deuteron
     sections:
     - file: vqe/n2
     - file: vqe/n3
     - file: vqe/general
   - file: vqe/qng
+
+- file: hardware/hardware
+  sections:
+  - file: hardware/noise
+  - file: hardware/error
+    sections:
+    - file: hardware/zne
+  - file: hardware/ibm
+
+- file: horbm/horbm
+  sections:
+  - file: horbm/classical
+  - file: horbm/quantum
+
+- file: qcgp
 
 - file: contributors
 

@@ -2,6 +2,9 @@ jupyter-book
 matplotlib
 numpy
 scipy
+mitiq
 qiskit
 qiskit_nature
 pennylane
+pennylane-qchem
+pennylane-qiskit
