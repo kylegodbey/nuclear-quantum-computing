@@ -64,7 +64,7 @@ plt.style.use(['science','notebook'])
 The above exception was the direct cause of the following exception:
 
 [0;31mOSError[0m                                   Traceback (most recent call last)
-[0;32m/tmp/ipykernel_2246/3059013997.py[0m in [0;36m<module>[0;34m[0m
+[0;32m/tmp/ipykernel_2104/3059013997.py[0m in [0;36m<module>[0;34m[0m
 [1;32m     11[0m [0;32mimport[0m [0mwarnings[0m[0;34m[0m[0;34m[0m[0m
 [1;32m     12[0m [0mwarnings[0m[0;34m.[0m[0mfilterwarnings[0m[0;34m([0m[0;34m'ignore'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [0;32m---> 13[0;31m [0mplt[0m[0;34m.[0m[0mstyle[0m[0;34m.[0m[0muse[0m[0;34m([0m[0;34m[[0m[0;34m'science'[0m[0;34m,[0m[0;34m'notebook'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
