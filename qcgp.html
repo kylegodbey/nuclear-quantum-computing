@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Contributors" href="contributors.html" />
+    <link rel="next" title="Conclusions and Acknowledgements" href="conclusions.html" />
     <link rel="prev" title="Reduced Basis Method on a Quantum Computer" href="horbm/quantum.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -229,6 +229,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Final challenge: Solving the Gross-Pitaevskii Equation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="conclusions.html">
+   Conclusions and Acknowledgements
   </a>
  </li>
  <li class="toctree-l1">
@@ -571,14 +576,14 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference external" href="https://link.springer.com/article/10.1007/BF02731494">Gross</a>-<a class="reference external" href="http://jetp.ras.ru/cgi-bin/dn/e_013_02_0451.pdf">Pitaevskii</a> (GP) equation (also see <a class="reference external" href="https://epubs.siam.org/doi/10.1137/20M1313106">here</a> for a RBM application) is a nonlinear Schrödinger equation that approximately describes the low-energy properties of dilute Bose-Einstein condensates. Using a self-consistent mean field approximation, the many-body wavefunction is reduced to a description in terms of a single complex-valued wavefunction <span class="math notranslate nohighlight">\(\phi(\vec{r})\)</span>. We work with the <a class="reference external" href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.62.063610">one-dimensional Gross-Pitaevskii equation</a> with a harmonic trapping potential by letting <span class="math notranslate nohighlight">\(F_\alpha\)</span> be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3db52dec-bc29-4680-ae68-2eabda8c544f">
-<span class="eqno">(16)<a class="headerlink" href="#equation-3db52dec-bc29-4680-ae68-2eabda8c544f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-8f92503d-0fcc-4adf-b77c-84dc82c3e926">
+<span class="eqno">(15)<a class="headerlink" href="#equation-8f92503d-0fcc-4adf-b77c-84dc82c3e926" title="Permalink to this equation">#</a></span>\[\begin{equation}
   F_{q,\kappa}(\phi)= -\phi''+\kappa x^2\phi+q|\phi|^2\phi-\lambda_{q,\kappa}\phi=0,
 \end{equation}\]</div>
 <p>where the parameters are now <span class="math notranslate nohighlight">\(\alpha=\{\kappa, q\}\)</span>, which are proportional to the strength of the harmonic trapping and the self-coupling of the wavefunction,respectively, while <span class="math notranslate nohighlight">\(\lambda_{q,\kappa}\)</span> is proportional to the ground state energ. <span class="math notranslate nohighlight">\(\phi(x)\)</span> is a single variable function that depends on <span class="math notranslate nohighlight">\(x\)</span> and it is normalized to unity.</p>
 <p>For a classical algorithm, the finite element method will work for this non-linear equation in the same way as it did for the harmonic oscillator. For the quantum computing counterpart, we will need to follow the same procedure as with the Harmonic Oscillator problem and cast the equations in the reduced basis. We once again expand our solution in a basis of <span class="math notranslate nohighlight">\(n\)</span> elements:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c1449323-8607-4bd3-802b-6115c582f20d">
-<span class="eqno">(17)<a class="headerlink" href="#equation-c1449323-8607-4bd3-802b-6115c582f20d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e9f871ba-d0a2-4179-b633-1c7f7b4cb2f0">
+<span class="eqno">(16)<a class="headerlink" href="#equation-e9f871ba-d0a2-4179-b633-1c7f7b4cb2f0" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the non-linear Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha=\{\kappa,q\}\)</span>.</p>
@@ -839,35 +844,35 @@ alpha = [10, 1], lambda = 4.023
 <h3>Effective two level system “Hamiltonian”<a class="headerlink" href="#effective-two-level-system-hamiltonian" title="Permalink to this headline">#</a></h3>
 <p>This discussion retraces everything we did before for the Harmonic Oscillator. The main difference is that now the Hamiltonian effectively depends on the solution <span class="math notranslate nohighlight">\(H_\alpha \equiv H_\alpha[\phi]\)</span>, but since we are aiming at solving the problem iteratively, at each stage we have a fixed linear Hamiltonian.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4dab680b-e863-44d7-a6f2-d8f869349681">
-<span class="eqno">(18)<a class="headerlink" href="#equation-4dab680b-e863-44d7-a6f2-d8f869349681" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-505a5b7a-ec43-4498-bbde-fefc7e23b4a9">
+<span class="eqno">(17)<a class="headerlink" href="#equation-505a5b7a-ec43-4498-bbde-fefc7e23b4a9" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi_{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi_{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-64ea6fe5-31b1-4ca1-a902-0ea64848d644">
-<span class="eqno">(19)<a class="headerlink" href="#equation-64ea6fe5-31b1-4ca1-a902-0ea64848d644" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7228c6ad-ab42-433d-ac5c-59182509348e">
+<span class="eqno">(18)<a class="headerlink" href="#equation-7228c6ad-ab42-433d-ac5c-59182509348e" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1166ecfe-8510-4243-b35f-7d9e36b86555">
-<span class="eqno">(20)<a class="headerlink" href="#equation-1166ecfe-8510-4243-b35f-7d9e36b86555" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-acab4a04-8536-4bce-9aa2-93d7c4583eef">
+<span class="eqno">(19)<a class="headerlink" href="#equation-acab4a04-8536-4bce-9aa2-93d7c4583eef" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-80a7b387-b269-41cd-8b7f-16270ac30b6d">
-<span class="eqno">(21)<a class="headerlink" href="#equation-80a7b387-b269-41cd-8b7f-16270ac30b6d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ea098d6a-88cc-4358-b167-cd3fb2671706">
+<span class="eqno">(20)<a class="headerlink" href="#equation-ea098d6a-88cc-4358-b167-cd3fb2671706" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-235369e5-4cb1-4cd6-9072-db3299d6f08b">
-<span class="eqno">(22)<a class="headerlink" href="#equation-235369e5-4cb1-4cd6-9072-db3299d6f08b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7d39010f-b2ed-4f4c-91bb-9990c991bc70">
+<span class="eqno">(21)<a class="headerlink" href="#equation-7d39010f-b2ed-4f4c-91bb-9990c991bc70" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bff585c8-98c2-4544-b55e-7be16c5fe04f">
-<span class="eqno">(23)<a class="headerlink" href="#equation-bff585c8-98c2-4544-b55e-7be16c5fe04f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-62d7bb4f-7b73-4c3e-8dc1-67ae289cd397">
+<span class="eqno">(22)<a class="headerlink" href="#equation-62d7bb4f-7b73-4c3e-8dc1-67ae289cd397" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the two potential parts and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\kappa H_1 +q H_2\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span>, <span class="math notranslate nohighlight">\(H_1= x^2\)</span>, and <span class="math notranslate nohighlight">\(H_2=|\phi(x)|^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \kappa \tilde H_1+ q \tilde H_2\)</span>. We now construct these matrices, <span class="math notranslate nohighlight">\(H_2\)</span> being a function that must be constructed every time we wish to iterate the approach.|</p>
@@ -1556,7 +1561,7 @@ Total Iterations Required:  19
 <p>Yet another beautiful result! Compared to the vanilla noisy result a few cells up, this has much better agreement with the ‘true’ solution provided by the finite element method. And remember, this is the noisy result from a basis of N=2!</p>
 <p>I encourage you to try how well we can solve the Gross-Pitaevskii equation with different values of the model parameters, <span class="math notranslate nohighlight">\(\alpha = {\kappa,q}\)</span>. While we haven’t picked something in our basis, it’s possible we just got lucky with the values we chose. Indeed, if you vary the parameters well outside the true solutions that inform the basis, you might start to see big deviations. But these deviations will manifest in the classical computing calculations too, so it’s not a computational limit but an informational one.</p>
 <p>If you want one final challenge, you can try running this on real hardware! The required cell is below, but be warned, this will take a long time to run. You may want to instead use the qiskit VQE runner that we used in the <a class="reference internal" href="hardware/ibm.html"><span class="doc std std-doc">noise chapter</span></a>, as this gets priority when running and had built in mitigation. The only thing you’ll need to add is your API token in <code class="docutils literal notranslate"><span class="pre">token</span></code> and choose which machine you want to submit to - a good strategy is finding which one has the lightest queue.</p>
-<p>Other than that last charge, this brings us to the end of the final challenge problem for our expansive tutorial series on quantum computing applications to many-body problems. The authors had a great time putting this all together, so we hope you enjoyed going through it :). Come meet our final thoughts and the thanks we want to give to key people in the next and final section of Conclusions and Acknowledgements.</p>
+<p>Other than that last charge, this brings us to the end of the final challenge problem for our expansive tutorial series on quantum computing applications to many-body problems. The authors had a great time putting this all together (<a class="reference internal" href="conclusions.html#ice-fig"><span class="std std-ref">see Fig. 1</span></a>), so we hope you enjoyed going through it :). Come meet our final thoughts and the thanks we want to give to key people in the next and final section of Conclusions and Acknowledgements.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;XXX&quot;</span>
@@ -1630,10 +1635,10 @@ Total Iterations Required:  19
             <p class="prev-next-title">Reduced Basis Method on a Quantum Computer</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="contributors.html" title="next page">
+    <a class='right-next' id="next-link" href="conclusions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contributors</p>
+        <p class="prev-next-title">Conclusions and Acknowledgements</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

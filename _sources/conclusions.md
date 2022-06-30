@@ -11,3 +11,11 @@ For the topics found in this book in particular, we would like to thank:
 - Ben Hall and Morten Hjorth-Jensen for a fantastic explanation of the Variational Quantum Eigensolver
 - Ryan Larose for another fantastic explanation on the Zero Noise Extrapolation algorithm
 - Dean Lee for great discussions about the Gross-Pitaevskii equation
+
+```{figure} ice.jpg
+---
+height: 150px
+name: ice-fig
+---
+Celebratory ice cream the day after the summer school!
+```
