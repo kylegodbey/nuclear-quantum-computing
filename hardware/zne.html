@@ -645,14 +645,138 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.81462975 MeV,  Convergence parameter = 0.43383560 MeV
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.88077619 MeV,  Convergence parameter = 0.44628596 MeV
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception ignored in: &lt;function _releaseLock at 0x7fd82ad7d4d0&gt;
-Traceback (most recent call last):
-  File &quot;/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/logging/__init__.py&quot;, line 221, in _releaseLock
-    def _releaseLock():
-KeyboardInterrupt
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2090</span><span class="o">/</span><span class="mf">1445607610.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="c1"># Here we see what the energy of our system is with the new parameters</span>
+<span class="ne">---&gt; </span><span class="mi">19</span>     <span class="n">energy</span> <span class="o">=</span> <span class="n">cost_fn</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span> 
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="c1"># Calculate difference between new and old energies</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/vqe/vqe.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">226</span> 
+<span class="g g-Whitespace">    </span><span class="mi">227</span>     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">228</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">229</span> 
+<span class="g g-Whitespace">    </span><span class="mi">230</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/dot.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(params, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">141</span>         <span class="n">interface</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">interface</span>
+<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="n">fn</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">_get_dot_func</span><span class="p">(</span><span class="n">interface</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">143</span>         <span class="n">func</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">fn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">144</span> 
+<span class="g g-Whitespace">    </span><span class="mi">145</span>     <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/qnode_collection.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">275</span> 
+<span class="g g-Whitespace">    </span><span class="mi">276</span>     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">277</span>         <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">278</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interface</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">279</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/collections/qnode_collection.py</span> in <span class="ni">evaluate</span><span class="nt">(self, args, kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">231</span> 
+<span class="g g-Whitespace">    </span><span class="mi">232</span>         <span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">qnodes</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">233</span>             <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">234</span> 
+<span class="g g-Whitespace">    </span><span class="mi">235</span>         <span class="k">return</span> <span class="n">results</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">624</span>             <span class="n">gradient_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">gradient_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">625</span>             <span class="n">override_shots</span><span class="o">=</span><span class="n">override_shots</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">626</span>             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">execute_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">627</span>         <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">628</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">execute</span><span class="nt">(tapes, device, gradient_fn, interface, mode, gradient_kwargs, cache, cachesize, max_diff, override_shots, expand_fn, max_expansion, device_batch_transform)</span>
+<span class="g g-Whitespace">    </span><span class="mi">413</span> 
+<span class="g g-Whitespace">    </span><span class="mi">414</span>     <span class="n">res</span> <span class="o">=</span> <span class="n">_execute</span><span class="p">(</span>
+<span class="ne">--&gt; </span><span class="mi">415</span>         <span class="n">tapes</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">execute_fn</span><span class="p">,</span> <span class="n">gradient_fn</span><span class="p">,</span> <span class="n">gradient_kwargs</span><span class="p">,</span> <span class="n">_n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_diff</span><span class="o">=</span><span class="n">max_diff</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">_mode</span>
+<span class="g g-Whitespace">    </span><span class="mi">416</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">417</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/autograd.py</span> in <span class="ni">execute</span><span class="nt">(tapes, device, execute_fn, gradient_fn, gradient_kwargs, _n, max_diff, mode)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span>         <span class="n">gradient_kwargs</span><span class="o">=</span><span class="n">gradient_kwargs</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>         <span class="n">_n</span><span class="o">=</span><span class="n">_n</span><span class="p">,</span>
+<span class="ne">---&gt; </span><span class="mi">74</span>         <span class="n">max_diff</span><span class="o">=</span><span class="n">max_diff</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>     <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span> 
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>             <span class="k">return</span> <span class="n">new_box</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">trace</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">48</span>             <span class="k">return</span> <span class="n">f_raw</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="n">f_wrapped</span><span class="o">.</span><span class="n">fun</span> <span class="o">=</span> <span class="n">f_raw</span>
+<span class="g g-Whitespace">     </span><span class="mi">50</span>     <span class="n">f_wrapped</span><span class="o">.</span><span class="n">_is_autograd_primitive</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/autograd.py</span> in <span class="ni">_execute</span><span class="nt">(parameters, tapes, device, execute_fn, gradient_fn, gradient_kwargs, _n, max_diff)</span>
+<span class="g g-Whitespace">    </span><span class="mi">108</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">109</span><span class="sd">     with qml.tape.Unwrap(*tapes):</span>
+<span class="ne">--&gt; </span><span class="mi">110</span><span class="sd">         res, jacs = execute_fn(tapes, **gradient_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">112</span><span class="sd">     for i, r in enumerate(res):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">wrapper</span><span class="nt">(tapes, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">170</span><span class="sd">         else:</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span><span class="sd">             # execute all unique tapes that do not exist in the cache</span>
+<span class="ne">--&gt; </span><span class="mi">172</span><span class="sd">             res = fn(execution_tapes.values(), **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span><span class="sd">         final_res = []</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">fn</span><span class="nt">(tapes, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">95</span><span class="sd">         def fn(tapes, **kwargs):  # pylint: disable=function-redefined</span>
+<span class="g g-Whitespace">     </span><span class="mi">96</span><span class="sd">             tapes = [expand_fn(tape) for tape in tapes]</span>
+<span class="ne">---&gt; </span><span class="mi">97</span><span class="sd">             return original_fn(tapes, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">98</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">99</span><span class="sd">     @wraps(fn)</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">inner</span><span class="nt">(*args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">72</span><span class="sd">         def inner(*args, **kwds):</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span><span class="sd">             with self._recreate_cm():</span>
+<span class="ne">---&gt; </span><span class="mi">74</span><span class="sd">                 return func(*args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span><span class="sd">         return inner</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span><span class="sd"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane_qiskit/qiskit_device.py</span> in <span class="ni">batch_execute</span><span class="nt">(self, circuits)</span>
+<span class="g g-Whitespace">    </span><span class="mi">446</span><span class="sd">         # Send the batch of circuit objects using backend.run</span>
+<span class="g g-Whitespace">    </span><span class="mi">447</span><span class="sd">         self._current_job = self.backend.run(compiled_circuits, shots=self.shots, **self.run_args)</span>
+<span class="ne">--&gt; </span><span class="mi">448</span><span class="sd">         result = self._current_job.result()</span>
+<span class="g g-Whitespace">    </span><span class="mi">449</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">450</span><span class="sd">         # Compute statistics using the state and/or samples</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/providers/aer/jobs/utils.py</span> in <span class="ni">_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span><span class="sd">         if self._future is None:</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span><span class="sd">             raise JobError(&quot;Job not submitted yet!. You have to .submit() first!&quot;)</span>
+<span class="ne">---&gt; </span><span class="mi">41</span><span class="sd">         return func(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span><span class="sd">     return _wrapper</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="sd"> </span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/providers/aer/jobs/aerjob.py</span> in <span class="ni">result</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span><span class="sd">             concurrent.futures.CancelledError: if job cancelled before completed.</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span><span class="sd">         &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">78</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">79</span> 
+<span class="g g-Whitespace">     </span><span class="mi">80</span>     <span class="nd">@requires_submit</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/concurrent/futures/_base.py</span> in <span class="ni">result</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">428</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_result</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">429</span> 
+<span class="ne">--&gt; </span><span class="mi">430</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_condition</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">431</span> 
+<span class="g g-Whitespace">    </span><span class="mi">432</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="ow">in</span> <span class="p">[</span><span class="n">CANCELLED</span><span class="p">,</span> <span class="n">CANCELLED_AND_NOTIFIED</span><span class="p">]:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/threading.py</span> in <span class="ni">wait</span><span class="nt">(self, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">294</span>         <span class="k">try</span><span class="p">:</span>    <span class="c1"># restore state no matter what (e.g., KeyboardInterrupt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span>             <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">296</span>                 <span class="n">waiter</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>                 <span class="n">gotit</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">298</span>             <span class="k">else</span><span class="p">:</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
