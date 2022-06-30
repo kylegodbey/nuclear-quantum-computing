@@ -742,18 +742,21 @@ Generated Hamiltonian:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 1.55081233 MeV,  Conv = 18.17408379 MeV, Time Elapsed = 1.124 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 1.93075779 MeV,  Conv = 4.68493394 MeV, Time Elapsed = 0.980 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = 0.80973878 MeV,  Conv = 0.80172025 MeV, Time Elapsed = 10.241 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 10,  Energy = -1.98320377 MeV,  Conv = 0.04824797 MeV, Time Elapsed = 9.003 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -1.49171613 MeV,  Conv = 0.16742032 MeV, Time Elapsed = 10.233 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 20,  Energy = -2.05259832 MeV,  Conv = 0.00016556 MeV, Time Elapsed = 8.967 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 30,  Energy = -2.05357252 MeV,  Conv = 0.00008095 MeV, Time Elapsed = 9.016 s
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2535</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2572</span><span class="o">/</span><span class="mf">3506502158.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
 <span class="g g-Whitespace">     </span><span class="mi">16</span> 
 <span class="g g-Whitespace">     </span><span class="mi">17</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
 <span class="ne">---&gt; </span><span class="mi">18</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -908,60 +911,95 @@ Generated Hamiltonian:
 <span class="g g-Whitespace">    </span><span class="mi">260</span><span class="s2">         if operation in diagonal_in_z_basis:</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/devices/default_qubit.py</span> in <span class="ni">_get_unitary_matrix</span><span class="nt">(self, unitary)</span>
-<span class="g g-Whitespace">    </span><span class="mi">562</span><span class="s2">             return unitary.eigvals()</span>
-<span class="g g-Whitespace">    </span><span class="mi">563</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">564</span><span class="s2">         return unitary.matrix()</span>
-<span class="g g-Whitespace">    </span><span class="mi">565</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">566</span><span class="s2">     @classmethod</span>
+<span class="g g-Whitespace">    </span><span class="mi">560</span><span class="s2">         &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>         <span class="k">if</span> <span class="n">unitary</span> <span class="ow">in</span> <span class="n">diagonal_in_z_basis</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">562</span>             <span class="k">return</span> <span class="n">unitary</span><span class="o">.</span><span class="n">eigvals</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">563</span> 
+<span class="g g-Whitespace">    </span><span class="mi">564</span>         <span class="k">return</span> <span class="n">unitary</span><span class="o">.</span><span class="n">matrix</span><span class="p">()</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">matrix</span><span class="nt">(self, wire_order)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1412</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1413</span><span class="s2">     def matrix(self, wire_order=None):</span>
-<span class="ne">-&gt; </span><span class="mi">1414</span><span class="s2">         canonical_matrix = self.compute_matrix(*self.parameters, **self.hyperparameters)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1415</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1416</span><span class="s2">         if self.inverse:</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">eigvals</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1423</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1424</span>     <span class="k">def</span> <span class="nf">eigvals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1425</span>         <span class="n">op_eigvals</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eigvals</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1426</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1427</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">:</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/ops/qubit/parametric_ops.py</span> in <span class="ni">compute_matrix</span><span class="nt">(theta)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1370</span><span class="s2">         ]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1371</span><span class="s2"> </span>
-<span class="ne">-&gt; </span><span class="mi">1372</span><span class="s2">         return qml.math.stack([stack_last(row) for row in matrix], axis=-2)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">     @staticmethod</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/operation.py</span> in <span class="ni">eigvals</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">687</span> 
+<span class="g g-Whitespace">    </span><span class="mi">688</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">689</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_eigvals</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">hyperparameters</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">690</span>         <span class="k">except</span> <span class="n">EigvalsUndefinedError</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">691</span>             <span class="c1"># By default, compute the eigenvalues from the matrix representation.</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/ops/qubit/parametric_ops.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1370</span><span class="s2">         ]</span>
-<span class="g g-Whitespace">   </span><span class="mi">1371</span><span class="s2"> </span>
-<span class="ne">-&gt; </span><span class="mi">1372</span><span class="s2">         return qml.math.stack([stack_last(row) for row in matrix], axis=-2)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1373</span><span class="s2"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1374</span><span class="s2">     @staticmethod</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/ops/qubit/parametric_ops.py</span> in <span class="ni">compute_eigvals</span><span class="nt">(theta)</span>
+<span class="g g-Whitespace">    </span><span class="mi">315</span>         <span class="n">p</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="n">j</span> <span class="o">*</span> <span class="n">theta</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">316</span> 
+<span class="ne">--&gt; </span><span class="mi">317</span>         <span class="k">return</span> <span class="n">stack_last</span><span class="p">([</span><span class="n">p</span><span class="p">,</span> <span class="n">qml</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">p</span><span class="p">)])</span>
+<span class="g g-Whitespace">    </span><span class="mi">318</span> 
+<span class="g g-Whitespace">    </span><span class="mi">319</span>     <span class="k">def</span> <span class="nf">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
 <span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/multi_dispatch.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">174</span><span class="s2">             interface = kwargs.pop(&quot;like&quot;, None)</span>
-<span class="ne">--&gt; </span><span class="mi">175</span><span class="s2">             interface = interface or _multi_dispatch(dispatch_args)</span>
-<span class="g g-Whitespace">    </span><span class="mi">176</span><span class="s2">             kwargs[&quot;like&quot;] = interface</span>
-<span class="g g-Whitespace">    </span><span class="mi">177</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">176</span>             <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;like&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">interface</span>
+<span class="g g-Whitespace">    </span><span class="mi">177</span> 
+<span class="ne">--&gt; </span><span class="mi">178</span>             <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">179</span> 
+<span class="g g-Whitespace">    </span><span class="mi">180</span>         <span class="k">return</span> <span class="n">wrapper</span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/multi_dispatch.py</span> in <span class="ni">_multi_dispatch</span><span class="nt">(values)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span><span class="s2">         values = np.asarray(values)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span><span class="s2"> </span>
-<span class="ne">---&gt; </span><span class="mi">55</span><span class="s2">     interfaces = {get_interface(v) for v in values}</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">     if len(set(interfaces) - {&quot;numpy&quot;, &quot;scipy&quot;, &quot;autograd&quot;}) &gt; 1:</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/multi_dispatch.py</span> in <span class="ni">stack</span><span class="nt">(values, axis, like)</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">506</span><span class="s2">     values = np.coerce(values, like=like)</span>
+<span class="ne">--&gt; </span><span class="mi">507</span><span class="s2">     return np.stack(values, axis=axis, like=like)</span>
+<span class="g g-Whitespace">    </span><span class="mi">508</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span><span class="s2"> </span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/multi_dispatch.py</span> in <span class="ni">&lt;setcomp&gt;</span><span class="nt">(.0)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span><span class="s2">         values = np.asarray(values)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span><span class="s2"> </span>
-<span class="ne">---&gt; </span><span class="mi">55</span><span class="s2">     interfaces = {get_interface(v) for v in values}</span>
-<span class="g g-Whitespace">     </span><span class="mi">56</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span><span class="s2">     if len(set(interfaces) - {&quot;numpy&quot;, &quot;scipy&quot;, &quot;autograd&quot;}) &gt; 1:</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autoray/autoray.py</span> in <span class="ni">do</span><span class="nt">(fn, like, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">83</span><span class="s2">         backend = infer_backend(like)</span>
+<span class="g g-Whitespace">     </span><span class="mi">84</span><span class="s2"> </span>
+<span class="ne">---&gt; </span><span class="mi">85</span><span class="s2">     return get_lib_fn(backend, fn)(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">86</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">87</span><span class="s2"> </span>
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/math/utils.py</span> in <span class="ni">get_interface</span><span class="nt">(tensor)</span>
-<span class="g g-Whitespace">    </span><span class="mi">188</span><span class="s2">     &#39;autograd&#39;</span>
-<span class="g g-Whitespace">    </span><span class="mi">189</span><span class="s2">     &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">190</span>     <span class="n">namespace</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">191</span> 
-<span class="g g-Whitespace">    </span><span class="mi">192</span>     <span class="k">if</span> <span class="n">namespace</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;pennylane&quot;</span><span class="p">,</span> <span class="s2">&quot;autograd&quot;</span><span class="p">):</span>
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/wrapper.py</span> in <span class="ni">_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">116</span><span class="s2">         # evaluate the original object</span>
+<span class="ne">--&gt; </span><span class="mi">117</span><span class="s2">         res = obj(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">118</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span><span class="s2">         if isinstance(res, _np.ndarray):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">stack</span><span class="nt">(arrays, axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="s2">     sl = (slice(None),) * axis + (None,)</span>
+<span class="ne">--&gt; </span><span class="mi">103</span><span class="s2">     return concatenate([arr[sl] for arr in arrays], axis=axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span><span class="s2"> def append(arr, values, axis=None):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/numpy/numpy_wrapper.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">    </span><span class="mi">101</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="s2">     sl = (slice(None),) * axis + (None,)</span>
+<span class="ne">--&gt; </span><span class="mi">103</span><span class="s2">     return concatenate([arr[sl] for arr in arrays], axis=axis)</span>
+<span class="g g-Whitespace">    </span><span class="mi">104</span><span class="s2"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">105</span><span class="s2"> def append(arr, values, axis=None):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/tracer.py</span> in <span class="ni">f_wrapped</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span><span class="s2">             argnums = tuple(argnum    for argnum, _   in boxed_args)</span>
+<span class="g g-Whitespace">     </span><span class="mi">44</span><span class="s2">             ans = f_wrapped(*argvals, **kwargs)</span>
+<span class="ne">---&gt; </span><span class="mi">45</span><span class="s2">             node = node_constructor(ans, f_wrapped, argvals, kwargs, argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span><span class="s2">             return new_box(ans, trace, node)</span>
+<span class="g g-Whitespace">     </span><span class="mi">47</span><span class="s2">         else:</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">__init__</span><span class="nt">(self, value, fun, args, kwargs, parent_argnums, parents)</span>
+<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s2">             raise NotImplementedError(&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnums </span><span class="si">{}</span><span class="s2"> not defined&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="s2">                                       .format(fun_name, parent_argnums))</span>
+<span class="ne">---&gt; </span><span class="mi">36</span><span class="s2">         self.vjp = vjpmaker(parent_argnums, value, args, kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">37</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">38</span><span class="s2">     def initialize_root(self):</span>
+
+<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp_argnums</span><span class="nt">(argnums, ans, args, kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="s2">                     &quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnum 0 not defined&quot;.format(fun.__name__))</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span><span class="s2">             vjp = vjpfun(ans, *args, **kwargs)</span>
+<span class="ne">---&gt; </span><span class="mi">67</span><span class="s2">             return lambda g: (vjp(g),)</span>
+<span class="g g-Whitespace">     </span><span class="mi">68</span><span class="s2">         elif L == 2:</span>
+<span class="g g-Whitespace">     </span><span class="mi">69</span><span class="s2">             argnum_0, argnum_1 = argnums</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
