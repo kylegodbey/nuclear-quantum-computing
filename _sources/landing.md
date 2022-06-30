@@ -12,7 +12,7 @@ Through this virtual book, we will go through three main topics:
 
 The tools we develop in these three topics will come to play together to tackle a challenging problem in the final part of this book: using a quantum computer we will solve the one dimensional Gross-Pitaevskii equation. This nonlinear Schrödinger equation approximately describes the low-energy properties of dilute Bose-Einstein condensates, and is one of the simplest models describing many-body quantum systems. We will use the Variational Quantum Eigensolver to find the ground state of the reduced system for different Hamiltonian parameters, while the Zero-Noise Extrapolation will be exploited to produce accurate results even in the presence of noise.
 
-A pdf version of this book can be downloaded [here](nuclear-qc.pdf).
+A pdf version of this book can be downloaded [here](https://github.com/kylegodbey/nuclear-quantum-computing/raw/main/nuclear-qc/nuclear-qc.pdf).
 
 List of contributors can be found [here](contributors.md).
 
