@@ -32,8 +32,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['#VQE step', 'opt = qml.GradientDescentOptimizer(stepsize=step_size)', '', 'params = init_params', '']
+['for i,alpha_sample in enumerate(alpha_vals):', '    ', '    evals, evects = IterativeSolver(x_array,alpha_sample[0],alpha_sample[1],700) # solve the system for evals and evects.', '    T[i] = evects[n]/np.linalg.norm(evects[n]) # assign the nth evect to solution array T', '    T_evals[i] = evals[n] # assign the nth eigenvalue to the eigenvalue array T_eval.']
 ...
-['        break', '', 'print()', 'print("Final value of the energy = {:.8f} MeV".format(energy))', 'print("Number of iterations = ", n)']
+["ax.set_title('Numerical solutions')", '', 'ax.legend()', '', 'plt.show()']
 -------------------
 

@@ -227,6 +227,11 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../qcgp.html">
+   Final challenge: Solving the Gross-Pitaevskii Equation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../contributors.html">
    Contributors
   </a>
@@ -583,27 +588,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">DeviceError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2074</span><span class="o">/</span><span class="mf">3161754162.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> 
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1">#set up noisy device</span>
-<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;qiskit.aer&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
-<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1">#now we&#39;ll define the circuit we want to use with this Hamiltonian</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/__init__.py</span> in <span class="ni">device</span><span class="nt">(name, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">326</span>         <span class="k">return</span> <span class="n">dev</span>
-<span class="g g-Whitespace">    </span><span class="mi">327</span> 
-<span class="ne">--&gt; </span><span class="mi">328</span>     <span class="k">raise</span> <span class="n">DeviceError</span><span class="p">(</span><span class="s2">&quot;Device does not exist. Make sure the required plugin is installed.&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">329</span> 
-<span class="g g-Whitespace">    </span><span class="mi">330</span> 
-
-<span class="ne">DeviceError</span>: Device does not exist. Make sure the required plugin is installed.
-</pre></div>
-</div>
-</div>
 </div>
 <p>Now we define some initial parameter and convergence info, as before.</p>
 <div class="cell docutils container">
@@ -661,15 +645,14 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.91581311 MeV,  Convergence parameter = 0.43063906 MeV
-Iteration = 20,  Energy = -0.08565763 MeV,  Convergence parameter = 0.28591615 MeV
-Iteration = 40,  Energy = -1.28501083 MeV,  Convergence parameter = 0.02400316 MeV
-Iteration = 60,  Energy = -1.30151527 MeV,  Convergence parameter = 0.09387584 MeV
-Iteration = 80,  Energy = -1.36145504 MeV,  Convergence parameter = 0.03246856 MeV
-Iteration = 100,  Energy = -1.43787035 MeV,  Convergence parameter = 0.09574779 MeV
-
-Final value of the energy = -1.35099772 MeV
-Number of iterations =  119
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.81462975 MeV,  Convergence parameter = 0.43383560 MeV
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception ignored in: &lt;function _releaseLock at 0x7fd82ad7d4d0&gt;
+Traceback (most recent call last):
+  File &quot;/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/logging/__init__.py&quot;, line 221, in _releaseLock
+    def _releaseLock():
+KeyboardInterrupt
 </pre></div>
 </div>
 </div>

@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Contributors" href="../contributors.html" />
+    <link rel="next" title="Final challenge: Solving the Gross-Pitaevskii Equation" href="../qcgp.html" />
     <link rel="prev" title="Quantum Harmonic Oscillator as a two level system" href="classical.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -223,6 +223,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../qcgp.html">
+   Final challenge: Solving the Gross-Pitaevskii Equation
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../contributors.html">
@@ -797,8 +802,8 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.77065107 -0.24466892 -1.00554672]
- [-0.18133961 -0.2019159   1.55454221]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[-0.502741   -1.5639276  -0.98302593]
+ [ 1.37961229 -1.1095496  -0.0780967 ]]
 </pre></div>
 </div>
 </div>
@@ -866,30 +871,42 @@ Basis constructed!
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 2.14330877,  Conv = 4.76536908, Time Elapsed = 0.079 s
-It = 1,  Energy = 2.82455656,  Conv = 0.68124779, Time Elapsed = 0.069 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 3.70548380,  Conv = 0.82786798, Time Elapsed = 0.079 s
+It = 1,  Energy = 3.55703789,  Conv = 0.14844590, Time Elapsed = 0.076 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 1.84448099,  Conv = 0.98007557, Time Elapsed = 0.148 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 2,  Energy = 3.39301760,  Conv = 0.16402029, Time Elapsed = 0.163 s
+It = 3,  Energy = 3.01067103,  Conv = 0.38234657, Time Elapsed = 0.070 s
+It = 4,  Energy = 2.67699643,  Conv = 0.33367460, Time Elapsed = 0.070 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 3,  Energy = 1.77880632,  Conv = 0.06567467, Time Elapsed = 0.074 s
-It = 4,  Energy = 1.76830068,  Conv = 0.01050564, Time Elapsed = 0.074 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 5,  Energy = 2.32411424,  Conv = 0.35288219, Time Elapsed = 0.072 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 5,  Energy = 1.76648585,  Conv = 0.00181483, Time Elapsed = 0.075 s
-It = 6,  Energy = 1.76613872,  Conv = 0.00034713, Time Elapsed = 0.074 s
-It = 7,  Energy = 1.76605532,  Conv = 0.00008340, Time Elapsed = 0.071 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 6,  Energy = 2.08716705,  Conv = 0.23694720, Time Elapsed = 0.078 s
+It = 7,  Energy = 1.93094471,  Conv = 0.15622234, Time Elapsed = 0.077 s
+It = 8,  Energy = 1.84794272,  Conv = 0.08300199, Time Elapsed = 0.077 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 8,  Energy = 1.76602696,  Conv = 0.00002836, Time Elapsed = 0.073 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 9,  Energy = 1.80500109,  Conv = 0.04294163, Time Elapsed = 0.078 s
+It = 10,  Energy = 1.78442900,  Conv = 0.02057209, Time Elapsed = 0.076 s
+It = 11,  Energy = 1.77459447,  Conv = 0.00983453, Time Elapsed = 0.070 s
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 9,  Energy = 1.76601406,  Conv = 0.00001290, Time Elapsed = 0.075 s
-It = 10,  Energy = 1.76600730,  Conv = 0.00000676, Time Elapsed = 0.074 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 12,  Energy = 1.77000802,  Conv = 0.00458645, Time Elapsed = 0.077 s
+It = 13,  Energy = 1.76786095,  Conv = 0.00214707, Time Elapsed = 0.076 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 14,  Energy = 1.76686448,  Conv = 0.00099647, Time Elapsed = 0.077 s
+It = 15,  Energy = 1.76662342,  Conv = 0.00024106, Time Elapsed = 0.157 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 16,  Energy = 1.76666727,  Conv = 0.00004385, Time Elapsed = 0.077 s
+It = 17,  Energy = 1.76599897,  Conv = 0.00066830, Time Elapsed = 0.072 s
+It = 18,  Energy = 1.76599878,  Conv = 0.00000019, Time Elapsed = 0.071 s
 
-Final value of the energy = 1.76600730
-Number of iterations =  10
+Final value of the energy = 1.76599878
+Number of iterations =  18
 </pre></div>
 </div>
 </div>
@@ -908,8 +925,8 @@ Number of iterations =  10
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9991121365307478
-a2 Coefficient:  0.04213002061433775
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a1 Coefficient:  0.9990652518511365
+a2 Coefficient:  0.043227566940844994
 </pre></div>
 </div>
 </div>
@@ -958,7 +975,7 @@ a2 Coefficient:  0.04213002061433775
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finite Ele alpha = 3, lambda = 1.7320320573669
-QC Galerkin alpha = 3, lambda = 1.766007297392273
+QC Galerkin alpha = 3, lambda = 1.7659987772010668
 </pre></div>
 </div>
 <img alt="../_images/quantum_19_1.png" src="../_images/quantum_19_1.png" />
@@ -1001,10 +1018,10 @@ QC Galerkin alpha = 3, lambda = 1.766007297392273
             <p class="prev-next-title">Quantum Harmonic Oscillator as a two level system</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../contributors.html" title="next page">
+    <a class='right-next' id="next-link" href="../qcgp.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Contributors</p>
+        <p class="prev-next-title">Final challenge: Solving the Gross-Pitaevskii Equation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -17,45 +17,44 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-#TODO: build noisy model backend and run this here first and then on a real device below
-prob_1 = 0.001; prob_2 = 0.01 #for one, two qubit gates
-error_1 = noise.depolarizing_error(prob_1, 1)
-error_2 = noise.depolarizing_error(prob_2, 2)
+#perform ZNE using mitiq
+extrapolate = RichardsonFactory.extrapolate
+scale_factors = [1, 2, 3]
 
-noise_model = noise.NoiseModel()
-noise_model.add_all_qubit_quantum_error(error_1, ['u1', 'u2', 'u3'])
-noise_model.add_all_qubit_quantum_error(error_2, ['cx'])
-
-dev_sim = qml.device('qiskit.aer', wires=2, optimization_limit=0, backend='aer_simulator', noise_model=noise_model)
-
-@qml.transforms.mitigate_with_zne([1, 2, 3], fold_global, RichardsonFactory.extrapolate)
-@qml.qnode(dev_sim)
-def circuit_mit(params):
-    t0 = params[0]
-    qml.PauliX(wires=0)
-    qml.RY(t0, wires=1)
-    qml.CNOT(wires=[1,0])
-    return qml.expval(H)
-
-sim_qnode = qml.QNode(circuit_mit, dev_sim)
+mitigated_qnode = mitigate_with_zne(scale_factors, fold_global, extrapolate)(
+    sim_qnode
+)
+mitigated_qnode()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mDeviceError[0m                               Traceback (most recent call last)
-[0;32m/tmp/ipykernel_2248/1489140230.py[0m in [0;36m<module>[0;34m[0m
-[1;32m      8[0m [0mnoise_model[0m[0;34m.[0m[0madd_all_qubit_quantum_error[0m[0;34m([0m[0merror_2[0m[0;34m,[0m [0;34m[[0m[0;34m'cx'[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      9[0m [0;34m[0m[0m
-[0;32m---> 10[0;31m [0mdev_sim[0m [0;34m=[0m [0mqml[0m[0;34m.[0m[0mdevice[0m[0;34m([0m[0;34m'qiskit.aer'[0m[0;34m,[0m [0mwires[0m[0;34m=[0m[0;36m2[0m[0;34m,[0m [0moptimization_limit[0m[0;34m=[0m[0;36m0[0m[0;34m,[0m [0mbackend[0m[0;34m=[0m[0;34m'aer_simulator'[0m[0;34m,[0m [0mnoise_model[0m[0;34m=[0m[0mnoise_model[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m     11[0m [0;34m[0m[0m
-[1;32m     12[0m [0;34m@[0m[0mqml[0m[0;34m.[0m[0mtransforms[0m[0;34m.[0m[0mmitigate_with_zne[0m[0;34m([0m[0;34m[[0m[0;36m1[0m[0;34m,[0m [0;36m2[0m[0;34m,[0m [0;36m3[0m[0;34m][0m[0;34m,[0m [0mfold_global[0m[0;34m,[0m [0mRichardsonFactory[0m[0;34m.[0m[0mextrapolate[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+[0;32m/tmp/ipykernel_2558/1686130105.py[0m in [0;36m<module>[0;34m[0m
+[1;32m      6[0m     [0msim_qnode[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      7[0m )
+[0;32m----> 8[0;31m [0mmitigated_qnode[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/transforms/batch_transform.py[0m in [0;36m_wrapper[0;34m(*args, **kwargs)[0m
+[1;32m    286[0m         [0;32mdef[0m [0m_wrapper[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    287[0m             [0mshots[0m [0;34m=[0m [0mkwargs[0m[0;34m.[0m[0mpop[0m[0;34m([0m[0;34m"shots"[0m[0;34m,[0m [0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 288[0;31m             [0mqnode[0m[0;34m.[0m[0mconstruct[0m[0;34m([0m[0margs[0m[0;34m,[0m [0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    289[0m             [0mtapes[0m[0;34m,[0m [0mprocessing_fn[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mconstruct[0m[0;34m([0m[0mqnode[0m[0;34m.[0m[0mqtape[0m[0;34m,[0m [0;34m*[0m[0mtargs[0m[0;34m,[0m [0;34m**[0m[0mtkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    290[0m [0;34m[0m[0m
 
-[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/__init__.py[0m in [0;36mdevice[0;34m(name, *args, **kwargs)[0m
-[1;32m    326[0m         [0;32mreturn[0m [0mdev[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    327[0m [0;34m[0m[0m
-[0;32m--> 328[0;31m     [0;32mraise[0m [0mDeviceError[0m[0;34m([0m[0;34m"Device does not exist. Make sure the required plugin is installed."[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    329[0m [0;34m[0m[0m
-[1;32m    330[0m [0;34m[0m[0m
+[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/transforms/batch_transform.py[0m in [0;36m_construct[0;34m(args, kwargs)[0m
+[1;32m    373[0m [0;34m[0m[0m
+[1;32m    374[0m                 [0;32mdef[0m [0m_construct[0m[0;34m([0m[0margs[0m[0;34m,[0m [0mkwargs[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 375[0;31m                     [0mqnode[0m[0;34m.[0m[0mconstruct[0m[0;34m([0m[0margs[0m[0;34m,[0m [0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    376[0m                     [0;32mreturn[0m [0mself[0m[0;34m.[0m[0mconstruct[0m[0;34m([0m[0mqnode[0m[0;34m.[0m[0mqtape[0m[0;34m,[0m [0;34m*[0m[0mtargs[0m[0;34m,[0m [0;34m**[0m[0mtkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    377[0m [0;34m[0m[0m
 
-[0;31mDeviceError[0m: Device does not exist. Make sure the required plugin is installed.
-DeviceError: Device does not exist. Make sure the required plugin is installed.
+[0;32m/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/qnode.py[0m in [0;36mconstruct[0;34m(self, args, kwargs)[0m
+[1;32m    524[0m [0;34m[0m[0m
+[1;32m    525[0m         [0;32mwith[0m [0mself[0m[0;34m.[0m[0mtape[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 526[0;31m             [0mself[0m[0;34m.[0m[0m_qfunc_output[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mfunc[0m[0;34m([0m[0;34m*[0m[0margs[0m[0;34m,[0m [0;34m**[0m[0mkwargs[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    527[0m         [0mself[0m[0;34m.[0m[0m_tape[0m[0;34m.[0m[0m_qfunc_output[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_qfunc_output[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    528[0m [0;34m[0m[0m
+
+[0;31mTypeError[0m: circuit_mit() missing 1 required positional argument: 'params'
+TypeError: circuit_mit() missing 1 required positional argument: 'params'
 
