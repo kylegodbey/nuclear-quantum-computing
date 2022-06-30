@@ -12,6 +12,9 @@ execute:
   exclude_patterns:
     - 'qcgp.ipynb'
     - 'zne.ipynb'
+    - 'ibm.ipynb'
+    - 'quantum.ipynb'
+    - 'classical.ipynb'
 
 # Define the name of the latex output file for PDF builds
 latex:
