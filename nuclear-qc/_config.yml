@@ -10,11 +10,13 @@ logo: logo.png
 execute:
   execute_notebooks: auto
   exclude_patterns:
-    - 'qcgp.ipynb'
+    - 'qcgp*'
     - 'zne.ipynb'
     - 'ibm.ipynb'
     - 'quantum.ipynb'
     - 'classical.ipynb'
+    - '*.ipynb'
+
 
 # Define the name of the latex output file for PDF builds
 latex:
