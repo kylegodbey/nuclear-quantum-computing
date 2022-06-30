@@ -6,3 +6,5 @@ mitiq
 qiskit
 qiskit_nature
 pennylane
+pennylane-qchem
+pennylane-qiskit

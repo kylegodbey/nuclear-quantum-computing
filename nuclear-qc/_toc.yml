@@ -27,6 +27,8 @@ chapters:
   - file: horbm/classical
   - file: horbm/quantum
 
+- file: qcgp
+
 - file: contributors
 
 
