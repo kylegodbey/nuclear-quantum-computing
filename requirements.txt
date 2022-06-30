@@ -1,10 +1,12 @@
 jupyter-book
 matplotlib
+scienceplots
 numpy
 scipy
 mitiq
 qiskit
 qiskit_nature
+pylatexenc
 pennylane
 pennylane-qchem
 pennylane-qiskit
