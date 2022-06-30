@@ -525,14 +525,14 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference external" href="https://link.springer.com/article/10.1007/BF02731494">Gross</a>-<a class="reference external" href="http://jetp.ras.ru/cgi-bin/dn/e_013_02_0451.pdf">Pitaevskii</a> (GP) equation (also <a class="reference external" href="https://epubs.siam.org/doi/10.1137/20M1313106">here</a> for a RBM application) is a nonlinear Schrödinger equation that approximately describes the low-energy properties of dilute Bose-Einstein condensates. Using a self-consistent mean field approximation, the many-body wavefunction is reduced to a description in terms of a single complex-valued wavefunction <span class="math notranslate nohighlight">\(\phi(\vec{r})\)</span>. We work with the <a class="reference external" href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.62.063610">one-dimensional Gross-Pitaevskii equation</a> with a harmonic trapping potential by letting <span class="math notranslate nohighlight">\(F_\alpha\)</span> be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-921414c6-d636-4863-af94-f7abd427ad19">
-<span class="eqno">(16)<a class="headerlink" href="#equation-921414c6-d636-4863-af94-f7abd427ad19" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7d15ffaa-424e-42f4-94c8-40677fb1a499">
+<span class="eqno">(16)<a class="headerlink" href="#equation-7d15ffaa-424e-42f4-94c8-40677fb1a499" title="Permalink to this equation">#</a></span>\[\begin{equation}
   F_{q,\kappa}(\phi)= -\phi''+\kappa x^2\phi+q|\phi|^2\phi-\lambda_{q,\kappa}\phi=0,
 \end{equation}\]</div>
 <p>where the parameters are now <span class="math notranslate nohighlight">\(\alpha=\{\kappa, q\}\)</span>, which are proportional to the strength of the harmonic trapping and the self-coupling of the wavefunction,respectively, while <span class="math notranslate nohighlight">\(\lambda_{q,\kappa}\)</span> is proportional to the ground state energ. <span class="math notranslate nohighlight">\(\phi(x)\)</span> is a single variable function that depends on <span class="math notranslate nohighlight">\(x\)</span> and it is normalized to unity.</p>
 <p>To be able to solve this problem in a quantum computer with few qbits we follow the same procedure as with the Harmonic Oscillator problem and cast the equations in the reduced basis. We once again expand our solution in a basis of <span class="math notranslate nohighlight">\(n\)</span> elements:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-11a4d257-0cbd-4129-8092-aaf4480def8e">
-<span class="eqno">(17)<a class="headerlink" href="#equation-11a4d257-0cbd-4129-8092-aaf4480def8e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5484bec7-8a36-40ad-9a20-eec9f96efe0b">
+<span class="eqno">(17)<a class="headerlink" href="#equation-5484bec7-8a36-40ad-9a20-eec9f96efe0b" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the non-linear Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha=\{\kappa,q\}\)</span>.</p>
@@ -552,6 +552,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;science&#39;</span><span class="p">,</span><span class="s1">&#39;notebook&#39;</span><span class="p">])</span>
+
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -752,37 +754,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2595</span><span class="o">/</span><span class="mf">4130808931.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">solution0</span><span class="o">=</span><span class="n">IterativeSolver</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">solution</span><span class="o">=</span><span class="n">IterativeSolver</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> 
-<span class="g g-Whitespace">      </span><span class="mi">4</span> 
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span> <span class="n">solution0</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;q=0, kappa=1&#39;</span><span class="p">)</span>
-
-<span class="nn">/tmp/ipykernel_2595/3314993183.py</span> in <span class="ni">IterativeSolver</span><span class="nt">(grid, q, kappa, maxIterations)</span>
-<span class="g g-Whitespace">     </span><span class="mi">50</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>             <span class="n">qeff</span><span class="o">=</span><span class="n">q</span>
-<span class="ne">---&gt; </span><span class="mi">52</span>         <span class="n">Hn</span><span class="o">=</span><span class="n">construct_H</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">kappa</span><span class="p">,</span><span class="n">qeff</span><span class="p">,(</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">])</span><span class="o">/</span><span class="mf">6.0</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">53</span>         <span class="n">SOL</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">Hn</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> 
-
-<span class="nn">/tmp/ipykernel_2595/3229265265.py</span> in <span class="ni">construct_H</span><span class="nt">(grid, mass, kappa, q, PHIgrid)</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="n">off_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="n">off_diag</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="ne">---&gt; </span><span class="mi">30</span>     <span class="n">H</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">+</span> <span class="n">sci</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">toeplitz</span><span class="p">(</span><span class="n">off_diag</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">mass</span><span class="o">*</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="n">kappa</span><span class="p">))</span><span class="o">+</span> <span class="n">q</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">PHIgrid</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span> 
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="k">return</span> <span class="n">H</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/numpy/tensor.py</span> in <span class="ni">__array_ufunc__</span><span class="nt">(self, ufunc, method, *inputs, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">153</span>         <span class="c1"># call the ndarray.__array_ufunc__ method to compute the result</span>
-<span class="g g-Whitespace">    </span><span class="mi">154</span>         <span class="c1"># of the vectorized ufunc</span>
-<span class="ne">--&gt; </span><span class="mi">155</span>         <span class="n">res</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">ufunc</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">156</span> 
-<span class="g g-Whitespace">    </span><span class="mi">157</span>         <span class="k">if</span> <span class="n">ufunc</span><span class="o">.</span><span class="n">nout</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<img alt="_images/qcgp_5_0.png" src="_images/qcgp_5_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.022841278511318
 </pre></div>
 </div>
 </div>
@@ -869,35 +842,35 @@ alpha = [10, 1], lambda = 4.022841278511264
 <h2>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.<a class="headerlink" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components" title="Permalink to this headline">#</a></h2>
 <p>This discussion retraces everything we did before for the Harmonic Oscillator. The main difference is that now the Hamiltonian effectively depends on the solution <span class="math notranslate nohighlight">\(H_\alpha \equiv H_\alpha[\phi]\)</span>, but since we are aiming at solving the problem iteratively, at each stage we have a fixed linear Hamiltonian.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-53d1106a-cf9d-4425-b9b3-dca68520c769">
-<span class="eqno">(18)<a class="headerlink" href="#equation-53d1106a-cf9d-4425-b9b3-dca68520c769" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b4266ee6-4261-41f6-a1fd-38485edd9a29">
+<span class="eqno">(18)<a class="headerlink" href="#equation-b4266ee6-4261-41f6-a1fd-38485edd9a29" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e1ab9e3b-5f05-4a69-a490-2a4872823ffa">
-<span class="eqno">(19)<a class="headerlink" href="#equation-e1ab9e3b-5f05-4a69-a490-2a4872823ffa" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-14a85a79-524d-44ab-9064-e4cec08d577f">
+<span class="eqno">(19)<a class="headerlink" href="#equation-14a85a79-524d-44ab-9064-e4cec08d577f" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49ba94c6-39a2-4a6e-9d57-dd72085d114a">
-<span class="eqno">(20)<a class="headerlink" href="#equation-49ba94c6-39a2-4a6e-9d57-dd72085d114a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-23823510-f5e3-4fac-9a90-95a1702c219e">
+<span class="eqno">(20)<a class="headerlink" href="#equation-23823510-f5e3-4fac-9a90-95a1702c219e" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b30c2ce8-20ef-494a-9748-b7a7f9a716a3">
-<span class="eqno">(21)<a class="headerlink" href="#equation-b30c2ce8-20ef-494a-9748-b7a7f9a716a3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-babc058c-217f-45da-aad9-7f287d548f74">
+<span class="eqno">(21)<a class="headerlink" href="#equation-babc058c-217f-45da-aad9-7f287d548f74" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0a02eca8-2afc-463a-b0a6-6a1a8b31ab11">
-<span class="eqno">(22)<a class="headerlink" href="#equation-0a02eca8-2afc-463a-b0a6-6a1a8b31ab11" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c12edc2e-4c38-4122-a8da-f6b60ce06f72">
+<span class="eqno">(22)<a class="headerlink" href="#equation-c12edc2e-4c38-4122-a8da-f6b60ce06f72" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-49875a42-d662-41e0-8e32-1d0c3476b96b">
-<span class="eqno">(23)<a class="headerlink" href="#equation-49875a42-d662-41e0-8e32-1d0c3476b96b" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-495e772d-1b8e-4a47-b54b-c375a4c12568">
+<span class="eqno">(23)<a class="headerlink" href="#equation-495e772d-1b8e-4a47-b54b-c375a4c12568" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the tow potential parts and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\kappa H_1 +q H_2\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span>, <span class="math notranslate nohighlight">\(H_1= x^2\)</span>, and <span class="math notranslate nohighlight">\(H_2=|\phi(x)|^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \kappa \tilde H_1+ q \tilde H_2\)</span>. We now construct these matrices, <span class="math notranslate nohighlight">\(H_2\)</span> being a function that must be constructed every time:</p>
@@ -1192,7 +1165,12 @@ H2= [[ 0.36584365 -0.13715205]
 
     <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span>
 
-<span class="k">def</span> <span class="nf">run_vqe</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">init_params</span><span class="p">,</span> <span class="n">dev</span><span class="p">,</span> <span class="n">mixing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">conv_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">run_vqe</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">init_params</span><span class="p">,</span> <span class="n">dev</span><span class="p">,</span> <span class="n">mixing</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> \
+    <span class="n">noisy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">conv_tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">noisy</span><span class="p">):</span>
+        <span class="n">prob_circ</span> <span class="o">=</span> <span class="n">noisy_prob_circuit</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">prob_circ</span> <span class="o">=</span> <span class="n">prob_circuit</span>
 
     <span class="n">H</span> <span class="o">=</span> <span class="n">update_ham</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">coeffs</span><span class="p">)</span>
 
@@ -1202,7 +1180,7 @@ H2= [[ 0.36584365 -0.13715205]
 
     <span class="n">params</span> <span class="o">=</span> <span class="n">init_params</span>
 
-    <span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circ</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
     <span class="n">new_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 
     <span class="n">gd_param_history</span> <span class="o">=</span> <span class="p">[</span><span class="n">params</span><span class="p">]</span>
@@ -1225,7 +1203,7 @@ H2= [[ 0.36584365 -0.13715205]
         <span class="n">conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">energy</span> <span class="o">-</span> <span class="n">prev_energy</span><span class="p">)</span>
 
         <span class="c1"># Update hamiltonian with new coeffs</span>
-        <span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circ</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
         <span class="n">new_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
         <span class="n">coeffs</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="n">mixing</span><span class="p">)</span><span class="o">*</span><span class="n">coeffs</span> <span class="o">+</span> <span class="n">mixing</span><span class="o">*</span><span class="n">new_coeffs</span>
 
@@ -1249,7 +1227,7 @@ H2= [[ 0.36584365 -0.13715205]
     <span class="k">if</span><span class="p">(</span><span class="n">debug</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Final value of the energy = </span><span class="si">{:.8f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy</span><span class="p">))</span>
     <span class="k">if</span><span class="p">(</span><span class="n">debug</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of iterations = &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">gd_cost_history</span>
 </pre></div>
 </div>
 </div>
@@ -1357,7 +1335,7 @@ Total Iterations Required:  60
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev</span><span class="p">)</span>
 
 <span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">)</span>
 <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
@@ -1408,6 +1386,10 @@ Total Iterations Required:  22
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#define some noise model to use in pennylane from qiskit.test.mock</span>
 <span class="kn">from</span> <span class="nn">qiskit.test.mock</span> <span class="kn">import</span> <span class="n">FakeLima</span>
 <span class="kn">from</span> <span class="nn">qiskit.providers.aer.noise</span> <span class="kn">import</span> <span class="n">NoiseModel</span>
+<span class="kn">import</span> <span class="nn">mitiq</span> <span class="k">as</span> <span class="nn">mq</span>
+<span class="kn">from</span> <span class="nn">mitiq.zne.scaling</span> <span class="kn">import</span> <span class="n">fold_global</span>
+<span class="kn">from</span> <span class="nn">mitiq.zne.inference</span> <span class="kn">import</span> <span class="n">RichardsonFactory</span>
+<span class="kn">from</span> <span class="nn">pennylane.transforms</span> <span class="kn">import</span> <span class="n">mitigate_with_zne</span>
 
 <span class="n">backend</span> <span class="o">=</span> <span class="n">FakeLima</span><span class="p">()</span>
 <span class="n">noise_model</span> <span class="o">=</span> <span class="n">NoiseModel</span><span class="o">.</span><span class="n">from_backend</span><span class="p">(</span><span class="n">backend</span><span class="p">)</span>
@@ -1415,75 +1397,31 @@ Total Iterations Required:  22
 <span class="c1">#set up noisy device</span>
 <span class="n">dev_sim</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;qiskit.aer&quot;</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">noise_model</span><span class="o">=</span><span class="n">noise_model</span><span class="p">,</span> <span class="n">optimization_level</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
 
-<span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev_sim</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># generate the prob function</span>
+<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev_sim</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">noisy_prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">ansatz</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">dev_sim</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">dev_sim</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
 
-<span class="n">probs</span> <span class="o">=</span> <span class="n">prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">)</span>
+<span class="n">sol_params</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">energy_history</span> <span class="o">=</span> <span class="n">run_vqe</span><span class="p">(</span><span class="n">alpha_k</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span><span class="n">init_params</span><span class="p">,</span><span class="n">dev_sim</span><span class="p">,</span>\
+    <span class="n">max_iter</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">noisy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">probs</span> <span class="o">=</span> <span class="n">noisy_prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">)</span>
 <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result expected from classical computation: &quot;</span><span class="p">,</span> <span class="n">classical</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients expected from classical computation: &quot;</span><span class="p">,</span><span class="o">-</span><span class="n">classical</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="o">-</span><span class="n">classical</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result from dynamic VQE: &quot;</span><span class="p">,</span><span class="n">energy</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients from dynamic VQE: &quot;</span><span class="p">,</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result from noisy VQE: &quot;</span><span class="p">,</span><span class="n">energy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients from noisy VQE: &quot;</span><span class="p">,</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total Iterations Required: &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>It = 0,  Energy = 3.45008765,  Conv = 6.54991235, Time Elapsed = 5.546 s
-It = 1,  Energy = 3.31128987,  Conv = 0.13879778, Time Elapsed = 5.924 s
-It = 2,  Energy = 3.30066910,  Conv = 0.01062077, Time Elapsed = 5.757 s
-It = 3,  Energy = 3.24861704,  Conv = 0.05205207, Time Elapsed = 6.105 s
-It = 4,  Energy = 3.27428866,  Conv = 0.02567163, Time Elapsed = 6.819 s
-It = 5,  Energy = 3.24819814,  Conv = 0.02609053, Time Elapsed = 5.804 s
-It = 6,  Energy = 3.25508899,  Conv = 0.00689085, Time Elapsed = 6.656 s
-It = 7,  Energy = 3.27100412,  Conv = 0.01591514, Time Elapsed = 5.780 s
-It = 8,  Energy = 3.31753318,  Conv = 0.04652906, Time Elapsed = 5.710 s
-It = 9,  Energy = 3.25481757,  Conv = 0.06271561, Time Elapsed = 7.099 s
-It = 10,  Energy = 3.31092820,  Conv = 0.05611064, Time Elapsed = 5.798 s
-It = 11,  Energy = 3.30897420,  Conv = 0.00195401, Time Elapsed = 6.549 s
-It = 12,  Energy = 3.29723379,  Conv = 0.01174041, Time Elapsed = 5.490 s
-It = 13,  Energy = 3.28860444,  Conv = 0.00862934, Time Elapsed = 5.853 s
-It = 14,  Energy = 3.28756224,  Conv = 0.00104220, Time Elapsed = 6.863 s
-It = 15,  Energy = 3.32841700,  Conv = 0.04085476, Time Elapsed = 6.156 s
-It = 16,  Energy = 3.30915667,  Conv = 0.01926033, Time Elapsed = 6.297 s
-It = 17,  Energy = 3.28407537,  Conv = 0.02508130, Time Elapsed = 5.904 s
-It = 18,  Energy = 3.32175444,  Conv = 0.03767908, Time Elapsed = 5.810 s
-It = 19,  Energy = 3.27801711,  Conv = 0.04373733, Time Elapsed = 6.692 s
-It = 20,  Energy = 3.32350278,  Conv = 0.04548567, Time Elapsed = 6.494 s
-It = 21,  Energy = 3.30055953,  Conv = 0.02294325, Time Elapsed = 5.930 s
-It = 22,  Energy = 3.30920933,  Conv = 0.00864980, Time Elapsed = 5.796 s
-It = 23,  Energy = 3.28905023,  Conv = 0.02015910, Time Elapsed = 5.652 s
-It = 24,  Energy = 3.26975919,  Conv = 0.01929104, Time Elapsed = 6.092 s
-It = 25,  Energy = 3.29094021,  Conv = 0.02118102, Time Elapsed = 6.526 s
-It = 26,  Energy = 3.30211557,  Conv = 0.01117536, Time Elapsed = 5.687 s
-It = 27,  Energy = 3.32210400,  Conv = 0.01998844, Time Elapsed = 6.284 s
-It = 28,  Energy = 3.30324798,  Conv = 0.01885603, Time Elapsed = 5.610 s
-It = 29,  Energy = 3.29828116,  Conv = 0.00496681, Time Elapsed = 5.642 s
-It = 30,  Energy = 3.29565115,  Conv = 0.00263002, Time Elapsed = 6.956 s
-It = 31,  Energy = 3.30187247,  Conv = 0.00622132, Time Elapsed = 5.647 s
-It = 32,  Energy = 3.31154264,  Conv = 0.00967017, Time Elapsed = 6.610 s
-It = 33,  Energy = 3.30546372,  Conv = 0.00607892, Time Elapsed = 5.404 s
-It = 34,  Energy = 3.27940380,  Conv = 0.02605992, Time Elapsed = 5.633 s
-It = 35,  Energy = 3.30888528,  Conv = 0.02948148, Time Elapsed = 6.732 s
-It = 36,  Energy = 3.27081687,  Conv = 0.03806842, Time Elapsed = 5.855 s
-It = 37,  Energy = 3.28225989,  Conv = 0.01144303, Time Elapsed = 6.374 s
-It = 38,  Energy = 3.26278061,  Conv = 0.01947929, Time Elapsed = 5.676 s
-It = 39,  Energy = 3.28063551,  Conv = 0.01785490, Time Elapsed = 5.738 s
-It = 40,  Energy = 3.29267797,  Conv = 0.01204246, Time Elapsed = 6.554 s
-It = 41,  Energy = 3.28356477,  Conv = 0.00911321, Time Elapsed = 6.357 s
-It = 42,  Energy = 3.34580861,  Conv = 0.06224384, Time Elapsed = 5.969 s
-It = 43,  Energy = 3.31229907,  Conv = 0.03350954, Time Elapsed = 6.162 s
-It = 44,  Energy = 3.24888997,  Conv = 0.06340910, Time Elapsed = 5.773 s
-It = 45,  Energy = 3.32192019,  Conv = 0.07303022, Time Elapsed = 6.016 s
-It = 46,  Energy = 3.32720467,  Conv = 0.00528449, Time Elapsed = 6.782 s
-It = 47,  Energy = 3.29778082,  Conv = 0.02942386, Time Elapsed = 5.630 s
-It = 48,  Energy = 3.32401439,  Conv = 0.02623357, Time Elapsed = 6.197 s
-It = 49,  Energy = 3.27325533,  Conv = 0.05075905, Time Elapsed = 5.806 s
-Final value of the energy = 3.27325533
-Number of iterations =  49
-Result expected from classical computation:  3.2502202855515776
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Result expected from classical computation:  3.2502202855515776
 Coefficients expected from classical computation:  0.9913354984896009 0.131354213614845
-Result from dynamic VQE:  3.273255334766314
-Coefficients from dynamic VQE:  0.9921464969052414 0.12508128828349135
+Result from noisy VQE:  3.0775726438512083
+Coefficients from noisy VQE:  0.9413288479590965 0.1673320053068151
 Total Iterations Required:  49
 </pre></div>
 </div>
@@ -1491,137 +1429,87 @@ Total Iterations Required:  49
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mitiq</span> <span class="k">as</span> <span class="nn">mq</span>
-<span class="kn">from</span> <span class="nn">mitiq.zne.scaling</span> <span class="kn">import</span> <span class="n">fold_global</span>
-<span class="kn">from</span> <span class="nn">mitiq.zne.inference</span> <span class="kn">import</span> <span class="n">RichardsonFactory</span>
-<span class="kn">from</span> <span class="nn">pennylane.transforms</span> <span class="kn">import</span> <span class="n">mitigate_with_zne</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energy_history</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Noisy VQE&quot;</span><span class="p">)</span>
 
-<span class="c1"># generate the prob function</span>
-<span class="nd">@qml</span><span class="o">.</span><span class="n">qnode</span><span class="p">(</span><span class="n">dev_sim</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">noisy_prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wire</span><span class="p">):</span>
-    <span class="n">ansatz</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">dev_sim</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">wire</span><span class="p">)</span>
-
-<span class="n">probs</span> <span class="o">=</span> <span class="n">noisy_prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result expected from classical computation: &quot;</span><span class="p">,</span> <span class="n">classical</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients expected from classical computation: &quot;</span><span class="p">,</span><span class="o">-</span><span class="n">classical</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="o">-</span><span class="n">classical</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result from dynamic VQE: &quot;</span><span class="p">,</span><span class="n">energy</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients from dynamic VQE: &quot;</span><span class="p">,</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">coeffs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total Iterations Required: &quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Energy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Optimization steps&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Convergence of noisy RBM&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">207</span><span class="o">-</span><span class="mi">044</span><span class="n">f1213c12f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">wire</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 
-<span class="ne">---&gt; </span><span class="mi">12</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">noisy_prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Result expected from classical computation: &quot;</span><span class="p">,</span> <span class="n">classical</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+<img alt="_images/qcgp_31_0.png" src="_images/qcgp_31_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solGaler</span><span class="o">=</span><span class="n">phibuilderFromCoeffs</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+<span class="n">lamGaler</span><span class="o">=</span><span class="n">solFull</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="nn">~/.local/lib/python3.8/site-packages/pennylane/qnode.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">607</span> 
-<span class="g g-Whitespace">    </span><span class="mi">608</span>         <span class="c1"># construct the tape</span>
-<span class="ne">--&gt; </span><span class="mi">609</span>         <span class="bp">self</span><span class="o">.</span><span class="n">construct</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">610</span> 
-<span class="g g-Whitespace">    </span><span class="mi">611</span>         <span class="n">cache</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cache&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1"># Make plots of the numerical wavefunction </span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="nn">~/.local/lib/python3.8/site-packages/pennylane/qnode.py</span> in <span class="ni">construct</span><span class="nt">(self, args, kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> 
-<span class="g g-Whitespace">    </span><span class="mi">525</span>         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tape</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">526</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">527</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_tape</span><span class="o">.</span><span class="n">_qfunc_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_qfunc_output</span>
-<span class="g g-Whitespace">    </span><span class="mi">528</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solFinite</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Finite element method&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solGaler</span><span class="p">,</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Noisy Galerkin&#39;</span><span class="p">)</span>
 
-<span class="nn">&lt;ipython-input-207-044f1213c12f&gt;</span> in <span class="ni">noisy_prob_circuit</span><span class="nt">(params, wire)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="k">def</span> <span class="nf">noisy_prob_circuit</span><span class="p">(</span><span class="n">params</span><span class="p">,</span><span class="n">wire</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="n">ansatz</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">wires</span><span class="o">=</span><span class="n">dev_sim</span><span class="o">.</span><span class="n">wires</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="k">return</span> <span class="n">qml</span><span class="o">.</span><span class="n">probs</span><span class="p">(</span><span class="n">wires</span><span class="o">=</span><span class="n">wire</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="g g-Whitespace">     </span><span class="mi">11</span> 
-<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">probs</span> <span class="o">=</span> <span class="n">noisy_prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solutions&#39;</span><span class="p">)</span>
 
-<span class="ne">TypeError</span>: &#39;MeasurementProcess&#39; object is not subscriptable
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/qcgp_32_0.png" src="_images/qcgp_32_0.png" />
+</div>
+</div>
+<p>Even with a noisy circuit it doesn’t do terribly! One last thing we can do to get slightly better performance is to leverage zero-noise extrapolation for the coefficients and see if there is a noticeable improvement.</p>
+<p>To achieve this we’ll first define an extrapolation function to parse the output from our probability function and setup the error mitigated qnode.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prob_extrapolate</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="o">**</span><span class="n">extrapolate_kwargs</span><span class="p">):</span>
+    <span class="n">prob1</span> <span class="o">=</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span><span class="n">results</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">prob2</span> <span class="o">=</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span><span class="n">results</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">prob1</span><span class="p">,</span><span class="n">prob2</span><span class="p">])</span>
+
+<span class="c1">#set up scale factors to use</span>
+<span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="n">sim_qnode</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">noisy_prob_circuit</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
+
+<span class="c1">#use ZNE to mitigate error</span>
+<span class="n">mitigated_qnode</span> <span class="o">=</span> <span class="n">mitigate_with_zne</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">prob_extrapolate</span><span class="p">)(</span><span class="n">sim_qnode</span><span class="p">)</span>
+<span class="n">zne_result</span> <span class="o">=</span> <span class="n">mitigated_qnode</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">mitig_coeffs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">zne_result</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#set up the extrapolation step and scale factors to use</span>
-<span class="n">extrapolate</span> <span class="o">=</span> <span class="n">RichardsonFactory</span><span class="o">.</span><span class="n">extrapolate</span>
-<span class="n">scale_factors</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">solGaler</span><span class="o">=</span><span class="n">phibuilderFromCoeffs</span><span class="p">(</span><span class="n">mitig_coeffs</span><span class="p">)</span>
+<span class="n">lamGaler</span><span class="o">=</span><span class="n">solFull</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">noisy_prob_circuit</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Make plots of the numerical wavefunction </span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">sim_qnode</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">QNode</span><span class="p">(</span><span class="n">noisy_prob_circuit</span><span class="p">,</span> <span class="n">dev_sim</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solFinite</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;Finite element method&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">solGaler</span><span class="p">,</span><span class="n">label</span><span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;Error Mitigated Galerkin&#39;</span><span class="p">)</span>
 
-<span class="c1">#use ZNE to mitigate error</span>
-<span class="n">mitigated_qnode</span> <span class="o">=</span> <span class="n">mitigate_with_zne</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">extrapolate</span><span class="p">)(</span><span class="n">sim_qnode</span><span class="p">)</span>
-<span class="n">zne_result</span> <span class="o">=</span> <span class="n">mitigated_qnode</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Numerical solutions&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center left&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.0926 0.9074]
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">206</span><span class="o">-</span><span class="mi">6</span><span class="n">b11519877b7</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="c1">#use ZNE to mitigate error</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">mitigated_qnode</span> <span class="o">=</span> <span class="n">mitigate_with_zne</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">fold_global</span><span class="p">,</span> <span class="n">extrapolate</span><span class="p">)(</span><span class="n">sim_qnode</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">zne_result</span> <span class="o">=</span> <span class="n">mitigated_qnode</span><span class="p">(</span><span class="n">sol_params</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="n">shots</span><span class="o">=</span><span class="mi">2</span><span class="o">**</span><span class="mi">14</span><span class="p">)</span>
-
-<span class="nn">~/.local/lib/python3.8/site-packages/pennylane/transforms/batch_transform.py</span> in <span class="ni">_wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">311</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">312</span> 
-<span class="ne">--&gt; </span><span class="mi">313</span>             <span class="k">return</span> <span class="n">processing_fn</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">314</span> 
-<span class="g g-Whitespace">    </span><span class="mi">315</span>         <span class="k">return</span> <span class="n">_wrapper</span>
-
-<span class="nn">~/.local/lib/python3.8/site-packages/pennylane/transforms/mitigate.py</span> in <span class="ni">processing_fn</span><span class="nt">(results)</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>         <span class="p">]</span>  <span class="c1"># creates nested list according to reps_per_factor</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>         <span class="n">results</span> <span class="o">=</span> <span class="n">mean</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">224</span>         <span class="n">extrapolated</span> <span class="o">=</span> <span class="n">extrapolate</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="o">**</span><span class="n">extrapolate_kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span>         <span class="k">return</span> <span class="n">extrapolated</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">shape</span><span class="p">(</span><span class="n">extrapolated</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span> <span class="k">else</span> <span class="n">extrapolated</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span> 
-
-<span class="nn">~/.local/lib/python3.8/site-packages/mitiq/zne/inference.py</span> in <span class="ni">extrapolate</span><span class="nt">(scale_factors, exp_values, full_output)</span>
-<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="c1"># with order equal to the number of data points minus 1.</span>
-<span class="g g-Whitespace">    </span><span class="mi">933</span>         <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">scale_factors</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="ne">--&gt; </span><span class="mi">934</span>         <span class="k">return</span> <span class="n">PolyFactory</span><span class="o">.</span><span class="n">extrapolate</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">935</span>             <span class="n">scale_factors</span><span class="p">,</span> <span class="n">exp_values</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">full_output</span>
-<span class="g g-Whitespace">    </span><span class="mi">936</span>         <span class="p">)</span>
-
-<span class="nn">~/.local/lib/python3.8/site-packages/mitiq/zne/inference.py</span> in <span class="ni">extrapolate</span><span class="nt">(scale_factors, exp_values, order, full_output)</span>
-<span class="g g-Whitespace">    </span><span class="mi">860</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">861</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">862</span><span class="s2">         opt_params, params_cov = mitiq_polyfit(</span>
-<span class="g g-Whitespace">    </span><span class="mi">863</span><span class="s2">             scale_factors, exp_values, order</span>
-<span class="g g-Whitespace">    </span><span class="mi">864</span><span class="s2">         )</span>
-
-<span class="nn">~/.local/lib/python3.8/site-packages/mitiq/zne/inference.py</span> in <span class="ni">mitiq_polyfit</span><span class="nt">(scale_factors, exp_values, deg, weights)</span>
-<span class="g g-Whitespace">    </span><span class="mi">185</span><span class="s2">     with warnings.catch_warnings(record=True) as warn_list:</span>
-<span class="g g-Whitespace">    </span><span class="mi">186</span><span class="s2">         try:</span>
-<span class="ne">--&gt; </span><span class="mi">187</span><span class="s2">             opt_params, params_cov = np.polyfit(</span>
-<span class="g g-Whitespace">    </span><span class="mi">188</span><span class="s2">                 scale_factors, exp_values, deg, w=weights, cov=True</span>
-<span class="g g-Whitespace">    </span><span class="mi">189</span><span class="s2">             )</span>
-
-<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">polyfit</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">~/.local/lib/python3.8/site-packages/numpy/lib/polynomial.py</span> in <span class="ni">polyfit</span><span class="nt">(x, y, deg, rcond, full, w, cov)</span>
-<span class="g g-Whitespace">    </span><span class="mi">630</span><span class="s2">         raise TypeError(&quot;expected non-empty vector for x&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">631</span><span class="s2">     if y.ndim &lt; 1 or y.ndim &gt; 2:</span>
-<span class="ne">--&gt; </span><span class="mi">632</span><span class="s2">         raise TypeError(&quot;expected 1D or 2D array for y&quot;)</span>
-<span class="g g-Whitespace">    </span><span class="mi">633</span><span class="s2">     if x.shape[0] != y.shape[0]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">634</span><span class="s2">         raise TypeError(&quot;expected x and y to have same length&quot;)</span>
-
-<span class="ne">TypeError</span>: expected 1D or 2D array for y
-</pre></div>
-</div>
+<img alt="_images/qcgp_35_0.png" src="_images/qcgp_35_0.png" />
 </div>
 </div>
 </section>

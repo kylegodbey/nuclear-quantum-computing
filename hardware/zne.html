@@ -645,138 +645,15 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.72478153 MeV,  Convergence parameter = 0.61068267 MeV
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2201</span><span class="o">/</span><span class="mf">1445607610.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span> 
-<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="c1"># Take a step in parameter space and record your energy</span>
-<span class="ne">---&gt; </span><span class="mi">12</span>     <span class="n">params</span><span class="p">,</span> <span class="n">prev_energy</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">step_and_cost</span><span class="p">(</span><span class="n">cost_fn</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span> 
-<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="c1"># This keeps track of our energy for plotting at comparisons</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration = 0,  Energy = 7.91581311 MeV,  Convergence parameter = 0.43063906 MeV
+Iteration = 20,  Energy = -0.08565763 MeV,  Convergence parameter = 0.28591615 MeV
+Iteration = 40,  Energy = -1.28501083 MeV,  Convergence parameter = 0.02400316 MeV
+Iteration = 60,  Energy = -1.30151527 MeV,  Convergence parameter = 0.09387584 MeV
+Iteration = 80,  Energy = -1.36145504 MeV,  Convergence parameter = 0.03246856 MeV
+Iteration = 100,  Energy = -1.43787035 MeV,  Convergence parameter = 0.09574779 MeV
 
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/optimize/gradient_descent.py</span> in <span class="ni">step_and_cost</span><span class="nt">(self, objective_fn, grad_fn, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">57</span>         <span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">58</span><span class="sd"> </span>
-<span class="ne">---&gt; </span><span class="mi">59</span><span class="sd">         g, forward = self.compute_grad(objective_fn, args, kwargs, grad_fn=grad_fn)</span>
-<span class="g g-Whitespace">     </span><span class="mi">60</span><span class="sd">         new_args = self.apply_grad(g, args)</span>
-<span class="g g-Whitespace">     </span><span class="mi">61</span><span class="sd"> </span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/optimize/gradient_descent.py</span> in <span class="ni">compute_grad</span><span class="nt">(objective_fn, args, kwargs, grad_fn)</span>
-<span class="g g-Whitespace">    </span><span class="mi">115</span><span class="sd">         &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="n">g</span> <span class="o">=</span> <span class="n">get_gradient</span><span class="p">(</span><span class="n">objective_fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">grad_fn</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">grad_fn</span>
-<span class="ne">--&gt; </span><span class="mi">117</span>         <span class="n">grad</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">118</span>         <span class="n">forward</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="s2">&quot;forward&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">119</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_grad.py</span> in <span class="ni">__call__</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span>             <span class="k">return</span> <span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">114</span> 
-<span class="ne">--&gt; </span><span class="mi">115</span>         <span class="n">grad_value</span><span class="p">,</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">grad_fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">116</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_forward</span> <span class="o">=</span> <span class="n">ans</span>
-<span class="g g-Whitespace">    </span><span class="mi">117</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/wrap_util.py</span> in <span class="ni">nary_f</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">18</span>             <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>                 <span class="n">x</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">argnum</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">20</span>             <span class="k">return</span> <span class="n">unary_operator</span><span class="p">(</span><span class="n">unary_f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">nary_op_args</span><span class="p">,</span> <span class="o">**</span><span class="n">nary_op_kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">21</span>         <span class="k">return</span> <span class="n">nary_f</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">return</span> <span class="n">nary_operator</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/_grad.py</span> in <span class="ni">_grad_with_forward</span><span class="nt">(fun, x)</span>
-<span class="g g-Whitespace">    </span><span class="mi">139</span>             <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">140</span> 
-<span class="ne">--&gt; </span><span class="mi">141</span>         <span class="n">grad_value</span> <span class="o">=</span> <span class="n">vjp</span><span class="p">(</span><span class="n">vspace</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span><span class="o">.</span><span class="n">ones</span><span class="p">())</span>
-<span class="g g-Whitespace">    </span><span class="mi">142</span>         <span class="k">return</span> <span class="n">grad_value</span><span class="p">,</span> <span class="n">ans</span>
-<span class="g g-Whitespace">    </span><span class="mi">143</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">vjp</span><span class="nt">(g)</span>
-<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="k">def</span> <span class="nf">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">):</span> <span class="k">return</span> <span class="n">vspace</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">zeros</span><span class="p">()</span>
-<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="k">else</span><span class="p">:</span>
-<span class="ne">---&gt; </span><span class="mi">14</span>         <span class="k">def</span> <span class="nf">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">):</span> <span class="k">return</span> <span class="n">backward_pass</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">end_node</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="k">return</span> <span class="n">vjp</span><span class="p">,</span> <span class="n">end_value</span>
-<span class="g g-Whitespace">     </span><span class="mi">16</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">backward_pass</span><span class="nt">(g, end_node)</span>
-<span class="g g-Whitespace">     </span><span class="mi">19</span>     <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">toposort</span><span class="p">(</span><span class="n">end_node</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">20</span>         <span class="n">outgrad</span> <span class="o">=</span> <span class="n">outgrads</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">21</span>         <span class="n">ingrads</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">vjp</span><span class="p">(</span><span class="n">outgrad</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">     </span><span class="mi">22</span>         <span class="k">for</span> <span class="n">parent</span><span class="p">,</span> <span class="n">ingrad</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parents</span><span class="p">,</span> <span class="n">ingrads</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">23</span>             <span class="n">outgrads</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span> <span class="o">=</span> <span class="n">add_outgrads</span><span class="p">(</span><span class="n">outgrads</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parent</span><span class="p">),</span> <span class="n">ingrad</span><span class="p">)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/autograd/core.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(g)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>                     <span class="s2">&quot;VJP of </span><span class="si">{}</span><span class="s2"> wrt argnum 0 not defined&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fun</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">66</span>             <span class="n">vjp</span> <span class="o">=</span> <span class="n">vjpfun</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">67</span>             <span class="k">return</span> <span class="k">lambda</span> <span class="n">g</span><span class="p">:</span> <span class="p">(</span><span class="n">vjp</span><span class="p">(</span><span class="n">g</span><span class="p">),)</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>         <span class="k">elif</span> <span class="n">L</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>             <span class="n">argnum_0</span><span class="p">,</span> <span class="n">argnum_1</span> <span class="o">=</span> <span class="n">argnums</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/autograd.py</span> in <span class="ni">grad_fn</span><span class="nt">(dy)</span>
-<span class="g g-Whitespace">    </span><span class="mi">196</span>                         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">197</span> 
-<span class="ne">--&gt; </span><span class="mi">198</span>                         <span class="n">vjps</span> <span class="o">=</span> <span class="n">processing_fn</span><span class="p">(</span><span class="n">execute_fn</span><span class="p">(</span><span class="n">vjp_tapes</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">    </span><span class="mi">199</span> 
-<span class="g g-Whitespace">    </span><span class="mi">200</span>                 <span class="k">else</span><span class="p">:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">wrapper</span><span class="nt">(tapes, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">170</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span>             <span class="c1"># execute all unique tapes that do not exist in the cache</span>
-<span class="ne">--&gt; </span><span class="mi">172</span>             <span class="n">res</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="n">execution_tapes</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">173</span> 
-<span class="g g-Whitespace">    </span><span class="mi">174</span>         <span class="n">final_res</span> <span class="o">=</span> <span class="p">[]</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane/interfaces/execution.py</span> in <span class="ni">fn</span><span class="nt">(tapes, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span>         <span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">tapes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pylint: disable=function-redefined</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span>             <span class="n">tapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">expand_fn</span><span class="p">(</span><span class="n">tape</span><span class="p">)</span> <span class="k">for</span> <span class="n">tape</span> <span class="ow">in</span> <span class="n">tapes</span><span class="p">]</span>
-<span class="ne">---&gt; </span><span class="mi">97</span>             <span class="k">return</span> <span class="n">original_fn</span><span class="p">(</span><span class="n">tapes</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">98</span> 
-<span class="g g-Whitespace">     </span><span class="mi">99</span>     <span class="nd">@wraps</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/contextlib.py</span> in <span class="ni">inner</span><span class="nt">(*args, **kwds)</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span>         <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span>             <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_recreate_cm</span><span class="p">():</span>
-<span class="ne">---&gt; </span><span class="mi">74</span>                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">75</span>         <span class="k">return</span> <span class="n">inner</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/pennylane_qiskit/qiskit_device.py</span> in <span class="ni">batch_execute</span><span class="nt">(self, circuits)</span>
-<span class="g g-Whitespace">    </span><span class="mi">446</span>         <span class="c1"># Send the batch of circuit objects using backend.run</span>
-<span class="g g-Whitespace">    </span><span class="mi">447</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_current_job</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">compiled_circuits</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shots</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">run_args</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">448</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_job</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">449</span> 
-<span class="g g-Whitespace">    </span><span class="mi">450</span>         <span class="c1"># Compute statistics using the state and/or samples</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/providers/aer/jobs/utils.py</span> in <span class="ni">_wrapper</span><span class="nt">(self, *args, **kwargs)</span>
-<span class="g g-Whitespace">     </span><span class="mi">39</span>         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_future</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">40</span>             <span class="k">raise</span> <span class="n">JobError</span><span class="p">(</span><span class="s2">&quot;Job not submitted yet!. You have to .submit() first!&quot;</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">41</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="k">return</span> <span class="n">_wrapper</span>
-<span class="g g-Whitespace">     </span><span class="mi">43</span> 
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/qiskit/providers/aer/jobs/aerjob.py</span> in <span class="ni">result</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">     </span><span class="mi">76</span>             <span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">CancelledError</span><span class="p">:</span> <span class="k">if</span> <span class="n">job</span> <span class="n">cancelled</span> <span class="n">before</span> <span class="n">completed</span><span class="o">.</span>
-<span class="g g-Whitespace">     </span><span class="mi">77</span>         <span class="s2">&quot;&quot;&quot;</span>
-<span class="ne">---&gt; </span><span class="mi">78</span><span class="s2">         return self._future.result(timeout=timeout)</span>
-<span class="g g-Whitespace">     </span><span class="mi">79</span><span class="s2"> </span>
-<span class="g g-Whitespace">     </span><span class="mi">80</span><span class="s2">     @requires_submit</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/concurrent/futures/_base.py</span> in <span class="ni">result</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">428</span><span class="s2">                 return self.__get_result()</span>
-<span class="g g-Whitespace">    </span><span class="mi">429</span><span class="s2"> </span>
-<span class="ne">--&gt; </span><span class="mi">430</span><span class="s2">             self._condition.wait(timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">431</span><span class="s2"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">432</span><span class="s2">             if self._state in [CANCELLED, CANCELLED_AND_NOTIFIED]:</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/threading.py</span> in <span class="ni">wait</span><span class="nt">(self, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">294</span><span class="s2">         try:    # restore state no matter what (e.g., KeyboardInterrupt)</span>
-<span class="g g-Whitespace">    </span><span class="mi">295</span><span class="s2">             if timeout is None:</span>
-<span class="ne">--&gt; </span><span class="mi">296</span><span class="s2">                 waiter.acquire()</span>
-<span class="g g-Whitespace">    </span><span class="mi">297</span><span class="s2">                 gotit = True</span>
-<span class="g g-Whitespace">    </span><span class="mi">298</span><span class="s2">             else:</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+Final value of the energy = -1.35099772 MeV
+Number of iterations =  119
 </pre></div>
 </div>
 </div>

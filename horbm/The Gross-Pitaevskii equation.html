@@ -523,14 +523,14 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference external" href="https://link.springer.com/article/10.1007/BF02731494">Gross</a>-<a class="reference external" href="http://jetp.ras.ru/cgi-bin/dn/e_013_02_0451.pdf">Pitaevskii</a> (GP) equation (also <a class="reference external" href="https://epubs.siam.org/doi/10.1137/20M1313106">here</a> for a RBM application) is a nonlinear Schrödinger equation that approximately describes the low-energy properties of dilute Bose-Einstein condensates. Using a self-consistent mean field approximation, the many-body wavefunction is reduced to a description in terms of a single complex-valued wavefunction <span class="math notranslate nohighlight">\(\phi(\vec{r})\)</span>. We work with the <a class="reference external" href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.62.063610">one-dimensional Gross-Pitaevskii equation</a> with a harmonic trapping potential by letting <span class="math notranslate nohighlight">\(F_\alpha\)</span> be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bdb8b14f-2d71-4450-9a20-4dbda9b117f1">
-<span class="eqno">()<a class="headerlink" href="#equation-bdb8b14f-2d71-4450-9a20-4dbda9b117f1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-292bf0db-8baf-434e-9755-004a2db175d2">
+<span class="eqno">()<a class="headerlink" href="#equation-292bf0db-8baf-434e-9755-004a2db175d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
   F_{q,\kappa}(\phi)= -\phi''+\kappa x^2\phi+q|\phi|^2\phi-\lambda_{q,\kappa}\phi=0,
 \end{equation}\]</div>
 <p>where the parameters are now <span class="math notranslate nohighlight">\(\alpha=\{\kappa, q\}\)</span>, which are proportional to the strength of the harmonic trapping and the self-coupling of the wavefunction,respectively, while <span class="math notranslate nohighlight">\(\lambda_{q,\kappa}\)</span> is proportional to the ground state energ. <span class="math notranslate nohighlight">\(\phi(x)\)</span> is a single variable function that depends on <span class="math notranslate nohighlight">\(x\)</span> and it is normalized to unity.</p>
 <p>To be able to solve this problem in a quantum computer with few qbits we follow the same procedure as with the Harmonic Oscillator problem and cast the equations in the reduced basis. We once again expand our solution in a basis of <span class="math notranslate nohighlight">\(n\)</span> elements:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-19686379-37b6-487c-a6b9-f1849d273dfd">
-<span class="eqno">()<a class="headerlink" href="#equation-19686379-37b6-487c-a6b9-f1849d273dfd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8105e476-7fcd-4f13-bdae-eed24446d3b8">
+<span class="eqno">()<a class="headerlink" href="#equation-8105e476-7fcd-4f13-bdae-eed24446d3b8" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the non-linear Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha=\{\kappa,q\}\)</span>.</p>
@@ -744,7 +744,7 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/The Gross-Pitaevskii equation_5_0.png" src="../_images/The Gross-Pitaevskii equation_5_0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.022841278511318
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.022841278511313
 </pre></div>
 </div>
 </div>
@@ -799,41 +799,13 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = [0, 2], lambda = 1.4129624545775548
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">ipykernel_2457</span><span class="o">/</span><span class="mf">3942673942.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">alpha_sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha_vals</span><span class="p">):</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span>     <span class="n">evals</span><span class="p">,</span> <span class="n">evects</span> <span class="o">=</span> <span class="n">IterativeSolver</span><span class="p">(</span><span class="n">x_array</span><span class="p">,</span><span class="n">alpha_sample</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">alpha_sample</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">700</span><span class="p">)</span> <span class="c1"># solve the system for evals and evects.</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>     <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evects</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">evects</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="c1"># assign the nth evect to solution array T</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">T_evals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">evals</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="c1"># assign the nth eigenvalue to the eigenvalue array T_eval.</span>
-
-<span class="nn">/tmp/ipykernel_2457/3314993183.py</span> in <span class="ni">IterativeSolver</span><span class="nt">(grid, q, kappa, maxIterations)</span>
-<span class="g g-Whitespace">     </span><span class="mi">51</span>             <span class="n">qeff</span><span class="o">=</span><span class="n">q</span>
-<span class="g g-Whitespace">     </span><span class="mi">52</span>         <span class="n">Hn</span><span class="o">=</span><span class="n">construct_H</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">kappa</span><span class="p">,</span><span class="n">qeff</span><span class="p">,(</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">]</span><span class="o">+</span><span class="n">ListOfPhiOlds</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">])</span><span class="o">/</span><span class="mf">6.0</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">53</span>         <span class="n">SOL</span><span class="o">=</span><span class="n">solve</span><span class="p">(</span><span class="n">Hn</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">h</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">54</span> 
-<span class="g g-Whitespace">     </span><span class="mi">55</span>         <span class="n">PHIn</span><span class="o">=</span><span class="n">SOL</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nn">/tmp/ipykernel_2457/3314993183.py</span> in <span class="ni">solve</span><span class="nt">(H, grid, h)</span>
-<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="n">Eigenvalues</span> <span class="ow">and</span> <span class="n">eigenvectors</span> <span class="n">are</span> <span class="n">ordered</span> <span class="ow">in</span> <span class="n">ascending</span> <span class="n">order</span><span class="o">.</span>
-<span class="g g-Whitespace">     </span><span class="mi">32</span>     <span class="s1">&#39;&#39;&#39;</span>
-<span class="ne">---&gt; </span><span class="mi">33</span><span class="s1">     evals,evects = np.linalg.eigh(H)</span>
-<span class="g g-Whitespace">     </span><span class="mi">34</span><span class="s1">     evects = evects.T</span>
-<span class="g g-Whitespace">     </span><span class="mi">35</span><span class="s1">     for i,evect in enumerate(evects):</span>
-
-<span class="nn">&lt;__array_function__ internals&gt;</span> in <span class="ni">eigh</span><span class="nt">(*args, **kwargs)</span>
-
-<span class="nn">/opt/hostedtoolcache/Python/3.7.13/x64/lib/python3.7/site-packages/numpy/linalg/linalg.py</span> in <span class="ni">eigh</span><span class="nt">(a, UPLO)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1468</span><span class="s1"> </span>
-<span class="g g-Whitespace">   </span><span class="mi">1469</span><span class="s1">     signature = &#39;D-&gt;dD&#39; if isComplexType(t) else &#39;d-&gt;dd&#39;</span>
-<span class="ne">-&gt; </span><span class="mi">1470</span><span class="s1">     w, vt = gufunc(a, signature=signature, extobj=extobj)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1471</span><span class="s1">     w = w.astype(_realType(result_t), copy=False)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1472</span><span class="s1">     vt = vt.astype(result_t, copy=False)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = [5, 1], lambda = 2.6896595245510877
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>alpha = [10, 1], lambda = 4.022841278511271
+</pre></div>
+</div>
+<img alt="../_images/The Gross-Pitaevskii equation_8_5.png" src="../_images/The Gross-Pitaevskii equation_8_5.png" />
 </div>
 </div>
 </section>
@@ -867,35 +839,35 @@ title="Print to PDF"
 <h2>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.<a class="headerlink" href="#we-will-now-model-an-effective-hamiltonian-in-which-two-particles-interact-each-one-represents-one-of-these-two-components" title="Permalink to this headline">#</a></h2>
 <p>This discussion retraces everything we did before for the Harmonic Oscillator. The main difference is that now the Hamiltonian effectively depends on the solution <span class="math notranslate nohighlight">\(H_\alpha \equiv H_\alpha[\phi]\)</span>, but since we are aiming at solving the problem iteratively, at each stage we have a fixed linear Hamiltonian.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-daf40376-2a04-4e1c-bf7a-c4b975b79a38">
-<span class="eqno">()<a class="headerlink" href="#equation-daf40376-2a04-4e1c-bf7a-c4b975b79a38" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-727f98f2-e75a-46e7-9afc-921afe7f3769">
+<span class="eqno">()<a class="headerlink" href="#equation-727f98f2-e75a-46e7-9afc-921afe7f3769" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4b234ef9-00ce-4651-935a-8b86c21ce14b">
-<span class="eqno">()<a class="headerlink" href="#equation-4b234ef9-00ce-4651-935a-8b86c21ce14b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-dbd995ec-c341-46e2-8bfa-f3d798e8ffdb">
+<span class="eqno">()<a class="headerlink" href="#equation-dbd995ec-c341-46e2-8bfa-f3d798e8ffdb" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7fb6ecc0-f27d-420a-bd6d-39087a2a0f75">
-<span class="eqno">()<a class="headerlink" href="#equation-7fb6ecc0-f27d-420a-bd6d-39087a2a0f75" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0a1d4da4-3b18-4690-aca7-fd9f7ba796cf">
+<span class="eqno">()<a class="headerlink" href="#equation-0a1d4da4-3b18-4690-aca7-fd9f7ba796cf" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-82c84173-b87b-4a3b-80ba-e481449d6aae">
-<span class="eqno">()<a class="headerlink" href="#equation-82c84173-b87b-4a3b-80ba-e481449d6aae" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-94ecd7a4-8a77-46f3-a678-e43f22d39ea8">
+<span class="eqno">()<a class="headerlink" href="#equation-94ecd7a4-8a77-46f3-a678-e43f22d39ea8" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-be2cfb1b-6395-4be5-babf-77e688ef6542">
-<span class="eqno">()<a class="headerlink" href="#equation-be2cfb1b-6395-4be5-babf-77e688ef6542" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a150c701-5817-4d5a-9456-2f7185bc8cb0">
+<span class="eqno">()<a class="headerlink" href="#equation-a150c701-5817-4d5a-9456-2f7185bc8cb0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5c4fa9f9-24a3-4e49-b790-0a80c3e93483">
-<span class="eqno">()<a class="headerlink" href="#equation-5c4fa9f9-24a3-4e49-b790-0a80c3e93483" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-cb5e4b68-866b-4c18-b2bb-49817d008343">
+<span class="eqno">()<a class="headerlink" href="#equation-cb5e4b68-866b-4c18-b2bb-49817d008343" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the tow potential parts and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\kappa H_1 +q H_2\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span>, <span class="math notranslate nohighlight">\(H_1= x^2\)</span>, and <span class="math notranslate nohighlight">\(H_2=|\phi(x)|^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \kappa \tilde H_1+ q \tilde H_2\)</span>. We now construct these matrices, <span class="math notranslate nohighlight">\(H_2\)</span> being a function that must be constructed every time:</p>
