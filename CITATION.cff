@@ -6,7 +6,7 @@ title: Quantum Computing Applications in Nuclear Physics
 message: >-
   If you found this text useful, please consider
   citing!
-type: software
+type: book
 authors:
   - given-names: Kyle
     family-names: Godbey
@@ -20,3 +20,4 @@ authors:
     orcid: 'https://orcid.org/0000-0002-8145-0745'
   - given-names: Jingyi
     family-names: Li
+doi: 10.5281/zenodo.7126685
