@@ -1,0 +1,22 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Quantum Computing Applications in Nuclear Physics
+message: >-
+  If you found this text useful, please consider
+  citing!
+type: software
+authors:
+  - given-names: Kyle
+    family-names: Godbey
+    email: qc@kyle.ee
+    orcid: 'https://orcid.org/0000-0003-0622-3646'
+  - given-names: Alexandra
+    family-names: Semposki
+    orcid: 'https://orcid.org/0000-0003-2354-1523'
+  - given-names: Pablo
+    family-names: Giuliani
+    orcid: 'https://orcid.org/0000-0002-8145-0745'
+  - given-names: Jingyi
+    family-names: Li
