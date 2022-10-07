@@ -22,4 +22,19 @@ The tools we develop in these three topics will come to play together to tackle 
 This GitHub repo and Jupyter Book were written by Pablo Giuliani (MSU), Kyle Godbey (MSU), Jingyi Li (MSU), and Alexandra Semposki (OU). 
 
 Any questions or concerns may be directed to qc@kyle.ee. 
+
+## Citing
+
+If this book helped any part of your research, please consider citing!
+
+```
+@book{Godbey_Quantum_Computing_Applications,
+author = {Godbey, Kyle and Semposki, Alexandra and Giuliani, Pablo and Li, Jingyi},
+doi = {10.5281/zenodo.7126685},
+title = {{Quantum Computing Applications in Nuclear Physics}}
+}
+```
+
+[![DOI](https://zenodo.org/badge/506734165.svg)](https://zenodo.org/badge/latestdoi/506734165)
+
 <!-- #endregion -->
