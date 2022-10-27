@@ -1,6 +1,8 @@
 # Quantum Computing the Deuteron
 
-In this introduction we will briefly discuss the 2018 paper, [Cloud Quantum Computing of an Atomic Nucleus](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.120.210501). discuss the deuteron and the model maybe? It should be somewhere, maybe here instead of the notebook. Just need a light introduction before the real work.
+Author: Jingyi Li
+
+In this introduction we will briefly discuss the 2018 paper, [Cloud Quantum Computing of an Atomic Nucleus](https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.120.210501).
 
 From the paper we can read that the authors employed the projection of hamiltonian operators onto quantum qubits (X,Y,Z) to construct a quantum computatable hamiltonian by the Pionless EFT, a systematically improvable and model-independent approach to nuclear interactions in a regime where the momentum scale $Q$ of the interesting physics. The important part of this paper is how the deuteron creation and annihilation operator is mapped onto qubits using Jordan-Wigner transformation. Qubits can be used by quantum computers for operations based on Pauli matrices (denoted as $X_{q}, Y_{q}$, and $Z_{q}$ on qubit $q$ ).
 
