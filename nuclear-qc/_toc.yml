@@ -4,6 +4,10 @@ format: jb-book
 root: landing
 chapters:
 - file: introduction/introduction
+  
+- file: intro-qc/intro-qc
+  sections:
+  - file: intro-qc/qubits
 
 - file: vqe/vqe
   sections:
