@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
@@ -486,8 +488,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#classical-comparison-bits">
-   Classical comparison: bits
+  <a class="reference internal nav-link" href="#qubit-representation">
+   Qubit representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#converting-the-coefficients">
+   Converting the coefficients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -530,8 +537,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#classical-comparison-bits">
-   Classical comparison: bits
+  <a class="reference internal nav-link" href="#qubit-representation">
+   Qubit representation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#converting-the-coefficients">
+   Converting the coefficients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -566,35 +578,84 @@ title="Print to PDF"
 <p>What is the first thing that a person beginning their journey in quantum computing needs to understand? Well, this could be a rather contested statement, but arguably the most important bit of information (pun intended) is the <em>qubit</em>. What is a qubit? How does this tie into the classical computing we’re all used to? How does a qubit rely on quantum mechanics and how can we get information from one? All of these questions will be answered shortly in this section, so read on!</p>
 <section id="what-are-qubits">
 <h2>What are qubits?<a class="headerlink" href="#what-are-qubits" title="Permalink to this headline">#</a></h2>
-<p>–insert text here–</p>
+<p>Jumping right into it, a <strong>qubit</strong> is the quantum mechanical equivalent of a classical <strong>bit</strong>, which you saw in any computer science or computational physics course. What was the bit defined as then? A <strong>bit</strong> is a small amount of information stored in a computer using <em>binary code</em>, i.e. 0 or 1. When it comes down to it, all information is stored in this way, with strings of 0s and 1s building up to more and more complex pieces of data.</p>
+<p>With this concept established, a <strong>qubit</strong> is then a piece of information stored in a quantum mechanical way, instead of a classical way. They are still like bits, in that they store small snippets of information and can be built up into larger and larger data sources, but they differ in this quantum mechanical sense from their classical counterparts, which we will see below.</p>
 </section>
-<section id="classical-comparison-bits">
-<h2>Classical comparison: bits<a class="headerlink" href="#classical-comparison-bits" title="Permalink to this headline">#</a></h2>
-<p>–insert text here–</p>
+<section id="qubit-representation">
+<h2>Qubit representation<a class="headerlink" href="#qubit-representation" title="Permalink to this headline">#</a></h2>
+<p>In classical cases, you will see the bit simply represented as <strong>0</strong> or <strong>1</strong>, as just discussed above. However, this changes when one is looking at a qubit. Qubits can be represented using Dirac notation—from elementary quantum mechanics—as</p>
+<div class="math notranslate nohighlight">
+\[
+| 0 \rangle ~~~~~ \textit{or} ~~~~~ | 1 \rangle
+\]</div>
+<p>which qualify as a <em>qubit state</em>. This can be better written as</p>
+<div class="math notranslate nohighlight">
+\[
+| \psi \rangle = \alpha | 0 \rangle + \beta | 1 \rangle. 
+\]</div>
+<p>But wait! What is this? Qubit states can be written as a <strong>superposition</strong> of individual qubits? This is where the quantum mechanical effect starts to rear its head. <span class="math notranslate nohighlight">\(| \psi \rangle\)</span> above is absolutely in a superposition of the states <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>, and this gives rise to two <em>very</em> important points:</p>
+<ol class="simple">
+<li><p>A qubit state does not have to be only in the state 0 or 1 (though it can be in only one of those two states); it can also be in any superposition of the two, leading to an infinite number of possible qubit states. This is in stark contrast to the classical bit, which has only the two possible states of 0 and 1.</p></li>
+<li><p>Probability must now be not only considered, but also conserved, which means taking care to keep track of the coefficients <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> in <span class="math notranslate nohighlight">\(| \psi \rangle\)</span> above. After all, quantum mechanics is highly probabilistic, and this will come up again and again in quantum computing.</p></li>
+</ol>
+<p>From the second point above, these states follow the rule that, in order to conserve probability (and hence normalize the statevector),</p>
+<div class="math notranslate nohighlight">
+\[
+|\alpha|^{2} + |\beta|^{2} = 1.
+\]</div>
+<p>This also helps lend credence to the first point above—<span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> could be any two numbers that sum to one.</p>
+</section>
+<section id="converting-the-coefficients">
+<h2>Converting the coefficients<a class="headerlink" href="#converting-the-coefficients" title="Permalink to this headline">#</a></h2>
+<p>Before we talk about measuring or visualizing the qubit state, we want to think about the coefficients of the two states <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> as real numbers. To avoid them being complex, we can first pull any complex numbers out of the coefficients by writing</p>
+<div class="math notranslate nohighlight">
+\[
+| \psi \rangle = \alpha |0\rangle + \beta e^{i\phi} |1\rangle,
+\]</div>
+<p>where the <span class="math notranslate nohighlight">\(\phi\)</span> angle is now considered the <em>phase</em> of the qubit state. We could, of course, have written an <strong>global phase</strong> for the entire statevector <span class="math notranslate nohighlight">\(|\psi\rangle\)</span>, but this would not be a phase we could measure—how would one measure something when one has no reference point to consider? Hence we do not write any overall phase factor, only the one contained in <span class="math notranslate nohighlight">\(e^{i\phi}\)</span>. This form of the statevector will also help tremendously in making sure we know which state we are considering [2]. Why is the phase here attached to only one of the individual states? Because it is the <strong>relative phase</strong> between the <span class="math notranslate nohighlight">\(|0\rangle\)</span> state and the <span class="math notranslate nohighlight">\(|1\rangle\)</span> state [2].</p>
+<p>We can continue on to define the coefficients in a trigonometric fashion instead of just <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>—this can be done by writing the statevector <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+| \psi \rangle = \cos\frac{\theta}{2} |0\rangle + \sin\frac{\theta}{2} e^{i\phi} |1\rangle, 
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> is now contained in the coefficients of both states. These actions have changed our unknown variables from <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> to <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span>, and this will now make it much easier to visualize the qubit statevector.</p>
 </section>
 <section id="visualizing-a-qubit-state">
 <h2>Visualizing a qubit state<a class="headerlink" href="#visualizing-a-qubit-state" title="Permalink to this headline">#</a></h2>
+<p>A qubit state can be thought of as a vector in a portion of Hilbert space that can be seen on a sphere if we consider the coordinates to be spherical (with <span class="math notranslate nohighlight">\(r\)</span>, the magnitude of the statevector, set to 1) [2]. With <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> now understood, we can finally take a look at an example of a qubit statevector with <span class="math notranslate nohighlight">\(\theta = 0\)</span> and <span class="math notranslate nohighlight">\(\phi = 0\)</span>. This means our statevector now looks like</p>
+<div class="math notranslate nohighlight">
+\[
+|\psi \rangle = |0\rangle. 
+\]</div>
 <p>Below we can use Qiskit, the IBM Quantum Computing package, to visualize the vector on the Bloch sphere.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import Qiskit </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import Qiskit package </span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">visualization</span>
 
-<span class="c1">#plot the Bloch sphere with selected vector</span>
+<span class="c1">#plot the Bloch sphere with selected vector (in cartesian coordinates!)</span>
 <span class="n">visualization</span><span class="o">.</span><span class="n">plot_bloch_vector</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/qubits_9_0.png" src="../_images/qubits_9_0.png" />
+<img alt="../_images/qubits_11_0.png" src="../_images/qubits_11_0.png" />
 </div>
 </div>
 </section>
 <section id="measurement-of-qubits">
 <h2>Measurement of qubits<a class="headerlink" href="#measurement-of-qubits" title="Permalink to this headline">#</a></h2>
+<p><a id='measurement_qubits'></a></p>
+<p>Measuring qubits will be covered in more detail later on when we actually look at how circuits can be built with multiple qubits included, but for now we will talk a little bit about how to measure one. Recalling what we know from quantum mechanics, measuring the state of a system will <strong>collapse</strong> the wavefunction of that state into a definite answer that will no longer be fluid, or a superposition of states. This same principle applies in quantum computing to qubits: if the qubit’s state is measured, it will collapse into either the <span class="math notranslate nohighlight">\(|0\rangle\)</span> state or the <span class="math notranslate nohighlight">\(|1\rangle\)</span> state. No matter how many times it is measured, no other measurement outcome will be seen. How, then, can we know what the probability is for obtaining either 0 or 1 as a result?</p>
+<p>As in statistical mechanics, an <strong>ensemble</strong> of identical states must be ‘’prepared’’ to tackle this problem. If we measure each individual state in the ensemble, and they are all identical, their measurements will give us an idea of this probability as more and more measurements are made.</p>
+<p>Later on, when we do actual measurements on either a simulator or an actual quantum computer, we will see that a number of <em>shots</em> must be made when making these measurements on qubit states, and usually this is a very large number (such as <span class="math notranslate nohighlight">\(2^{13}\)</span> shots). This is so we have enough identically prepared states to gain a concrete estimate of the probability of our measuring either 0 or 1 from our qubit. And what does this probability correspond to? Of course, the coefficient of our <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> states in our overall statevector!</p>
+<hr class="docutils" />
+<p>In the next section, we will take a look at the postulates of quantum mechanics, written this time around for qubits and quantum computing.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<p>[1] Nielsen, M. A., &amp; Chuang, I. L. (2011). Quantum Computation and Quantum Information: 10th Anniversary Edition. Cambridge University Press.</p>
+<p>[2] Qiskit textbook, “Quantum States and Qubits: Representing Qubit States” (exact page found <a class="reference external" href="https://learn.qiskit.org/course/ch-states/representing-qubit-states">here</a>).</p>
 </section>
 </section>
 
