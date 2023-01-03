@@ -8,6 +8,8 @@ chapters:
 - file: intro-qc/intro-qc
   sections:
   - file: intro-qc/qubits
+  - file: intro-qc/gates
+  - file: intro-qc/computer_science
 
 - file: vqe/vqe
   sections:
