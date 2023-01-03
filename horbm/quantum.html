@@ -134,6 +134,16 @@ const thebe_selector_output = ".output, .cell_output"
      From classical to quantum: bits to qubits
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro-qc/gates.html">
+     Quantum gates and simple circuits
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../intro-qc/computer_science.html">
+     Quantum algorithms and P/NP space
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -562,7 +572,7 @@ title="Print to PDF"
 <span class="c1">### NOTE: hbar = 1 in this demo</span>
 <span class="c1">### First define exact solutions to compare numerical solutions to.</span>
 <span class="k">def</span> <span class="nf">V</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    1-d harmonic Oscillator potential</span>
 
 <span class="sd">    Parameters</span>
@@ -580,7 +590,7 @@ title="Print to PDF"
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">return</span> <span class="n">alpha</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span>
 <span class="k">def</span> <span class="nf">construct_H</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">mass</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Uses 2nd order finite difference scheme to construct a discretized differential H operator</span>
 <span class="sd">    Note: mass is fixed to 1 for this demo.</span>
 
@@ -603,7 +613,7 @@ title="Print to PDF"
     <span class="n">H</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">dim</span><span class="p">)</span> <span class="o">+</span> <span class="n">sci</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">toeplitz</span><span class="p">(</span><span class="n">off_diag</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">mass</span><span class="o">*</span><span class="n">h</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">V</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span><span class="n">alpha</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">H</span>
 <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">H</span><span class="p">,</span><span class="n">grid</span><span class="p">,</span><span class="n">h</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    H : 2d ndarray</span>

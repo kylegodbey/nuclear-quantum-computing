@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Dimensionality Reduction &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Quantum algorithms and P/NP space &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quantum Harmonic Oscillator as a two level system" href="classical.html" />
-    <link rel="prev" title="Real Hardware: N=2 Case" href="../hardware/ibm.html" />
+    <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
+    <link rel="prev" title="Quantum gates and simple circuits" href="gates.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -119,28 +119,28 @@ const thebe_selector_output = ".output, .cell_output"
    Introduction
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../intro-qc/intro-qc.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro-qc.html">
    Quantum computing: a brief introduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/qubits.html">
+    <a class="reference internal" href="qubits.html">
      From classical to quantum: bits to qubits
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/gates.html">
+    <a class="reference internal" href="gates.html">
      Quantum gates and simple circuits
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/computer_science.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Quantum algorithms and P/NP space
     </a>
    </li>
@@ -229,23 +229,23 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../horbm/horbm.html">
    Dimensionality Reduction
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
   <label for="toctree-checkbox-6">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="classical.html">
+    <a class="reference internal" href="../horbm/classical.html">
      Quantum Harmonic Oscillator as a two level system
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="quantum.html">
+    <a class="reference internal" href="../horbm/quantum.html">
      Reduced Basis Method on a Quantum Computer
     </a>
    </li>
@@ -317,6 +317,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/intro-qc/computer_science.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/intro-qc/computer_science.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -356,7 +403,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fhorbm/horbm.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fintro-qc/computer_science.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -384,7 +431,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/horbm/horbm.md"
+        <a href="../_sources/intro-qc/computer_science.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -395,7 +442,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -433,7 +480,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Dimensionality Reduction</h1>
+                <h1>Quantum algorithms and P/NP space</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -445,13 +492,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="dimensionality-reduction">
-<h1>Dimensionality Reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">#</a></h1>
-<p>Author: Pablo Giuliani</p>
-<p>As physicists, we are usually trying to find the important degrees of freedom of the system we want to study. If we consider too few, our theories become too simple and can’t describe what we see. If we include too many, then our calculations become impossible to perform (perhaps even on lightning fast quantum computers!). Finding the right degrees of freedom to consider has usually been more of an art than a science, and it is a feature that many successful theories have shared over the centuries. Dimensionality reduction techniques - a series of novel approaches mostly developed in the last decades thanks to the increase in classical computational power - have transformed many areas of science by allowing us to select the degrees of freedom that are ‘just right’.</p>
-<p>In this chapter we will explore one such dimensionality reduction technique called the Reduced Basis Method, which comes under the umbrella of Reduced Order Models. This reduction will enable us to tackle a simple and a not-so-simple problem on a quantum computer using just a small number of qubits. We start first with the simple one: the Quantum Harmonic Oscillator.</p>
-<div class="toctree-wrapper compound">
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="quantum-algorithms-and-p-np-space">
+<h1>Quantum algorithms and P/NP space<a class="headerlink" href="#quantum-algorithms-and-p-np-space" title="Permalink to this headline">#</a></h1>
+<p>Author: Alexandra Semposki</p>
+<p>Maintainer: Alexandra Semposki</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -467,7 +511,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./horbm"
+            path: "./intro-qc"
         },
         predefinedOutput: true
     }
@@ -481,17 +525,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../hardware/ibm.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="gates.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Real Hardware: N=2 Case</p>
+            <p class="prev-next-title">Quantum gates and simple circuits</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="classical.html" title="next page">
+    <a class='right-next' id="next-link" href="../vqe/vqe.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quantum Harmonic Oscillator as a two level system</p>
+        <p class="prev-next-title">Variational Quantum Eigensolver</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

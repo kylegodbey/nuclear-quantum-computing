@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
+    <link rel="next" title="Quantum gates and simple circuits" href="gates.html" />
     <link rel="prev" title="Quantum computing: a brief introduction" href="intro-qc.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -134,6 +134,16 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      From classical to quantum: bits to qubits
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="gates.html">
+     Quantum gates and simple circuits
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="computer_science.html">
+     Quantum algorithms and P/NP space
     </a>
    </li>
   </ul>
@@ -650,7 +660,7 @@ title="Print to PDF"
 <p>As in statistical mechanics, an <strong>ensemble</strong> of identical states must be ‘’prepared’’ to tackle this problem. If we measure each individual state in the ensemble, and they are all identical, their measurements will give us an idea of this probability as more and more measurements are made.</p>
 <p>Later on, when we do actual measurements on either a simulator or an actual quantum computer, we will see that a number of <em>shots</em> must be made when making these measurements on qubit states, and usually this is a very large number (such as <span class="math notranslate nohighlight">\(2^{13}\)</span> shots). This is so we have enough identically prepared states to gain a concrete estimate of the probability of our measuring either 0 or 1 from our qubit. And what does this probability correspond to? Of course, the coefficient of our <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> states in our overall statevector!</p>
 <hr class="docutils" />
-<p>In the next section, we will take a look at the postulates of quantum mechanics, written this time around for qubits and quantum computing.</p>
+<p>In the next section, we will take a look at <strong>quantum gates</strong> and how to use qubits with these gates in simple quantum circuits.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
@@ -693,10 +703,10 @@ title="Print to PDF"
             <p class="prev-next-title">Quantum computing: a brief introduction</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../vqe/vqe.html" title="next page">
+    <a class='right-next' id="next-link" href="gates.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Variational Quantum Eigensolver</p>
+        <p class="prev-next-title">Quantum gates and simple circuits</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
