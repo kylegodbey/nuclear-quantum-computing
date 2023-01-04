@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Quantum algorithms and P/NP space" href="computer_science.html" />
@@ -491,8 +493,13 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quantum-operators">
-   Quantum operators
+  <a class="reference internal nav-link" href="#two-qubit-states">
+   Two-qubit states
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quantum-operators-from-matrices-to-gates">
+   Quantum operators: from matrices to gates
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -503,6 +510,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-few-simple-circuits">
    A few simple circuits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-bell-states">
+   Example: Bell states
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -530,8 +542,13 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quantum-operators">
-   Quantum operators
+  <a class="reference internal nav-link" href="#two-qubit-states">
+   Two-qubit states
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quantum-operators-from-matrices-to-gates">
+   Quantum operators: from matrices to gates
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -542,6 +559,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-few-simple-circuits">
    A few simple circuits
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-bell-states">
+   Example: Bell states
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -564,9 +586,32 @@ title="Print to PDF"
 <p>Author: Alexandra Semposki</p>
 <p>Maintainer: Alexandra Semposki</p>
 <p>Now that you have established a working understanding of qubits, you will see below how to use them with quantum gates in simple circuits of one to two qubits. Later on, we can tackle more complicated circuits, but for now we just need a basic knowledge of how to read a quantum circuit and how to follow the qubits through the actions performed on them by the quantum gates. Being able to quickly read a quantum circuit is a wonderful skill to have and will be highly beneficial if you go on to read state of the art quantum computing research articles, where circuits can get very complex <em>very</em> rapidly.</p>
-<section id="quantum-operators">
-<h2>Quantum operators<a class="headerlink" href="#quantum-operators" title="Permalink to this headline">#</a></h2>
+<section id="two-qubit-states">
+<h2>Two-qubit states<a class="headerlink" href="#two-qubit-states" title="Permalink to this headline">#</a></h2>
+<p>Before jump into the operators, gates, and simple circuits to come, we first look at the two-qubit state, a step up from the last lesson where we only dealt with a single qubit.</p>
+<p>Two qubit states will involve four total computational basis states, since we can combine two qubits of <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span> into four different two-qubit states, such as <span class="math notranslate nohighlight">\(|01\rangle\)</span>. The full expression for the two-qubit state is given as</p>
+<div class="math notranslate nohighlight">
+\[
+|\psi\rangle = \alpha |00\rangle + \beta |01\rangle + \gamma |10\rangle + \delta |11\rangle,
+\]</div>
+<p>where the normalization of the state, if we only measured one qubit of the two, now is given as [1]</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{x\in\{0,1\}^{2}} |c_{x}|^{2} = 1,
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> contains all coefficients in <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> (<span class="math notranslate nohighlight">\(c \in \{\alpha, \beta, \gamma, \delta\}\)</span>), and <span class="math notranslate nohighlight">\(x\)</span> here is a set of two numbers where either number is 0 or 1 [1]. This will become clearer when we get to two-qubit Bell states (see the section <a class="reference external" href="#bell_states">Example: Bell states</a> below).</p>
+</section>
+<section id="quantum-operators-from-matrices-to-gates">
+<h2>Quantum operators: from matrices to gates<a class="headerlink" href="#quantum-operators-from-matrices-to-gates" title="Permalink to this headline">#</a></h2>
 <p>&lt; put Pauli operators &gt;</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import Qiskit</span>
+<span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="quantum-gates">
 <h2>Quantum gates<a class="headerlink" href="#quantum-gates" title="Permalink to this headline">#</a></h2>
@@ -575,6 +620,36 @@ title="Print to PDF"
 <section id="a-few-simple-circuits">
 <h2>A few simple circuits<a class="headerlink" href="#a-few-simple-circuits" title="Permalink to this headline">#</a></h2>
 <p>&lt; do the simplest circuits that transform into one another, etc. &gt;</p>
+</section>
+<section id="example-bell-states">
+<h2>Example: Bell states<a class="headerlink" href="#example-bell-states" title="Permalink to this headline">#</a></h2>
+<p><a id='bell_states'></a></p>
+<p>Let’s look at a simple two-qubit circuit where we prepare the four Bell states below.</p>
+<div class="math notranslate nohighlight">
+\[ 
+|\Phi^{+}\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+|\Phi^{-}\rangle = \frac{|00\rangle - |11\rangle}{\sqrt{2}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+|\Psi^{+}\rangle = \frac{|01\rangle + |10\rangle}{\sqrt{2}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+|\Psi^{-}\rangle = \frac{|01\rangle - |10\rangle}{\sqrt{2}}
+\]</div>
+<p>What are these <strong>Bell states</strong>? What purpose do they have? Well, they use the Hadamard and CNOT gates we just discussed individually above, and they have some very interesting properties, including quantum teleportation! They play a very important role in the EPR paradox and the recent 2022 Physics Nobel Prize (see <a class="reference external" href="https://www.youtube.com/embed/9OM0jSTeeBg">this comprehensive YouTube video</a> from IBM Quantum for more information on Bell states and Bell’s inequality).</p>
+<p>To prepare our circuits, we set up a <code class="docutils literal notranslate"><span class="pre">QuantumCircuit</span></code> object using Qiskit and set it for 2 qubits and 2 classical bits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#set up the circuits (do this later on)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
