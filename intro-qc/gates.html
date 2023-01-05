@@ -704,9 +704,10 @@ title="Print to PDF"
 \sigma_{z} = Z = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; -1 \end{bmatrix},
 \end{split}\]</div>
 <p>and</p>
-<p>$<span class="math notranslate nohighlight">\(
+<div class="math notranslate nohighlight">
+\[\begin{split}
 I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
-\)</span>$.</p>
+\end{split}\]</div>
 <p>These can be called in <code class="docutils literal notranslate"><span class="pre">Qiskit</span></code> to use as gates on a single qubit, which we’ll look at below.</p>
 <p>This now requires us to discuss the classical sense of <em>logic gate</em> and compare it to the <em>quantum logic gate</em>. In classical computers, we have logic gates, i.e. the AND, NOR, and XOR gates, to name a few, which are connected to wires in the circuit. In quantum computing, we consider the wires to be the qubits and the logic gates to be operations (such as the Pauli matrices) that affect the state of the qubit. As we will see, there are quantum logic gates that are the direct quantum analog of classical logic gates, and there are some new ones, as well. For example, look at the <span class="math notranslate nohighlight">\(X\)</span> gate above. It is the equivalent of the NOT gate in classical computing, as it flips a 0 to a 1, and a 1 to a 0, as we’ll see in the circuits we construct later on.</p>
 <p>You may be asking yourself how this matrix works when it is clearly four values, and the qubits we have seen so far have merely been defined in basis states of <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>. This works because these basis states are defined for as the vectors <span class="math notranslate nohighlight">\(|0\rangle = \begin{pmatrix}1 \\ 0\end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(|1\rangle = \begin{pmatrix} 0 \\ 1\end{pmatrix}\)</span>. Hence, acting with a 2x2 matrix on these vectors will produce another vector, which will correspond to the altered qubit state.</p>
@@ -1040,6 +1041,36 @@ H|1\rangle = |-\rangle,
 <img alt="../_images/gates_41_1.png" src="../_images/gates_41_1.png" />
 </div>
 </div>
+<p>Now that we have these states established, we can put our knowledge of measuring circuits to use, and check to see if we obtain the states we expect from the four circuits above. To do this, we need to first set up the <strong>simulator</strong>. You may have noticed that we used a simulator earlier on, the <code class="docutils literal notranslate"><span class="pre">Qiskit.Aer</span></code> simulator, to see the statevectors from our simple circuits on the Bloch sphere. Now we’ll use one of these so-called ‘’noiseless’’ simulators to act like a quantum computer and measure this circuit many, many times. This is done, as previously discussed, to develop a probability for each state since measuring once will collapse the wavefunction and give us only one of the possible results. Hence, we measure many identical circuits using the <code class="docutils literal notranslate"><span class="pre">shots</span></code> argument of the simulator, as seen below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># measure the four circuits respectively</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">shots</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">13</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;aer_simulator&#39;</span><span class="p">)</span>
+<span class="n">bells</span> <span class="o">=</span> <span class="p">[</span><span class="n">bell1</span><span class="p">,</span> <span class="n">bell2</span><span class="p">,</span> <span class="n">bell3</span><span class="p">,</span> <span class="n">bell4</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bells</span><span class="p">:</span>
+    <span class="n">qc_trans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">sim</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">qc_trans</span><span class="p">:</span>
+    <span class="n">counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">())</span>
+            
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bell </span><span class="si">{}</span><span class="s1"> counts: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">counts</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bell 1 counts: {&#39;11&#39;: 4112, &#39;00&#39;: 4080}
+Bell 2 counts: {&#39;00&#39;: 4079, &#39;11&#39;: 4113}
+Bell 3 counts: {&#39;01&#39;: 4127, &#39;10&#39;: 4065}
+Bell 4 counts: {&#39;10&#39;: 4044, &#39;01&#39;: 4148}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, the first and second states contain the <span class="math notranslate nohighlight">\(|00\rangle\)</span> and <span class="math notranslate nohighlight">\(|11\rangle\)</span> two-qubit computational basis states, and the third and fourth states contain the <span class="math notranslate nohighlight">\(|01\rangle\)</span> and <span class="math notranslate nohighlight">\(|10\rangle\)</span> basis states. Later in these pages we’ll see these Bell states used to compare the results of a noiseless simulator to that of a simulator using real quantum noise. For now, however, we’ll move on to a short crash course on computer science and role of quantum computing within it in the present and near future.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
