@@ -498,15 +498,10 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quantum-gates">
-   Quantum gates
+  <a class="reference internal nav-link" href="#single-qubit-gates">
+   Single qubit gates
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-qubit-gates">
-     Single qubit gates
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#not-gate">
      NOT gate
@@ -528,18 +523,25 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#phase-gate">
-     Phase gate
+    <a class="reference internal nav-link" href="#s-gate">
+     S gate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-qubit-gates">
+   Multiple qubit gates
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cnot-gate">
+     CNOT gate
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#toffoli-gate">
      Toffoli gate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multiple-qubit-gates">
-     Multiple qubit gates
     </a>
    </li>
   </ul>
@@ -589,15 +591,10 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quantum-gates">
-   Quantum gates
+  <a class="reference internal nav-link" href="#single-qubit-gates">
+   Single qubit gates
   </a>
   <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#single-qubit-gates">
-     Single qubit gates
-    </a>
-   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#not-gate">
      NOT gate
@@ -619,18 +616,25 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#phase-gate">
-     Phase gate
+    <a class="reference internal nav-link" href="#s-gate">
+     S gate
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiple-qubit-gates">
+   Multiple qubit gates
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cnot-gate">
+     CNOT gate
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#toffoli-gate">
      Toffoli gate
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multiple-qubit-gates">
-     Multiple qubit gates
     </a>
    </li>
   </ul>
@@ -686,10 +690,8 @@ title="Print to PDF"
 <p>where <span class="math notranslate nohighlight">\(c\)</span> contains all coefficients in <span class="math notranslate nohighlight">\(|\psi\rangle\)</span> (<span class="math notranslate nohighlight">\(c \in \{\alpha, \beta, \gamma, \delta\}\)</span>), and <span class="math notranslate nohighlight">\(x\)</span> here is a set of two numbers where either number is 0 or 1 [1].</p>
 <p>This will all become clearer when we get to two-qubit Bell states (see the section <a class="reference external" href="#bell_states">Example: Bell states</a> below). First, however, we’ll deal with some single qubit gates.</p>
 </section>
-<section id="quantum-gates">
-<h2>Quantum gates<a class="headerlink" href="#quantum-gates" title="Permalink to this headline">#</a></h2>
 <section id="single-qubit-gates">
-<h3>Single qubit gates<a class="headerlink" href="#single-qubit-gates" title="Permalink to this headline">#</a></h3>
+<h2>Single qubit gates<a class="headerlink" href="#single-qubit-gates" title="Permalink to this headline">#</a></h2>
 <p>Some single-qubit gates are very familiar quantum operators that you will recognise immediately as the <strong>Pauli matrices</strong>. Recall that these are <span class="math notranslate nohighlight">\(\sigma_{x}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{y}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{z}\)</span>, and the identity, <span class="math notranslate nohighlight">\(I\)</span>. These become, respectively, <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>, <span class="math notranslate nohighlight">\(Z\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> in quantum computing language. They are defined in matrix form as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -711,7 +713,6 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 <p>These can be called in <code class="docutils literal notranslate"><span class="pre">Qiskit</span></code> to use as gates on a single qubit, which we’ll look at below.</p>
 <p>This now requires us to discuss the classical sense of <em>logic gate</em> and compare it to the <em>quantum logic gate</em>. In classical computers, we have logic gates, i.e. the AND, NOR, and XOR gates, to name a few, which are connected to wires in the circuit. In quantum computing, we consider the wires to be the qubits and the logic gates to be operations (such as the Pauli matrices) that affect the state of the qubit. As we will see, there are quantum logic gates that are the direct quantum analog of classical logic gates, and there are some new ones, as well. For example, look at the <span class="math notranslate nohighlight">\(X\)</span> gate above. It is the equivalent of the NOT gate in classical computing, as it flips a 0 to a 1, and a 1 to a 0, as we’ll see in the circuits we construct later on.</p>
 <p>You may be asking yourself how this matrix works when it is clearly four values, and the qubits we have seen so far have merely been defined in basis states of <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>. This works because these basis states are defined for as the vectors <span class="math notranslate nohighlight">\(|0\rangle = \begin{pmatrix}1 \\ 0\end{pmatrix}\)</span> and <span class="math notranslate nohighlight">\(|1\rangle = \begin{pmatrix} 0 \\ 1\end{pmatrix}\)</span>. Hence, acting with a 2x2 matrix on these vectors will produce another vector, which will correspond to the altered qubit state.</p>
-</section>
 <hr class="docutils" />
 <section id="not-gate">
 <h3>NOT gate<a class="headerlink" href="#not-gate" title="Permalink to this headline">#</a></h3>
@@ -734,7 +735,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_9_0.png" src="../_images/gates_9_0.png" />
+<img alt="../_images/gates_8_0.png" src="../_images/gates_8_0.png" />
 </div>
 </div>
 <p>The above circuit is drawn before we’ve added any gates, so all we see is the single qubit wire, <span class="math notranslate nohighlight">\(q\)</span>, and the classical bit <span class="math notranslate nohighlight">\(c\)</span>, which is represented by a double line to indicate its classical nature. This bit will be crucial when it comes to measuring the circuit, a topic we’ll come to soon.</p>
@@ -747,7 +748,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_11_0.png" src="../_images/gates_11_0.png" />
+<img alt="../_images/gates_10_0.png" src="../_images/gates_10_0.png" />
 </div>
 </div>
 <p>In a <code class="docutils literal notranslate"><span class="pre">Qiskit</span></code> quantum circuit object, each qubit begins automatically with the assignment of the state <span class="math notranslate nohighlight">\(|0\rangle\)</span>, so we know that this NOT gate has converted <span class="math notranslate nohighlight">\(q\)</span> from <span class="math notranslate nohighlight">\(|0\rangle\)</span> to <span class="math notranslate nohighlight">\(|1\rangle\)</span>. Later on, when we measure this circuit, we will see this for ourselves.</p>
@@ -767,7 +768,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_13_0.png" src="../_images/gates_13_0.png" />
+<img alt="../_images/gates_12_0.png" src="../_images/gates_12_0.png" />
 </div>
 </div>
 <p>Now we pull up the Bloch sphere.</p>
@@ -777,7 +778,6 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 <span class="kn">from</span> <span class="nn">qiskit.visualization</span> <span class="kn">import</span> <span class="n">plot_bloch_vector</span><span class="p">,</span> <span class="n">plot_bloch_multivector</span>
 <span class="kn">from</span> <span class="nn">qiskit</span> <span class="kn">import</span> <span class="n">Aer</span>
 <span class="n">svsim</span> <span class="o">=</span> <span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;statevector_simulator&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -794,7 +794,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before Y gate:
 </pre></div>
 </div>
-<img alt="../_images/gates_16_1.png" src="../_images/gates_16_1.png" />
+<img alt="../_images/gates_15_1.png" src="../_images/gates_15_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -811,7 +811,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After Y gate:
 </pre></div>
 </div>
-<img alt="../_images/gates_17_1.png" src="../_images/gates_17_1.png" />
+<img alt="../_images/gates_16_1.png" src="../_images/gates_16_1.png" />
 </div>
 </div>
 <p>We can see from the above that this gate rotated <span class="math notranslate nohighlight">\(|0\rangle\)</span> by <span class="math notranslate nohighlight">\(\pi\)</span> to the <span class="math notranslate nohighlight">\(|1\rangle\)</span> state, which is equivalent to rotating about the y axis by 180 degrees on the Bloch sphere. Because this gate involves complex numbers, in real space it looks merely like the NOT gate on the Bloch sphere, but it is indeed a whole different operator with its own unique actions.</p>
@@ -831,7 +831,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_19_0.png" src="../_images/gates_19_0.png" />
+<img alt="../_images/gates_18_0.png" src="../_images/gates_18_0.png" />
 </div>
 </div>
 <p>Now, to achieve the application of the <span class="math notranslate nohighlight">\(Z\)</span> gate on the <span class="math notranslate nohighlight">\(|1\rangle\)</span> state, we must first apply the <span class="math notranslate nohighlight">\(X\)</span> gate to our qubit to flip it.</p>
@@ -846,7 +846,7 @@ I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_21_0.png" src="../_images/gates_21_0.png" />
+<img alt="../_images/gates_20_0.png" src="../_images/gates_20_0.png" />
 </div>
 </div>
 <p>We cannot see anything obvious here, except for the construction of our circuit, but this is useful knowledge to have going forward for when we want to construct the four Bell states, when we must be very careful about the ordering of our gates and the qubits they are acting on.</p>
@@ -882,7 +882,7 @@ H|1\rangle = \frac{1}{\sqrt{2}}\begin{bmatrix}1 &amp; 1 \\ 1 &amp; -1\end{bmatri
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_23_0.png" src="../_images/gates_23_0.png" />
+<img alt="../_images/gates_22_0.png" src="../_images/gates_22_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -899,7 +899,7 @@ H|1\rangle = \frac{1}{\sqrt{2}}\begin{bmatrix}1 &amp; 1 \\ 1 &amp; -1\end{bmatri
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>After H gate:
 </pre></div>
 </div>
-<img alt="../_images/gates_24_1.png" src="../_images/gates_24_1.png" />
+<img alt="../_images/gates_23_1.png" src="../_images/gates_23_1.png" />
 </div>
 </div>
 <p>The location of our vector above makes sense, as the Hadamard gate yields <span class="math notranslate nohighlight">\(\frac{|0\rangle + |1\rangle}{\sqrt{2}}\)</span> for this initial basis state, and this vector is clearly halfway between the states of <span class="math notranslate nohighlight">\(|0\rangle\)</span> and <span class="math notranslate nohighlight">\(|1\rangle\)</span>.</p>
@@ -917,14 +917,43 @@ H|1\rangle = |-\rangle,
 <hr class="docutils" />
 <p>Now let’s look at the last couple of single qubit gates we’ll want to know.</p>
 </section>
-<section id="phase-gate">
-<h3>Phase gate<a class="headerlink" href="#phase-gate" title="Permalink to this headline">#</a></h3>
+<section id="s-gate">
+<h3>S gate<a class="headerlink" href="#s-gate" title="Permalink to this headline">#</a></h3>
+<p>The <span class="math notranslate nohighlight">\(S\)</span> gate is a special case of the more general <span class="math notranslate nohighlight">\(P\)</span> gate, which we may use in the future but will not discuss in detail now [2]. The <span class="math notranslate nohighlight">\(S\)</span> gate is a phase gate, in that it changes the phase of the qubit it is acting on. It can be described in matrix form as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+S = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{\frac{i\pi}{2}}\end{bmatrix},
+\end{split}\]</div>
+<p>and we can also have its Hermitian adjoint, which is given as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatrix}.
+\end{split}\]</div>
+<p>This gate will rotate a vector on the Bloch sphere by <span class="math notranslate nohighlight">\(\pi/2\)</span>, as is indicated by the angle in the exponent. Below we show a two-qubit circuit where one qubit has had the <span class="math notranslate nohighlight">\(S\)</span> gate applied, and one the <span class="math notranslate nohighlight">\(S^{\dagger}\)</span> gate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># quantum circuit for S gate and S dagger gate</span>
+<span class="n">qs</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qs</span><span class="o">.</span><span class="n">s</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qs</span><span class="o">.</span><span class="n">sdg</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qs</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/gates_26_0.png" src="../_images/gates_26_0.png" />
+</div>
+</div>
+<p>Now that we’ve seen some of the simpler single qubit gates, it’s time to build up to two and even three qubit gates, and more complex circuits. Let’s jump in with one of the most famous, the CNOT gate!</p>
+</section>
+</section>
+<section id="multiple-qubit-gates">
+<h2>Multiple qubit gates<a class="headerlink" href="#multiple-qubit-gates" title="Permalink to this headline">#</a></h2>
+<section id="cnot-gate">
+<h3>CNOT gate<a class="headerlink" href="#cnot-gate" title="Permalink to this headline">#</a></h3>
 </section>
 <section id="toffoli-gate">
 <h3>Toffoli gate<a class="headerlink" href="#toffoli-gate" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="multiple-qubit-gates">
-<h3>Multiple qubit gates<a class="headerlink" href="#multiple-qubit-gates" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 <section id="measuring-qubit-states-in-circuits">
@@ -974,7 +1003,7 @@ H|1\rangle = |-\rangle,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_38_1.png" src="../_images/gates_38_1.png" />
+<img alt="../_images/gates_39_1.png" src="../_images/gates_39_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -995,7 +1024,7 @@ H|1\rangle = |-\rangle,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Second Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_39_1.png" src="../_images/gates_39_1.png" />
+<img alt="../_images/gates_40_1.png" src="../_images/gates_40_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1016,7 +1045,7 @@ H|1\rangle = |-\rangle,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Third Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_40_1.png" src="../_images/gates_40_1.png" />
+<img alt="../_images/gates_41_1.png" src="../_images/gates_41_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1038,7 +1067,7 @@ H|1\rangle = |-\rangle,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fourth Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_41_1.png" src="../_images/gates_41_1.png" />
+<img alt="../_images/gates_42_1.png" src="../_images/gates_42_1.png" />
 </div>
 </div>
 <p>Now that we have these states established, we can put our knowledge of measuring circuits to use, and check to see if we obtain the states we expect from the four circuits above. To do this, we need to first set up the <strong>simulator</strong>. You may have noticed that we used a simulator earlier on, the <code class="docutils literal notranslate"><span class="pre">Qiskit.Aer</span></code> simulator, to see the statevectors from our simple circuits on the Bloch sphere. Now we’ll use one of these so-called ‘’noiseless’’ simulators to act like a quantum computer and measure this circuit many, many times. This is done, as previously discussed, to develop a probability for each state since measuring once will collapse the wavefunction and give us only one of the possible results. Hence, we measure many identical circuits using the <code class="docutils literal notranslate"><span class="pre">shots</span></code> argument of the simulator, as seen below.</p>

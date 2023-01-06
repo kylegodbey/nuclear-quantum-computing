@@ -593,19 +593,19 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>Let us consider the Schrodinger equation for the 1-d Harmonic Oscillator:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d7a13d9b-6f02-4752-9d19-4060d672a353">
-<span class="eqno">(6)<a class="headerlink" href="#equation-d7a13d9b-6f02-4752-9d19-4060d672a353" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-19e82987-a0d3-4def-8774-6e56b1e2357f">
+<span class="eqno">(6)<a class="headerlink" href="#equation-19e82987-a0d3-4def-8774-6e56b1e2357f" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\Big(- \frac{d^{2}}{dx^{2}} + V_\alpha (x)  - \lambda \Big) \phi = 0, \\
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(V_\alpha(x)=\alpha x^{2}\)</span>. This equation can be written a</p>
-<div class="amsmath math notranslate nohighlight" id="equation-37103aea-49ae-4c6a-839e-140694b48109">
-<span class="eqno">(7)<a class="headerlink" href="#equation-37103aea-49ae-4c6a-839e-140694b48109" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1c707c84-d281-4054-aea9-863289e4d97e">
+<span class="eqno">(7)<a class="headerlink" href="#equation-1c707c84-d281-4054-aea9-863289e4d97e" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;F_{\alpha}\Big[ \phi_{\alpha}(x) \Big] = H_\alpha\phi - \lambda \phi=0 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda = 2 m E\)</span> is the eigenvalue with energy <span class="math notranslate nohighlight">\(E\)</span> and <span class="math notranslate nohighlight">\(\alpha = m^{2} \omega^{2}\)</span> is the harmonic oscilation parameter with oscilation frequency <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
 <p>The shooting method and finite elements methods are among the many approaches to solve such types of equations using classical computers. During this notebook we will follow the finite element method, in which every object is projected onto a discretized space, the functions <span class="math notranslate nohighlight">\(\phi(x)\)</span> becomes vectors, and the operators <span class="math notranslate nohighlight">\(H_\alpha\)</span> matrices. These vectors and matrices could be composed of houndreds or thousands of elements, making it impossible to store such amount of information in a quantum computer with few qbits. For example, 7 qbits are available in the case of the free version of the IBM services. Therefore, if we want to implement an algorithm in a quantum circuit to find solutions to this equation for many values of the parameter <span class="math notranslate nohighlight">\(\alpha\)</span> we need another strategy.  We approximate this equation using dimensionality reduction techniques, such as the <a class="reference external" href="https://link.springer.com/book/10.1007/978-3-319-22470-1">Reduced Basis Method</a>, as was done in <a class="reference external" href="https://kylegodbey.github.io/nuclear-rbm/ho/1dHO.html">this book</a>. These techniques aim at reducing the redundant, or unnecessary, degrees of freedom of the system from many thousand to just a handful. This is done by first restricting the solution to the equation to lay in the span of a basis of <span class="math notranslate nohighlight">\(n\)</span> states:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-11f195de-244b-43af-af4c-ea75d3cc4919">
-<span class="eqno">(8)<a class="headerlink" href="#equation-11f195de-244b-43af-af4c-ea75d3cc4919" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6f5eaf1c-6c07-424c-a018-fcbb477763d0">
+<span class="eqno">(8)<a class="headerlink" href="#equation-6f5eaf1c-6c07-424c-a018-fcbb477763d0" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
@@ -875,35 +875,35 @@ alpha = 15, lambda = 3.8635854863645682
 <h3>Effective two level system “Hamiltonian”<a class="headerlink" href="#effective-two-level-system-hamiltonian" title="Permalink to this headline">#</a></h3>
 <p>We will now model an effective hamiltonian in which two “particles” interact, each one represents one of these two components.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d3b93914-c378-47fd-b0cd-29f04097d198">
-<span class="eqno">(9)<a class="headerlink" href="#equation-d3b93914-c378-47fd-b0cd-29f04097d198" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f61c4b35-6aa2-4628-8b2b-4beb2b6bb331">
+<span class="eqno">(9)<a class="headerlink" href="#equation-f61c4b35-6aa2-4628-8b2b-4beb2b6bb331" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-32ba9bba-5431-4d2c-9c5d-68bd66f8b259">
-<span class="eqno">(10)<a class="headerlink" href="#equation-32ba9bba-5431-4d2c-9c5d-68bd66f8b259" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e4a4c14c-0c67-4f69-bcbc-a73774d3266d">
+<span class="eqno">(10)<a class="headerlink" href="#equation-e4a4c14c-0c67-4f69-bcbc-a73774d3266d" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-21b49550-d932-4af7-8640-8aba0963a5f0">
-<span class="eqno">(11)<a class="headerlink" href="#equation-21b49550-d932-4af7-8640-8aba0963a5f0" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5ca85303-9ec5-4600-b5e1-25d2560dc3b7">
+<span class="eqno">(11)<a class="headerlink" href="#equation-5ca85303-9ec5-4600-b5e1-25d2560dc3b7" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-98bd3432-f9ac-4604-bf42-4bcbf3936f3f">
-<span class="eqno">(12)<a class="headerlink" href="#equation-98bd3432-f9ac-4604-bf42-4bcbf3936f3f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-124ff407-9452-4e81-8881-71fb3595111f">
+<span class="eqno">(12)<a class="headerlink" href="#equation-124ff407-9452-4e81-8881-71fb3595111f" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-77bd56e7-b2cd-40d6-924e-5bdcd3b04538">
-<span class="eqno">(13)<a class="headerlink" href="#equation-77bd56e7-b2cd-40d6-924e-5bdcd3b04538" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0b913f33-86ba-43e7-a11e-59c746a534b0">
+<span class="eqno">(13)<a class="headerlink" href="#equation-0b913f33-86ba-43e7-a11e-59c746a534b0" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4de308ed-f8f6-4663-97d1-db319501e795">
-<span class="eqno">(14)<a class="headerlink" href="#equation-4de308ed-f8f6-4663-97d1-db319501e795" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e81a4109-1999-4334-99d8-699ad7baeef6">
+<span class="eqno">(14)<a class="headerlink" href="#equation-e81a4109-1999-4334-99d8-699ad7baeef6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depends on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the potential part and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\alpha H_1\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span> and <span class="math notranslate nohighlight">\(H_1= x^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \alpha \tilde H_1\)</span>. We now construct these matrices:</p>
