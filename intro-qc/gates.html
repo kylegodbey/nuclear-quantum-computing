@@ -951,9 +951,48 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <h2>Multiple qubit gates<a class="headerlink" href="#multiple-qubit-gates" title="Permalink to this headline">#</a></h2>
 <section id="cnot-gate">
 <h3>CNOT gate<a class="headerlink" href="#cnot-gate" title="Permalink to this headline">#</a></h3>
+<p>The <strong>Controlled NOT</strong> gate is the first two-qubit gate we’ve seen, and it is relatively straightforward to understand. Let’s first look at how it works in a circuit. Below is a schematic of the CNOT gate in a circuit:</p>
+<a class="reference internal image-reference" href="intro-qc/cnot_gate.jpg"><img alt="intro-qc/cnot_gate.jpg" src="intro-qc/cnot_gate.jpg" style="width: 300px;" /></a>
+<p>The dot on the first qubit wire indicates the <strong>control</strong> qubit, and the target shaped symbol on the second qubit wire indicates the <strong>target</strong>. This means that the first qubit’s state determines whether the gate activates on the second qubit or not, hence the ‘’controlled’’ in the name. We can see this in circuit form below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># CNOT circuit</span>
+<span class="n">qcnot</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qcnot</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qcnot</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/gates_30_0.png" src="../_images/gates_30_0.png" />
+</div>
+</div>
+<p>Let’s think about what it means to send different computational basis states through this circuit. We’ll start with the most basic, <span class="math notranslate nohighlight">\(|00\rangle\)</span>. Here we are following the convention of Qiskit, which is to consider the last value in the ket (the one farthest to the right) to be the <em>most significant qubit</em>. Hence, in the ket above, we consider the rightmost 0 to be the qubit corresponding to <span class="math notranslate nohighlight">\(q_{0}\)</span> in the circuit above, and the leftmost 0 to correspond to <span class="math notranslate nohighlight">\(q_{1}\)</span>.</p>
+<p>Let’s send this state through the CNOT gate and see what we get:</p>
+<div class="math notranslate nohighlight">
+\[
+|00\rangle \rightarrow \textrm{CNOT gate} \rightarrow |00\rangle.
+\]</div>
+<p>Now if we instead send the ket <span class="math notranslate nohighlight">\(|10\rangle\)</span>, we get</p>
+<div class="math notranslate nohighlight">
+\[
+|01\rangle \rightarrow \textrm{CNOT gate} \rightarrow |11\rangle.
+\]</div>
+<p>We see above that when the control qubit is set initially to 1, the CNOT gate activates, and changes the state of the target qubit. If this target qubit was originally 0, it converts to a 1, and if it was originally 1, it will convert to a 0, as seen here:</p>
+<div class="math notranslate nohighlight">
+\[
+|11\rangle \rightarrow \textrm{CNOT gate} \rightarrow |01\rangle.
+\]</div>
+<p>Our final state to test is <span class="math notranslate nohighlight">\(|10\rangle\)</span>, and becomes</p>
+<div class="math notranslate nohighlight">
+\[
+|10\rangle \rightarrow \textrm{CNOT gate} \rightarrow |10\rangle.
+\]</div>
+<p>We’ll see this gate in action later on in our example where we construct <a class="reference external" href="#bell_states">Bell states</a>.</p>
 </section>
 <section id="toffoli-gate">
 <h3>Toffoli gate<a class="headerlink" href="#toffoli-gate" title="Permalink to this headline">#</a></h3>
+<p>Now that we’ve been introduced to the two-qubit CNOT gate, we are ready to look at another interesting multiple qubit tool, the <strong>Toffoli gate</strong>.</p>
 </section>
 </section>
 <section id="measuring-qubit-states-in-circuits">
@@ -1003,7 +1042,7 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_39_1.png" src="../_images/gates_39_1.png" />
+<img alt="../_images/gates_41_1.png" src="../_images/gates_41_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1024,7 +1063,7 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Second Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_40_1.png" src="../_images/gates_40_1.png" />
+<img alt="../_images/gates_42_1.png" src="../_images/gates_42_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1045,7 +1084,7 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Third Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_41_1.png" src="../_images/gates_41_1.png" />
+<img alt="../_images/gates_43_1.png" src="../_images/gates_43_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1067,7 +1106,7 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fourth Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_42_1.png" src="../_images/gates_42_1.png" />
+<img alt="../_images/gates_44_1.png" src="../_images/gates_44_1.png" />
 </div>
 </div>
 <p>Now that we have these states established, we can put our knowledge of measuring circuits to use, and check to see if we obtain the states we expect from the four circuits above. To do this, we need to first set up the <strong>simulator</strong>. You may have noticed that we used a simulator earlier on, the <code class="docutils literal notranslate"><span class="pre">Qiskit.Aer</span></code> simulator, to see the statevectors from our simple circuits on the Bloch sphere. Now we’ll use one of these so-called ‘’noiseless’’ simulators to act like a quantum computer and measure this circuit many, many times. This is done, as previously discussed, to develop a probability for each state since measuring once will collapse the wavefunction and give us only one of the possible results. Hence, we measure many identical circuits using the <code class="docutils literal notranslate"><span class="pre">shots</span></code> argument of the simulator, as seen below.</p>
@@ -1075,6 +1114,7 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># measure the four circuits respectively</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">qc_trans</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">shots</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">13</span>
 <span class="n">sim</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">Aer</span><span class="o">.</span><span class="n">get_backend</span><span class="p">(</span><span class="s1">&#39;aer_simulator&#39;</span><span class="p">)</span>
 <span class="n">bells</span> <span class="o">=</span> <span class="p">[</span><span class="n">bell1</span><span class="p">,</span> <span class="n">bell2</span><span class="p">,</span> <span class="n">bell3</span><span class="p">,</span> <span class="n">bell4</span><span class="p">]</span>
@@ -1091,10 +1131,10 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bell 1 counts: {&#39;11&#39;: 4112, &#39;00&#39;: 4080}
-Bell 2 counts: {&#39;00&#39;: 4079, &#39;11&#39;: 4113}
-Bell 3 counts: {&#39;01&#39;: 4127, &#39;10&#39;: 4065}
-Bell 4 counts: {&#39;10&#39;: 4044, &#39;01&#39;: 4148}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bell 1 counts: {&#39;00&#39;: 4119, &#39;11&#39;: 4073}
+Bell 2 counts: {&#39;00&#39;: 4108, &#39;11&#39;: 4084}
+Bell 3 counts: {&#39;10&#39;: 4118, &#39;01&#39;: 4074}
+Bell 4 counts: {&#39;10&#39;: 4008, &#39;01&#39;: 4184}
 </pre></div>
 </div>
 </div>
