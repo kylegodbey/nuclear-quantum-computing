@@ -1014,7 +1014,7 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <img alt="../_images/gates_34_0.png" src="../_images/gates_34_0.png" />
 </div>
 </div>
-<p>What does this gate do? Since we can see that the third, target, qubit depends directly on the other two qubits being the same value, we can guess that this gate acts as an <strong>AND gate</strong>. And, naturally, we’re correct! Now let’s see what happens when we send three-qubit states through this circuit. Check out the results in the truth table below [3]!</p>
+<p>What does this gate do? Since we can see that the third, target, qubit depends directly on the other two qubits being the same value, we can guess that this gate acts as an <strong>NAND gate</strong>. And, naturally, we’re correct! Now let’s see what happens when we send three-qubit states through this circuit. Check out the results in the truth table below [3]!</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="text-align:center head"><p>Input (t,c2,c1)</p></th>
@@ -1108,28 +1108,133 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;00&#39;: 4165, &#39;11&#39;: 4027}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;00&#39;: 4139, &#39;11&#39;: 4053}
 </pre></div>
 </div>
 </div>
 </div>
 <p>As you can see, we get two different results: <span class="math notranslate nohighlight">\(|00\rangle\)</span> and <span class="math notranslate nohighlight">\(|11\rangle\)</span>, as we would expect from using a Hadamard gate and a CNOT gate where both qubits are initialized to 0. The number of measurements for each state is close to equal; if we ran this experiment with even more shots than we have above, we’d see the number of measurements converge to a 50-50 split between the two states.</p>
-<p><strong>A very important note</strong>: It may seem obvious, from all of the information in this notebook, that we’d be getting only the two results above, <span class="math notranslate nohighlight">\(|00\rangle\)</span> and <span class="math notranslate nohighlight">\(|11\rangle\)</span>. <em>However</em>, that is NOT a given in quantum computing! As we previously discussed, qubits can have <em>any</em> state in the Bloch sphere. So why do we measure just these two options? Because when we measure, we have to measure with respect to some vector on which we’re <strong>projecting</strong> the qubit state:</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>__A very important note__: It may seem obvious, from all of the information in this notebook, that we&#39;d be getting only the two results above, $|00\rangle$ and $|11\rangle$. *However*, that is NOT a given in quantum computing! As we previously discussed, qubits can have *any* state in the Bloch sphere. So why do we measure just these two options? Because when we measure, we have to measure with respect to some vector on which we&#39;re __projecting__ the qubit state:
+
+$$
 p(|x\rangle) = |\langle x|\psi\rangle|^{2} \rightarrow |x\rangle = \{|0\rangle,|1\rangle\}
-\]</div>
-<p>Hence, all of our measurements have been in this <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> basis, which is usually referred to the as the <strong>computational basis</strong>. We could measure in a different basis if we wished to, but this is the standard. These basis states are also the eigenstates of the <span class="math notranslate nohighlight">\(Z\)</span> gate, so these are also sometimes called the <span class="math notranslate nohighlight">\(Z\)</span>-basis.</p>
+$$
+
+Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis, which is usually referred to the as the __computational basis__. We could measure in a different basis if we wished to, but this is the standard. These basis states are also the eigenstates of the $Z$ gate, so these are also sometimes called the $Z$-basis.
+</pre></div>
+</div>
 </section>
 <section id="a-few-simple-circuits">
 <h2>A few simple circuits<a class="headerlink" href="#a-few-simple-circuits" title="Permalink to this headline">#</a></h2>
-<p>&lt; do the simplest circuits that transform into one another, etc. &gt;</p>
+<p>Now let’s quickly look at a few interesting circuits that can be built from the ones we just learned. For example, we can create an <span class="math notranslate nohighlight">\(X\)</span> gate from two Hadmards and a <span class="math notranslate nohighlight">\(Z\)</span> gate, as follows.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># X = HZH circuit</span>
+<span class="n">qhzh</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qhzh</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qhzh</span><span class="o">.</span><span class="n">z</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qhzh</span><span class="o">.</span><span class="n">h</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qhzh</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qhzh</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/gates_47_0.png" src="../_images/gates_47_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check equivalence to X gate by measuring the circuit</span>
+<span class="n">qc_trans</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">qhzh</span><span class="p">,</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_trans</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Counts: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;1&#39;: 8192}
+</pre></div>
+</div>
+</div>
+</div>
+<p>We already know that an <span class="math notranslate nohighlight">\(X\)</span> gate circuit gives the measured state of ‘1’ as well, so we now know this circuit definitely creates an <span class="math notranslate nohighlight">\(X\)</span> gate. This will come in useful later on if we want to convert from different basis states to the computational basis.</p>
+<p>Let’s see this in action once more, with the following configuration of CNOT gates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># equivalent SWAP circuit</span>
+<span class="n">qc3</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">cx</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qc3</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/gates_50_0.png" src="../_images/gates_50_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># measurement</span>
+<span class="n">qc_trans</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">qc3</span><span class="p">,</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_trans</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Counts: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;01&#39;: 8192}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s do the same thing, but use a SWAP gate instead.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># real SWAP gate</span>
+<span class="n">qswap2</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">QuantumCircuit</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">qswap2</span><span class="o">.</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qswap2</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+<span class="n">qswap2</span><span class="o">.</span><span class="n">swap</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qswap2</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">qswap2</span><span class="o">.</span><span class="n">measure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">qswap2</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">&quot;mpl&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/gates_53_0.png" src="../_images/gates_53_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># measurement</span>
+<span class="n">qc_trans</span> <span class="o">=</span> <span class="n">qiskit</span><span class="o">.</span><span class="n">transpile</span><span class="p">(</span><span class="n">qswap2</span><span class="p">,</span><span class="n">sim</span><span class="p">)</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">qc_trans</span><span class="p">,</span> <span class="n">shots</span><span class="o">=</span><span class="n">shots</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span><span class="o">.</span><span class="n">get_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Counts: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counts</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;01&#39;: 8192}
+</pre></div>
+</div>
+</div>
+</div>
+<p>In these circuits, we set an <span class="math notranslate nohighlight">\(X\)</span> gate on <span class="math notranslate nohighlight">\(q_{1}\)</span> so that we could see the values of the qubits swapping, and indeed we do! They both swap from the least significant to the most significant qubit, indicating the equivalence of the two circuits.</p>
+<p><strong><em>Universality</em></strong>: This all leads us to the question: can we build all complicated gates out of only a few simple ones? Which gates would those be? Those sets of gates which can build <em>all</em> other gates are called <strong>universal gates</strong>, because of this ability to reproduce any unitary operation with them [1]. Usually they come in sets, as just mentioned, but there are ones, such as the <strong>Toffoli gate</strong> (which we already looked at!) that are universal on their own [4]. The Toffoli gate is considered to be a universal gate because it is able to create a NAND gate, which can be used to build any other logic gate (as you may recall from classical computing) [4]. There are many universal sets of gates in quantum computing, and we may run across more of them later in this book!</p>
 </section>
 <hr class="docutils" />
 <section id="example-bell-states">
 <h2>Example: Bell states<a class="headerlink" href="#example-bell-states" title="Permalink to this headline">#</a></h2>
 <p><a id='bell_states'></a></p>
-<p>Let’s look at a simple two-qubit circuit where we prepare the four Bell states below.</p>
+<p>Let’s look at a simple two-qubit circuit where we prepare the four Bell states below as a full example of measuring two-qubit circuits.</p>
 <div class="math notranslate nohighlight">
 \[ 
 |\Phi^{+}\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
@@ -1165,7 +1270,7 @@ p(|x\rangle) = |\langle x|\psi\rangle|^{2} \rightarrow |x\rangle = \{|0\rangle,|
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_51_1.png" src="../_images/gates_51_1.png" />
+<img alt="../_images/gates_61_1.png" src="../_images/gates_61_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1186,7 +1291,7 @@ p(|x\rangle) = |\langle x|\psi\rangle|^{2} \rightarrow |x\rangle = \{|0\rangle,|
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Second Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_52_1.png" src="../_images/gates_52_1.png" />
+<img alt="../_images/gates_62_1.png" src="../_images/gates_62_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1207,7 +1312,7 @@ p(|x\rangle) = |\langle x|\psi\rangle|^{2} \rightarrow |x\rangle = \{|0\rangle,|
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Third Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_53_1.png" src="../_images/gates_53_1.png" />
+<img alt="../_images/gates_63_1.png" src="../_images/gates_63_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1229,7 +1334,7 @@ p(|x\rangle) = |\langle x|\psi\rangle|^{2} \rightarrow |x\rangle = \{|0\rangle,|
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fourth Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_54_1.png" src="../_images/gates_54_1.png" />
+<img alt="../_images/gates_64_1.png" src="../_images/gates_64_1.png" />
 </div>
 </div>
 <p>Now that we have these states established, we can put our knowledge of measuring circuits to use, and check to see if we obtain the states we expect from the four circuits above. To do this, we need to first set up the <strong>simulator</strong>. You may have noticed that we used a simulator earlier on, the <code class="docutils literal notranslate"><span class="pre">Qiskit.Aer</span></code> simulator, to see the statevectors from our simple circuits on the Bloch sphere. Now we’ll use one of these so-called ‘’noiseless’’ simulators to act like a quantum computer and measure this circuit many, many times. This is done, as previously discussed, to develop a probability for each state since measuring once will collapse the wavefunction and give us only one of the possible results. Hence, we measure many identical circuits using the <code class="docutils literal notranslate"><span class="pre">shots</span></code> argument of the simulator, as seen below.</p>
@@ -1269,6 +1374,7 @@ Bell 4 counts: {&#39;10&#39;: 4008, &#39;01&#39;: 4184}
 <p>[1] Nielsen, M. A., &amp; Chuang, I. L. (2011). Quantum Computation and Quantum Information: 10th Anniversary Edition. Cambridge University Press.</p>
 <p>[2] Qiskit textbook, “Single Qubit Gates” (exact page found <a class="reference external" href="https://qiskit.org/textbook/ch-states/single-qubit-gates.html#ynzgatez">here</a>).</p>
 <p>[3] Qiskit textbook, “Multiple Qubits and Entangled States” (exact page found <a class="reference external" href="https://qiskit.org/textbook/ch-gates/multiple-qubits-entangled-states.html#cnot">here</a>).</p>
+<p>[4] Tom Wong, Scott Aaronson. “Lecture 16, Tues March 21: Quantum Computing, Universal Gate Sets.” (PDF link <a class="reference external" href="https://www.scottaaronson.com/qclec/16.pdf">here</a>).</p>
 </section>
 </section>
 
