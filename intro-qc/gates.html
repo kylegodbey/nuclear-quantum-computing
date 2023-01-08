@@ -1108,21 +1108,20 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;00&#39;: 4139, &#39;11&#39;: 4053}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counts: {&#39;11&#39;: 4150, &#39;00&#39;: 4042}
 </pre></div>
 </div>
 </div>
 </div>
 <p>As you can see, we get two different results: <span class="math notranslate nohighlight">\(|00\rangle\)</span> and <span class="math notranslate nohighlight">\(|11\rangle\)</span>, as we would expect from using a Hadamard gate and a CNOT gate where both qubits are initialized to 0. The number of measurements for each state is close to equal; if we ran this experiment with even more shots than we have above, we’d see the number of measurements converge to a 50-50 split between the two states.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>__A very important note__: It may seem obvious, from all of the information in this notebook, that we&#39;d be getting only the two results above, $|00\rangle$ and $|11\rangle$. *However*, that is NOT a given in quantum computing! As we previously discussed, qubits can have *any* state in the Bloch sphere. So why do we measure just these two options? Because when we measure, we have to measure with respect to some vector on which we&#39;re __projecting__ the qubit state:
-
-$$
+<p>:::{admonition} A very important note
+It may seem obvious, from all of the information in this notebook, that we’d be getting only the two results above, <span class="math notranslate nohighlight">\(|00\rangle\)</span> and <span class="math notranslate nohighlight">\(|11\rangle\)</span>. <em>However</em>, that is NOT a given in quantum computing! As we previously discussed, qubits can have <em>any</em> state in the Bloch sphere. So why do we measure just these two options? Because when we measure, we have to measure with respect to some vector on which we’re <strong>projecting</strong> the qubit state:</p>
+<div class="math notranslate nohighlight">
+\[
 p(|x\rangle) = |\langle x|\psi\rangle|^{2} \rightarrow |x\rangle = \{|0\rangle,|1\rangle\}
-$$
-
-Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis, which is usually referred to the as the __computational basis__. We could measure in a different basis if we wished to, but this is the standard. These basis states are also the eigenstates of the $Z$ gate, so these are also sometimes called the $Z$-basis.
-</pre></div>
-</div>
+\]</div>
+<p>Hence, all of our measurements have been in this <span class="math notranslate nohighlight">\(|0\rangle\)</span>, <span class="math notranslate nohighlight">\(|1\rangle\)</span> basis, which is usually referred to the as the <strong>computational basis</strong>. We could measure in a different basis if we wished to, but this is the standard. These basis states are also the eigenstates of the <span class="math notranslate nohighlight">\(Z\)</span> gate, so these are also sometimes called the <span class="math notranslate nohighlight">\(Z\)</span>-basis.
+:::</p>
 </section>
 <section id="a-few-simple-circuits">
 <h2>A few simple circuits<a class="headerlink" href="#a-few-simple-circuits" title="Permalink to this headline">#</a></h2>
@@ -1140,7 +1139,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_47_0.png" src="../_images/gates_47_0.png" />
+<img alt="../_images/gates_48_0.png" src="../_images/gates_48_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1176,7 +1175,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_50_0.png" src="../_images/gates_50_0.png" />
+<img alt="../_images/gates_51_0.png" src="../_images/gates_51_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1209,7 +1208,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/gates_53_0.png" src="../_images/gates_53_0.png" />
+<img alt="../_images/gates_54_0.png" src="../_images/gates_54_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1270,7 +1269,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>First Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_61_1.png" src="../_images/gates_61_1.png" />
+<img alt="../_images/gates_62_1.png" src="../_images/gates_62_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1291,7 +1290,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Second Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_62_1.png" src="../_images/gates_62_1.png" />
+<img alt="../_images/gates_63_1.png" src="../_images/gates_63_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1312,7 +1311,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Third Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_63_1.png" src="../_images/gates_63_1.png" />
+<img alt="../_images/gates_64_1.png" src="../_images/gates_64_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1334,7 +1333,7 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fourth Bell circuit:
 </pre></div>
 </div>
-<img alt="../_images/gates_64_1.png" src="../_images/gates_64_1.png" />
+<img alt="../_images/gates_65_1.png" src="../_images/gates_65_1.png" />
 </div>
 </div>
 <p>Now that we have these states established, we can put our knowledge of measuring circuits to use, and check to see if we obtain the states we expect from the four circuits above. To do this, we need to first set up the <strong>simulator</strong>. You may have noticed that we used a simulator earlier on, the <code class="docutils literal notranslate"><span class="pre">Qiskit.Aer</span></code> simulator, to see the statevectors from our simple circuits on the Bloch sphere. Now we’ll use one of these so-called ‘’noiseless’’ simulators to act like a quantum computer and measure this circuit many, many times. This is done, as previously discussed, to develop a probability for each state since measuring once will collapse the wavefunction and give us only one of the possible results. Hence, we measure many identical circuits using the <code class="docutils literal notranslate"><span class="pre">shots</span></code> argument of the simulator, as seen below.</p>
@@ -1359,10 +1358,10 @@ Hence, all of our measurements have been in this $|0\rangle$, $|1\rangle$ basis,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bell 1 counts: {&#39;00&#39;: 4119, &#39;11&#39;: 4073}
-Bell 2 counts: {&#39;00&#39;: 4108, &#39;11&#39;: 4084}
-Bell 3 counts: {&#39;10&#39;: 4118, &#39;01&#39;: 4074}
-Bell 4 counts: {&#39;10&#39;: 4008, &#39;01&#39;: 4184}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bell 1 counts: {&#39;00&#39;: 4075, &#39;11&#39;: 4117}
+Bell 2 counts: {&#39;11&#39;: 4149, &#39;00&#39;: 4043}
+Bell 3 counts: {&#39;01&#39;: 4096, &#39;10&#39;: 4096}
+Bell 4 counts: {&#39;01&#39;: 4059, &#39;10&#39;: 4133}
 </pre></div>
 </div>
 </div>
