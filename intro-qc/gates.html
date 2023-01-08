@@ -952,7 +952,12 @@ S^{\dagger} = \begin{bmatrix}1 &amp; 0 \\ 0 &amp; e^{-\frac{i\pi}{2}}\end{bmatri
 <section id="cnot-gate">
 <h3>CNOT gate<a class="headerlink" href="#cnot-gate" title="Permalink to this headline">#</a></h3>
 <p>The <strong>Controlled NOT</strong> gate is the first two-qubit gate we’ve seen, and it is relatively straightforward to understand. Let’s first look at how it works in a circuit. Below is a schematic of the CNOT gate in a circuit:</p>
-<a class="reference internal image-reference" href="intro-qc/cnot_gate.jpg"><img alt="intro-qc/cnot_gate.jpg" src="intro-qc/cnot_gate.jpg" style="width: 300px;" /></a>
+<figure class="align-default" id="cnot-fig">
+<a class="reference internal image-reference" href="intro-qc/cnot_gate.jpg"><img alt="intro-qc/cnot_gate.jpg" src="intro-qc/cnot_gate.jpg" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Circuit with CNOT gate included between the two qubits</span><a class="headerlink" href="#cnot-fig" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <p>The dot on the first qubit wire indicates the <strong>control</strong> qubit, and the target shaped symbol on the second qubit wire indicates the <strong>target</strong>. This means that the first qubit’s state determines whether the gate activates on the second qubit or not, hence the ‘’controlled’’ in the name. We can see this in circuit form below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
