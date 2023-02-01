@@ -46,6 +46,7 @@ parse:
     - amsmath
     - dollarmath
     - html_image
+    - html_admonition
 
 
 sphinx:
