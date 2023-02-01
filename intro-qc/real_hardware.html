@@ -536,6 +536,11 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -594,6 +599,11 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -610,7 +620,7 @@ title="Print to PDF"
 <p>Maintainer: Alexandra Semposki</p>
 <section id="divincenzo-criteria">
 <h2>DiVincenzo criteria<a class="headerlink" href="#divincenzo-criteria" title="Permalink to this headline">#</a></h2>
-<p>When building a real quantum computer, there are several requirements that need to be addressed to achieve one that is as reliable as possible. David DiVincenzo, while working on this task, came up with a set of these conditions now called <strong>DiVincenzo criteria</strong>:</p>
+<p>When building a real quantum computer, there are several requirements that need to be addressed to achieve one that is as reliable as possible. David DiVincenzo, while working on this task, came up with a set of these conditions now called <strong>DiVincenzo criteria</strong> [1]:</p>
 <div class="admonition-divincenzo-criteria admonition">
 <p class="admonition-title">DiVincenzo criteria</p>
 <ol class="simple">
@@ -622,13 +632,12 @@ title="Print to PDF"
 </ol>
 </div>
 <p>There are also two more criteria that directly relate to quantum communication:</p>
-<ol class="simple">
-<li><p>The ability to interchange between stationary vs flying qubits.</p></li>
-<li><p>The ability to transmit flying qubits between specific locations reliably.</p></li>
-</ol>
 <p>Let’s break down stationary and flying qubits to better understand the last two rules above.</p>
 <section id="stationary-vs-flying-qubits">
 <h3>Stationary vs. flying qubits<a class="headerlink" href="#stationary-vs-flying-qubits" title="Permalink to this headline">#</a></h3>
+<p>Flying qubits gives the impression of qubits flying around one’s head like a bird—of course, this is not the case, but it paints an interesting picture that actually has some merit. <strong>Flying qubits</strong> are qubits that send information across a distance without corrupting their messages. This distance must be a macroscopic distance, and these qubits are only given this one task, to send information from one node of the system to another [2].</p>
+<p><strong>Stationary qubits</strong>, on the other hand, must be able to not only store information, but perform calculations with it [2]. They have a much more widespread use than flying qubits. They must also have good entanglement capabilities.</p>
+<p>So, returning to rules 6 and 7 above, Rule 6 references the ability of a quantum computer to switch between flying and stationary qubits, and Rule 7 refers to the ability of these flying qubits to transfer their information in a stable way.</p>
 </section>
 </section>
 <section id="approaches-to-fabricating-qubits">
@@ -646,6 +655,11 @@ title="Print to PDF"
 <section id="quantum-dots-in-microwave-cavities-si-technology">
 <h3>Quantum dots in microwave cavities (Si-technology)<a class="headerlink" href="#quantum-dots-in-microwave-cavities-si-technology" title="Permalink to this headline">#</a></h3>
 </section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<p>[1] Jha, Raghav G. “Notes on Quantum Computation and Information”. arXiv: 2301.09679 [hep-ph]. (Link <a class="reference external" href="https://arxiv.org/abs/2301.09679">here</a>).</p>
+<p>[2] https://quantumcomputing.stackexchange.com/questions/8900/what-is-a-flying-qubit</p>
 </section>
 </section>
 

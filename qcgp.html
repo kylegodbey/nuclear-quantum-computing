@@ -608,14 +608,14 @@ title="Print to PDF"
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference external" href="https://link.springer.com/article/10.1007/BF02731494">Gross</a>-<a class="reference external" href="http://jetp.ras.ru/cgi-bin/dn/e_013_02_0451.pdf">Pitaevskii</a> (GP) equation (also see <a class="reference external" href="https://epubs.siam.org/doi/10.1137/20M1313106">here</a> for a RBM application) is a nonlinear Schrödinger equation that approximately describes the low-energy properties of dilute Bose-Einstein condensates. Using a self-consistent mean field approximation, the many-body wavefunction is reduced to a description in terms of a single complex-valued wavefunction <span class="math notranslate nohighlight">\(\phi(\vec{r})\)</span>. We work with the <a class="reference external" href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.62.063610">one-dimensional Gross-Pitaevskii equation</a> with a harmonic trapping potential by letting <span class="math notranslate nohighlight">\(F_\alpha\)</span> be:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9fd212c0-b74f-45ee-acbe-53a1951e31d1">
-<span class="eqno">(15)<a class="headerlink" href="#equation-9fd212c0-b74f-45ee-acbe-53a1951e31d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-85f7eb32-084e-4cfd-adbc-8d95c8ef5666">
+<span class="eqno">(15)<a class="headerlink" href="#equation-85f7eb32-084e-4cfd-adbc-8d95c8ef5666" title="Permalink to this equation">#</a></span>\[\begin{equation}
   F_{q,\kappa}(\phi)= -\phi''+\kappa x^2\phi+q|\phi|^2\phi-\lambda_{q,\kappa}\phi=0,
 \end{equation}\]</div>
 <p>where the parameters are now <span class="math notranslate nohighlight">\(\alpha=\{\kappa, q\}\)</span>, which are proportional to the strength of the harmonic trapping and the self-coupling of the wavefunction,respectively, while <span class="math notranslate nohighlight">\(\lambda_{q,\kappa}\)</span> is proportional to the ground state energ. <span class="math notranslate nohighlight">\(\phi(x)\)</span> is a single variable function that depends on <span class="math notranslate nohighlight">\(x\)</span> and it is normalized to unity.</p>
 <p>For a classical algorithm, the finite element method will work for this non-linear equation in the same way as it did for the harmonic oscillator. For the quantum computing counterpart, we will need to follow the same procedure as with the Harmonic Oscillator problem and cast the equations in the reduced basis. We once again expand our solution in a basis of <span class="math notranslate nohighlight">\(n\)</span> elements:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e3122f82-bd93-4849-b31e-59ce7851a3e0">
-<span class="eqno">(16)<a class="headerlink" href="#equation-e3122f82-bd93-4849-b31e-59ce7851a3e0" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-94523e46-ec93-481c-895b-b01fb29a6b9b">
+<span class="eqno">(16)<a class="headerlink" href="#equation-94523e46-ec93-481c-895b-b01fb29a6b9b" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat{\phi}_{\alpha}(x) = \sum_{i=1}^{n} a_{i} \phi_{i}(x) 
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi_{i}(x)\)</span> are informed on previous solutions built on a classical computer to the non-linear Schrodinger equation for chosen values of <span class="math notranslate nohighlight">\(\alpha=\{\kappa,q\}\)</span>.</p>
@@ -876,35 +876,35 @@ alpha = [10, 1], lambda = 4.023
 <h3>Effective two level system “Hamiltonian”<a class="headerlink" href="#effective-two-level-system-hamiltonian" title="Permalink to this headline">#</a></h3>
 <p>This discussion retraces everything we did before for the Harmonic Oscillator. The main difference is that now the Hamiltonian effectively depends on the solution <span class="math notranslate nohighlight">\(H_\alpha \equiv H_\alpha[\phi]\)</span>, but since we are aiming at solving the problem iteratively, at each stage we have a fixed linear Hamiltonian.</p>
 <p>Here we explicitly construct <span class="math notranslate nohighlight">\( \hat{\phi}_{\alpha}= a_{1} \phi_{1}+a_2\phi_2\)</span> and use the Galerkin method, that is, projecting <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> over <span class="math notranslate nohighlight">\(2\)</span> linearly independent functions projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i}\}_{i=1}^{2}\)</span>.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e7047faa-7b44-4eeb-addf-e08ab789f597">
-<span class="eqno">(17)<a class="headerlink" href="#equation-e7047faa-7b44-4eeb-addf-e08ab789f597" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b708a384-172c-4e99-a003-0ad9457462ae">
+<span class="eqno">(17)<a class="headerlink" href="#equation-b708a384-172c-4e99-a003-0ad9457462ae" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \psi_{1}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 \\
 &amp;\langle \psi_{2}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle = 0 
 \end{align}\]</div>
 <p>We can interpret this as enforcing the orthogonality of <span class="math notranslate nohighlight">\(F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big)\)</span> to the subspace spanned by <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> that is, by finding <span class="math notranslate nohighlight">\(\hat{\phi}_{\alpha}\)</span> such that <span class="math notranslate nohighlight">\(F_{\alpha}(\hat{\phi}_{\alpha})\)</span> is approximately zero up to the ability of the set <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span>. The choice of projecting functions <span class="math notranslate nohighlight">\(\{ \psi_{i} \}\)</span> is arbitrary, but here we choose the solution set <span class="math notranslate nohighlight">\(\{ \phi_{i} \}\)</span> to be our projecting functions to make our lives easier. Since <span class="math notranslate nohighlight">\(\lambda\)</span> is also unknown, we need an additional equation. This comes from the normalization conditions:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b3ac993c-de60-4421-8fda-c3bb99cb815d">
-<span class="eqno">(18)<a class="headerlink" href="#equation-b3ac993c-de60-4421-8fda-c3bb99cb815d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cc31a5b7-cd66-4853-962f-0828b99836fe">
+<span class="eqno">(18)<a class="headerlink" href="#equation-cc31a5b7-cd66-4853-962f-0828b99836fe" title="Permalink to this equation">#</a></span>\[\begin{align}
 \langle \hat{\phi}_{\alpha_{k}}|\hat{\phi}_{\alpha_{k}} \rangle  = 1
 \end{align}\]</div>
 <p>We can re-write the projecting equations taking advantage of the linear form of <span class="math notranslate nohighlight">\(F_\alpha\)</span> to obtain an effective 2-level system Hamiltonian. We note that:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-dd26482f-fe7f-40aa-85d3-f401ff31b82c">
-<span class="eqno">(19)<a class="headerlink" href="#equation-dd26482f-fe7f-40aa-85d3-f401ff31b82c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bb39ee9c-775b-4fea-b661-fd4e05c14692">
+<span class="eqno">(19)<a class="headerlink" href="#equation-bb39ee9c-775b-4fea-b661-fd4e05c14692" title="Permalink to this equation">#</a></span>\[\begin{align}
 &amp;\langle \phi_{i}| F_{\alpha}\big( \hat{\phi}_{\alpha}(x) \big) \rangle =  \\
 &amp;\langle \phi_{i}|  a_1 H_\alpha \phi_1 + a_2 H_\alpha \phi_2 - a_1\hat \lambda \phi_1 - a_2\hat \lambda \phi_2\rangle
 \end{align}\]</div>
 <p>Since <span class="math notranslate nohighlight">\(\langle \phi_i|\phi_j\rangle = \delta _{i,j}\)</span>, we arrive at the following matrix equation for the projecting equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-edbb9c83-3343-4d15-a924-334eb57138c2">
-<span class="eqno">(20)<a class="headerlink" href="#equation-edbb9c83-3343-4d15-a924-334eb57138c2" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a87be2c4-eba4-4298-b8ea-bcf2aa779188">
+<span class="eqno">(20)<a class="headerlink" href="#equation-a87be2c4-eba4-4298-b8ea-bcf2aa779188" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha |a\rangle = \hat\lambda |a\rangle
 \end{equation}\]</div>
 <p>where <span class="math notranslate nohighlight">\(|a\rangle = \{a_1,a_2\}\)</span> and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-689ef70c-c1b2-4d35-87c4-e09e71a31ed4">
-<span class="eqno">(21)<a class="headerlink" href="#equation-689ef70c-c1b2-4d35-87c4-e09e71a31ed4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-671eada2-e96a-4a5f-ad30-5a31d96ce613">
+<span class="eqno">(21)<a class="headerlink" href="#equation-671eada2-e96a-4a5f-ad30-5a31d96ce613" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \tilde H_\alpha = \begin{bmatrix} \langle \phi_1|H_\alpha|\phi_1\rangle &amp; \langle \phi_1|H_\alpha|\phi_2\rangle \\ \langle \phi_2|H_\alpha|\phi_1\rangle &amp; \langle \phi_2|H_\alpha|\phi_2\rangle \end{bmatrix}
 \end{equation}\]</div>
 <p>while the normalization condition translates into:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bad9e79a-555c-43c6-8f56-4ce1e6c97c24">
-<span class="eqno">(22)<a class="headerlink" href="#equation-bad9e79a-555c-43c6-8f56-4ce1e6c97c24" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-a3e4a08f-2aa4-4ba6-a44f-e894e1958f81">
+<span class="eqno">(22)<a class="headerlink" href="#equation-a3e4a08f-2aa4-4ba6-a44f-e894e1958f81" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \langle a|a \rangle  = a_1^2+a_2^2= 1
 \end{equation}\]</div>
 <p>Now we proceed to construct this Hamiltonian matrix for our problem at hand. We note that although <span class="math notranslate nohighlight">\(\tilde H_\alpha\)</span> depennds on <span class="math notranslate nohighlight">\(\alpha\)</span>, the dependance is only in the two potential parts and it is affine (linear): <span class="math notranslate nohighlight">\(H_\alpha=H_0+\kappa H_1 +q H_2\)</span>, where <span class="math notranslate nohighlight">\(H_0= - \frac{d^{2}}{dx^{2}}\)</span>, <span class="math notranslate nohighlight">\(H_1= x^2\)</span>, and <span class="math notranslate nohighlight">\(H_2=|\phi(x)|^2\)</span>. We then decompose <span class="math notranslate nohighlight">\(\tilde H_\alpha= \tilde H_0 + \kappa \tilde H_1+ q \tilde H_2\)</span>. We now construct these matrices, <span class="math notranslate nohighlight">\(H_2\)</span> being a function that must be constructed every time we wish to iterate the approach.|</p>
