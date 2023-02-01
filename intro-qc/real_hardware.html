@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
@@ -611,15 +609,13 @@ title="Print to PDF"
 <section id="divincenzo-criteria">
 <h2>DiVincenzo criteria<a class="headerlink" href="#divincenzo-criteria" title="Permalink to this headline">#</a></h2>
 <p>When building a real quantum computer, there are several requirements that need to be addressed to achieve one that is as reliable as possible. David DiVincenzo, while working on this task, came up with a set of these conditions now called <strong>DiVincenzo criteria</strong>:</p>
-<p>:::{DiVincenzo criteria}</p>
-<ol class="simple">
-<li><p>A physical system that is scalable and possesses well-characterized qubits.</p></li>
-<li><p>Qubits that can be initialized to a fiducial state (<span class="math notranslate nohighlight">\(|000000...000\rangle\)</span>).</p></li>
-<li><p>A long decoherence time with respect to the gate operation time.</p></li>
-<li><p>A universal set of quantum gates.</p></li>
-<li><p>A qubit-specific measurement capability.
-:::</p></li>
-</ol>
+<div class="highlight-{DiVincenzo notranslate"><div class="highlight"><pre><span></span>1. A physical system that is scalable and possesses well-characterized qubits.
+2. Qubits that can be initialized to a fiducial state ($|000000...000\rangle$).
+3. A long decoherence time with respect to the gate operation time.
+4. A universal set of quantum gates.
+5. A qubit-specific measurement capability.
+</pre></div>
+</div>
 <p>There are also two more criteria that directly relate to quantum communication:</p>
 <ol class="simple">
 <li><p>The ability to interchange between stationary vs flying qubits.</p></li>
