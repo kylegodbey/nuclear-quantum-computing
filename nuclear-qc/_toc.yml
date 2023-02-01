@@ -10,6 +10,7 @@ chapters:
   - file: intro-qc/qubits
   - file: intro-qc/gates
   - file: intro-qc/computer_science
+  - file: intro-qc/real_hardware
 
 - file: vqe/vqe
   sections:
