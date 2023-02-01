@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Quantum algorithms and P/NP space &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Computer science: P/NP space &amp; quantum computing &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
+    <link rel="next" title="Building a quantum computer: experimental techniques" href="real_hardware.html" />
     <link rel="prev" title="Quantum gates and simple circuits" href="gates.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -141,7 +141,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Quantum algorithms and P/NP space
+     Computer science: P/NP space &amp; quantum computing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="real_hardware.html">
+     Building a quantum computer: experimental techniques
     </a>
    </li>
   </ul>
@@ -468,23 +473,118 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-to-computer-science">
+   Introduction to computer science
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantum-algorithms">
+     Quantum Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computational-complexity-theory">
+   Computational complexity theory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-problems-p-np-space">
+     Decision problems: P/NP space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-ahead-approaching-computational-problems-with-quantum-computers">
+   Looking ahead: approaching computational problems with quantum computers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Quantum algorithms and P/NP space</h1>
+                <h1>Computer science: P/NP space & quantum computing</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction-to-computer-science">
+   Introduction to computer science
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantum-algorithms">
+     Quantum Algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computational-complexity-theory">
+   Computational complexity theory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decision-problems-p-np-space">
+     Decision problems: P/NP space
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-ahead-approaching-computational-problems-with-quantum-computers">
+   Looking ahead: approaching computational problems with quantum computers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -492,10 +592,28 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="quantum-algorithms-and-p-np-space">
-<h1>Quantum algorithms and P/NP space<a class="headerlink" href="#quantum-algorithms-and-p-np-space" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="computer-science-p-np-space-quantum-computing">
+<h1>Computer science: P/NP space &amp; quantum computing<a class="headerlink" href="#computer-science-p-np-space-quantum-computing" title="Permalink to this headline">#</a></h1>
 <p>Author: Alexandra Semposki</p>
 <p>Maintainer: Alexandra Semposki</p>
+<section id="introduction-to-computer-science">
+<h2>Introduction to computer science<a class="headerlink" href="#introduction-to-computer-science" title="Permalink to this headline">#</a></h2>
+<section id="quantum-algorithms">
+<h3>Quantum Algorithms<a class="headerlink" href="#quantum-algorithms" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="computational-complexity-theory">
+<h2>Computational complexity theory<a class="headerlink" href="#computational-complexity-theory" title="Permalink to this headline">#</a></h2>
+<section id="decision-problems-p-np-space">
+<h3>Decision problems: P/NP space<a class="headerlink" href="#decision-problems-p-np-space" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="looking-ahead-approaching-computational-problems-with-quantum-computers">
+<h2>Looking ahead: approaching computational problems with quantum computers<a class="headerlink" href="#looking-ahead-approaching-computational-problems-with-quantum-computers" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -532,10 +650,10 @@ title="Print to PDF"
             <p class="prev-next-title">Quantum gates and simple circuits</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../vqe/vqe.html" title="next page">
+    <a class='right-next' id="next-link" href="real_hardware.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Variational Quantum Eigensolver</p>
+        <p class="prev-next-title">Building a quantum computer: experimental techniques</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

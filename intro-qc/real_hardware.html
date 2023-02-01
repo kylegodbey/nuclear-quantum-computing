@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Variational Quantum Eigensolver &#8212; Quantum Computing Applications in Nuclear Physics</title>
+    <title>Building a quantum computer: experimental techniques &#8212; Quantum Computing Applications in Nuclear Physics</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quantum Computing the Deuteron" href="deuteron.html" />
-    <link rel="prev" title="Building a quantum computer: experimental techniques" href="../intro-qc/real_hardware.html" />
+    <link rel="next" title="Variational Quantum Eigensolver" href="../vqe/vqe.html" />
+    <link rel="prev" title="Computer science: P/NP space &amp; quantum computing" href="computer_science.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -121,50 +119,50 @@ const thebe_selector_output = ".output, .cell_output"
    Introduction
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../intro-qc/intro-qc.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="intro-qc.html">
    Quantum computing: a brief introduction
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/qubits.html">
+    <a class="reference internal" href="qubits.html">
      From classical to quantum: bits to qubits
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/gates.html">
+    <a class="reference internal" href="gates.html">
      Quantum gates and simple circuits
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/computer_science.html">
+    <a class="reference internal" href="computer_science.html">
      Computer science: P/NP space &amp; quantum computing
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../intro-qc/real_hardware.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      Building a quantum computer: experimental techniques
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../vqe/vqe.html">
    Variational Quantum Eigensolver
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2 has-children">
-    <a class="reference internal" href="deuteron.html">
+    <a class="reference internal" href="../vqe/deuteron.html">
      Quantum Computing the Deuteron
     </a>
     <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -174,24 +172,24 @@ const thebe_selector_output = ".output, .cell_output"
     </label>
     <ul>
      <li class="toctree-l3">
-      <a class="reference internal" href="n2.html">
+      <a class="reference internal" href="../vqe/n2.html">
        First Steps: N=2
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="n3.html">
+      <a class="reference internal" href="../vqe/n3.html">
        Complexity++: N=3
       </a>
      </li>
      <li class="toctree-l3">
-      <a class="reference internal" href="general.html">
+      <a class="reference internal" href="../vqe/general.html">
        A General Case
       </a>
      </li>
     </ul>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="qng.html">
+    <a class="reference internal" href="../vqe/qng.html">
      Quantum Natural Gradient
     </a>
    </li>
@@ -324,6 +322,53 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/kylegodbey/nuclear-quantum-computing/main?urlpath=tree/nuclear-qc/intro-qc/real_hardware.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/kylegodbey/nuclear-quantum-computing/blob/main/nuclear-qc/intro-qc/real_hardware.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -363,7 +408,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fvqe/vqe.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/kylegodbey/nuclear-quantum-computing/issues/new?title=Issue%20on%20page%20%2Fintro-qc/real_hardware.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -391,7 +436,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/vqe/vqe.md"
+        <a href="../_sources/intro-qc/real_hardware.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -402,7 +447,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -428,23 +473,128 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divincenzo-criteria">
+   DiVincenzo criteria
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stationary-vs-flying-qubits">
+     Stationary vs. flying qubits
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approaches-to-fabricating-qubits">
+   Approaches to fabricating qubits
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#superconducting-qubits-ibm-rigetti">
+     Superconducting qubits (IBM, Rigetti)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trapped-ions-ion-q-honeywell">
+     Trapped ions (Ion Q, Honeywell)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#photonic-qubits-xanadu">
+     Photonic qubits (Xanadu)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantum-dots-in-microwave-cavities-si-technology">
+     Quantum dots in microwave cavities (Si-technology)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Variational Quantum Eigensolver</h1>
+                <h1>Building a quantum computer: experimental techniques</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#divincenzo-criteria">
+   DiVincenzo criteria
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stationary-vs-flying-qubits">
+     Stationary vs. flying qubits
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approaches-to-fabricating-qubits">
+   Approaches to fabricating qubits
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#superconducting-qubits-ibm-rigetti">
+     Superconducting qubits (IBM, Rigetti)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#trapped-ions-ion-q-honeywell">
+     Trapped ions (Ion Q, Honeywell)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#photonic-qubits-xanadu">
+     Photonic qubits (Xanadu)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#quantum-dots-in-microwave-cavities-si-technology">
+     Quantum dots in microwave cavities (Si-technology)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -452,49 +602,32 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="variational-quantum-eigensolver">
-<h1>Variational Quantum Eigensolver<a class="headerlink" href="#variational-quantum-eigensolver" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="building-a-quantum-computer-experimental-techniques">
+<h1>Building a quantum computer: experimental techniques<a class="headerlink" href="#building-a-quantum-computer-experimental-techniques" title="Permalink to this headline">#</a></h1>
 <p>Author: Alexandra Semposki</p>
-<p>The variational quantum eigensolver (VQE) has been used prominently in QC in the past few years as a way to find the ground state energy of a system. This is done using the variational method from quantum mechanics, which is able to provide an upper bound for this ground state energy. We start with a Hermitian Hamiltonian, <span class="math notranslate nohighlight">\(H\)</span>, and write the eigenvalue equation down as</p>
-<div class="math notranslate nohighlight">
-\[
-H | \psi_{i} \rangle = \lambda_{i} | \psi_{i} \rangle.
-\]</div>
-<p>Say, however, that we cannot directly solve this and must instead use states <span class="math notranslate nohighlight">\(| \psi(\theta) \rangle\)</span>, which have some variable angle <span class="math notranslate nohighlight">\(\theta\)</span> dependence, and can be expanded in a basis of the original states such that</p>
-<div class="math notranslate nohighlight">
-\[
-| \psi(\theta) \rangle = \sum_{i} c_{i} | \psi_{i} \rangle.
-\]</div>
-<p>Now we can find the expectation value.</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \psi(\theta) | H | \psi(\theta) \rangle = \sum_{i,j} c_{j}^{*} c_{i} \langle \psi_{j} | H | \psi_{i} \rangle = \sum_{i,j} \delta_{ij} c_{j}^{*} c_{i} E_{i},
-\]</div>
-<p>and finally</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \psi(\theta) | H | \psi(\theta) \rangle = \sum_{i} |c_{i}|^{2} E_{i},
-\]</div>
-<p>and we know that</p>
-<div class="math notranslate nohighlight">
-\[
-\langle \psi(\theta) | H | \psi(\theta) \rangle = E \ge E_{0},
-\]</div>
-<p>so we can minimize the angles <span class="math notranslate nohighlight">\(\theta\)</span> and get</p>
-<div class="math notranslate nohighlight">
-\[
-\textrm{min} \langle \psi(\theta) | H | \psi(\theta) \rangle = E_{0}.
-\]</div>
-<p>VQE will attempt to do this angle minimization to obtain a reasonable approximation to the ground state energy of the deuteron in this chapter. (To see the notebook this was adapted from, and an excellent tutorial using a very simple Hamiltonian, click <a class="reference external" href="https://github.com/NuclearPhysicsWorkshops/FRIB-TASummerSchoolQuantumComputing/blob/main/doc/pub/lecture7/ipynb/lecture7.ipynb">here</a>).</p>
-<p>When it comes to implementing this technique, there are a few main ingredients in the recipe:</p>
-<ol class="simple">
-<li><p>The Hamiltonian in question transformed into the Pauli basis using the <strong>Jordan-Wigner transformation</strong>;</p></li>
-<li><p>A suitable <strong>ansatz</strong> for the wave function;</p></li>
-<li><p>A classical <strong>optimization routine</strong> to be used to continously optimize the angles <span class="math notranslate nohighlight">\(\theta\)</span> for each run of the VQE circuit.</p></li>
-</ol>
-<p>In the next chapter, we will see these three ingredients worked out in detail and implemented using the package <tt>pennylane</tt>.</p>
-<div class="toctree-wrapper compound">
-</div>
+<p>Maintainer: Alexandra Semposki</p>
+<section id="divincenzo-criteria">
+<h2>DiVincenzo criteria<a class="headerlink" href="#divincenzo-criteria" title="Permalink to this headline">#</a></h2>
+<section id="stationary-vs-flying-qubits">
+<h3>Stationary vs. flying qubits<a class="headerlink" href="#stationary-vs-flying-qubits" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
+<section id="approaches-to-fabricating-qubits">
+<h2>Approaches to fabricating qubits<a class="headerlink" href="#approaches-to-fabricating-qubits" title="Permalink to this headline">#</a></h2>
+<p>Below are a few approaches described in some detail, but there are a few more that we will not get into. These include NV-centers in diamond lattices and NMR. Now, let’s dig into the main experimental implementations of qubits!</p>
+<section id="superconducting-qubits-ibm-rigetti">
+<h3>Superconducting qubits (IBM, Rigetti)<a class="headerlink" href="#superconducting-qubits-ibm-rigetti" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="trapped-ions-ion-q-honeywell">
+<h3>Trapped ions (Ion Q, Honeywell)<a class="headerlink" href="#trapped-ions-ion-q-honeywell" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="photonic-qubits-xanadu">
+<h3>Photonic qubits (Xanadu)<a class="headerlink" href="#photonic-qubits-xanadu" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="quantum-dots-in-microwave-cavities-si-technology">
+<h3>Quantum dots in microwave cavities (Si-technology)<a class="headerlink" href="#quantum-dots-in-microwave-cavities-si-technology" title="Permalink to this headline">#</a></h3>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -510,7 +643,7 @@ H | \psi_{i} \rangle = \lambda_{i} | \psi_{i} \rangle.
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./vqe"
+            path: "./intro-qc"
         },
         predefinedOutput: true
     }
@@ -524,17 +657,17 @@ H | \psi_{i} \rangle = \lambda_{i} | \psi_{i} \rangle.
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../intro-qc/real_hardware.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="computer_science.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Building a quantum computer: experimental techniques</p>
+            <p class="prev-next-title">Computer science: P/NP space &amp; quantum computing</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="deuteron.html" title="next page">
+    <a class='right-next' id="next-link" href="../vqe/vqe.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quantum Computing the Deuteron</p>
+        <p class="prev-next-title">Variational Quantum Eigensolver</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
