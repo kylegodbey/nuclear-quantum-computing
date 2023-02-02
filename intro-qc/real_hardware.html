@@ -652,7 +652,15 @@ title="Print to PDF"
 <p>Below are a few approaches described in some detail, but there are a few more that we will not get into. These include NV-centers in diamond lattices and NMR. Now, let’s dig into the main experimental implementations of qubits!</p>
 <section id="superconducting-qubits-ibm-rigetti">
 <h3>Superconducting qubits (IBM, Rigetti)<a class="headerlink" href="#superconducting-qubits-ibm-rigetti" title="Permalink to this headline">#</a></h3>
-<div class="highlight-{admonition}Superconducting notranslate"><div class="highlight"><pre><span></span>Fill in text here.
+<p>Superconductor fabrication has long been one of the most impactful technologies of the 20th century. Superconductors are conductors that possess <strong>infinite conductivity</strong>, a concept that seems quite far-fetched but is real! It happens when conduction electrons form Cooper pairs at very low temperatures in a material, and therefore no longer need to obey the Pauli Exclusion Principle [3]. This leads to infinite conductivity, and hence superconductivity.</p>
+<p>How do we build this in real life? We can construct a circuit with superconducting wires, cool it to very low temperatures (mK level) and voila! we have a small quantum system! This system exhibits quantum properties and discrete energy levels at a macroscopic level [3]. However, we will need these energy levels to possess nonuniform spacing, or our excitement of electrons to other energy levels will not be as controlled as we would want.</p>
+<p>We can begin by constructing a circuit like so:</p>
+<p><img alt="image" src="intro-qc/lc_circuit.JPG" /></p>
+<p>Here we have an inductor to store the magnetic field, a capacitor to store electric charge, and superconducting wires. However, this is not enough to create the nonuniform energy levels—to do that, we’ll need to insert what is called a <strong>Josephson junction</strong>. This is shown below, in place of the inductor:</p>
+<p><img alt="image" src="intro-qc/josephson_junction_circuit.JPG" /></p>
+<p>The Josephson junction serves as a capacitor with a non-linear inductance. These are small pieces of insulating material placed between our superconducting materials—hence enabling <em>quantum tunnelling</em> [3]. This also creates the effect of nonuniform energy levels, so our circuit will now work as a robust quantum device! We <em>do</em> still need to have some capacitance control so that our qubit works as part of a quantum computer, however—this is so that the qubit has external controls [3]. To do this, we add a gate capacitor, and make sure that our capacitance is large enough that the energy levels stay separated. This is called entering the <strong>transmon regime</strong>, and hence our qubit is referred to as a <strong>transmon</strong> [3]. These devices are built into a quantum computer.</p>
+<div class="highlight-{admonition}Superconducting notranslate"><div class="highlight"><pre><span></span>SQUID devices are instances of superconducting qubits that possess two Josephson junctions directly across from one another. These devices are extremely sensitive to magnetic fields and can detect even extremely weak fields very precisely. 
+```{glue:figure} squid
 </pre></div>
 </div>
 </section>
@@ -670,6 +678,7 @@ title="Print to PDF"
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <p>[1] Jha, Raghav G. “Notes on Quantum Computation and Information”. arXiv: 2301.09679 [hep-ph]. (Link <a class="reference external" href="https://arxiv.org/abs/2301.09679">here</a>).</p>
 <p>[2] https://quantumcomputing.stackexchange.com/questions/8900/what-is-a-flying-qubit</p>
+<p>[3] Alvaro Ballon, “Quantum computing with superconducting qubits”. https://pennylane.ai/qml/demos/tutorial_sc_qubits.html</p>
 </section>
 </section>
 
