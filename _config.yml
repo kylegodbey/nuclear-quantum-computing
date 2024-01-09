@@ -1,0 +1,3 @@
+parse:
+  myst_enable_extensions:
+    - deflist
