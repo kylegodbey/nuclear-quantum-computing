@@ -408,13 +408,13 @@ document.write(`
 <section id="defining-the-hamiltonian">
 <h2>Defining the Hamiltonian<a class="headerlink" href="#defining-the-hamiltonian" title="Permalink to this heading">#</a></h2>
 <p>The deuteron Hamiltonian is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9e829c9-7ff5-42e7-9bf5-3e721a9d7917">
-<span class="eqno">(1)<a class="headerlink" href="#equation-c9e829c9-7ff5-42e7-9bf5-3e721a9d7917" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-f35ced2f-6931-4d54-a464-bf79e6bd34bd">
+<span class="eqno">(1)<a class="headerlink" href="#equation-f35ced2f-6931-4d54-a464-bf79e6bd34bd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle a_{n^{\prime}}^{\dagger} a_{n} .
 \end{equation}\]</div>
 <p>The operators <span class="math notranslate nohighlight">\(a_{n}^{\dagger}\)</span> and <span class="math notranslate nohighlight">\(a_{n}\)</span> here are the creation and annihilation operators. A deuteron is created or annihilated in the harmonic-oscillator <span class="math notranslate nohighlight">\(s\)</span>-wave state <span class="math notranslate nohighlight">\(|n\rangle\)</span>. The matrix elements of the kinetic and potential energy are represented by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e7a1279d-6a8e-4fa4-810a-6fd04706d0eb">
-<span class="eqno">(2)<a class="headerlink" href="#equation-e7a1279d-6a8e-4fa4-810a-6fd04706d0eb" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-32278570-2b27-409c-ba94-db2df82979e3">
+<span class="eqno">(2)<a class="headerlink" href="#equation-32278570-2b27-409c-ba94-db2df82979e3" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 \left\langle n^{\prime}|T| n\right\rangle=&amp; \frac{\hbar \omega}{2}\left[(2 n+3 / 2) \delta_{n}^{n^{\prime}}-\sqrt{n(n+1 / 2)} \delta_{n}^{n^{\prime}+1}\right.\\
 &amp;\left.-\sqrt{(n+1)(n+3 / 2)} \delta_{n}^{n^{\prime}-1}\right] \\
@@ -426,8 +426,8 @@ H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle 
 <section id="mapping-the-deuteron-onto-qubits">
 <h2>Mapping the deuteron onto qubits<a class="headerlink" href="#mapping-the-deuteron-onto-qubits" title="Permalink to this heading">#</a></h2>
 <p>Quantum computers manipulate qubits by operations based on Pauli matrices (denoted as <span class="math notranslate nohighlight">\(X_{q}, Y_{q}\)</span>, and <span class="math notranslate nohighlight">\(Z_{q}\)</span> on qubit <span class="math notranslate nohighlight">\(q\)</span> ). The deuteron creation and annihilation operators can be mapped onto Pauli matrices via the Jordan-Wigner transformation, defined as,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-85a3b87d-d2d5-4844-9038-a9ed828d52b3">
-<span class="eqno">(3)<a class="headerlink" href="#equation-85a3b87d-d2d5-4844-9038-a9ed828d52b3" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-49c2ae1e-6963-49e5-a1af-46c01886b1e6">
+<span class="eqno">(3)<a class="headerlink" href="#equation-49c2ae1e-6963-49e5-a1af-46c01886b1e6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 &amp;a_{n}^{\dagger} \rightarrow \frac{1}{2}\left[\prod_{j=0}^{n-1}-Z_{j}\right]\left(X_{n}-i Y_{n}\right) \\
 &amp;a_{n} \rightarrow \frac{1}{2}\left[\prod_{j=0}^{n-1}-Z_{j}\right]\left(X_{n}+i Y_{n}\right) .
@@ -435,15 +435,15 @@ H_{N}=\sum_{n, n^{\prime}=0}^{N-1}\left\langle n^{\prime}|(T+V)| n\right\rangle 
 \end{equation}\]</div>
 <p>Note that other mappings can be used, with the various mappings having benefits and drawbacks that may apply to your problem of interest.</p>
 <p>A spin up <span class="math notranslate nohighlight">\(|\uparrow\rangle\)</span> (down <span class="math notranslate nohighlight">\(|\downarrow\rangle\)</span> ) on qubit <span class="math notranslate nohighlight">\(n\)</span> corresponds to zero (one) deuteron in the state <span class="math notranslate nohighlight">\(|n\rangle\)</span>. For <span class="math notranslate nohighlight">\(N=2,3\)</span> we have the components of the Hamiltonian (all numbers are in units of <span class="math notranslate nohighlight">\(\mathrm{MeV}\)</span>)</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e475a2f-ef0a-4e3c-8b81-515308b44404">
-<span class="eqno">(4)<a class="headerlink" href="#equation-7e475a2f-ef0a-4e3c-8b81-515308b44404" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-0cdfb907-5a82-473b-9b0f-15169a6b1ebd">
+<span class="eqno">(4)<a class="headerlink" href="#equation-0cdfb907-5a82-473b-9b0f-15169a6b1ebd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \begin{aligned}
 H_{2}=&amp; 5.906709 I+0.218291 Z_{0}-6.125 Z_{1} \\
 &amp;-2.143304\left(X_{0} X_{1}+Y_{0} Y_{1}\right)
 \end{aligned}
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-50fef939-04d3-499c-8661-8df48e2a5dd6">
-<span class="eqno">(5)<a class="headerlink" href="#equation-50fef939-04d3-499c-8661-8df48e2a5dd6" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-d21d0400-df9a-4cfa-b69a-0a21e29f0249">
+<span class="eqno">(5)<a class="headerlink" href="#equation-d21d0400-df9a-4cfa-b69a-0a21e29f0249" title="Permalink to this equation">#</a></span>\[\begin{equation}
 H_{3}=H_{2}+9.625\left(I-Z_{2}\right)-3.913119\left(X_{1} X_{2}+Y_{1} Y_{2}\right)
 \end{equation}\]</div>
 </section>
